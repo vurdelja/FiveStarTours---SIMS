@@ -9,24 +9,21 @@ namespace FiveStarTours.Model
 {
     public class Location : ISerializable
     {
-        public int Id { get; set; }
         public string State { get; set; }
         public string City { get; set; }
 
         public Location() { }
 
-        public Location(int id, string state, string city)
+        public Location(string state, string city)
         {
-            Id = id;
-            State = state;
-            City = city;
+            this.State = state;
+            this.City = city;
         }
 
         public string[] ToCSV()
         {
             string[] csvValues = 
             { 
-                Id.ToString(),
                 State, 
                 City 
             };
@@ -35,9 +32,8 @@ namespace FiveStarTours.Model
 
         public void FromCSV(string[] values)
         {
-            Id = Convert.ToInt32(values[0]);
-            State = values[1];
-            City = values[2];
+            State = values[0];
+            City = values[1];
         }
     }
 }
