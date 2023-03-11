@@ -24,7 +24,12 @@ namespace FiveStarTours.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { State, City };
+            string[] csvValues = 
+            { 
+                Id.ToString(),
+                State, 
+                City 
+            };
             return csvValues;
         }
 
