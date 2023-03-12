@@ -12,7 +12,7 @@ namespace FiveStarTours.Model
     {
 
         public Location Location { get; set; }
-        public int ID { get; set; }
+        
         public int MaxPersonNum { get; set; }
         public string Language { get; set; }
 
@@ -21,10 +21,10 @@ namespace FiveStarTours.Model
 
        Vehicle () { }
 
-        public Vehicle(Location location, int iD, int maxPersonNum, string language, List<string> imageURLs)
+        public Vehicle(Location location, int maxPersonNum, string language, List<string> imageURLs)
         {
             Location = location;
-            ID = iD;
+            
             MaxPersonNum = maxPersonNum;
             Language = language;
             ImageURLs = imageURLs;
@@ -37,7 +37,7 @@ namespace FiveStarTours.Model
             {
                 Location.City.ToString(),
                 Location.State.ToString(),
-                ID.ToString(), 
+                
                 MaxPersonNum.ToString(), 
                 Language,
                 
@@ -49,10 +49,10 @@ namespace FiveStarTours.Model
         public void FromCSV(string[] values)
         {
             Location = new Location(values[0], values[1]);
-            ID = Convert.ToInt32(values[2]);
-            MaxPersonNum = int.Parse(values[3]);
-            Language = values[4];
-            ImageURLs = values[5].Split(',').ToList();
+            
+            MaxPersonNum = int.Parse(values[2]);
+            Language = values[3];
+            ImageURLs = values[4].Split(',').ToList();
 
         }
 
