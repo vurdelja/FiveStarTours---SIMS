@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FiveStarTours.Model
 {
-    public class Driver : ISerializable
+    public class Vehicle : ISerializable
     {
 
         public Location Location { get; set; }
@@ -19,9 +19,9 @@ namespace FiveStarTours.Model
         public List<string> ImageURLs = new List<string>();  
 
 
-        Driver() { }
+       Vehicle () { }
 
-        public Driver(Location location, int iD, int maxPersonNum, string language, List<string> imageURLs)
+        public Vehicle(Location location, int iD, int maxPersonNum, string language, List<string> imageURLs)
         {
             Location = location;
             ID = iD;
