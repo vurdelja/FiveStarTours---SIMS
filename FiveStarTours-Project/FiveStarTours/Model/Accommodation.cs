@@ -20,6 +20,7 @@ namespace FiveStarTours.Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public int IdLocation { get; set; }
         public Location Location { get; set; }
         public AccommodationType Type { get; set; }
         public int MaxGuestNum { get; set; }
@@ -31,10 +32,11 @@ namespace FiveStarTours.Model
 
         public Accommodation() { }
 
-        public Accommodation(int Id, string Name, Location location, AccommodationType type, int maxGuestNum, int minReservationDays, int daysPossibleToCancel, List<Accommodation> photos, User owner)
+        public Accommodation(int Id, string Name, int idLocation, Location location, AccommodationType type, int maxGuestNum, int minReservationDays, int daysPossibleToCancel, List<Accommodation> photos, User owner)
         {
             this.Id = Id;
             this.Name = Name;
+            this.IdLocation = idLocation;
             this.Location = location;
             this.Type = type;
             this.MaxGuestNum = maxGuestNum;
@@ -50,8 +52,7 @@ namespace FiveStarTours.Model
             string[] csvValues = {
                 Id.ToString(),
                 Name,
-                Location.State.ToString(),
-                Location.City.ToString(),
+                IdLocation.ToString(),
                 Type.ToString(),
                 MaxGuestNum.ToString(),
                 MinReservationDays.ToString(),
@@ -65,7 +66,7 @@ namespace FiveStarTours.Model
         {
             Id = Convert.ToInt32(values[0]);
             Name = values[1];
-            Location = new Location(values[2], values[3]);
+            IdLocation = Convert.ToInt32(values[2]);
             Type = Enum.Parse<AccommodationType>(values[4]);
             MaxGuestNum = int.Parse(values[5]);
             MinReservationDays = int.Parse(values[6]);
