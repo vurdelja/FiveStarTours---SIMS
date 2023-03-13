@@ -10,27 +10,28 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using FiveStarTours.View;
 
-namespace FiveStarTours
+namespace FiveStarTours.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TourRegistrationForm.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TourRegistrationForm : Window
     {
-        public MainWindow()
+        public TourRegistrationForm()
         {
             InitializeComponent();
         }
 
-        private void ToursButton_Click(object sender, RoutedEventArgs e)
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            Tours tours = new Tours();
-            tours.Show();
-            
+
+        }
+
+        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
