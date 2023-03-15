@@ -10,6 +10,7 @@
   <ItemGroup>
     <Folder Include="Repository\" />
     <Folder Include="Resources\Images\" />
+    <Folder Include="Resources\ImagesOwner\" />
 
   </ItemGroup>
 
