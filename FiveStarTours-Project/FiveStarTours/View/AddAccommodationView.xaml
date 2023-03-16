@@ -3,12 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FiveStarTours.View"
+        xmlns:local="clr-namespace:FiveStarTours.View" xmlns:viewModel="clr-namespace:FiveStarTours.ViewModel"
         mc:Ignorable="d"
         Title="AddAccommodationView" Height="750" Width="430" Background="Transparent" WindowStyle="None"
         WindowStartupLocation="CenterScreen" AllowsTransparency="True">
+    <Window.DataContext>
+        <viewModel:AddAccommodationViewModel/>
+    </Window.DataContext>
+    
     <Grid>
-        <Grid>
+        
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="*"/>
@@ -24,22 +28,74 @@
             <!--Input Secrion-->
             <Border Grid.Column="1" Padding="20" Background="White" CornerRadius="0 10 10 0">
                 <StackPanel>
-                    <TextBlock Text="Accommodation registration form" Foreground="OrangeRed" HorizontalAlignment="Center"/> <!--add style-->
+                    <TextBlock Text="Accommodation registration form" Foreground="OrangeRed" HorizontalAlignment="Center"/>
 
                     <Border BorderThickness="1" BorderBrush="Gray" Margin="70 7" CornerRadius ="5">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="auto"/>
+                          <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                            <TextBlock x:Name="textName" Text="Name" Grid.Column="1" Panel.ZIndex="1" Margin="10 0 0 0" Foreground="Purple"/>
-                            
+                    <TextBox x:Name="textName" Text="{Binding AccommodationName}" Grid.Column="1" Panel.ZIndex="1" Margin="10 0 0 0" Foreground="Purple"/>
 
+
+                </Grid>
+            </Border>
+
+            <!--State and city combobox-->
+            <Border BorderThickness="1" BorderBrush="Gray" Margin="70 7" CornerRadius ="5">
+                <Grid>
+                     <Grid.ColumnDefinitions>
+                           <ColumnDefinition Width="200"/>
+                           <ColumnDefinition Width="*"/>
+                     </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Vertical" Margin="1 1">
+                                <StackPanel Orientation="Horizontal" Margin="1">
+                                    <Label Content="Select State: " Margin="3 0 0 0" Width="auto" FontSize="10" Foreground="Purple"/>
+                                    <ComboBox Width="100" Height="17" ItemsSource="{Binding CountryList}" DisplayMemberPath="CountryName" SelectedValue="{Binding SelectedCountryCode}" SelectedValuePath="CountryThreeLetterCode" Margin="0 0 1 0" FontSize="10"/>
+                                    <Label Content="{Binding SelectedCountryCode}"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Margin="1">
+                                    <Label Content="Select city: " Margin="3 0 0 0" Width="auto" FontSize="10" Foreground="Purple"/>
+                                    <Label Content="{Binding SelectedCity}"/>
+                                    <ComboBox Width="100" Height="17" ItemsSource="{Binding CityList}" DisplayMemberPath="CityName" SelectedValue="{Binding SelectedCity}" SelectedValuePath="CityName" IsEnabled="{Binding AllowCitySelection}" FontSize="10"/>
+                                </StackPanel>
+                            </StackPanel>
                         </Grid>
-                    </Border>
+            </Border>
+
+            <!--Choose type of Accommodation-->
+            <Border BorderThickness="1" BorderBrush="Gray" Margin="70 7" CornerRadius ="5">
+                <StackPanel>
+                     <StackPanel Orientation="Horizontal" Margin="10">
+                           <Label Content="Choose type:" Margin="0 0 10 0" Width="120"/>
+                           <ComboBox Width="100" ItemsSource="{Binding AccommodationTypes}" SelectedItem="{Binding SelectedAccommodationType}" Margin="0 0 10 0"/>
+                           <Button Content="Show selected type" Command="{Binding ShowAccommodationTypeCommand}"/>
+                     </StackPanel>
                 </StackPanel>
             </Border>
-        </Grid>
+
+            <!--Max guest number-->
+                    <Border BorderThickness="1" BorderBrush="Gray" Margin="70 7" CornerRadius ="5">
+                        <StackPanel Orientation="Horizontal" Margin="1">
+                            <Label Content="Max guest number: " Margin="3 0 0 0" Width="auto" FontSize="10" Foreground="Purple"/>
+                        <ComboBox Width="100" Height="17" ItemsSource="{Binding MaxGuestNum}"  Margin="0 0 1 0" FontSize="10"/>
+                    </StackPanel>
+                    </Border>
+                
+                    <!--Cancel and submit button-->
+                    <Grid>
+                        <StackPanel  Orientation="Horizontal">
+                            <Button Command="{Binding SubmitCommand}" Content="Submit" Padding="10 5"/>
+                            <Button Command="{Binding CancelCommand}" Margin="5 0 0 0" Content="Cancel" Padding="10 5"/>
+                        </StackPanel>
+                    </Grid>
+                    
+                </StackPanel>
+            </Border>
+        
     </Grid>
 </Window>

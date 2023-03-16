@@ -25,9 +25,10 @@ namespace FiveStarTours.Model
 
         public void AddAccomodation(Accommodation accommodation)
         {
-            foreach(Accommodation existingAccommodation in accommodations)
+            foreach (Accommodation existingAccommodation in accommodations)
             {
-                if (existingAccommodation.Conflicts(accommodation)){
+                if (existingAccommodation.Conflicts(accommodation))
+                {
                     throw new AccommodationConflictException(existingAccommodation, accommodation);
                 }
             }

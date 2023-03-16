@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FiveStarTours.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,13 @@ namespace FiveStarTours
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            AddAccommodationView aav = new AddAccommodationView();
+            aav.Show();
         }
     }
 }

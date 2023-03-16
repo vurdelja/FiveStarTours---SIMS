@@ -5,6 +5,7 @@ using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
+using FiveStarTours.Exceptions;
 using FiveStarTours.Serializer;
 
 public enum AccommodationType
@@ -110,6 +111,8 @@ namespace FiveStarTours.Model
                 return true;
             }
         }
+
+        
 
 
     }
