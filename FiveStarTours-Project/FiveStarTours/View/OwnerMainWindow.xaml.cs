@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace FiveStarTours.View
 {
     /// <summary>
-    /// Interaction logic for AccomodationRegistrationForm.xaml
+    /// Interaction logic for OwnerMainWindow.xaml
     /// </summary>
-    public partial class AccomodationRegistrationForm : Window
+    public partial class OwnerMainWindow : UserControl
     {
-        public AccomodationRegistrationForm()
+        public OwnerMainWindow()
         {
             InitializeComponent();
         }
