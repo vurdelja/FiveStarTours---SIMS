@@ -14,8 +14,8 @@ namespace FiveStarTours.Model
         public int IdLocation { get; set; }
         public Location Location { get; set; }
         public string Description { get; set; } 
-        public List<int> IdLanguage { get; set; }
-        public List<Language> Language { get; set; }
+        public List<int> IdLanguages { get; set; }
+        public List<Language> Languages { get; set; }
         public int MaxGuests { get; set; }
         public List<int> IdKeyPoints { get; set; }
         public List<KeyPoints> KeyPoints { get; set; }
@@ -25,15 +25,14 @@ namespace FiveStarTours.Model
 
         public Tour() { }
 
-        public Tour(int id, string name, int idLocation, Location location, string description, List<int> idLanguage, List<Language> language, int maxGuests, List<int> idKeyPoints, List<KeyPoints> keyPoints, List<DateTime> beginning, int duration, List<string> imageUrls)
+        public Tour(string name,int idLocation, Location location, string description, List<int>idLanguage, List<Language> language, int maxGuests,List<int> idKeyPoints, List<KeyPoints> keyPoints, List<DateTime> beginning, int duration, List<string> imageUrls)
         {
-            Id = id;
             Name = name;
             IdLocation = idLocation;
             Location = location;
             Description = description;
-            IdLanguage = idLanguage;
-            Language = language;
+            IdLanguages = idLanguage;
+            Languages = language;
             MaxGuests = maxGuests;
             IdKeyPoints = idKeyPoints;
             KeyPoints = keyPoints;
@@ -49,7 +48,7 @@ namespace FiveStarTours.Model
               Name,
               IdLocation.ToString(),
               Description,
-              string.Join(';', IdLanguage),
+              string.Join(';', IdLanguages),
               MaxGuests.ToString(), 
               string.Join(';', IdKeyPoints),
               string.Join(';', Beginning), 
@@ -64,7 +63,7 @@ namespace FiveStarTours.Model
             Name = values[1];
             IdLocation = Convert.ToInt32(values[2]);
             Description = values[3];
-            IdLanguage = ConvertToInt(values[4]);
+            IdLanguages = ConvertToInt(values[4]);
             MaxGuests = Convert.ToInt32(values[5]);
             IdKeyPoints = ConvertToInt(values[6]);
             Beginning = ConvertToDateTime(values[7]);

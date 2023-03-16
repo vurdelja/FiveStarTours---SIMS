@@ -15,9 +15,8 @@ namespace FiveStarTours.Model
 
         public Location() { }
 
-        public Location(int id, string state, string city)
+        public Location(string state, string city)
         {
-            this.Id = Id;
             this.State = state;
             this.City = city;
         }
