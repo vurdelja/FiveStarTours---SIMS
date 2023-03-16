@@ -18,10 +18,6 @@ namespace FiveStarTours.View
     /// </summary>
     public partial class TourRegistrationForm : Window, INotifyPropertyChanged
     {
-        public List<int> HourValues { get; } = Enumerable.Range(0, 24).ToList();
-        public List<int> MinutesValues { get; } = Enumerable.Range(0, 60).ToList();
-        public List<int> SecondsValues { get; } = Enumerable.Range(0, 60).ToList();
-
         private readonly ToursRepository _toursRepository;
         private readonly LanguagesRepository _languagesRepository;
         private readonly LocationsRepository _locationsRepository;
