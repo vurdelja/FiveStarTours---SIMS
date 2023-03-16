@@ -6,5 +6,19 @@
         xmlns:local="clr-namespace:FiveStarTours" xmlns:view="clr-namespace:FiveStarTours.View"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.25*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Background="LightGreen">
+            <RadioButton x:Name="OwnerButtonClick" Content="Owner" Margin="10,10, 0, 0" Checked="OwnerButtonClick_Checked"/>
+            <RadioButton x:Name="TravelerButtonClick" Content="Traveler" Margin="10, 10, 0, 0" Checked="TravelerButtonClick_Checked"/>
+            <RadioButton x:Name="GuideButtonClick" Content="Guide" Margin="10, 10, 0, 0" Checked="GuideButtonClick_Checked"/>
+            <RadioButton x:Name="VisitorButtonClick" Content="Visitor" Margin="10, 10, 0, 0" Checked="VisitorButtonClick_Checked"/>
+            <RadioButton x:Name="DriverButtonClick" Content="Driver" Margin="10, 10, 0, 0" Checked="DriverButtonClick_Checked"/>
+
+        </StackPanel>
+    </Grid>
 
 </Window>

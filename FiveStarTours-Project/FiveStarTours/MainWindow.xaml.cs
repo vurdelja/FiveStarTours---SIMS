@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FiveStarTours.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,33 @@ namespace FiveStarTours
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void OwnerButtonClick_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TravelerButtonClick_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void GuideButtonClick_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void VisitorButtonClick_Checked(object sender, RoutedEventArgs e)
+        {
+            VisitorMainWindow visitorWindow = new VisitorMainWindow();
+            this.Visibility = Visibility.Hidden;
+            visitorWindow.Show();
+        }
+
+        private void DriverButtonClick_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
