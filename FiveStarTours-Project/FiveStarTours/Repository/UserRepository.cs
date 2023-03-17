@@ -10,7 +10,7 @@ namespace FiveStarTours.Repository
 {
     public class UserRepository
     {
-        private const string FilePath = "../../../Resources/Data/users.txt";
+        private const string FilePath = "../../../Resources/Data/users.csv";
 
         private readonly Serializer<User> _serializer;
 
