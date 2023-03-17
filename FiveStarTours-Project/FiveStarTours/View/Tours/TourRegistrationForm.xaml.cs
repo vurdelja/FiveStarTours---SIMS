@@ -41,36 +41,6 @@ namespace FiveStarTours.View
             }
         }
 
-        private string _city;
-
-        public string City
-        {
-            get => _city;
-            set
-            {
-                if (value != _city)
-                {
-                    _city = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _state;
-
-        public string State
-        {
-            get => _state;
-            set
-            {
-                if (value != _state)
-                {
-                    _state = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
         private string _description;
         public string Description
         {
@@ -175,32 +145,80 @@ namespace FiveStarTours.View
             _languagesRepository = new LanguagesRepository();
             _locationsRepository = new LocationsRepository();
             _keyPointsRepository = new KeyPointsRepository();
+
+
+            // Adding state and city trough combobox:
+
+            List<string> States  = _locationsRepository.GetAllStates();
+            stateComboBox.ItemsSource = States;
+            stateComboBox.SelectedValuePath = ".";
+            stateComboBox.DisplayMemberPath = ".";
+            
         }
+
+        // Adding state and city trough combobox:
+
+        private string selectedState;
+        private string selectedCity;
+
+        private void stateComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (stateComboBox.SelectedItem != null)
+            {
+                
+                string selectedStateComboBox = stateComboBox.SelectedItem.ToString();
+                List<string> citiesInState = _locationsRepository.GetCitiesInState(selectedStateComboBox);
+                cityComboBox.ItemsSource = citiesInState;
+                selectedState = stateComboBox.SelectedItem as string;
+            }
+        }
+
+        private void cityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cityComboBox.SelectedItem != null)
+            {
+                selectedCity = cityComboBox.SelectedItem as string;
+            }
+        }
+
+        private Location GetSelectedLocation()
+        {
+            return new Location(selectedState, selectedCity);
+        }
+
 
         // Adding dates and times into list
 
         List<DateTime> DateTimes = new List<DateTime>();
+        private DateTime lastSelectedDate;
 
         private void Calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
-            foreach (DateTime date in datePicker.SelectedDates)
-            {
-                TimeSpan time = TimeSpan.Parse(textBoxTime.Text);
-                DateTime newDate = new DateTime(date.Year, date.Month, date.Day, time.Hours, time.Minutes, time.Seconds);
-                DateTimes.Add(newDate);
-            }
+            lastSelectedDate = (DateTime)datePicker.SelectedDate;
 
+        }
+
+        private void AddDateTime_Click(object sender, RoutedEventArgs e)
+        {
             datesTextBox.Clear();
-            foreach (DateTime date in DateTimes)
+            if(datePicker.SelectedDate == null)
             {
-                datesTextBox.AppendText(date.ToString() + "\n");
+                MessageBox.Show("Please select date first!");
+                return;
+            }
+            DateTime date = (DateTime)datePicker.SelectedDate;
+            TimeSpan time = TimeSpan.Parse(textBoxTime.Text);
+            DateTime newDate = new DateTime(date.Year, date.Month, date.Day, time.Hours, time.Minutes, time.Seconds);
+            DateTimes.Add(newDate);
+            foreach (DateTime dateTime in DateTimes)
+            {
+                datesTextBox.AppendText(dateTime.ToString() + "\n");
             }
         }
 
-            private void SaveButton_Click(object sender, RoutedEventArgs e)
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            Location location = new Location(State, City);
-            _locationsRepository.Save(location);
+            Location location = GetSelectedLocation();
             List<Language> LanguageList = MakeLanguagesList(Languages);
             List<int> LanguageIds = GetLanguagesIds(LanguageList);
             List<KeyPoints> KeyPointsList = MakeKeyPointsList(KeyPoints);

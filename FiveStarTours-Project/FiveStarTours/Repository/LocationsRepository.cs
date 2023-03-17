@@ -26,23 +26,20 @@ namespace FiveStarTours.Repository
             return _serializer.FromCSV(FilePath);
         }
 
-        public Location Save(Location location)
+        public List<string> GetAllStates()
         {
-            location.Id = NextId();
-            _locations = _serializer.FromCSV(FilePath);
-            _locations.Add(location);
-            _serializer.ToCSV(FilePath, _locations);
-            return location;
+            List<Location> locations = GetAll();
+            List<string> states = locations.Select(l => l.State).Distinct().ToList();
+            return states;
         }
-
-        public int NextId()
+        public List<string> GetCitiesInState(string state)
         {
-            _locations = _serializer.FromCSV(FilePath);
-            if (_locations.Count < 1)
-            {
-                return 1;
-            }
-            return _locations.Max(l => l.Id) + 1;
+            var locations = GetAll();
+            return locations
+                .Where(l => l.State == state)
+                .Select(l => l.City)
+                .Distinct()
+                .ToList();
         }
     }
 }
