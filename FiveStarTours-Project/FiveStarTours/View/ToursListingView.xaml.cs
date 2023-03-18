@@ -27,11 +27,16 @@ namespace FiveStarTours.View
     { 
         public static ObservableCollection<Tour> Tours { get; set; }
         public Tour SelectedTour{ get; set; }
+        //private readonly TourRepository _repository;
+
 
 
         public ToursListingView()
         {
-            
+            InitializeComponent();
+            //_repository = new TourRepository();
+
+
         }
 
         private void TourSearchClick_Checked(object sender, RoutedEventArgs e)
