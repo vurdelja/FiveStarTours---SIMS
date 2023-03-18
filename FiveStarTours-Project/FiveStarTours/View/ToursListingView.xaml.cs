@@ -34,6 +34,8 @@ namespace FiveStarTours.View
         public ToursListingView()
         {
             InitializeComponent();
+            DataContext = this;
+
             //_repository = new TourRepository();
 
 
