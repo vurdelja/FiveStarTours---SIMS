@@ -179,7 +179,15 @@ namespace FiveStarTours.View
 
         private Location GetSelectedLocation()
         {
-            return new Location(selectedState, selectedCity);
+            foreach(var location in _locationsRepository.GetAll())
+            {
+                if(location.City == selectedCity)
+                {
+                    return location;
+                }
+            }
+
+            return null;
         }
 
 
