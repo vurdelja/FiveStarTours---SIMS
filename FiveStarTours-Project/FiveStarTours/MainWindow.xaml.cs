@@ -39,7 +39,8 @@ namespace FiveStarTours
 
         private void GuideButtonClick_Checked(object sender, RoutedEventArgs e)
         {
-
+            Tours tours = new Tours();
+            tours.Show();
         }
 
         private void VisitorButtonClick_Checked(object sender, RoutedEventArgs e)
@@ -52,13 +53,6 @@ namespace FiveStarTours
         private void DriverButtonClick_Checked(object sender, RoutedEventArgs e)
         {
 
-        }
-
-        private void ToursButton_Click(object sender, RoutedEventArgs e)
-        {
-            Tours tours = new Tours();
-            tours.Show();
-            
         }
     }
 }

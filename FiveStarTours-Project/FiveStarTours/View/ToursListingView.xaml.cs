@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.View;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FiveStarTours.View
 {
@@ -27,7 +29,7 @@ namespace FiveStarTours.View
     { 
         public static ObservableCollection<Tour> Tours { get; set; }
         public Tour SelectedTour{ get; set; }
-        //private readonly TourRepository _repository;
+        private readonly ToursRepository _repository;
 
 
 
@@ -35,15 +37,26 @@ namespace FiveStarTours.View
         {
             InitializeComponent();
             DataContext = this;
-
-            //_repository = new TourRepository();
-
+            _repository = new ToursRepository();
+            Tours = new ObservableCollection<Tour>(_repository.GetAll());
 
         }
 
-        private void TourSearchClick_Checked(object sender, RoutedEventArgs e)
+        private void TourSearchClick(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void ShowTourView(object sender, RoutedEventArgs e)
+        {
+            
+            if(SelectedTour != null)
+            {
+                TourView tourView = new TourView(SelectedTour);
+                //this.Visibility = Visibility.Hidden;
+                tourView.Show();
+                
+            }
         }
     }
 }

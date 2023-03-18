@@ -47,5 +47,18 @@ namespace FiveStarTours.Repository
             }
             return _tours.Max(t => t.Id) + 1;
         }
+
+        public Tour GetById(int id)
+        {
+            _tours = GetAll();
+            foreach (Tour tour in _tours)
+            {
+                if(tour.Id == id)
+                {
+                    return tour;
+                }
+            }
+            return null;
+        }
     }
 }
