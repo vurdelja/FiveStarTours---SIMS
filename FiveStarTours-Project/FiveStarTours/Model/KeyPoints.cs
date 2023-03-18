@@ -15,11 +15,9 @@ namespace FiveStarTours.Model
 
         public KeyPoints() { }
 
-        public KeyPoints(int id, string name, bool visited)
+        public KeyPoints(string name)
         {
-            Id = id;
             Name = name;
-            Visited = visited;
         }
 
         public string[] ToCSV()

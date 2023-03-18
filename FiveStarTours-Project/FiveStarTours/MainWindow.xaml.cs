@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FiveStarTours.View;
 
 namespace FiveStarTours
 {
@@ -51,6 +52,13 @@ namespace FiveStarTours
         private void DriverButtonClick_Checked(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void ToursButton_Click(object sender, RoutedEventArgs e)
+        {
+            Tours tours = new Tours();
+            tours.Show();
+            
         }
     }
 }
