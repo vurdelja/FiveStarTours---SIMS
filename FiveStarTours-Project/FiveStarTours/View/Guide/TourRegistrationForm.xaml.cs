@@ -317,5 +317,7 @@ namespace FiveStarTours.View
         {
             Close();
         }
+
+       
     }
 }
