@@ -73,6 +73,5 @@
             <Button Content="Save" IsDefault="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5"
                 Click="SaveButton_Click"/>
         </WrapPanel>
-
     </Grid>
 </Window>
