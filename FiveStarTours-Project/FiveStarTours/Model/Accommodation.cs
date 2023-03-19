@@ -5,7 +5,6 @@ using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
-using FiveStarTours.Exceptions;
 using FiveStarTours.Serializer;
 
 public enum AccommodationType
@@ -20,53 +19,64 @@ namespace FiveStarTours.Model
     public class Accommodation : ISerializable
     {
         public int Id { get; set; }
-        public int IdOwner { get; set; } 
         public string Name { get; set; }
         public int IdLocation { get; set; }
+        public Location Location { get; set; }
         public AccommodationType Type { get; set; }
         public int MaxGuestNum { get; set; }
         public int MinReservationDays { get; set; }
         public int DaysPossibleToCancel { get; set; } = 1;  //podrazumevana vrednost je jedan dan, a vlasnik može zadati neki drugi broj
 
-        public List<string> ImageURLs = new List<string>();   //Jedna ili više slika (za svaku sliku navesti URL)
+        public List<Uri> ImageURLs { get; set; }   //Jedna ili više slika (za svaku sliku navesti URL)
 
         public Accommodation() { }
 
-        public Accommodation(int Id, int idOwner, string Name, int idLocation, AccommodationType type, int maxGuestNum, int minReservationDays, int daysPossibleToCancel)
+        public Accommodation(string Name, int idLocation, Location location, AccommodationType type, int maxGuestNum, int minReservationDays, int daysPossibleToCancel, List<string> imageURLs)
         {
-            this.Id = Id;
-            this.IdOwner = idOwner;
+            {
+                ImageURLs = new List<Uri>();
+            }
+
             this.Name = Name;
             this.IdLocation = idLocation;
+            this.Location = location;
             this.Type = type;
             this.MaxGuestNum = maxGuestNum;
             this.MinReservationDays = minReservationDays;
             this.DaysPossibleToCancel = daysPossibleToCancel;
-          
+
+            
+            this.ImageURLs = new List<Uri>();
+
+            foreach(string imageURL in imageURLs)
+            {
+                Uri file = new Uri(imageURL);
+                ImageURLs.Add(file);
+            }
         }
 
         public string[] ToCSV()
         {
-            StringBuilder imageList = new StringBuilder();
+            StringBuilder imageURLsList = new StringBuilder();
 
-            foreach(string image in ImageURLs)
+            foreach (Uri imageURL in ImageURLs)
             {
-                imageList.Append(image);
-                imageList.Append(',');
+                string imageURLString = imageURL.ToString();
+                imageURLsList.Append(imageURL);
+                imageURLsList.Append(" ,");
             }
 
-            imageList.Remove(imageList.Length - 1, 1);
-            
+            imageURLsList.Remove(imageURLsList.Length - 1, 1);
+
             string[] csvValues = {
                 Id.ToString(),
-                IdOwner.ToString(),
                 Name,
                 IdLocation.ToString(),
                 Type.ToString(),
                 MaxGuestNum.ToString(),
                 MinReservationDays.ToString(),
                 DaysPossibleToCancel.ToString(),
-                imageList.ToString(),
+                imageURLsList.ToString()
                 
         };
             return csvValues;
@@ -75,45 +85,26 @@ namespace FiveStarTours.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            IdOwner = Convert.ToInt32(values[1]);
-            Name = values[2];
-            IdLocation = Convert.ToInt32(values[3]);
-            Type = Enum.Parse<AccommodationType>(values[4]);
-            MaxGuestNum = int.Parse(values[5]);
-            MinReservationDays = int.Parse(values[6]);
-            DaysPossibleToCancel = int.Parse(values[7]);
+            Name = values[1];
+            IdLocation = Convert.ToInt32(values[2]);
+            Type = Enum.Parse<AccommodationType>(values[3]);
+            MaxGuestNum = int.Parse(values[4]);
+            MinReservationDays = int.Parse(values[5]);
+            DaysPossibleToCancel = int.Parse(values[6]);
 
-            string images = values[8];
-            string[] delimitedImages = images.Split(";");
-
-            if(ImageURLs == null)
+            string imageURLs = values[7];
+            string[] delimitedImageURLs = imageURLs.Split(",");
+            if (ImageURLs == null)
             {
-                ImageURLs = new List<string>();
+                ImageURLs = new List<Uri>();
             }
 
-            foreach(string image in delimitedImages)
+            foreach (string imageURL in delimitedImageURLs)
             {
-                ImageURLs.Add(image);
-            }
-
-        }
-
-
-        public bool Conflicts(Accommodation accommodation)
-        {
-            if (accommodation.Id != Id)
-            {
-                return false;
-            }
-
-            else
-            {
-                return true;
+                Uri file = new Uri(imageURL);
+                ImageURLs.Add(file);
             }
         }
-
-        
-
 
     }
 }

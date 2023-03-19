@@ -1,2 +1,2 @@
-Accommodation;Accommodation.Id;Accommodation.IdOwner;Accommodation.Name;Accommodation.IdLocation;Accommodation.Type;Accommodation.MaxGuestNum;Accommodation.MinReservationDays;Accommodation.DaysPossibleToCancel
-FiveStarTours.Model.Accommodation;3;7;Kucica;8;cottage;9;3;2
+1|Pool house|2|house|10|3|7|file:///C:/Users/Katarina/Desktop/pool.jpg 
+2|Forest Cottage|1|cottage|3|5|10|file:///C:/Users/Katarina/Desktop/forestCottage.jpg 
