@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FiveStarTours.View"
         mc:Ignorable="d"
-        Title="TourView" Height="450" Width="800">
+        Title="TourView" Height="450" Width="800" ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
+         WindowStartupLocation="CenterScreen">
     <Grid DataContext="{Binding tour}">
-        <TextBlock HorizontalAlignment="Left" Margin="213,80,40,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Height="59" Width="272"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
     </Grid>
 </Window>
