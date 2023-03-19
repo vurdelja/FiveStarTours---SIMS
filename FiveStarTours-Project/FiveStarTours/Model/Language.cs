@@ -14,9 +14,8 @@ namespace FiveStarTours.Model
 
         public Language() { }
 
-        public Language(int id, string name)
+        public Language(string name)
         {
-            Id = id;
             Name = name;
         }
 

@@ -8,15 +8,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Resources\Images\**" />
-    <EmbeddedResource Remove="Resources\Images\**" />
-    <None Remove="Resources\Images\**" />
-    <Page Remove="Resources\Images\**" />
+	  <Compile Remove="Resources\Images\**" />
+	  <EmbeddedResource Remove="Resources\Images\**" />
+	  <None Remove="Resources\Images\**" />
+	  <Page Remove="Resources\Images\**" />
+	  <Folder Include="Resources\" />
+	  <Folder Include="Resources\Data\" />
+	  <Folder Include="Repository\" />
+    <Folder Include="Resources\Images\" />
+
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\ImagesOwner\" />
-
+    <PackageReference Include="MahApps.Metro" Version="2.4.9" />
   </ItemGroup>
 
 </Project>
