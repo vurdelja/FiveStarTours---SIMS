@@ -29,7 +29,8 @@ namespace FiveStarTours
 
         private void OwnerButtonClick_Checked(object sender, RoutedEventArgs e)
         {
-
+            OwnerMainWindow ownerWindow = new OwnerMainWindow();
+            ownerWindow.Show();
         }
 
         private void TravelerButtonClick_Checked(object sender, RoutedEventArgs e)

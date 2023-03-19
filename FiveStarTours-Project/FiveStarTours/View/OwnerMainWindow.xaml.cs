@@ -10,7 +10,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace FiveStarTours.View
@@ -18,11 +17,17 @@ namespace FiveStarTours.View
     /// <summary>
     /// Interaction logic for OwnerMainWindow.xaml
     /// </summary>
-    public partial class OwnerMainWindow : UserControl
+    public partial class OwnerMainWindow : Window
     {
         public OwnerMainWindow()
         {
             InitializeComponent();
+        }
+
+        private void OwnerMainButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddAccommodationView addAccommodation = new AddAccommodationView();
+            addAccommodation.Show();
         }
     }
 }

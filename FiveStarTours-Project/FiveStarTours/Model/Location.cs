@@ -23,11 +23,11 @@ namespace FiveStarTours.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = 
-            { 
+            string[] csvValues =
+            {
                 Id.ToString(),
-                State, 
-                City 
+                State,
+                City
             };
             return csvValues;
         }
