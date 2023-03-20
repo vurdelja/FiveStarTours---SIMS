@@ -84,7 +84,7 @@ namespace FiveStarTours.Model
 
         public void FromCSV(string[] values)
         {
-            Id = Convert.ToInt32(values[0]);
+            Id= Convert.ToInt32(values[0]);
             Name = values[1];
             IdLocation = Convert.ToInt32(values[2]);
             Type = Enum.Parse<AccommodationType>(values[3]);
