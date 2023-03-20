@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FiveStarTours.Serializer;
+
 
 namespace FiveStarTours.Model
 {
-    public class User : FiveStarTours.Serializer.ISerializable
+    public class User : ISerializable
     {
         public int Id { get; set; }
         public string Username { get; set; }
@@ -16,8 +16,9 @@ namespace FiveStarTours.Model
 
         public User() { }
 
-        public User(string username, string password)
+        public User(int id, string username, string password)
         {
+            Id = id;
             Username = username;
             Password = password;
         }
@@ -34,5 +35,7 @@ namespace FiveStarTours.Model
             Username = values[1];
             Password = values[2];
         }
+
+
     }
 }

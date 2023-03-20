@@ -3,11 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FiveStarTours"
+        xmlns:local="clr-namespace:FiveStarTours" xmlns:view="clr-namespace:FiveStarTours.View"
         mc:Ignorable="d"
-        Title="Main Window" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Vehicle Registration" HorizontalAlignment="Left" Margin="122,93,0,0" VerticalAlignment="Top" Height="40" Width="151" Click="VehicleRegistrationButton_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.25*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Background="LightGreen">
+            <RadioButton x:Name="OwnerButtonClick" Content="Owner" Margin="10,10, 0, 0" Checked="OwnerButtonClick_Checked"/>
+            <RadioButton x:Name="TravelerButtonClick" Content="Traveler" Margin="10, 10, 0, 0" Checked="TravelerButtonClick_Checked"/>
+            <RadioButton x:Name="GuideButtonClick" Content="Guide" Margin="10, 10, 0, 0" Checked="GuideButtonClick_Checked"/>
+            <RadioButton x:Name="VisitorButtonClick" Content="Visitor" Margin="10, 10, 0, 0" Checked="VisitorButtonClick_Checked"/>
+            <RadioButton x:Name="DriverButtonClick" Content="Driver" Margin="10, 10, 0, 0" Checked="DriverButtonClick_Checked"/>
 
+        </StackPanel>
     </Grid>
+
+   
 </Window>

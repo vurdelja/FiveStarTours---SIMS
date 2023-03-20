@@ -1,6 +1,4 @@
-﻿using FiveStarTours.View.VehicleRegistration;
-using FiveStarTours.Model;
-using FiveStarTours.Repository;
+﻿using FiveStarTours.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using FiveStarTours.View;
 
 namespace FiveStarTours
 {
@@ -29,10 +27,33 @@ namespace FiveStarTours
             InitializeComponent();
         }
 
-        private void VehicleRegistrationButton_Click(object sender, RoutedEventArgs e)
+        private void OwnerButtonClick_Checked(object sender, RoutedEventArgs e)
         {
-            VehicleRegistration vehicleRegistration = new VehicleRegistration();
-            vehicleRegistration.Show();
+            OwnerMainWindow ownerWindow = new OwnerMainWindow();
+            ownerWindow.Show();
+        }
+
+        private void TravelerButtonClick_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void GuideButtonClick_Checked(object sender, RoutedEventArgs e)
+        {
+            Tours tours = new Tours();
+            tours.Show();
+        }
+
+        private void VisitorButtonClick_Checked(object sender, RoutedEventArgs e)
+        {
+            VisitorMainWindow visitorWindow = new VisitorMainWindow();
+            this.Visibility = Visibility.Hidden;
+            visitorWindow.Show();
+        }
+
+        private void DriverButtonClick_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

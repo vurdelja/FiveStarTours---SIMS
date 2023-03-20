@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using FiveStarTours.Serializer;
 
 namespace FiveStarTours.Model
 {
-    public class Language : FiveStarTours.Serializer.ISerializable
+    public class Language : ISerializable
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -17,7 +16,6 @@ namespace FiveStarTours.Model
 
         public Language(string name)
         {
-            
             Name = name;
         }
 
