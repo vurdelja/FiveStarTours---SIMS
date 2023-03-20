@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
 using System.Windows.Media.Imaging;
+using System.Linq;
 
 namespace FiveStarTours.View
 {
@@ -152,7 +153,7 @@ namespace FiveStarTours.View
             }
         }
 
-        //Min days to make reservation
+        //Days possible to cancel
         private string _daysPossibleToCancel;
         public string DaysPossibleToCancel
         {
@@ -162,8 +163,9 @@ namespace FiveStarTours.View
             }
             set
             {
-                _daysPossibleToCancel = value;
-                OnPropertyChanged();
+                
+                    _daysPossibleToCancel = value;
+                    OnPropertyChanged();
             }
         }
 
@@ -185,7 +187,7 @@ namespace FiveStarTours.View
 
 
         // Upload image button
-        private void UploadImageButton_Click(object sender, RoutedEventArgs e)
+        /*private void UploadImageButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog= new OpenFileDialog();
             openFileDialog.Filter = "Image files|*.bmp;*.jpg;*.png";
@@ -204,10 +206,10 @@ namespace FiveStarTours.View
 
                 ImageURLs = ImageURLs.Substring(0, ImageURLs.Length - 1);
 
-                imagePicture.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                //imagePicture.Source = new BitmapImage(new Uri(openFileDialog.FileName));
             }
 
-        }
+        }*/
 
         //Submit button
         private void SubmitRegistrationButton_Click(object sender, RoutedEventArgs e)
@@ -254,10 +256,19 @@ namespace FiveStarTours.View
                     formattedImages
                 );
 
-            _accommodationsRepository.Save(newAccommodation);
+            if (newAccommodation.IsValid)
+            {
+                _accommodationsRepository.Save(newAccommodation);
+                Close();
 
-            Close();
+            }
+            else
+            {
+                MessageBox.Show("All necessary fields must be filled.");
+            }
         }
+
+
 
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

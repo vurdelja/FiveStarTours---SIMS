@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.RightsManagement;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Documents;
 using FiveStarTours.Serializer;
@@ -18,6 +19,8 @@ namespace FiveStarTours.Model
 {
     public class Accommodation : ISerializable
     {
+        public Owner Owner { get; set; }
+        public Guest Guest { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
         public int IdLocation { get; set; }
@@ -27,16 +30,12 @@ namespace FiveStarTours.Model
         public int MinReservationDays { get; set; }
         public int DaysPossibleToCancel { get; set; } = 1;  //podrazumevana vrednost je jedan dan, a vlasnik može zadati neki drugi broj
 
-        public List<Uri> ImageURLs { get; set; }   //Jedna ili više slika (za svaku sliku navesti URL)
+        public List<string> ImageURLs { get; set; }   //Jedna ili više slika (za svaku sliku navesti URL)
 
         public Accommodation() { }
 
         public Accommodation(string Name, int idLocation, Location location, AccommodationType type, int maxGuestNum, int minReservationDays, int daysPossibleToCancel, List<string> imageURLs)
         {
-            {
-                ImageURLs = new List<Uri>();
-            }
-
             this.Name = Name;
             this.IdLocation = idLocation;
             this.Location = location;
@@ -44,24 +43,15 @@ namespace FiveStarTours.Model
             this.MaxGuestNum = maxGuestNum;
             this.MinReservationDays = minReservationDays;
             this.DaysPossibleToCancel = daysPossibleToCancel;
-
-            
-            this.ImageURLs = new List<Uri>();
-
-            foreach(string imageURL in imageURLs)
-            {
-                Uri file = new Uri(imageURL);
-                ImageURLs.Add(file);
-            }
+            this.ImageURLs = imageURLs;
         }
 
         public string[] ToCSV()
         {
             StringBuilder imageURLsList = new StringBuilder();
 
-            foreach (Uri imageURL in ImageURLs)
+            foreach (string imageURL in ImageURLs)
             {
-                string imageURLString = imageURL.ToString();
                 imageURLsList.Append(imageURL);
                 imageURLsList.Append(" ,");
             }
@@ -77,7 +67,7 @@ namespace FiveStarTours.Model
                 MinReservationDays.ToString(),
                 DaysPossibleToCancel.ToString(),
                 imageURLsList.ToString()
-                
+
         };
             return csvValues;
         }
@@ -96,13 +86,56 @@ namespace FiveStarTours.Model
             string[] delimitedImageURLs = imageURLs.Split(",");
             if (ImageURLs == null)
             {
-                ImageURLs = new List<Uri>();
+                ImageURLs = new List<string>();
             }
 
             foreach (string imageURL in delimitedImageURLs)
             {
-                Uri file = new Uri(imageURL);
+                string file = new string(imageURL);
                 ImageURLs.Add(file);
+            }
+        }
+
+        //validacija
+        public string Error => null;
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == "textName")
+                {
+                    if (string.IsNullOrEmpty(Name))
+                        return "Name is necessary!";
+                }
+                else if (columnName == "MaxGuestNum")
+                {
+                    if (string.IsNullOrEmpty(MaxGuestNum.ToString()))
+                        return "Maximum number of guests is necessary!";
+                }
+                else if (columnName == "MinReservationDays")
+                {
+                    if (string.IsNullOrEmpty(MinReservationDays.ToString()))
+                        return "Minimum reservation days is necessary!";
+                }
+
+                return null;
+            }
+        }
+
+        private readonly string[] _validatedProperties = { "Name", "MaxGuestNum", "MinReservationDays" };
+
+        public bool IsValid
+        {
+            get
+            {
+                foreach (var property in _validatedProperties)
+                {
+                    if (this[property] != null)
+                        return false;
+                }
+
+                return true;
             }
         }
 
