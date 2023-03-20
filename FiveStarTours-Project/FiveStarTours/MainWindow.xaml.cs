@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FiveStarTours.View.VehicleRegistration;
+using FiveStarTours.Model;
+using FiveStarTours.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace FiveStarTours
 {
     /// <summary>
@@ -23,6 +27,12 @@ namespace FiveStarTours
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void VehicleRegistrationButton_Click(object sender, RoutedEventArgs e)
+        {
+            VehicleRegistration vehicleRegistration = new VehicleRegistration();
+            vehicleRegistration.Show();
         }
     }
 }
