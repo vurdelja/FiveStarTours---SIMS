@@ -37,5 +37,15 @@ namespace FiveStarTours.View
             tour = _repository.GetById(selectedTour.Id);
             //Tours = new ObservableCollection<Tour>(_repository.GetById(selectedTour.Id));
         }
+
+        private void ReservationButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
