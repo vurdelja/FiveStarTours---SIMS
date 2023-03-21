@@ -68,7 +68,7 @@ namespace FiveStarTours.View.Guide
             Close();
         }
 
-        public void CheckPoint_Checked(object sender, RoutedEventArgs e)
+        /*public void CheckPoint_Checked(object sender, RoutedEventArgs e)
         {
             int numChecked = 0;
             CheckBox checkpoint = (CheckBox)sender;
@@ -85,8 +85,26 @@ namespace FiveStarTours.View.Guide
                 _liveTourRepository.FindIdAndSave(liveTour, liveTour.Id);
                 Close();
             }
-        }
+            if(KeyPoi)
+        }*/
 
+        private void CheckPoint_Checked(object sender, RoutedEventArgs e)
+        {
+            bool allChecked = true;
+            foreach (KeyPoints item in liveTour.KeyPoints)
+            {
+                if (!item.Visited)
+                {
+                    allChecked = false;
+                    break;
+                }
+            }
+
+            if (allChecked)
+            {
+                this.Close();
+            }
+        }
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             e.Handled = true;
@@ -111,6 +129,22 @@ namespace FiveStarTours.View.Guide
                         yield return childOfChild;
                     }
                 }
+            }
+        }
+
+        public void Visitor_Checked(object sender, RoutedEventArgs e)
+        {
+            string item = (string)((CheckBox)sender).Content;
+
+            MessageBoxResult result = MessageBox.Show($"Do you want to check {item}?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                liveTour.Visitors[item] = true;
+            }
+            else
+            {
+                ((CheckBox)sender).IsChecked = false;
             }
         }
 

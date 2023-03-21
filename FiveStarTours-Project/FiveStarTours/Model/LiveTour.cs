@@ -13,7 +13,7 @@ namespace FiveStarTours.Model
         public DateTime Date { get; set; }
         public List<int> IdKeyPoints { get; set; }
         public List<KeyPoints> KeyPoints { get; set; }
-        // lista gostiju na ovoj turi
+        public Dictionary<string, bool> Visitors { get; set; }
         public bool Started { get; set; }
         public bool Ended { get; set; }
 
@@ -26,6 +26,12 @@ namespace FiveStarTours.Model
             Date = date;
             IdKeyPoints = idKeyPoints;
             KeyPoints = keyPoints;
+            Visitors = new Dictionary<string, bool>
+            {
+                { "Marko Markovic", false },
+                { "Ana Anic", false },
+                { "Stefan Stefanovic", false }
+            };
             Started = started;
             Ended = ended;
         }

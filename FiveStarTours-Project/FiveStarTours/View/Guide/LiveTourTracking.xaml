@@ -10,10 +10,19 @@
         <DockPanel>
             <Label DockPanel.Dock="Top" Content="{Binding Name}" Height="25" Margin="150,0,0,0" ></Label>
             <Button DockPanel.Dock="Bottom" x:Name="EndTour" Margin="330,10,10,10" Height="25" Content="End" Click="EndTour_Click" > </Button>
-            <ItemsControl ItemsSource="{Binding KeyPoints}">
+            <ItemsControl x:Name="KeyPoints" DockPanel.Dock="Left" ItemsSource="{Binding KeyPoints}" Width="200">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <CheckBox x:Name="KeyPoint" Content="{Binding Name}" IsChecked="{Binding Visited, Mode=TwoWay}" Unchecked="CheckBox_Unchecked" Checked="CheckPoint_Checked" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <ItemsControl Name="Visitors" DockPanel.Dock="Right" ItemsSource="{Binding Visitors}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <CheckBox x:Name="Visitor" Content="{Binding Key}" IsChecked="{Binding Value, Mode=OneWay}" Checked="Visitor_Checked" />
+                        </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
