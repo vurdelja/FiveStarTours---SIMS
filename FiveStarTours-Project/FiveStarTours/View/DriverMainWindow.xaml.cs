@@ -11,19 +11,27 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using FiveStarTours.View;
+using FiveStarTours.Model;
+using FiveStarTours.Repository;
+using FiveStarTours.Serializer;
 
 namespace FiveStarTours.View
 {
     /// <summary>
-    /// Interaction logic for OwnerMainWindow.xaml
+    /// Interaction logic for DriverMainWindow.xaml
     /// </summary>
     public partial class DriverMainWindow : Window
     {
-        public OwnerMainWindow()
+        public DriverMainWindow()
         {
             InitializeComponent();
         }
 
-        
+        private void VehicleRegistrationButton_Click(object sender, RoutedEventArgs e)
+        {
+            VehicleRegistration.VehicleRegistration vehicleRegistration = new VehicleRegistration.VehicleRegistration();
+            vehicleRegistration.Show();
+        }
     }
 }
