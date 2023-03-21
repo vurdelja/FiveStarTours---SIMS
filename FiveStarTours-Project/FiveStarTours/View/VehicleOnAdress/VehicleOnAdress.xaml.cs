@@ -20,7 +20,7 @@ namespace FiveStarTours.View.VehicleOnAdress
     public partial class VehicleOnAdress : Window, INotifyPropertyChanged
     {
 
-        private readonly VehicleOnAddressRepository _vehicleOnAddressRepository;
+        private readonly VehicleOnAdressRepository _vehicleOnAddressRepository;
         private readonly DrivingsRepository _drivingsRepository;
 
         private string _drivings;
@@ -53,6 +53,9 @@ namespace FiveStarTours.View.VehicleOnAdress
                 }
             }
         }
+
+        
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -64,7 +67,7 @@ namespace FiveStarTours.View.VehicleOnAdress
             InitializeComponent();
             DataContext = this;
 
-            _vehicleOnAddressRepository = new VehicleOnAddressRepository();
+            _vehicleOnAddressRepository = new VehicleOnAdressRepository();
             _drivingsRepository = new DrivingsRepository();
            
 
@@ -90,15 +93,20 @@ namespace FiveStarTours.View.VehicleOnAdress
             }
         }
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        public void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             
             List<Drivings> DrivingsList = MakeDrivingsList(Drivings);
             int Delays = int.Parse(Delay);
 
 
-            /*VehicleOnAddress newVehicleOnAdress = new VehicleOnAdress(DrivingsList, Delays);
-            _vehicleOnAddressRepository.Save(newVehicleOnAdress);*/
+            //VehicleOnAdress vehicleOnAdress = new VehicleOnAdress(DrivingsList, Delays);
+            //_vehicleOnAddressRepository.Save(vehicleOnAdress);
+            Drivings newDrivings = new Drivings();
+            _drivingsRepository.Save(newDrivings);
+
+
+
 
             Close();
         }

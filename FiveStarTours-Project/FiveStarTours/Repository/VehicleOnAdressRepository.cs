@@ -1,6 +1,5 @@
 ﻿
 using System;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,7 +30,7 @@ namespace FiveStarTours.Repository
             return _serializer.FromCSV(FilePath);
         }
 
-        public VehicleOnAdress Save(VehicleOnAdress vehicleOnAdress)
+        public VehicleOnAdress Save(View.VehicleOnAdress.VehicleOnAdress vehicleOnAdress)
         {
             vehicleOnAdress.Id = NextId();
             _vehicleOnAdress = _serializer.FromCSV(FilePath);

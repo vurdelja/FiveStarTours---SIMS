@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace FiveStarTours.Model
 {
-    public class VehicleOnAdress 
+    public class VehicleOnAdress : ISerializable
     {
 
         public int Id;
-        public List<Drivings> drivingsList;
-        public object delays;
+        public List<Drivings> DrivingsList;
+        public int Delays;
        
 
         VehicleOnAdress() { }
@@ -20,35 +20,30 @@ namespace FiveStarTours.Model
         public VehicleOnAdress(List<Drivings> drivingsList, int delays)
         {
 
-            
-            this.drivingsList = drivingsList;
-            this.delays = delays;
+            this.DrivingsList = drivingsList;
+            this.Delays = delays;
             
         }
 
         public string[] ToCSV()
         {
+
             string[] csvValues =
             {
                 Id.ToString(),
 
-                delays.ToString(),
+                Delays.ToString(),
 
-                string.Join(';', drivingsList) };
-                
+                string.Join(';', DrivingsList) };
+
             return csvValues;
         }
-
-
 
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            
-            delays = Convert.ToInt32(values[1]);
 
-
-            
+            Delays = Convert.ToInt32(values[1]);
         }
     }
 }
