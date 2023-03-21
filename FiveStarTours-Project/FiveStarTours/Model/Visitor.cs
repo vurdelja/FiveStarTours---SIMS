@@ -16,18 +16,22 @@ namespace FiveStarTours.Model
         public int Id { get; set; }
         public string VisitorName { get; set; }
         public string PhoneNumber { get; set; }
-        public string StartingKeyPoint { get; set; }
+        public int IdKeyPoint { get; set; }
+        public KeyPoints StartingKeyPoint { get; set; }
+        public DateTime DateTime { get; set; }
         public int MembersNumber { get; set; }
         public string Email { get; set; }
         public Visitor() { }
-        public Visitor(string visitorName, string phoneNumber, string startingKeyPoint, int membersNumber, string email)
+        public Visitor(string visitorName, string phoneNumber, int idKeyPoint, KeyPoints startingKeyPoint, DateTime dateTime, int membersNumber, string email)
         {
             VisitorName = visitorName;
             PhoneNumber = phoneNumber;
+            IdKeyPoint = idKeyPoint;
             StartingKeyPoint = startingKeyPoint;
             MembersNumber = membersNumber;
             Email = email;
         }
+        
         public string[] ToCSV()
         {
             string[] csvValues =
@@ -35,7 +39,8 @@ namespace FiveStarTours.Model
               Id.ToString(),
               VisitorName,
               PhoneNumber,
-              StartingKeyPoint,              
+              IdKeyPoint.ToString(),
+              DateTime.ToString(),
               MembersNumber.ToString(),
               Email
             };
@@ -46,9 +51,10 @@ namespace FiveStarTours.Model
             Id = Convert.ToInt32(values[0]);
             VisitorName = values[1];
             PhoneNumber = values[2];
-            StartingKeyPoint = values[3];
-            MembersNumber = Convert.ToInt32(values[4]);
-            Email = values[5];           
+            IdKeyPoint = Convert.ToInt32(values[3]);
+            DateTime = Convert.ToDateTime(values[4]);
+            MembersNumber = Convert.ToInt32(values[5]);
+            Email = values[6];           
         }
     }
 }

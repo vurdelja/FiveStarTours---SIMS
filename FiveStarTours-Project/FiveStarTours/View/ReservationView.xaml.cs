@@ -24,6 +24,8 @@ namespace FiveStarTours.View
     public partial class ReservationView : Window//, INotifyPropertyChanged
     {
         private readonly VisitorRepository _visitorRepository;
+        private readonly KeyPointsRepository _keyPointsRepository;
+
 
         private string _visitorName;
         public string VisitorName
@@ -53,19 +55,6 @@ namespace FiveStarTours.View
             }
         }
 
-        private string _startingKeyPoint;
-        public string StartingKeyPoint
-        {
-            get => _startingKeyPoint;
-            set
-            {
-                if (value != _startingKeyPoint)
-                {
-                    _startingKeyPoint = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
         private string _membersNumber;
         public string MembersNumber
         {
@@ -105,12 +94,27 @@ namespace FiveStarTours.View
             DataContext = this;
 
             _visitorRepository = new VisitorRepository();
-            
+            _keyPointsRepository = new KeyPointsRepository();
+
+            List<string> KeyPoints = _keyPointsRepository.GetAllNames();
+            StartingKeyPoint.ItemsSource = KeyPoints;
+            StartingKeyPoint.SelectedValuePath = ".";
+            StartingKeyPoint.DisplayMemberPath = ".";
+
         }
 
         private void ReservationButton_Click(object sender, RoutedEventArgs e)
         {
-            Visitor visitor = new Visitor(VisitorName, PhoneNumber, StartingKeyPoint, Convert.ToInt32(MembersNumber), Email);
+            KeyPoints startingKeyPoint = new KeyPoints();
+            startingKeyPoint.Name = selectedKeyPoint;
+            foreach(var keyPoint in _keyPointsRepository.GetAll())
+            {
+                if(startingKeyPoint.Name == keyPoint.Name)
+                {
+                    startingKeyPoint.Id = keyPoint.Id;
+                }
+            }
+            Visitor visitor = new Visitor(VisitorName, PhoneNumber, startingKeyPoint.Id, startingKeyPoint, Convert.ToInt32(MembersNumber), Email);
             _visitorRepository.Save(visitor);
             Close();
 
@@ -119,6 +123,16 @@ namespace FiveStarTours.View
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private string selectedKeyPoint;
+        private void StartingKeyPoint_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(StartingKeyPoint.SelectedItem != null)
+            {
+                selectedKeyPoint = StartingKeyPoint.SelectedItem as string;
+
+            }
         }
     }
 }

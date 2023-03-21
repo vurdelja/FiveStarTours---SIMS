@@ -168,7 +168,7 @@ namespace FiveStarTours.View
                 selectedState = stateComboBox.SelectedItem as string;
             }
         }
-
+        
         private void cityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cityComboBox.SelectedItem != null)
