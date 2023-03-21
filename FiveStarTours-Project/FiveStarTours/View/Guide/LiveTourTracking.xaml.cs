@@ -19,6 +19,7 @@ namespace FiveStarTours.View.Guide
     public partial class LiveTourTracking : Window, INotifyPropertyChanged
     {
         private readonly LiveTourRepository _liveTourRepository;
+        private readonly VisitorRepository _visitorRepository;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public ObservableCollection<string> Checkpoints { get; set; }
@@ -28,7 +29,9 @@ namespace FiveStarTours.View.Guide
         LiveTour liveTour { get; set; }
         public LiveTourTracking(Tour selectedTour)
         {
+            selectedTour.Id += 1;
             _liveTourRepository = new LiveTourRepository();
+            _visitorRepository = new VisitorRepository();
             if (StartLiveTour(selectedTour))
             {
                 InitializeComponent();
@@ -40,11 +43,74 @@ namespace FiveStarTours.View.Guide
             }
         }
 
+        // Dictionary of visitors for tracking 
+
+        Dictionary<string, bool> Visitor;
+
+        public Dictionary<string, bool> GetAllVisitors(VisitorRepository visitorRepository, Tour tour)
+        {
+            Dictionary<string, bool> Visitors = new Dictionary<string, bool>();
+            List<Visitor> visitors = new List<Visitor>();
+            foreach(var v in _visitorRepository.GetAll())
+            {
+                if(tour.Id == v.TourId && tour.OneBeginningTime == v.DateTime)
+                {
+                    visitors.Add(v);
+                }
+            }
+
+            List<string> Names = new List<string>();
+
+            foreach(var visitor in visitors)
+            {
+                Names.Add(visitor.VisitorName);
+            }
+
+            foreach(var name in Names)
+            {
+                Visitors.Add(name, false);
+            }
+
+            if (Visitors.Count < 1)
+            {
+                MessageBox.Show("Nema posetilaca na ovoj turi!");
+                Close();
+            }
+            return Visitors;
+        }
+
+        public bool CheckVisitors(VisitorRepository visitorRepository, Tour tour)
+        {
+            List<Visitor> visitors = new List<Visitor>();
+            foreach (var v in _visitorRepository.GetAll())
+            {
+                if (tour.Id == v.Id && tour.OneBeginningTime == v.DateTime)
+                {
+                    visitors.Add(v);
+                }
+            }
+            if( visitors.Count < 1)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public bool StartLiveTour(Tour tour)
         {
             tour.KeyPoints = tour.getKeyPointsById(tour.IdKeyPoints);
             tour.KeyPoints.ElementAt(0).Visited = true;
-            liveTour = new LiveTour(tour.Id, tour.Name, tour.OneBeginningTime, tour.IdKeyPoints, tour.KeyPoints, true, false);
+            if(CheckVisitors(_visitorRepository, tour))
+            {
+                Visitor = GetAllVisitors(_visitorRepository, tour);
+            }
+            else
+            {
+                MessageBox.Show("No visitors on this tour!");
+                return false;
+            }
+            liveTour = new LiveTour(tour.Id, tour.Name, tour.OneBeginningTime, tour.IdKeyPoints, tour.KeyPoints, Visitor, true, false);
             foreach (var livetour in _liveTourRepository.GetAll())
             {
                 if (livetour.Ended && livetour.Date.Date == liveTour.Date.Date && string.Equals(livetour.Name, liveTour.Name, StringComparison.OrdinalIgnoreCase))
