@@ -1,0 +1,21 @@
+﻿<Window x:Class="FiveStarTours.View.VehicleOnAdress.VehicleOnAdress"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FiveStarTours.View.VehicleOnAdress"
+        mc:Ignorable="d"
+        Title="Vehicle On Adress" Height="450" Width="450">
+    <Grid>
+        <Label Content="Drivings*" HorizontalAlignment="Left" Margin="51,44,0,0" VerticalAlignment="Top" Height="30" Width="56" RenderTransformOrigin="1.086,0.615"/>
+        <ComboBox x:Name="DrivingsComboBox" HorizontalAlignment="Left" Margin="112,46,0,0" VerticalAlignment="Top" Width="269" Height="22"/>
+        <CheckBox x:Name="OnAdressCheckBox" Content="On Adress" HorizontalAlignment="Left" Margin="112,100,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.463,2.126"/>
+        <CheckBox x:Name="DelayCheckBox" Content="Delay" HorizontalAlignment="Left" Margin="197,100,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.411,-1.247"/>
+        <Label Content="Enter Delay*" HorizontalAlignment="Right" Margin="0,141,338,0" VerticalAlignment="Top" RenderTransformOrigin="0.638,0.682"/>
+        <TextBox x:Name="DelayTextBox" HorizontalAlignment="Left" Margin="112,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Height="22" RenderTransformOrigin="0.371,0.256"/>
+        <Label Content="Check*" HorizontalAlignment="Left" Margin="60,94,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.31,-0.23"/>
+        <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="99,353,0,0" VerticalAlignment="Top" Height="22" Width="100"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="247,353,0,0" VerticalAlignment="Top" Width="99" Height="22"/>
+
+    </Grid>
+</Window>
