@@ -29,7 +29,8 @@ namespace FiveStarTours
 
         private void OwnerButtonClick_Checked(object sender, RoutedEventArgs e)
         {
-
+            OwnerMainWindow ownerWindow = new OwnerMainWindow();
+            ownerWindow.Show();
         }
 
         private void TravelerButtonClick_Checked(object sender, RoutedEventArgs e)
@@ -52,7 +53,8 @@ namespace FiveStarTours
 
         private void DriverButtonClick_Checked(object sender, RoutedEventArgs e)
         {
-
+            DriverMainWindow driverWindow = new DriverMainWindow();
+            driverWindow.Show();
         }
     }
 }

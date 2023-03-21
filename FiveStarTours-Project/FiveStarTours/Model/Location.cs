@@ -2,32 +2,37 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FiveStarTours.Model
 {
-    public class Location : ISerializable
+    public class Location : FiveStarTours.Serializer.ISerializable
     {
+        public string selectedState;
+        public string selectedCity;
+
         public int Id { get; set; }
         public string State { get; set; }
         public string City { get; set; }
 
         public Location() { }
-
-        public Location(string state, string city)
+        
+        public Location(string selectedState, string selectedCity)
         {
-            this.State = state;
-            this.City = city;
+            
+            this.selectedState = selectedState;
+            this.selectedCity = selectedCity;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = 
-            { 
+            string[] csvValues =
+            {
                 Id.ToString(),
-                State, 
-                City 
+                selectedState,
+                selectedCity
             };
             return csvValues;
         }
@@ -40,3 +45,4 @@ namespace FiveStarTours.Model
         }
     }
 }
+
