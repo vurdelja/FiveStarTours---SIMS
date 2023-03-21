@@ -53,7 +53,6 @@ namespace FiveStarTours.View
             if(SelectedTour != null)
             {
                 TourView tourView = new TourView(SelectedTour);
-                //this.Visibility = Visibility.Hidden;
                 tourView.Show();
                 
             }
