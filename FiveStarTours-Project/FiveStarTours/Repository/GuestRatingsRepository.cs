@@ -5,40 +5,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace FiveStarTours.Repository
 {
     public class GuestRatingsRepository
     {
-        private const string FilePath = "../../../Resources/Data/ratings.csv";
+        private const string FilePath = "../../../Resources/Data/guestRatings.csv";
 
-        private readonly Serializer<GuestRating> _serializerRating;
+        private readonly Serializer<GuestRating> _serializer;
 
         private List<GuestRating> _ratings;
 
         public GuestRatingsRepository()
         {
-            _serializerRating = new Serializer<GuestRating>();
-            _ratings = _serializerRating.FromCSV(FilePath);
+            _serializer = new Serializer<GuestRating>();
+            _ratings = _serializer.FromCSV(FilePath);
         }
 
         public List<GuestRating> GetAll()
         {
-            return _serializerRating.FromCSV(FilePath);
+            return _serializer.FromCSV(FilePath);
         }
 
         public GuestRating Save(GuestRating rating)
         {
             rating.Id = NextId();
-            _ratings = _serializerRating.FromCSV(FilePath);
+            _ratings = _serializer.FromCSV(FilePath);
             _ratings.Add(rating);
-            _serializerRating.ToCSV(FilePath, _ratings);
+            _serializer.ToCSV(FilePath, _ratings);
             return rating;
         }
 
         public int NextId()
         {
-            _ratings = _serializerRating.FromCSV(FilePath);
+            _ratings = _serializer.FromCSV(FilePath);
             if (_ratings.Count < 1)
             {
                 return 1;
@@ -58,5 +59,17 @@ namespace FiveStarTours.Repository
             }
             return null;
         }
+
+        public GuestRating Update(GuestRating rating)
+        {
+            _ratings = _serializer.FromCSV(FilePath);
+            GuestRating current = _ratings.Find(c => c.Id == rating.Id);
+            int index = _ratings.IndexOf(current);
+            _ratings.Remove(current);
+            _ratings.Insert(index, rating);  
+            _serializer.ToCSV(FilePath, _ratings);
+            return rating;
+        }
+
     }
 }

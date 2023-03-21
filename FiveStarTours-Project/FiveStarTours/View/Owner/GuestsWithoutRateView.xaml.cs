@@ -26,7 +26,7 @@ namespace FiveStarTours.View.Owner
     {
         public static ObservableCollection<AccommodationReservation> Reservations { get; set; }
 
-        public AccommodationReservation SelectedReservation { get; set; }
+        public AccommodationReservation SelectedReservation { get; set; }   //SELEKTOVANA
         private readonly AccommodationReservationsRepository _repository;
 
         public GuestsWithoutRateView()
@@ -35,6 +35,7 @@ namespace FiveStarTours.View.Owner
             DataContext = this;
             _repository = new AccommodationReservationsRepository();
             Reservations = new ObservableCollection<AccommodationReservation>(_repository.GetUnratedAndLessThanFiveDaysAgo());
+
         }
 
         private void RateGuestsButton_Click(object sender, RoutedEventArgs e)
@@ -43,6 +44,8 @@ namespace FiveStarTours.View.Owner
             {
                 GuestRatingView guestRatingView = new GuestRatingView(SelectedReservation);
                 guestRatingView.Show();
+                Close();
+                
             }
             else
             {

@@ -9,6 +9,9 @@ using System.Windows.Controls;
 using Microsoft.Win32;
 using System.Windows.Media.Imaging;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Security.AccessControl;
+using System.Xml.Linq;
 
 namespace FiveStarTours.View
 {
@@ -18,16 +21,12 @@ namespace FiveStarTours.View
         private readonly LocationsRepository _locationsRepository;
         private readonly AccommodationsRepository _accommodationsRepository;
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string properyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(properyName));
-        }
 
         public AddAccommodationView()
         {
             InitializeComponent();
             DataContext = this;
+
             _locationsRepository = new LocationsRepository();
             _accommodationsRepository = new AccommodationsRepository();
 
@@ -39,7 +38,6 @@ namespace FiveStarTours.View
             stateComboBox.SelectedValuePath = ".";
             stateComboBox.DisplayMemberPath = ".";
         }
-
 
         //Name
         private string _accommodationName;
@@ -53,9 +51,10 @@ namespace FiveStarTours.View
             }
         }
 
+
         //Location - state and city
-        private string selectedState;
-        private string selectedCity;
+        public string selectedState;
+        public string selectedCity;
 
         private void stateComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -90,59 +89,59 @@ namespace FiveStarTours.View
         }
 
         //Accommodation type
-        private AccommodationType accommodationType;
+        public AccommodationType accommodationType;
 
 
         //Accommodation max guest number
-        private string _maxGuestNum;
+        public string _maxGuestNum;
         public string MaxGuestNum
         {
-            get
-            {
-                return _maxGuestNum;
-            }
+            get => _maxGuestNum;
             set
             {
-                _maxGuestNum = value;
-                OnPropertyChanged();
+                if (value != _maxGuestNum)
+                {
+                    _maxGuestNum = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
 
         //Min days to make reservation
-        private string _minReservationDays;
+        public string _minReservationDays;
         public string MinReservationDays
         {
-            get
-            {
-                return _minReservationDays;
-            }
+            get => _minReservationDays;
             set
             {
-                _minReservationDays = value;
-                OnPropertyChanged();
+                if (value != _minReservationDays)
+                {
+                    _minReservationDays = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
+
+
         //Days possible to cancel
-        private string _daysPossibleToCancel;
+        public string _daysPossibleToCancel;
         public string DaysPossibleToCancel
         {
-            get
-            {
-                return _daysPossibleToCancel;
-            }
+            get => _daysPossibleToCancel;
             set
             {
-                
+                if (value != _daysPossibleToCancel)
+                {
                     _daysPossibleToCancel = value;
                     OnPropertyChanged();
+                }
             }
         }
 
         //Images
-        private string _imageURLs;
-
+        public string _imageURLs;
         public string ImageURLs
         {
             get => _imageURLs;
@@ -156,8 +155,14 @@ namespace FiveStarTours.View
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
 
-  
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
         private void SubmitRegistrationButton_Click(object sender, RoutedEventArgs e)
         {
             Location location = GetSelectedLocation();
@@ -193,7 +198,6 @@ namespace FiveStarTours.View
 
             Accommodation newAccommodation = new Accommodation(
                     AccommodationName,
-                    location.Id,
                     location,
                     accommodationType,
                     MaximumGuests,
@@ -202,17 +206,70 @@ namespace FiveStarTours.View
                     formattedImages
                 );
 
-            if (newAccommodation.IsValid)
+
+
+            if(IsValid(newAccommodation))
             {
                 _accommodationsRepository.Save(newAccommodation);
                 Close();
-
             }
             else
             {
                 MessageBox.Show("All necessary fields must be filled.");
             }
+            
+
         }
+
+
+        public string Error => null;
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == "AccommodationName")
+                {
+                    if (string.IsNullOrEmpty(AccommodationName))
+                        return "AccommodationName is required";
+                }
+                else if (columnName == "MaxGuestNum")
+                {
+                    if (string.IsNullOrEmpty(MaxGuestNum))
+                        return "Type is required";
+                }
+                else if (columnName == "MinReservationDays")
+                {
+                    if (string.IsNullOrEmpty(MinReservationDays))
+                        return "Type is required";
+                }
+                else if (columnName == "DaysPossibleToCancel")
+                {
+                    if (string.IsNullOrEmpty(DaysPossibleToCancel))
+                        return "Type is required";
+                }
+
+                return null;
+            }
+        }
+
+
+
+        private readonly string[] _validatedProperties = { "AccommodationName", "MaxGuestNum", "MinReservationDays", "DaysPossibleToCancel" };
+
+
+
+        public bool IsValid(Accommodation accommodation)
+        {
+            foreach (var property in _validatedProperties)
+            {
+                if (this[property] != null)
+                    return false;
+            }
+
+            return true;
+        }
+
 
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

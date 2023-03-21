@@ -64,6 +64,17 @@ namespace FiveStarTours.Repository
             return null;
         }
 
+        public AccommodationReservation Update(AccommodationReservation reservation)
+        {
+            _reservations = _serializer.FromCSV(FilePath);
+            AccommodationReservation current = _reservations.Find(c => c.Id == reservation.Id);
+            int index = _reservations.IndexOf(current);
+            _reservations.Remove(current);
+            _reservations.Insert(index, reservation);
+            _serializer.ToCSV(FilePath, _reservations);
+            return reservation;
+        }
+
         public List<AccommodationReservation> GetUnratedAndLessThanFiveDaysAgo()
         {
             List<AccommodationReservation> reservations = new List<AccommodationReservation>();
@@ -83,6 +94,8 @@ namespace FiveStarTours.Repository
             return reservations;
  
         }
+
+        
 
     }
 }

@@ -19,7 +19,7 @@ namespace FiveStarTours.Model
         public string AccommodationName { get; set; }
         public int GuestNumber { get; set; }
 
-        public bool Rated { get; set; } 
+        public bool Rated { get; set; }
 
         public AccommodationReservation(string name, string surname, DateTime startDate, DateTime endDate, int visitationDays, string accommodationName, int guestNum)
         {
@@ -38,6 +38,7 @@ namespace FiveStarTours.Model
         {
             string[] csvValues =
            {
+                Id.ToString(),
                 GuestName,
                 GuestSurname,
                 string.Join(';', StartDate),

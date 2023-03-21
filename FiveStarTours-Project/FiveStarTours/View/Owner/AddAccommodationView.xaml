@@ -8,14 +8,13 @@
         Title="AddAccommodationView" Height="750" Width="430" Background="White" WindowStyle="None"
         WindowStartupLocation="CenterScreen" AllowsTransparency="True">
     <Window.Resources>
-        <ControlTemplate x:Key="validationErrorTemplate">
-            <DockPanel>
-                <TextBlock Foreground="Red" 
-            DockPanel.Dock="Top">!</TextBlock>
-                <AdornedElementPlaceholder 
-           x:Name="ErrorAdorner"
-        ></AdornedElementPlaceholder>
-            </DockPanel>
+        <ControlTemplate x:Key="ValidationTemplate">
+            <StackPanel>
+                <!-- Placeholder for the TextBox itself -->
+                <AdornedElementPlaceholder x:Name="textBox" />
+                <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red" />
+            </StackPanel>
+
         </ControlTemplate>
     </Window.Resources>
     
@@ -96,12 +95,12 @@
 
 
 
-                <TextBox Name="nameText" Grid.Row="0" Grid.Column="1" 
-                         Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"
+                <TextBox Grid.Row="0" Grid.Column="1" 
+                         Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged}"
                          Height="30"  
                          Margin="0 0 1 0" 
                          FontSize="10"
-                         Validation.ErrorTemplate="{StaticResource validationErrorTemplate}">
+                         Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
 
                 </TextBox>
                 <ComboBox Grid.Row="1" Grid.Column="1"
@@ -127,28 +126,27 @@
                 </ComboBox>
                 <TextBox Grid.Row="4" Grid.Column="1"
                          Text="{Binding Path=MaxGuestNum, UpdateSourceTrigger=PropertyChanged}"
-                        
+                        Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
                          Height="30"  
                          Margin="0 0 1 0" 
                          FontSize="10">
                 </TextBox>
                 <TextBox Grid.Row="5" Grid.Column="1"
                          Text="{Binding Path=MinReservationDays, UpdateSourceTrigger=PropertyChanged}"
-                        
+                        Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
                          Height="30"  
                          Margin="0 0 1 0" 
                          FontSize="10">
                 </TextBox>
                 <TextBox Grid.Row="6" Grid.Column="1"
                          Text="{Binding Path=DaysPossibleToCancel, UpdateSourceTrigger=PropertyChanged}"
-                         
+                         Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
                          Height="30"  
                          Margin="0 0 1 0" 
                          FontSize="10">
                 </TextBox>
                 <TextBox Grid.Row="7" Grid.Column="1"
                          Text="{Binding Path=ImageURLs, UpdateSourceTrigger=PropertyChanged}"
-                         
                          Height="30"  
                          Margin="0 0 1 0" 
                          FontSize="10">

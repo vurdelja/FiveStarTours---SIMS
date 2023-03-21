@@ -1,10 +1,15 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using MahApps.Metro.Converters;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Security.AccessControl;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace FiveStarTours.View.Owner
 {
@@ -16,7 +21,7 @@ namespace FiveStarTours.View.Owner
         public AccommodationReservation _selectedReservation { get; set; }
 
         private readonly AccommodationReservationsRepository _repository;
-        public AccommodationReservation accommodationReservation { get; set; }
+        private readonly GuestRatingsRepository _rateRepository;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string properyName = null)
@@ -24,172 +29,217 @@ namespace FiveStarTours.View.Owner
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(properyName));
         }
 
-
-        /*public ObservableCollection<int> _tidinessRate { get; set; }
-        public int tidinessRate { get; set; }
-        public ObservableCollection<int> _rulesFollowedRate { get; set; }
-        public int rulesFollowedRate { get; set; }
-        public ObservableCollection<int> _quietnessRate { get; set; }
-        public int quietnessRate { get; set; }
-        public ObservableCollection<int> _friendlinessRate { get; set; }
-        public int friendlinessRate { get; set; }
-        public ObservableCollection<int> _communicationRate { get; set; }
-        public int communicationRate { get; set; }
-        public ObservableCollection<int> _respectTimeRate { get; set; }
-        public int respectTimeRate { get; set; }*/
-
         public GuestRatingView(AccommodationReservation selectedReservation)
         {
             InitializeComponent();
             DataContext = this;
 
-            //accommodationReservation = new AccommodationReservation();
-            //accommodationReservation = _repository.GetById(selectedReservation.Id);
+            _selectedReservation= selectedReservation;
+
 
             _repository = new AccommodationReservationsRepository();
-
-
-
-            accommodationReservation = new AccommodationReservation();
-            accommodationReservation = _repository.GetById(selectedReservation.Id);
-
-            /*_tidinessRate = new ObservableCollection<int>();
-
-            for (int i = 1; i < 6; i++)
-            {
-                _tidinessRate.Add(i);
-            }
-
-            _tidinessRate = new ObservableCollection<int>();
-
-            for (int i = 1; i < 6; i++)
-            {
-                _tidinessRate.Add(i);
-            }*/
+            _rateRepository= new GuestRatingsRepository();
 
         }
 
+      
 
+        public int tidiness;
 
-        private string tidiness;
-        public string Tidiness
-        {
-            get => tidiness;
-            set
-            {
-                tidiness = value;
-                OnPropertyChanged();
-            }
-        }
+        public int rulesFollowed;
 
-        private string rulesFollowed;
-        public string RulesFollowed
-        {
-            get
-            {
-                return rulesFollowed;
-            }
-            set
-            {
-                rulesFollowed = value;
-                OnPropertyChanged();
-            }
-        }
+        public int quietness;
 
-        private string quietness;
-        public string Quietness
-        {
-            get
-            {
-                return rulesFollowed;
-            }
-            set
-            {
-                rulesFollowed = value;
-                OnPropertyChanged();
-            }
-        }
+        public int friendliness;
 
-        private string friendliness;
-        public string Friendliness
-        {
-            get
-            {
-                return rulesFollowed;
-            }
-            set
-            {
-                rulesFollowed = value;
-                OnPropertyChanged();
-            }
-        }
+        public int communication;
 
-        private string communication;
-        public string Communication
-        {
-            get
-            {
-                return communication;
-            }
-            set
-            {
-                rulesFollowed = value;
-                OnPropertyChanged();
-            }
-        }
+        public int respectTime;
 
-        private string respectTime;
-        public string RespectTime
-        {
-            get
-            {
-                return rulesFollowed;
-            }
-            set
-            {
-                rulesFollowed = value;
-                OnPropertyChanged();
-            }
-        }
 
         private string comment;
         public string Comment
         {
             get
             {
-                return rulesFollowed;
+                return comment;
             }
             set
             {
-                rulesFollowed = value;
+                comment = value;
                 OnPropertyChanged();
             }
         }
 
         private void SubmitRateButton_Click(object sender, RoutedEventArgs e)
         {
+            //Tidiness
+            string s = TidinessComboBox.Text;
+            if (s.Equals("1 - very poor"))
+            {
+                tidiness = 1;
+            }
+            else if (s.Equals("2 - poor"))
+            {
+                tidiness = 2;
+            }
+            else if (s.Equals("3 - average"))
+            {
+                tidiness = 3;
+            }
+            else if (s.Equals("4 - good"))
+            {
+                tidiness = 4;
+            }
+            else if (s.Equals("5 - very good"))
+            {
+                tidiness = 5;
+            }
 
-            int tidiness = int.Parse(Tidiness);
-            int rulesFollowed = int.Parse(RulesFollowed);
-            int quietness = int.Parse(Quietness);
-            int friendliness = int.Parse(Friendliness);
-            int communication = int.Parse(Communication);
-            int respectTime = int.Parse(RespectTime);
+            //Rules followed
+            string r = RulesFollowedComboBox.Text;
+            if (r.Equals("1 - very poor"))
+            {
+                rulesFollowed = 1;
+            }
+            else if (r.Equals("2 - poor"))
+            {
+                rulesFollowed = 2;
+            }
+            else if (r.Equals("3 - average"))
+            {
+                rulesFollowed = 3;
+            }
+            else if (r.Equals("4 - good"))
+            {
+                rulesFollowed = 4;
+            }
+            else if (r.Equals("5 - very good"))
+            {
+                rulesFollowed = 5;
+            }
+
+            //Quietness
+            string q = QuietnessComboBox.Text;
+            if (q.Equals("1 - very poor"))
+            {
+                quietness = 1;
+            }
+            else if (q.Equals("2 - poor"))
+            {
+                quietness = 2;
+            }
+            else if (q.Equals("3 - average"))
+            {
+                quietness = 3;
+            }
+            else if (q.Equals("4 - good"))
+            {
+                quietness = 4;
+            }
+            else if (q.Equals("5 - very good"))
+            {
+                quietness = 5;
+            }
+
+            //Friendliness
+            string f = FriendlinessComboBox.Text;
+            if (f.Equals("1 - very poor"))
+            {
+                friendliness = 1;
+            }
+            else if (f.Equals("2 - poor"))
+            {
+                friendliness = 2;
+            }
+            else if (f.Equals("3 - average"))
+            {
+                friendliness = 3;
+            }
+            else if (f.Equals("4 - good"))
+            {
+                friendliness = 4;
+            }
+            else if (f.Equals("5 - very good"))
+            {
+                friendliness = 5;
+            }
+
+            //Communication
+            string c = CommunicationComboBox.Text;
+            if (c.Equals("1 - very poor"))
+            {
+                communication = 1;
+            }
+            else if (c.Equals("2 - poor"))
+            {
+                communication = 2;
+            }
+            else if (c.Equals("3 - average"))
+            {
+                communication = 3;
+            }
+            else if (c.Equals("4 - good"))
+            {
+                communication = 4;
+            }
+            else if (c.Equals("5 - very good"))
+            {
+                communication = 5;
+            }
+
+            //RespectTime
+            string t = RespectTimeComboBox.Text;
+            if (t.Equals("1 - very poor"))
+            {
+                respectTime = 1;
+            }
+            else if (t.Equals("2 - poor"))
+            {
+                respectTime = 2;
+            }
+            else if (t.Equals("3 - average"))
+            {
+                respectTime = 3;
+            }
+            else if (t.Equals("4 - good"))
+            {
+                respectTime = 4;
+            }
+            else if (t.Equals("5 - very good"))
+            {
+                respectTime = 5;
+            }
 
             AccommodationReservation reservation = _selectedReservation;
-
-
 
             GuestRating newGuestRate = new GuestRating(
                     reservation,
                     tidiness,
-                    rulesFollowed,
+                    friendliness,
                     quietness,
                     friendliness,
                     communication,
                     respectTime,
                     Comment
                 );
+
+            GuestsWithoutRateView guestsWithoutRateView = new GuestsWithoutRateView();
+            _rateRepository.Save(newGuestRate);
+            reservation.Rated = true;
+
+            _repository.Update(reservation);
+            System.Threading.Thread.Sleep(1000);
+            Close();
+            System.Threading.Thread.Sleep(2000);
+            
+
+            guestsWithoutRateView.Show();
+
+
+            
+
+            
 
         }
 
@@ -198,6 +248,7 @@ namespace FiveStarTours.View.Owner
             Close();
         }
 
+     
 
     }
 }

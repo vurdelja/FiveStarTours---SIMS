@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace FiveStarTours.Model
 {
@@ -12,8 +13,8 @@ namespace FiveStarTours.Model
     {
         public int Id { get; set; }
         public AccommodationReservation AccommodationReservation { get; set; }
-        public int Tidiness { get; set; }
-        public int RulesFollowed { get; set; }
+        public int Tidiness { get; set; } 
+        public int RulesFollowed { get; set; } 
         public int Quietness { get; set; }
         public int Friendliness { get; set; }
         public int Communication { get; set; }
@@ -26,8 +27,9 @@ namespace FiveStarTours.Model
             AccommodationReservation= new AccommodationReservation();
         }
 
-        public GuestRating(AccommodationReservation accommodationReservation, int tidiness, int rulesFollowed, int quietness, int friendliness, int communication, int respectTime , string comment)
+        public GuestRating(AccommodationReservation a, int tidiness, int rulesFollowed, int quietness, int friendliness, int communication, int respectTime , string comment)
         {
+            AccommodationReservation= a;
             Tidiness = tidiness;
             RulesFollowed = rulesFollowed;
             Quietness = quietness;
@@ -58,10 +60,8 @@ namespace FiveStarTours.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-
-            AccommodationReservation.GuestName = values[1];
-            AccommodationReservation.GuestSurname = values[2];
-
+            AccommodationReservation = new AccommodationReservation() { GuestName = values[1] };
+            AccommodationReservation = new AccommodationReservation() { GuestSurname = values[2] };
             Tidiness = int.Parse(values[3]);
             RulesFollowed= int.Parse(values[4]);
             Quietness= int.Parse(values[5]);

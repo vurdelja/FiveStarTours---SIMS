@@ -22,7 +22,7 @@
             </Border>
 
 
-            <Grid Grid.Row="0" Grid.Column="0" Width="430" Height="500">
+            <Grid Grid.Row="0" Grid.Column="0" Height="500" Margin="0,0,10,0">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
@@ -44,7 +44,7 @@
                        Height="30"
                        Foreground="Purple"/>
                 <Label Grid.Row="1" Grid.Column="0"
-                       Content="Rules followed: " 
+                       Content="Good at following the rules: " 
                        Margin="3 0 0 0" 
                        Height="30"
                        Foreground="Purple"/>
@@ -54,7 +54,7 @@
                        Height="30"
                        Foreground="Purple"/>
                 <Label Grid.Row="3" Grid.Column="0"
-                       Content="Friendliness " 
+                       Content="Friendliness: " 
                        Margin="3 0 0 0" 
                        Height="30"
                        Foreground="Purple"/>
@@ -64,7 +64,7 @@
                        Height="30"
                        Foreground="Purple"/>
                 <Label Grid.Row="5" Grid.Column="0"
-                       Content="Respected time: " 
+                       Content="Respected check-in/out time: " 
                        Margin="3 0 0 0" 
                        Height="30"
                        Foreground="Purple"/>
@@ -73,61 +73,79 @@
                        Margin="3 0 0 0" 
                        Height="30"
                        Foreground="Purple"/>
-             
 
 
+                <ComboBox Grid.Row="0" Grid.Column="1"
+                           x:Name="TidinessComboBox"
+                         Height="30"  
+                         Margin="0,16,10,16" FontSize="10">
+                    <ComboBoxItem Content="1 - very poor"/>
+                    <ComboBoxItem Content="2 - poor"/>
+                    <ComboBoxItem Content="3 - average"/>
+                    <ComboBoxItem Content="4 - good"/>
+                    <ComboBoxItem Content="5 - very good"/>
+                </ComboBox>
 
-    
-                <TextBox Grid.Row="0" Grid.Column="1"
-                         Text="{Binding Path=Tidiness, UpdateSourceTrigger=PropertyChanged}"
-                        
-                         Height="30"  
-                         Margin="0 0 1 0" 
-                         FontSize="10">
-                </TextBox>
-                <TextBox Grid.Row="1" Grid.Column="1"
-                         Text="{Binding Path=RulesFollowed, UpdateSourceTrigger=PropertyChanged}"
-                        
-                         Height="30"  
-                         Margin="0 0 1 0" 
-                         FontSize="10">
-                </TextBox>
-                <TextBox Grid.Row="2" Grid.Column="1"
-                         Text="{Binding Path=Quietness, UpdateSourceTrigger=PropertyChanged}"
-                         
-                         Height="30"  
-                         Margin="0 0 1 0" 
-                         FontSize="10">
-                </TextBox>
-                <TextBox Grid.Row="3" Grid.Column="1"
-                         Text="{Binding Path=Friendliness, UpdateSourceTrigger=PropertyChanged}"
-                         
-                         Height="30"  
-                         Margin="0 0 1 0" 
-                         FontSize="10">
-                </TextBox>
-                <TextBox Grid.Row="4" Grid.Column="1"
-                         Text="{Binding Path=Communication, UpdateSourceTrigger=PropertyChanged}"
-                         
-                         Height="30"  
-                         Margin="0 0 1 0" 
-                         FontSize="10">
-                </TextBox>
                 
-                <TextBox Grid.Row="5" Grid.Column="1"
-                         Text="{Binding Path=RespectTime, UpdateSourceTrigger=PropertyChanged}"
-                         
+                <ComboBox Grid.Row="1" Grid.Column="1"
+                           x:Name="RulesFollowedComboBox"
                          Height="30"  
-                         Margin="0 0 1 0" 
-                         FontSize="10">
-                </TextBox>
+                         Margin="0,16,10,16" FontSize="10">
+                    <ComboBoxItem Content="1 - very poor"/>
+                    <ComboBoxItem Content="2 - poor"/>
+                    <ComboBoxItem Content="3 - average"/>
+                    <ComboBoxItem Content="4 - good"/>
+                    <ComboBoxItem Content="5 - very good"/>
+                </ComboBox>
+
+                <ComboBox Grid.Row="2" Grid.Column="1"
+                           x:Name="QuietnessComboBox"
+                         Height="30"  
+                         Margin="0,16,10,16" FontSize="10">
+                    <ComboBoxItem Content="1 - very poor"/>
+                    <ComboBoxItem Content="2 - poor"/>
+                    <ComboBoxItem Content="3 - average"/>
+                    <ComboBoxItem Content="4 - good"/>
+                    <ComboBoxItem Content="5 - very good"/>
+                </ComboBox>
+
+                <ComboBox Grid.Row="3" Grid.Column="1"
+                           x:Name="FriendlinessComboBox"
+                         Height="30"  
+                         Margin="0,16,10,16" FontSize="10">
+                    <ComboBoxItem Content="1 - very poor"/>
+                    <ComboBoxItem Content="2 - poor"/>
+                    <ComboBoxItem Content="3 - average"/>
+                    <ComboBoxItem Content="4 - good"/>
+                    <ComboBoxItem Content="5 - very good"/>
+                </ComboBox>
+
+                <ComboBox Grid.Row="4" Grid.Column="1"
+                           x:Name="CommunicationComboBox"
+                         Height="30"  
+                         Margin="0,16,10,16" FontSize="10">
+                    <ComboBoxItem Content="1 - very poor"/>
+                    <ComboBoxItem Content="2 - poor"/>
+                    <ComboBoxItem Content="3 - average"/>
+                    <ComboBoxItem Content="4 - good"/>
+                    <ComboBoxItem Content="5 - very good"/>
+                </ComboBox>
+
+                <ComboBox Grid.Row="5" Grid.Column="1"
+                           x:Name="RespectTimeComboBox"
+                         Height="30"  
+                         Margin="0,16,10,16" FontSize="10">
+                    <ComboBoxItem Content="1 - very poor"/>
+                    <ComboBoxItem Content="2 - poor"/>
+                    <ComboBoxItem Content="3 - average"/>
+                    <ComboBoxItem Content="4 - good"/>
+                    <ComboBoxItem Content="5 - very good"/>
+                </ComboBox>
+
                 <TextBox Grid.Row="6" Grid.Column="1"
-                         Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}"
-                         
-                         Height="30"  
-                         Margin="0 0 1 0" 
-                         FontSize="10">
-                </TextBox>
+                         Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}"  
+                         Margin="0,0,1,62" 
+                         FontSize="10" Grid.RowSpan="2"/>
 
 
             </Grid>
