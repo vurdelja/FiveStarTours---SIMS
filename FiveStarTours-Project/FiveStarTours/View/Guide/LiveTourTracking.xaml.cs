@@ -73,7 +73,6 @@ namespace FiveStarTours.View.Guide
 
             if (Visitors.Count < 1)
             {
-                MessageBox.Show("Nema posetilaca na ovoj turi!");
                 Close();
             }
             return Visitors;
@@ -148,6 +147,7 @@ namespace FiveStarTours.View.Guide
 
             if (allChecked)
             {
+                EndTour_Click(sender, e);
                 this.Close();
             }
         }
