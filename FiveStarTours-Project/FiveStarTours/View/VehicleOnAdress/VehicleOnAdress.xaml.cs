@@ -37,9 +37,9 @@ namespace FiveStarTours.View.VehicleOnAdress
             }
         }
 
+
         private string _delay;
         
-
         public string Delay
         {
 
@@ -54,7 +54,7 @@ namespace FiveStarTours.View.VehicleOnAdress
             }
         }
 
-        
+        public int Id { get; internal set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -99,15 +99,10 @@ namespace FiveStarTours.View.VehicleOnAdress
             List<Drivings> DrivingsList = MakeDrivingsList(Drivings);
             int Delays = int.Parse(Delay);
 
-
-            //VehicleOnAdress vehicleOnAdress = new VehicleOnAdress(DrivingsList, Delays);
-            //_vehicleOnAddressRepository.Save(vehicleOnAdress);
-            Drivings newDrivings = new Drivings();
-            _drivingsRepository.Save(newDrivings);
-
-
-
-
+            VehicleOnAdress newVehicleOnAdress = new VehicleOnAdress( DrivingsList, Delays);
+            _vehicleOnAddressRepository.Save(newVehicleOnAdress);
+            
+            
             Close();
         }
 

@@ -15,11 +15,11 @@ namespace FiveStarTours.Model
         public int Delays;
        
 
-        VehicleOnAdress() { }
+        public VehicleOnAdress() { }
 
         public VehicleOnAdress(List<Drivings> drivingsList, int delays)
         {
-
+            
             this.DrivingsList = drivingsList;
             this.Delays = delays;
             

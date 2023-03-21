@@ -30,13 +30,13 @@ namespace FiveStarTours.Repository
             return _serializer.FromCSV(FilePath);
         }
 
-        public VehicleOnAdress Save(View.VehicleOnAdress.VehicleOnAdress vehicleOnAdress)
+        public VehicleOnAdress Save(VehicleOnAdress newVehicleOnAdress)
         {
-            vehicleOnAdress.Id = NextId();
+            newVehicleOnAdress.Id = NextId();
             _vehicleOnAdress = _serializer.FromCSV(FilePath);
-            _vehicleOnAdress.Add(vehicleOnAdress);
+            _vehicleOnAdress.Add(newVehicleOnAdress);
             _serializer.ToCSV(FilePath, _vehicleOnAdress);
-            return vehicleOnAdress;
+            return newVehicleOnAdress;
         }
 
         public int NextId()
