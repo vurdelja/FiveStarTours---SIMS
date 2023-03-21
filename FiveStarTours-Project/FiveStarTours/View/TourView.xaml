@@ -67,8 +67,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="RESERVATION" Width="100" Height="50" FontSize="15" Click="Button_Click" Background="LightGreen"/>
-            <Button Grid.Column="1" Content="GO BACK" Width="100" Height="50" FontSize="15" Click="Button_Click" Background="LightBlue"/>
+            <Button Grid.Column="0" Content="RESERVATION" Width="100" Height="50" FontSize="15" Click="ReservationButton_Click" Background="LightGreen"/>
+            <Button Grid.Column="1" Content="GO BACK" Width="100" Height="50" FontSize="15" Click="GoBackButton_Click" Background="LightBlue"/>
         </Grid>
     </Grid>
 </Window>

@@ -7,7 +7,45 @@
         mc:Ignorable="d"
         Title="ReservationView" Height="450" Width="800" ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
          WindowStartupLocation="CenterScreen">
-    <Grid>
-        
+    <Grid Background="Lavender">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1" Grid.Column="0" Width="650" Background="LemonChiffon">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Height="40" Width="160" Content="Enter name:" FontSize="15"/>
+            <Label Grid.Row="1" Grid.Column="0" Height="40" Width="160" Content="Number of people: " FontSize="15"/>
+            <Label Grid.Row="2" Grid.Column="0" Height="40" Width="160" Content="Starting Key Point:" FontSize="15"/>
+            <Label Grid.Row="3" Grid.Column="0" Height="40" Width="160" Content="Your contact(phone):" FontSize="15"/>
+            <Label Grid.Row="4" Grid.Column="0" Height="40" Width="160" Content="Your email:" FontSize="15"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Height="40" Width="400" Text="{Binding Path=TouristName, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Height="40" Width="400" Text="{Binding Path=MembersNumber, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Height="40" Width="400" Text="{Binding Path=StartingKeyPoint, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Height="40" Width="400" Text="{Binding Path=Phone, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Height="40" Width="400" Text="{Binding Path=Email, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
+        <Grid Grid.Row="3" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="3" Grid.Column="2" Height="40" Width="100" Content="RESERVATION" Background="LightGreen" FontSize="15" Click="ReservationButton_Click"/>
+            <Button Grid.Row="3" Grid.Column="3" Height="40" Width="100" Content="CANCEL" Background="LightGray" FontSize="15" Click="CancelButton_Click"/>
+
+        </Grid>
     </Grid>
 </Window>
