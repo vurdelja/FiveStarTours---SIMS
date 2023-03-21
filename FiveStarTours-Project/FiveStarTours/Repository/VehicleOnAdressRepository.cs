@@ -15,22 +15,22 @@ namespace FiveStarTours.Repository
     {
         private const string FilePath = "../../../Resources/Data/vehicleOnAdress.csv";
 
-        private readonly Serializer<VehicleOnAdress> _serializer;
+        private readonly Serializer<OnAdress> _serializer;
 
-        private List<VehicleOnAdress> _vehicleOnAdress;
+        private List<OnAdress> _vehicleOnAdress;
 
         public VehicleOnAdressRepository()
         {
-            _serializer = new Serializer<VehicleOnAdress>();
+            _serializer = new Serializer<OnAdress>();
             _vehicleOnAdress = _serializer.FromCSV(FilePath);
         }
 
-        public List<VehicleOnAdress> GetAll()
+        public List<OnAdress> GetAll()
         {
             return _serializer.FromCSV(FilePath);
         }
 
-        public VehicleOnAdress Save(VehicleOnAdress newVehicleOnAdress)
+        public OnAdress Save(OnAdress newVehicleOnAdress)
         {
             newVehicleOnAdress.Id = NextId();
             _vehicleOnAdress = _serializer.FromCSV(FilePath);
@@ -48,5 +48,7 @@ namespace FiveStarTours.Repository
             }
             return _vehicleOnAdress.Max(t => t.Id) + 1;
         }
+
+        
     }
 }

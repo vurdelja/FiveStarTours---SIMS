@@ -39,7 +39,6 @@ namespace FiveStarTours.View.VehicleOnAdress
 
 
         private string _delay;
-        
         public string Delay
         {
 
@@ -54,7 +53,7 @@ namespace FiveStarTours.View.VehicleOnAdress
             }
         }
 
-        public int Id { get; internal set; }
+        
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -62,14 +61,14 @@ namespace FiveStarTours.View.VehicleOnAdress
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public VehicleOnAdress(List<Drivings> drivingsList, int delays)
+        public VehicleOnAdress()
         {
             InitializeComponent();
             DataContext = this;
 
             _vehicleOnAddressRepository = new VehicleOnAdressRepository();
             _drivingsRepository = new DrivingsRepository();
-           
+            
 
             // Adding state and city trough combobox:
 
@@ -88,7 +87,6 @@ namespace FiveStarTours.View.VehicleOnAdress
 
                 string selectedStateComboBox = DrivingsComboBox.SelectedItem.ToString();
                 
-                
                 selectedDriving = DrivingsComboBox.SelectedItem as string;
             }
         }
@@ -99,10 +97,10 @@ namespace FiveStarTours.View.VehicleOnAdress
             List<Drivings> DrivingsList = MakeDrivingsList(Drivings);
             int Delays = int.Parse(Delay);
 
-            VehicleOnAdress newVehicleOnAdress = new VehicleOnAdress( DrivingsList, Delays);
+            OnAdress newVehicleOnAdress = new OnAdress( DrivingsList, Delays);
             _vehicleOnAddressRepository.Save(newVehicleOnAdress);
-            
-            
+            MessageBox.Show("Data saved successfully.");
+
             Close();
         }
 

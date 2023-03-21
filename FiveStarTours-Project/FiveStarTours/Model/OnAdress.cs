@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FiveStarTours.Model
 {
-    public class VehicleOnAdress : ISerializable
+    public class OnAdress : ISerializable
     {
 
         public int Id;
@@ -15,9 +15,9 @@ namespace FiveStarTours.Model
         public int Delays;
        
 
-        public VehicleOnAdress() { }
+        public OnAdress() { }
 
-        public VehicleOnAdress(List<Drivings> drivingsList, int delays)
+        public OnAdress(List<Drivings> drivingsList, int delays)
         {
             
             this.DrivingsList = drivingsList;
