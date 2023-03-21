@@ -1,15 +1,13 @@
 ﻿// Modeled on CommentForm from InitialProject
 
-using FiveStarTours.Model;
-using FiveStarTours.Repository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using FiveStarTours.Model;
+using FiveStarTours.Repository;
 
 namespace FiveStarTours.View
 {
@@ -136,7 +134,7 @@ namespace FiveStarTours.View
         {
             InitializeComponent();
             DataContext = this;
-            
+
             _toursRepository = new ToursRepository();
             _languagesRepository = new LanguagesRepository();
             _locationsRepository = new LocationsRepository();
@@ -145,11 +143,11 @@ namespace FiveStarTours.View
 
             // Adding state and city trough combobox:
 
-            List<string> States  = _locationsRepository.GetAllStates();
+            List<string> States = _locationsRepository.GetAllStates();
             stateComboBox.ItemsSource = States;
             stateComboBox.SelectedValuePath = ".";
             stateComboBox.DisplayMemberPath = ".";
-            
+
         }
 
         // Adding state and city trough combobox:
@@ -161,7 +159,7 @@ namespace FiveStarTours.View
         {
             if (stateComboBox.SelectedItem != null)
             {
-                
+
                 string selectedStateComboBox = stateComboBox.SelectedItem.ToString();
                 List<string> citiesInState = _locationsRepository.GetCitiesInState(selectedStateComboBox);
                 cityComboBox.ItemsSource = citiesInState;
@@ -179,9 +177,9 @@ namespace FiveStarTours.View
 
         private Location GetSelectedLocation()
         {
-            foreach(var location in _locationsRepository.GetAll())
+            foreach (var location in _locationsRepository.GetAll())
             {
-                if(location.City == selectedCity)
+                if (location.City == selectedCity)
                 {
                     return location;
                 }
@@ -205,7 +203,7 @@ namespace FiveStarTours.View
         private void AddDateTime_Click(object sender, RoutedEventArgs e)
         {
             datesTextBox.Clear();
-            if(datePicker.SelectedDate == null)
+            if (datePicker.SelectedDate == null)
             {
                 MessageBox.Show("Please select date first!");
                 return;
@@ -245,7 +243,7 @@ namespace FiveStarTours.View
 
             Array _languages = language.Split(", ");
 
-            foreach(string l in _languages)
+            foreach (string l in _languages)
             {
                 Language lang = new Language(l);
                 _languagesRepository.Save(lang);
@@ -259,7 +257,7 @@ namespace FiveStarTours.View
         {
             List<int> result = new List<int>();
 
-            foreach(Language lang in languages)
+            foreach (Language lang in languages)
             {
                 result.Add(lang.Id);
             }
@@ -276,9 +274,11 @@ namespace FiveStarTours.View
 
             foreach (string keyPoint in _keyPoints)
             {
+
                 KeyPoints kp = new KeyPoints(keyPoint);
                 _keyPointsRepository.Save(kp);
                 result.Add(kp);
+
             }
 
             return result;
@@ -318,6 +318,6 @@ namespace FiveStarTours.View
             Close();
         }
 
-       
+
     }
 }
