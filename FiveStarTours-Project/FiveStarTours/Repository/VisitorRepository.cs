@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using FiveStarTours.Model;
 using FiveStarTours.Serializer;
@@ -42,6 +43,24 @@ namespace FiveStarTours.Repository
                 return 1;
             }
             return _visitors.Max(t => t.Id) + 1;
+        }
+
+        public int ReservedSeats(Tour tour)
+        {
+            int reservedSeats = 0;
+            List<Visitor> visitors = new List<Visitor>();
+            visitors = GetAll();
+            foreach (var visitor in _visitors)
+            {
+                foreach(var date in tour.Beginning)
+                {
+                    if(visitor.TourId == tour.Id && visitor.DateTime == date)
+                    {
+                        reservedSeats += visitor.MembersNumber;
+                    }
+                }
+            }
+            return reservedSeats;
         }
     }
 }

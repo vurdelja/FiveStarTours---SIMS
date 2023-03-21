@@ -21,7 +21,7 @@ namespace FiveStarTours.View
     /// <summary>
     /// Interaction logic for ReservationView.xaml
     /// </summary>
-    public partial class ReservationView : Window//, INotifyPropertyChanged
+    public partial class ReservationView : Window, INotifyPropertyChanged
     {
         private readonly VisitorRepository _visitorRepository;
         private readonly KeyPointsRepository _keyPointsRepository;
@@ -88,10 +88,17 @@ namespace FiveStarTours.View
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        List<DateTime> DateTimeTour = new List<DateTime>();
+        int freeSeats
+        {
+            get; set;
+        }
         public ReservationView(Tour selectedTour)
         {
             InitializeComponent();
             DataContext = this;
+            freeSeats = selectedTour.MaxGuests;
+            SelectedTour = selectedTour;
 
             _visitorRepository = new VisitorRepository();
             _keyPointsRepository = new KeyPointsRepository();
@@ -101,12 +108,24 @@ namespace FiveStarTours.View
             StartingKeyPoint.SelectedValuePath = ".";
             StartingKeyPoint.DisplayMemberPath = ".";
 
-        }
+            DateTimeTour = selectedTour.Beginning;
+            DateTimeComboBox.ItemsSource = DateTimeTour;
+            DateTimeComboBox.SelectedValuePath = ".";
+            DateTimeComboBox.DisplayMemberPath = ".";
 
+            freeSeats -= _visitorRepository.ReservedSeats(SelectedTour);
+
+        }
+        public Tour SelectedTour;
         private void ReservationButton_Click(object sender, RoutedEventArgs e)
         {
             KeyPoints startingKeyPoint = new KeyPoints();
             startingKeyPoint.Name = selectedKeyPoint;
+            if(freeSeats < Convert.ToInt32(MembersNumber))
+            {
+                MessageBox.Show($"No enough seats for this reservation. Left seats : {freeSeats}");
+                return;
+            }
             foreach(var keyPoint in _keyPointsRepository.GetAll())
             {
                 if(startingKeyPoint.Name == keyPoint.Name)
@@ -114,7 +133,10 @@ namespace FiveStarTours.View
                     startingKeyPoint.Id = keyPoint.Id;
                 }
             }
-            Visitor visitor = new Visitor(VisitorName, PhoneNumber, startingKeyPoint.Id, startingKeyPoint, Convert.ToInt32(MembersNumber), Email);
+            DateTime dateTime = new DateTime();
+            dateTime = selectedDateTime;
+            
+            Visitor visitor = new Visitor(VisitorName, PhoneNumber, SelectedTour.Id, startingKeyPoint.Id, startingKeyPoint, dateTime, Convert.ToInt32(MembersNumber), Email);
             _visitorRepository.Save(visitor);
             Close();
 
@@ -132,6 +154,14 @@ namespace FiveStarTours.View
             {
                 selectedKeyPoint = StartingKeyPoint.SelectedItem as string;
 
+            }
+        }
+        private DateTime selectedDateTime;
+        private void DateTime_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(DateTimeComboBox.SelectedItem != null)
+            {
+                selectedDateTime = (DateTime)DateTimeComboBox.SelectedItem;//as DateTime;
             }
         }
     }
