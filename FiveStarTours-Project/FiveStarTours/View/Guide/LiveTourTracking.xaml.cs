@@ -68,26 +68,6 @@ namespace FiveStarTours.View.Guide
             Close();
         }
 
-        /*public void CheckPoint_Checked(object sender, RoutedEventArgs e)
-        {
-            int numChecked = 0;
-            CheckBox checkpoint = (CheckBox)sender;
-            foreach (var checkBox in FindVisualChildren<CheckBox>(this))
-            {
-                if (checkBox.IsChecked == true)
-                {
-                    numChecked++;
-                }
-            }
-            if (numChecked == liveTour.KeyPoints.Count())
-            {
-                liveTour.Ended = true;
-                _liveTourRepository.FindIdAndSave(liveTour, liveTour.Id);
-                Close();
-            }
-            if(KeyPoi)
-        }*/
-
         private void CheckPoint_Checked(object sender, RoutedEventArgs e)
         {
             bool allChecked = true;
