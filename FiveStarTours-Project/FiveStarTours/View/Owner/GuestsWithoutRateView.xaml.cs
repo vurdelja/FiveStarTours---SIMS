@@ -34,21 +34,20 @@ namespace FiveStarTours.View.Owner
             InitializeComponent();
             DataContext = this;
             _repository = new AccommodationReservationsRepository();
-            Reservations = new ObservableCollection<AccommodationReservation>(_repository.GetAll());
+            Reservations = new ObservableCollection<AccommodationReservation>(_repository.GetUnratedAndLessThanFiveDaysAgo());
         }
-
-
-
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
 
         private void RateGuestsButton_Click(object sender, RoutedEventArgs e)
         {
-            GuestRatingView rateGuests = new GuestRatingView();
-            rateGuests.Show();
+            if (SelectedReservation != null)
+            {
+                GuestRatingView guestRatingView = new GuestRatingView(SelectedReservation);
+                guestRatingView.Show();
+            }
+            else
+            {
+                Close();
+            }
         }
 
         private void MaybeLaterButton_Click(object sender, RoutedEventArgs e)

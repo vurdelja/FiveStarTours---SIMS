@@ -63,5 +63,26 @@ namespace FiveStarTours.Repository
             }
             return null;
         }
+
+        public List<AccommodationReservation> GetUnratedAndLessThanFiveDaysAgo()
+        {
+            List<AccommodationReservation> reservations = new List<AccommodationReservation>();
+            DateTime now = DateTime.Now;
+            foreach (AccommodationReservation accommodationReservation in _reservations)
+            {
+                DateTime end = accommodationReservation.EndDate;
+                if(end<now)
+                {
+                    if (accommodationReservation.Rated == false && now.AddDays(-5) < end)
+                    {
+                        reservations.Add(accommodationReservation);
+
+                    }
+                }
+            }
+            return reservations;
+ 
+        }
+
     }
 }

@@ -28,7 +28,6 @@ namespace FiveStarTours.Model
 
         public GuestRating(AccommodationReservation accommodationReservation, int tidiness, int rulesFollowed, int quietness, int friendliness, int communication, int respectTime , string comment)
         {
-            AccommodationReservation = accommodationReservation;
             Tidiness = tidiness;
             RulesFollowed = rulesFollowed;
             Quietness = quietness;

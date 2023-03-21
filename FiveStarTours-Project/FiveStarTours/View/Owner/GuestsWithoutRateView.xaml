@@ -9,8 +9,9 @@
     <Grid>
         <DataGrid ItemsSource="{Binding Reservations}"
                   SelectedItem="{Binding Path=SelectedReservation}"
-                  IsReadOnly="True" SelectionMode="Single" x:Name="NoRateGuests" AutoGenerateColumns="false"
-                  Margin="10,10,10,67" SelectionChanged="DataGrid_SelectionChanged">
+                  IsReadOnly="True" SelectionMode="Single" x:Name="NoRateGuests" 
+                  AutoGenerateColumns="false"
+                  Margin="10,10,10,67">
 
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">

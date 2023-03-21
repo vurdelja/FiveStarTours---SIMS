@@ -5,24 +5,154 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FiveStarTours.View.Owner"
         mc:Ignorable="d"
-        Title="OwnerRatingGuests" Height="450" Width="800">
+        Title="OwnerRatingGuests" Height="750" Width="430">
     <Grid>
-        <Label x:Name="___NotificationText_" Content="Please rate this guest" HorizontalAlignment="Center" Margin="0,57,0,0" VerticalAlignment="Top" Width="228" Background="#FFEEA5DB" HorizontalContentAlignment="Center" BorderBrush="Black" BorderThickness="1,1,1,1"/>
-        <Label Content="Guest UserName: " HorizontalAlignment="Left" Margin="88,143,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="103">
-        </Label>
-        <Label Content="Rate this guest cleanliness" HorizontalAlignment="Left" Margin="75,0,0,0" VerticalAlignment="Center"/>
-        <TextBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="120"
-                 Margin="305,0,0,0" 
-                 TextWrapping="Wrap" 
-                 Text="type number 1-5" />
-        <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"
-                 Margin="305,245,0,0" 
-                 TextWrapping="Wrap" Text="type number 1-5" />
-        <TextBox HorizontalAlignment="Left" Margin="305,283,0,0" TextWrapping="Wrap" Text="Add comment" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Rate this guest rule following" 
-               HorizontalAlignment="Left" Margin="75,236,0,0" VerticalAlignment="Top"/>
-        <Label Content="Add comment about this guest" 
-               HorizontalAlignment="Left" Margin="75,275,0,0" VerticalAlignment="Top"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="500"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
 
+            <Border Background="DeepPink" 
+                    Grid.Row="1"
+                    Padding="10" CornerRadius="10 0 0 10">
+                <StackPanel VerticalAlignment="Center">
+                    <Image Source="/Resources/ImagesOwner/logo.png" Width="30" Height="30" Margin="0 0 0 0"/>
+                </StackPanel>
+            </Border>
+
+
+            <Grid Grid.Row="0" Grid.Column="0" Width="430" Height="500">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0"
+                       Content="Tidiness: " 
+                       Margin="3 0 0 0" 
+                       Height="30"
+                       Foreground="Purple"/>
+                <Label Grid.Row="1" Grid.Column="0"
+                       Content="Rules followed: " 
+                       Margin="3 0 0 0" 
+                       Height="30"
+                       Foreground="Purple"/>
+                <Label Grid.Row="2" Grid.Column="0"
+                       Content="Quietness: " 
+                       Margin="3 0 0 0" 
+                       Height="30"
+                       Foreground="Purple"/>
+                <Label Grid.Row="3" Grid.Column="0"
+                       Content="Friendliness " 
+                       Margin="3 0 0 0" 
+                       Height="30"
+                       Foreground="Purple"/>
+                <Label Grid.Row="4" Grid.Column="0"
+                       Content="Communication: " 
+                       Margin="3 0 0 0" 
+                       Height="30"
+                       Foreground="Purple"/>
+                <Label Grid.Row="5" Grid.Column="0"
+                       Content="Respected time: " 
+                       Margin="3 0 0 0" 
+                       Height="30"
+                       Foreground="Purple"/>
+                <Label Grid.Row="6" Grid.Column="0"
+                       Content="Comment:" 
+                       Margin="3 0 0 0" 
+                       Height="30"
+                       Foreground="Purple"/>
+             
+
+
+
+    
+                <TextBox Grid.Row="0" Grid.Column="1"
+                         Text="{Binding Path=Tidiness, UpdateSourceTrigger=PropertyChanged}"
+                        
+                         Height="30"  
+                         Margin="0 0 1 0" 
+                         FontSize="10">
+                </TextBox>
+                <TextBox Grid.Row="1" Grid.Column="1"
+                         Text="{Binding Path=RulesFollowed, UpdateSourceTrigger=PropertyChanged}"
+                        
+                         Height="30"  
+                         Margin="0 0 1 0" 
+                         FontSize="10">
+                </TextBox>
+                <TextBox Grid.Row="2" Grid.Column="1"
+                         Text="{Binding Path=Quietness, UpdateSourceTrigger=PropertyChanged}"
+                         
+                         Height="30"  
+                         Margin="0 0 1 0" 
+                         FontSize="10">
+                </TextBox>
+                <TextBox Grid.Row="3" Grid.Column="1"
+                         Text="{Binding Path=Friendliness, UpdateSourceTrigger=PropertyChanged}"
+                         
+                         Height="30"  
+                         Margin="0 0 1 0" 
+                         FontSize="10">
+                </TextBox>
+                <TextBox Grid.Row="4" Grid.Column="1"
+                         Text="{Binding Path=Communication, UpdateSourceTrigger=PropertyChanged}"
+                         
+                         Height="30"  
+                         Margin="0 0 1 0" 
+                         FontSize="10">
+                </TextBox>
+                
+                <TextBox Grid.Row="5" Grid.Column="1"
+                         Text="{Binding Path=RespectTime, UpdateSourceTrigger=PropertyChanged}"
+                         
+                         Height="30"  
+                         Margin="0 0 1 0" 
+                         FontSize="10">
+                </TextBox>
+                <TextBox Grid.Row="6" Grid.Column="1"
+                         Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}"
+                         
+                         Height="30"  
+                         Margin="0 0 1 0" 
+                         FontSize="10">
+                </TextBox>
+
+
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="0" >
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button Content="Submit rate" 
+                        Padding="10 5"
+                        IsDefault="True"
+                        HorizontalAlignment="Center" Grid.Column="0" 
+                        VerticalAlignment="Center"
+                        Click="SubmitRateButton_Click"/>
+
+                <Button Content="Cancel" 
+                        Padding="10 5"
+                        IsDefault="True"
+                        HorizontalAlignment="Center" Grid.Column="1" 
+                        VerticalAlignment="Center"
+                        Click="CancelButton_Click"/>
+
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
