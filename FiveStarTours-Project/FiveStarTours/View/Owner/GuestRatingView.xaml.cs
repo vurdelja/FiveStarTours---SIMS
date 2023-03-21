@@ -12,22 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace FiveStarTours.View
+namespace FiveStarTours.View.Owner
 {
     /// <summary>
-    /// Interaction logic for OwnerMainWindow.xaml
+    /// Interaction logic for OwnerRatingGuests.xaml
     /// </summary>
-    public partial class OwnerMainWindow : Window
+    public partial class GuestRatingView : Window
     {
-        public OwnerMainWindow()
+        public GuestRatingView()
         {
             InitializeComponent();
-        }
-
-        private void OwnerMainButton_Click(object sender, RoutedEventArgs e)
-        {
-            AddAccommodationView addAccommodation = new AddAccommodationView();
-            addAccommodation.Show();
         }
     }
 }

@@ -92,35 +92,6 @@ namespace FiveStarTours.View
         //Accommodation type
         private AccommodationType accommodationType;
 
-        /*private IEnumerable<AccommodationType> _AccommodationTypes;
-        private string _SelectedAccommodationType;
-
-        public IEnumerable<AccommodationType> AccommodationTypes
-        {
-            get
-            {
-                return (AccommodationType[])Enum.GetValues(typeof(AccommodationType));
-            }
-            set
-            {
-                if (value != _AccommodationTypes)
-                {
-                    _AccommodationTypes = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        public string SelectedAccommodationType
-        {
-            get { return _SelectedAccommodationType; }
-            set
-            {
-                _SelectedAccommodationType = value;
-                OnPropertyChanged();
-            }
-        }*/
-
-
 
         //Accommodation max guest number
         private string _maxGuestNum;
@@ -186,32 +157,7 @@ namespace FiveStarTours.View
         }
 
 
-        // Upload image button
-        /*private void UploadImageButton_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog= new OpenFileDialog();
-            openFileDialog.Filter = "Image files|*.bmp;*.jpg;*.png";
-            openFileDialog.FilterIndex = 1;
-
-
-            if (openFileDialog.ShowDialog() == true)
-            {
-                string[] selectedFiles = openFileDialog.FileNames;
-
-                foreach (string file in selectedFiles)
-                {
-                    ImageURLs += file;
-                    ImageURLs += "|";
-                }
-
-                ImageURLs = ImageURLs.Substring(0, ImageURLs.Length - 1);
-
-                //imagePicture.Source = new BitmapImage(new Uri(openFileDialog.FileName));
-            }
-
-        }*/
-
-        //Submit button
+  
         private void SubmitRegistrationButton_Click(object sender, RoutedEventArgs e)
         {
             Location location = GetSelectedLocation();
@@ -267,8 +213,6 @@ namespace FiveStarTours.View
                 MessageBox.Show("All necessary fields must be filled.");
             }
         }
-
-
 
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

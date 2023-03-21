@@ -19,8 +19,6 @@ namespace FiveStarTours.Model
 {
     public class Accommodation : ISerializable
     {
-        public Owner Owner { get; set; }
-        public Guest Guest { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
         public int IdLocation { get; set; }

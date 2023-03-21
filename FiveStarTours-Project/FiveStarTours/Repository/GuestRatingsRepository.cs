@@ -8,26 +8,26 @@ using System.Threading.Tasks;
 
 namespace FiveStarTours.Repository
 {
-    public class RatingsRepository
+    public class GuestRatingsRepository
     {
         private const string FilePath = "../../../Resources/Data/ratings.csv";
 
-        private readonly Serializer<Rating> _serializerRating;
+        private readonly Serializer<GuestRating> _serializerRating;
 
-        private List<Rating> _ratings;
+        private List<GuestRating> _ratings;
 
-        public RatingsRepository()
+        public GuestRatingsRepository()
         {
-            _serializerRating = new Serializer<Rating>();
+            _serializerRating = new Serializer<GuestRating>();
             _ratings = _serializerRating.FromCSV(FilePath);
         }
 
-        public List<Rating> GetAll()
+        public List<GuestRating> GetAll()
         {
             return _serializerRating.FromCSV(FilePath);
         }
 
-        public Rating Save(Rating rating)
+        public GuestRating Save(GuestRating rating)
         {
             rating.Id = NextId();
             _ratings = _serializerRating.FromCSV(FilePath);
@@ -46,10 +46,10 @@ namespace FiveStarTours.Repository
             return _ratings.Max(t => t.Id) + 1;
         }
 
-        public Rating GetById(int id)
+        public GuestRating GetById(int id)
         {
             _ratings = GetAll();
-            foreach (Rating rating in _ratings)
+            foreach (GuestRating rating in _ratings)
             {
                 if (rating.Id == id)
                 {
