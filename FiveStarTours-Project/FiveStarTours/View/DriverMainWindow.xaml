@@ -11,8 +11,9 @@
                 HorizontalAlignment="Left" 
                 Margin="60, 60, 0, 0" 
                 VerticalAlignment="Top" 
-                Height="47" Width="213" 
+                Height="50" Width="200" 
                 Click="VehicleRegistrationButton_Click"/>
-        
+        <Button x:Name="VehicleOnAdressButton" Content="Vehicle On Adress" HorizontalAlignment="Left" Margin="60,140,0,0" VerticalAlignment="Top" Height="50" Width="200" Click="VehicleOnAdressButton_Click"/>
+
     </Grid>
 </Window>

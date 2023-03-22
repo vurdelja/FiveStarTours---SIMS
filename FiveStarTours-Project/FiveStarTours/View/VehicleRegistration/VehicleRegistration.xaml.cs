@@ -141,8 +141,7 @@ namespace FiveStarTours.View.VehicleRegistration
             
             Vehicle newVehicle = new Vehicle( location, LanguageList, LanguageIds, MaximumPersonNumber, ImageUrlsList );
             _vehicleRegistrationRepository.Save(newVehicle);
-            TextBlock outputTextBlock = new TextBlock();
-            outputTextBlock.Text = "Uspešno ste registrovali vozilo.";
+            MessageBox.Show("Data saved successfully.");
             Close();
         }
         
