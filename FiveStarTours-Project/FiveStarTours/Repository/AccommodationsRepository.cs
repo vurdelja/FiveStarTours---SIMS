@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 using FiveStarTours.Serializer;
+using System.Xml.Linq;
 
 namespace FiveStarTours.Repository
 {
@@ -52,7 +53,29 @@ namespace FiveStarTours.Repository
             }
             return _accommodations.Max(t => t.Id) + 1;
         }
-     
+
+        public void Delete(Accommodation accommodation)
+        {
+            _accommodations = _serializer.FromCSV(FilePath);
+            Accommodation founded = _accommodations.Find(c => c.Id == accommodation.Id);
+            _accommodations.Remove(founded);
+            _serializer.ToCSV(FilePath, _accommodations);
+        }
+
+        public Accommodation Update(Accommodation accommodation)
+        {
+            _accommodations = _serializer.FromCSV(FilePath);
+            Accommodation current = _accommodations.Find(c => c.Id == accommodation.Id);
+            int index = _accommodations.IndexOf(current);
+            _accommodations.Remove(current);
+            _accommodations.Insert(index, accommodation);    
+            _serializer.ToCSV(FilePath, _accommodations);
+            return accommodation;
+        }
+
+        
+
+
 
     }
 }

@@ -27,5 +27,24 @@ namespace FiveStarTours.Repository
             _users = _serializer.FromCSV(FilePath);
             return _users.FirstOrDefault(u => u.Username == username);
         }
+
+
+        public List<User> GetAll()
+        {
+            return _serializer.FromCSV(FilePath);
+        }
+
+        public User GetById(int id)
+        {
+            _users = GetAll();
+            foreach (User user in _users)
+            {
+                if (user.Id == id)
+                {
+                    return user;
+                }
+            }
+            return null;
+        }
     }
 }
