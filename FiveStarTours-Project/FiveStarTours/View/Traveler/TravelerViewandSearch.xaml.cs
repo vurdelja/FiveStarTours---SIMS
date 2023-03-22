@@ -155,7 +155,7 @@ namespace FiveStarTours.View.Traveler
             }
             foreach (Accommodation accommodation in Accommodations)
             {
-                if (accommodation.Name.ToLower().Contains(NameSearch.Text.ToLower()) && accommodation.Location.State.ToLower().Contains(StateSearch.Text.ToLower()) && accommodation.Location.City.ToLower().Contains(CitySearch.Text.ToLower()) && (accommodation.MaxGuestNum - max >= 0 || NumberSearch.Text.Equals("")) && (accommodation.MinReservationDays - min <= 0 || LengthSearch.Text.Equals("")) && accommodation.Type.Equals(TypeBox))
+                if (accommodation.AccommodationName.ToLower().Contains(NameSearch.Text.ToLower()) && accommodation.Location.State.ToLower().Contains(StateSearch.Text.ToLower()) && accommodation.Location.City.ToLower().Contains(CitySearch.Text.ToLower()) && (accommodation.MaxGuestNum - max >= 0 || NumberSearch.Text.Equals("")) && (accommodation.MinReservationDays - min <= 0 || LengthSearch.Text.Equals("")) && accommodation.Type.Equals(TypeBox))
                 {
                     Accommodations.Add(accommodation);
 
