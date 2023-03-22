@@ -13,6 +13,7 @@ using System.Windows.Controls;
 using FiveStarTours.View.VehicleOnAdress;
 using System.IO;
 using System.Windows.Threading;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 
 namespace FiveStarTours.View.VehicleOnAdress
@@ -98,8 +99,9 @@ namespace FiveStarTours.View.VehicleOnAdress
             
             List<Drivings> DrivingsList = MakeDrivingsList(Drivings);
             int Delays = int.Parse(Delay);
+            string selectedFinishedComboBox = FinishedComboBox.SelectedItem.ToString();
 
-            OnAdress newVehicleOnAdress = new OnAdress( DrivingsList, Delays);
+            OnAdress newVehicleOnAdress = new OnAdress( DrivingsList, Delays, selectedFinishedComboBox);
             _vehicleOnAddressRepository.Save(newVehicleOnAdress);
             MessageBox.Show("Data saved successfully.");
 
@@ -110,7 +112,7 @@ namespace FiveStarTours.View.VehicleOnAdress
         {
             List<Drivings> result = new List<Drivings>();
 
-            Array _drivings = drivings.Split(", ");
+            Array _drivings = drivings.Split(",");
 
             foreach (string d in _drivings)
             {
@@ -127,9 +129,17 @@ namespace FiveStarTours.View.VehicleOnAdress
             Close();
         }
 
+        
+
         private void FinishedComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+            if (FinishedComboBox.SelectedItem != null)
+            {
+
+                string selectedFinishedComboBox = FinishedComboBox.SelectedItem.ToString();
+                selectedFinishedComboBox = FinishedComboBox.SelectedItem as string;
+            }
         }
     }
 }

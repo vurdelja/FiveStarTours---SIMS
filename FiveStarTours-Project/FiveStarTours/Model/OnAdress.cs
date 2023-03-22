@@ -13,15 +13,18 @@ namespace FiveStarTours.Model
         public int Id;
         public List<Drivings> DrivingsList;
         public int Delays;
-       
+        public string? SelectedFinishedComboBox;
+
+
 
         public OnAdress() { }
 
-        public OnAdress(List<Drivings> drivingsList, int delays)
+        public OnAdress(List<Drivings> drivingsList, int delays, string? selectedFinishedComboBox)
         {
             
             this.DrivingsList = drivingsList;
             this.Delays = delays;
+            SelectedFinishedComboBox = selectedFinishedComboBox;
             
         }
 

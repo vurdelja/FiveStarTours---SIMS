@@ -6,21 +6,21 @@
         xmlns:local="clr-namespace:FiveStarTours.View.VehicleOnAdress"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="FiveStarTours.View.VehicleOnAdress.VehicleOnAdress"
         mc:Ignorable="d"
-        Title="Vehicle On Adress" Height="450" Width="500">
-    <Grid Margin="37,-15,0,0">
+        Title="Vehicle On Adress" Height="400" Width="450">
+    <Grid Margin="24,-15,0,0">
         <Label Content="Drivings*" HorizontalAlignment="Left" Margin="46,44,0,0" VerticalAlignment="Top" Height="30" Width="56" RenderTransformOrigin="1.086,0.615"/>
         <ComboBox x:Name="DrivingsComboBox" HorizontalAlignment="Left" Margin="112,46,0,0" VerticalAlignment="Top" Width="200" Height="22" SelectionChanged="DrivingsComboBox_SelectionChanged"/>
         <CheckBox x:Name="OnAdressCheckBox" Content="On Adress" HorizontalAlignment="Left" Margin="112,162,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.463,2.126" />
         <CheckBox x:Name="DelayCheckBox" Content="Delay" HorizontalAlignment="Left" Margin="112,100,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.411,-1.247"/>
-        <Label Content="Enter Delay*" HorizontalAlignment="Right" Margin="0,123,363,0" VerticalAlignment="Top" RenderTransformOrigin="0.638,0.682"/>
-        <TextBox x:Name="DelayTextBox" HorizontalAlignment="Left" Margin="112,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Height="22" RenderTransformOrigin="0.371,0.256" IsEnabled="{Binding IsChecked, ElementName=DelayCheckBox}"/>
+        <Label Content="Enter Delay*" HorizontalAlignment="Right" Margin="0,123,324,0" VerticalAlignment="Top" RenderTransformOrigin="0.638,0.682" Width="74"/>
+        <TextBox HorizontalAlignment="Left" Margin="112,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Height="22" RenderTransformOrigin="0.371,0.256" Text="{Binding Path=Delay, UpdateSourceTrigger=PropertyChanged}"/>
         <Label Content="Delay*" HorizontalAlignment="Left" Margin="57,94,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.31,-0.23"/>
-        <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="99,353,0,0" VerticalAlignment="Top" Height="22" Width="100" Click="SaveButton_Click"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="247,353,0,0" VerticalAlignment="Top" Width="99" Height="22" Click="Button_Click"/>
+        <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="87,331,0,0" VerticalAlignment="Top" Height="22" Width="100" Click="SaveButton_Click"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="237,331,0,0" VerticalAlignment="Top" Width="99" Height="22" Click="Button_Click"/>
         <Label Content="On Adress*" HorizontalAlignment="Left" Margin="32,157,0,0" VerticalAlignment="Top"/>
-        <mah:TimePicker HorizontalAlignment="Left" Margin="112,199,0,0" VerticalAlignment="Top" Height="22" Width="110"/>
-        <Label Content="Finished*" HorizontalAlignment="Left" Margin="41,238,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="FinishedComboBox" HorizontalAlignment="Left" Margin="112,242,0,0" VerticalAlignment="Top" Width="200" Height="22" SelectionChanged="FinishedComboBox_SelectionChanged">
+        <mah:TimePicker HorizontalAlignment="Left" Margin="112,199,0,0" VerticalAlignment="Top" Height="52" Width="110"/>
+        <Label Content="Finished*" HorizontalAlignment="Left" Margin="43,264,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.456,1.344"/>
+        <ComboBox x:Name="FinishedComboBox" HorizontalAlignment="Center" Margin="0,266,0,0" VerticalAlignment="Top" Width="200" Height="22" SelectionChanged="FinishedComboBox_SelectionChanged">
             <ComboBoxItem Content="Driving Successfull"/>
             <ComboBoxItem Content="Guest Didn't Show Up"/>
         </ComboBox>
