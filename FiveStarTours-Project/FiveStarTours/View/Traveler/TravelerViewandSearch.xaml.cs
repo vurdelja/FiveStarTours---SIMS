@@ -27,21 +27,27 @@ namespace FiveStarTours.View.Traveler
     public partial class TravelerViewandSearch : Window,INotifyPropertyChanged
     {
 
-        public static ObservableCollection<Accommodation> Accommodations { get; set; }
+        public ObservableCollection<Accommodation> Accommodations { get; set; }
         public Accommodation SelectAccommodation { get; set; }
    
         private readonly AccommodationsRepository accommodationsRepository;
-        private readonly LocationsRepository locationsRepository;
+        //private readonly LocationsRepository locationsRepository;
         public TravelerViewandSearch()
         {
+            
             InitializeComponent();
-            DataContext = this;
             accommodationsRepository = new AccommodationsRepository();
-            locationsRepository = new LocationsRepository();
+            //locationsRepository = new LocationsRepository();
             Accommodations = new ObservableCollection<Accommodation>(accommodationsRepository.GetAll());
+            DataContext = this;
+            
 
 
         }
+
+        //public Location location;
+
+        /*
         private string _accomodationName;
         public string AccomodationName
         {
@@ -111,6 +117,7 @@ namespace FiveStarTours.View.Traveler
         }
         public string selectedCity;
         public string selectedState;
+
         private Location GetSelectedLocation()
         {
             foreach (var location in locationsRepository.GetAll())
@@ -121,7 +128,7 @@ namespace FiveStarTours.View.Traveler
                 }
             }
             return null;
-        }
+        }*/
 
 
         private void Search_enter(object sender, RoutedEventArgs e)

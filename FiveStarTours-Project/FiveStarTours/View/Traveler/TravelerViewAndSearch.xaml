@@ -49,9 +49,9 @@
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="20"/>
-                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="45"/>
-                        <DataGridTextColumn Header="State" Binding="{Binding IdLocation}" Width="45"/>
-                        <DataGridTextColumn Header="City" Binding="{Binding IdLocation}" Width="40"/>
+                        <DataGridTextColumn Header="Name" Binding="{Binding AccommodationName}" Width="45"/>
+                        <DataGridTextColumn Header="State" Binding="{Binding Path= Location.State}" Width="45"/>
+                        <DataGridTextColumn Header="City"  Binding="{Binding Path =Location.City}" Width="40"/>
                         <DataGridTextColumn Header="Type"  Binding="{Binding Type}"/>
                         <DataGridTextColumn Header="Max guest"  Binding="{Binding MaxGuestNum}"/>
                         <DataGridTextColumn Header="Minimum reserved days"  Binding="{Binding MinReservationDays}"/>

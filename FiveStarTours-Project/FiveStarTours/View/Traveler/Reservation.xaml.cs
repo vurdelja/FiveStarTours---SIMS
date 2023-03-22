@@ -24,7 +24,7 @@ namespace FiveStarTours.View.Traveler
     /// </summary>
     public partial class Reservation : Window, INotifyPropertyChanged
     {
-        private readonly AccommodationsReservationsRepository accommodationsReservationsRepository;
+        private readonly AccommodationReservationsRepository accommodationsReservationsRepository;
         private readonly AccommodationsRepository accommodationsRepository;
         public static ObservableCollection<AccommodationReservation> AccommodationReservations { get; set; }
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -40,7 +40,7 @@ namespace FiveStarTours.View.Traveler
         {
             InitializeComponent();
             DataContext = this;
-            accommodationsReservationsRepository = new AccommodationsReservationsRepository();
+            accommodationsReservationsRepository = new AccommodationReservationsRepository();
         }
         private string _guestName;
         public string GuestName
