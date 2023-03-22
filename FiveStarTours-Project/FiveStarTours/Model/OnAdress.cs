@@ -10,20 +10,22 @@ namespace FiveStarTours.Model
     public class OnAdress : ISerializable
     {
 
-        public int Id;
-        public List<Drivings> DrivingsList;
-        public int Delays;
-        public string? SelectedFinishedComboBox;
+        public int Id { get; set; }
+        //public List<Drivings> DrivingsList;
+        public Drivings Drivings { get; set; }
+        public int Delays { get; set; }
+        public string? SelectedFinishedComboBox { get; set; }
 
 
 
         public OnAdress() { }
 
-        public OnAdress(List<Drivings> drivingsList, int delays, string? selectedFinishedComboBox)
+        public OnAdress( Drivings drivings, int delays, string? selectedFinishedComboBox)
         {
-            
-            this.DrivingsList = drivingsList;
-            this.Delays = delays;
+
+            //this.DrivingsList = drivingsList;
+            Drivings = drivings;
+            Delays = delays;
             SelectedFinishedComboBox = selectedFinishedComboBox;
             
         }
@@ -37,7 +39,10 @@ namespace FiveStarTours.Model
 
                 Delays.ToString(),
 
-                string.Join(';', DrivingsList) };
+                Drivings.ToString(),
+
+                SelectedFinishedComboBox.ToString()
+            };
 
             return csvValues;
         }
@@ -48,11 +53,12 @@ namespace FiveStarTours.Model
 
             Delays = Convert.ToInt32(values[1]);
 
-            if (DrivingsList == null)
-            {
-                DrivingsList = new List<Drivings>();
+            SelectedFinishedComboBox = values[3];
 
-            }
+            
+            
+
+            
         }
     }
 }

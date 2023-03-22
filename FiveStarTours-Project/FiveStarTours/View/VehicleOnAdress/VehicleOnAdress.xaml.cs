@@ -96,16 +96,22 @@ namespace FiveStarTours.View.VehicleOnAdress
 
         public void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            
-            List<Drivings> DrivingsList = MakeDrivingsList(Drivings);
+
+            // List<Drivings> DrivingsList = MakeDrivingsList(Drivings);
+            Drivings drivings= GetSelectedDriving();
             int Delays = int.Parse(Delay);
             string selectedFinishedComboBox = FinishedComboBox.SelectedItem.ToString();
 
-            OnAdress newVehicleOnAdress = new OnAdress( DrivingsList, Delays, selectedFinishedComboBox);
+            OnAdress newVehicleOnAdress = new OnAdress( drivings , Delays, selectedFinishedComboBox);
             _vehicleOnAddressRepository.Save(newVehicleOnAdress);
             MessageBox.Show("Data saved successfully.");
 
             Close();
+        }
+
+        private Drivings GetSelectedDriving()
+        {
+            return new Drivings();
         }
 
         private List<Drivings> MakeDrivingsList(string drivings)

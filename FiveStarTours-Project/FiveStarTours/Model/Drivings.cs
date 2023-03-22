@@ -33,11 +33,7 @@ namespace FiveStarTours.Model
         {
             Id = Convert.ToInt32(values[0]);
 
-            if (Name == null)
-            {
-                Name = Convert.ToString(values[1]);
-
-            }
+            Name = Convert.ToString(values[1]);
         }
 
         
