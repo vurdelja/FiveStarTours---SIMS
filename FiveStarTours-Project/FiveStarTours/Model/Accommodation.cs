@@ -5,6 +5,7 @@ using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
+using FiveStarTours.Repository;
 using FiveStarTours.Serializer;
 
 public enum AccommodationType
@@ -105,6 +106,20 @@ namespace FiveStarTours.Model
                 ImageURLs.Add(file);
             }
         }
+        public Location getLocationById(int locationId)
+        {
+            LocationsRepository locationsRepository = new LocationsRepository();
+            foreach (Location location in locationsRepository.GetAll())
+            {
+                if (locationId == location.Id)
+                {
+                    Location = location;
+                    return location;
+                }
+            }
 
+            return null;
+
+        }
     }
 }

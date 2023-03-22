@@ -29,6 +29,7 @@ namespace FiveStarTours.View.Traveler
 
         public static ObservableCollection<Accommodation> Accommodations { get; set; }
         public Accommodation SelectAccommodation { get; set; }
+   
         private readonly AccommodationsRepository accommodationsRepository;
         private readonly LocationsRepository locationsRepository;
         public TravelerViewandSearch()
@@ -38,6 +39,8 @@ namespace FiveStarTours.View.Traveler
             accommodationsRepository = new AccommodationsRepository();
             locationsRepository = new LocationsRepository();
             Accommodations = new ObservableCollection<Accommodation>(accommodationsRepository.GetAll());
+
+
         }
         private string _accomodationName;
         public string AccomodationName
@@ -59,62 +62,39 @@ namespace FiveStarTours.View.Traveler
                 OnPropertyChanged();
             }
         }
-        private string _accomodationType;
-        public string AccomodationType
-        {
-            get => _accomodationType;
-            set
-            {
-                _accomodationType=value;
-                OnPropertyChanged();
-            }
-        }
 
-        private string _maxGuestNum;
-        public string MaxGuestNum
+
+        private string _accomodationMaxGuest;
+        public string AccomodationMaxGuest
         {
             get
             {
-                return _maxGuestNum;
+                return _accomodationMaxGuest;
             }
             set
             {
-                _maxGuestNum = value;
+                _accomodationMaxGuest = value;
                 OnPropertyChanged();
             }
         }
 
 
-        private string _minReservationDays;
-        public string MinReservationDays
+        private string _accomodationMinReservationDays;
+        public string AccomodationMinReservationDays
         {
             get
             {
-                return _minReservationDays;
+                return _accomodationMinReservationDays;
             }
             set
             {
-                _minReservationDays = value;
+                _accomodationMinReservationDays = value;
                 OnPropertyChanged();
             }
         }
 
-        
-        private string _daysPossibleToCancel;
-        public string DaysPossibleToCancel
-        {
-            get
-            {
-                return _daysPossibleToCancel;
-            }
-            set
-            {
-                _daysPossibleToCancel = value;
-                OnPropertyChanged();
-            }
-        }
 
-       
+
         private string _imageURLs;
 
         public string ImageURLs
@@ -146,25 +126,98 @@ namespace FiveStarTours.View.Traveler
 
         private void Search_enter(object sender, RoutedEventArgs e)
         {
-            string searchterm = SearchNtb.Text;
-            string searchterm1 = SearchLtb.Text;
-            string searchterm2 = SearchGtb.Text;
-            string searchterm3 = SearchLentb.Text;
-           
+            Accommodations.Clear();
+            foreach (Accommodation accommodation in Accommodations)
+            {
+                Accommodations.Add(accommodation);
+            }
+            /*String Name = NameSearch.Text;
+            String State = StateSearch.Text;
+            String City = CitySearch.Text;
+            String GuestNum = NumberSearch.Text;
+            String LengtH=LengthSearch.Text;
+            List<Accommodation>ac=new List<Accommodation>();
+            */
+            String Name = NameSearch.Text;
+            String[] splitLocation = StateSearch.Text.Split(",");
+            String[] splitLocation1 = CitySearch.Text.Split(",");
+            String[] splitNumber = NumberSearch.Text.Split(",");
+            String[] splitType = TypeBox.Text.Split(",");
+            String[] splitLeng = LengthSearch.Text.Split(",");
 
-           
 
 
+            int max = 0;
+            int min = 0;
+            if (!(int.TryParse(NumberSearch.Text, out max) || (NumberSearch.Text.Equals(""))) || !(int.TryParse(LengthSearch.Text, out min) || (LengthSearch.Text.Equals(""))))
+            {
+                return;
+            }
+            foreach (Accommodation accommodation in Accommodations)
+            {
+                if (accommodation.Name.ToLower().Contains(NameSearch.Text.ToLower()) && accommodation.Location.State.ToLower().Contains(StateSearch.Text.ToLower()) && accommodation.Location.City.ToLower().Contains(CitySearch.Text.ToLower()) && (accommodation.MaxGuestNum - max >= 0 || NumberSearch.Text.Equals("")) && (accommodation.MinReservationDays - min <= 0 || LengthSearch.Text.Equals("")) && accommodation.Type.Equals(TypeBox))
+                {
+                    Accommodations.Add(accommodation);
+
+                }
+
+
+            }
         }
+        /* foreach(Accommodation accommodation in Accommodations)
+         {
+             if(AllMatchesGood(accommodation, _accomodationName, _accomodationLocation, _accomodationMaxGuest, _accomodationType, _accomodationMinReservationDays))
+             {
+                 if(!Accommodations.Contains(accommodation))
+                     Accommodations.Add(accommodation);
+                 MyDisplay.ItemsSource = Accommodations;
+             }
 
-        private string _selectedImage;
-        public string SelectedImage
+         }
+         MyDisplay.ItemsSource = Accommodations;
+     }
+
+     private bool AllMatchesGood(Accommodation accommodation, string _accomodationName, string _accomodationLocation, string _accomodationMaxGuest, _accomodationType, _accomodationMinReservationDays)
+     {
+         bool same = false;
+         if ((_accomodationName.ToLower().Trim().Contains(Name) || string.IsNullOrEmpty(Name)) &&
+             (GuestNumGoodMatch(_accomodationMaxGuest,AccomodationMaxGuest) || string.IsNullOrEmpty(MaxGues)) &&
+             (MinReservationGoodMatch(_accommodationMinResevationDays, MinReservationDays) || string.IsNullOrEmpty(MinReservationDays)))
+         {
+             same = true;
+         }
+         return same;
+     }
+
+     public bool  GuestNumGoodMatch(Accommodation accommodation,string MaxGuestNum)
+     {
+         bool good = false;
+         if(int.Parse(MaxGuestNum, out int parsedGuestNum)&& parsedGuestNum<=accommodation.MaxGuestNum)
+         {
+             good = true;
+         }
+         return good;
+     }
+     public bool MinReservationGoodMatch(Accommodation accommodation, string MinReservationDays)
+     {
+         bool good = false;
+         if (int.Parse(MaxGuestNum, out int parsedReservation) && parsedReservation <= accommodation.MaxGuestNum)
+         {
+             good = true;
+         }
+         return good;
+     }
+        */
+
+
+        private string _selectedReservation;
+        public string SelectedReservation
         {
-            get { return _selectedImage; }
+            get { return _selectedReservation; }
             set
             {
-                _selectedImage = value;
-                OnPropertyChanged("SelectedImage");
+                _selectedReservation = value;
+                OnPropertyChanged();
             }
         }
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -175,10 +228,31 @@ namespace FiveStarTours.View.Traveler
 
         private void Reserve(object sender, RoutedEventArgs e)
         {
-            Reservation rs = new Reservation();
-            rs.Show();
+            if (SelectAccommodation != null)
+            {
+                string messageBoxText = "Are you sure you want to reserve this?";    
+                string caption = "Reservation";
+                MessageBoxButton button = MessageBoxButton.YesNo;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult result;
+
+                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+                if (result == MessageBoxResult.Yes)
+                {
+                   
+                    Reservation rs = new Reservation();
+                    rs.Show();
+
+                }
+                else
+                {
+                    return;
+                }
+            }
+            Close();
+
         }
+
+
     }
-
-
 }

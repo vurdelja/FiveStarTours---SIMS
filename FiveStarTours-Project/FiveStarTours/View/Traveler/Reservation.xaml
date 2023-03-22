@@ -9,13 +9,13 @@
     <Grid Background="#FFED9C9C">
         <Label Content="Choose dates for your reservation" HorizontalAlignment="Left" Margin="176,10,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Width="381" HorizontalContentAlignment="Center" BorderThickness="8,8,8,8" BorderBrush="#FF8D3A92"/>
         <Grid>
-            <Label Content="ARRIVAL DATE:" HorizontalAlignment="Left" Margin="176,103,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
-            <Label Content="DEPARTURE DATE:" HorizontalAlignment="Left" Margin="176,159,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
-            <Label Content="LENGTH OF STAY:" HorizontalAlignment="Left" Margin="176,217,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Height="40" Width="202"/>
-            <DatePicker HorizontalAlignment="Left" Margin="450,103,0,0" VerticalAlignment="Top" Height="51" Width="189"/>
-            <DatePicker HorizontalAlignment="Left" Margin="450,159,0,0" VerticalAlignment="Top" Height="53" Width="189"/>
-            <TextBox HorizontalAlignment="Left" Margin="450,217,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="189" Height="40"/>
-            <Button Content="Continue reservation" HorizontalAlignment="Left" Margin="391,314,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" BorderThickness="5,5,5,5" Height="100" Width="355">
+            <Label Content="ARRIVAL DATE:" HorizontalAlignment="Left" Margin="40,76,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
+            <Label Content="DEPARTURE DATE:" HorizontalAlignment="Left" Margin="40,132,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
+            <Label Content="LENGTH OF STAY:" HorizontalAlignment="Left" Margin="40,190,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Height="40" Width="202"/>
+            <DatePicker x:Name="first" Text="{Binding Path=StartDate, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="211,76,0,0" VerticalAlignment="Top" Height="51" Width="189" />
+            <DatePicker x:Name="last" Text="{Binding Path=EndDate, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="229,132,0,0" VerticalAlignment="Top" Height="53" Width="189" />
+            <TextBox x:Name="Lengthtxt" HorizontalAlignment="Left" Margin="229,190,0,0" TextWrapping="Wrap" Text="{Binding Path=VisitationDays, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="189" Height="40"/>
+            <Button x:Name="Enter" Content="Continue reservation" HorizontalAlignment="Left" Margin="391,314,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" BorderThickness="5,5,5,5" Height="100" Width="355" Click="Submit">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>
@@ -24,6 +24,14 @@
                 </Button.Background>
             </Button>
             <Button Content="Go back" HorizontalAlignment="Left" Margin="10,326,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" BorderThickness="4,4,4,4" BorderBrush="#FF8B3636" Height="88" Width="214" Click="goback"/>
+            <Label x:Name="GuestN"  Content="NAME:" HorizontalAlignment="Left" Margin="455,76,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+            <Label Content="SURNAME:"   HorizontalAlignment="Left" Margin="443,127,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+            <Label Content="ACCOMMODATION NAME:" HorizontalAlignment="Left" Margin="455,195,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+            <TextBox Text="{Binding Path=GuestName,  UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="554,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox Text="{Binding Path=GuestSurname,  UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="554,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="657,202,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="Numtxt" Text="{Binding Path=GuestNumber, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="366,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" Height="23"/>
+            <Label Content="NUBER OF GUESTS:" HorizontalAlignment="Left" Margin="223,260,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="14"/>
         </Grid>
 
     </Grid>

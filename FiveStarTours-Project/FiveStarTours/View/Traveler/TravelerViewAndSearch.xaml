@@ -16,27 +16,27 @@
                 <TextBlock Text="GuestViewAndSearch" FontSize="22" Foreground="#FF1A43C3" FontWeight="Bold"/>
                 <Button Content="Reserve" Width="684" FontSize="20" FontWeight="Bold" Background="#FFB59797" FontStyle="Normal" FontFamily="Sitka Text" Click="Reserve" />
             </StackPanel>
-            <StackPanel DockPanel.Dock="Left" Margin="4" Background="AliceBlue" Width="221">
+            <StackPanel DockPanel.Dock="Left" Margin="4" Background="AliceBlue" Width="221" Height="339">
                 <TextBlock Text="Search for accommodation" FontSize="20" Background="#FFD2D0E0"/>
 
                 <Label Content="Enter name" Width="211" FontWeight="Bold" HorizontalContentAlignment="Center"/>
-                <TextBox Name="SearchNtb"/>
-                <Label Content="Enter location" Width="211" FontWeight="Black" HorizontalContentAlignment="Center"/>
-                <TextBox Name="SearchLtb"/>
-
+                <TextBox Name="NameSearch"/>
+                <Label Content="Enter state" Width="211" FontWeight="Black" HorizontalContentAlignment="Center"/>
+                <TextBox x:Name="StateSearch"/>
+                <Label Content="Enter city" FontSize="14" FontWeight="Bold" HorizontalContentAlignment="Center"/>
+                <TextBox x:Name="CitySearch"/>
                 <Label Content="Number of guests" HorizontalContentAlignment="Center" FontWeight="Bold"/>
-                <TextBox x:Name="SearchGtb"/>
+                <TextBox x:Name="NumberSearch"/>
                 <Label Content="Type" HorizontalContentAlignment="Center" FontWeight="Bold"/>
-                <ComboBox >
+                <ComboBox x:Name="TypeBox" >
                     <ComboBoxItem Content="Appartmnent"/>
                     <ComboBoxItem Content="House"/>
                     <ComboBoxItem Content="Cottage"/>
                 </ComboBox>
                 <Label Content="Lenght of stay" HorizontalContentAlignment="Center" FontWeight="Bold"/>
-                <TextBox x:Name="SearchLentb"/>
-                <Label Content="Press enter to start searching" FontSize="16" FontWeight="Bold" FontStyle="Italic"/>
+                <TextBox x:Name="LengthSearch"/>
 
-                <Button Content="Enter" Height="40" Background="#FFD2D0E0" FontWeight="Bold" FontSize="18" RenderTransformOrigin="0.506,0.243" Click="Search_enter"/>
+                <Button Content="Enter" Height="33" Background="#FFD2D0E0" FontWeight="Bold" FontSize="18" RenderTransformOrigin="0.506,0.243" Click="Search_enter"/>
 
 
 
@@ -50,8 +50,8 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="20"/>
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="45"/>
-                        <DataGridTextColumn Header="State" Binding="{Binding Location.State}" Width="45"/>
-                        <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="40"/>
+                        <DataGridTextColumn Header="State" Binding="{Binding IdLocation}" Width="45"/>
+                        <DataGridTextColumn Header="City" Binding="{Binding IdLocation}" Width="40"/>
                         <DataGridTextColumn Header="Type"  Binding="{Binding Type}"/>
                         <DataGridTextColumn Header="Max guest"  Binding="{Binding MaxGuestNum}"/>
                         <DataGridTextColumn Header="Minimum reserved days"  Binding="{Binding MinReservationDays}"/>
