@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Documents;
+using FiveStarTours.Repository;
 using FiveStarTours.Serializer;
 
 public enum AccommodationType
@@ -85,5 +86,6 @@ namespace FiveStarTours.Model
 
 
 
+        }
     }
 }

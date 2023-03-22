@@ -1,15 +1,13 @@
 ﻿// Modeled on CommentForm from InitialProject
 
-using FiveStarTours.Model;
-using FiveStarTours.Repository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using FiveStarTours.Model;
+using FiveStarTours.Repository;
 
 namespace FiveStarTours.View
 {
@@ -136,7 +134,7 @@ namespace FiveStarTours.View
         {
             InitializeComponent();
             DataContext = this;
-            
+
             _toursRepository = new ToursRepository();
             _languagesRepository = new LanguagesRepository();
             _locationsRepository = new LocationsRepository();
@@ -145,11 +143,11 @@ namespace FiveStarTours.View
 
             // Adding state and city trough combobox:
 
-            List<string> States  = _locationsRepository.GetAllStates();
+            List<string> States = _locationsRepository.GetAllStates();
             stateComboBox.ItemsSource = States;
             stateComboBox.SelectedValuePath = ".";
             stateComboBox.DisplayMemberPath = ".";
-            
+
         }
 
         // Adding state and city trough combobox:
@@ -161,14 +159,14 @@ namespace FiveStarTours.View
         {
             if (stateComboBox.SelectedItem != null)
             {
-                
+
                 string selectedStateComboBox = stateComboBox.SelectedItem.ToString();
                 List<string> citiesInState = _locationsRepository.GetCitiesInState(selectedStateComboBox);
                 cityComboBox.ItemsSource = citiesInState;
                 selectedState = stateComboBox.SelectedItem as string;
             }
         }
-
+        
         private void cityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cityComboBox.SelectedItem != null)
@@ -179,15 +177,26 @@ namespace FiveStarTours.View
 
         private Location GetSelectedLocation()
         {
-            foreach(var location in _locationsRepository.GetAll())
+            foreach (var location in _locationsRepository.GetAll())
             {
-                if(location.City == selectedCity)
+                if (location.City == selectedCity)
                 {
                     return location;
                 }
             }
 
             return null;
+        }
+
+        public bool CheckLocation()
+        {
+            if(selectedCity == null)
+            {
+                MessageBox.Show("You must select state and city.");
+                return false;
+            }
+
+            return true;
         }
 
 
@@ -205,7 +214,7 @@ namespace FiveStarTours.View
         private void AddDateTime_Click(object sender, RoutedEventArgs e)
         {
             datesTextBox.Clear();
-            if(datePicker.SelectedDate == null)
+            if (datePicker.SelectedDate == null)
             {
                 MessageBox.Show("Please select date first!");
                 return;
@@ -222,15 +231,85 @@ namespace FiveStarTours.View
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            Location location = GetSelectedLocation();
-            List<Language> LanguageList = MakeLanguagesList(Languages);
-            List<int> LanguageIds = GetLanguagesIds(LanguageList);
-            List<KeyPoints> KeyPointsList = MakeKeyPointsList(KeyPoints);
-            List<int> KeyPointsIds = GetKeyPointsIds(KeyPointsList);
-            List<string> ImageUrlsList = MakeUrlsList(ImageUrls);
+            if (TourName == null)
+            {
+                MessageBox.Show("You must enter name of tour.");
+                return;
+            }
 
-            int MaximumGuests = int.Parse(MaxGuests);
-            int DurationTime = int.Parse(Duration);
+            Location location = new Location();
+            if (CheckLocation())
+            {
+                location = GetSelectedLocation();
+            }
+            else return;
+
+            if (Description == null)
+            {
+                MessageBox.Show("You must enter description of tour.");
+                return;
+            }
+
+            List<Language> LanguageList = new List<Language>();
+            if (CheckLanguages(Languages))
+            {
+                LanguageList = MakeLanguagesList(Languages);
+            }
+            else return;
+
+            List<int> LanguageIds = GetLanguagesIds(LanguageList);
+
+            int MaximumGuests;
+            if (MaxGuests == null)
+            {
+                MessageBox.Show("You must enter maximum guests number.");
+                return;
+            } else
+            {
+                MaximumGuests = int.Parse(MaxGuests);
+                if(MaximumGuests < 1)
+                {
+                    MessageBox.Show("Maximum number of guests must be greater then 0.");
+                    return;
+                }
+            }
+
+            List<KeyPoints> KeyPointsList = new List<KeyPoints>();
+           
+            if (KeyPointsCheck(KeyPoints))
+            {
+                KeyPointsList = MakeKeyPointsList(KeyPoints);
+            }
+            else return;
+            List<int> KeyPointsIds = GetKeyPointsIds(KeyPointsList);
+
+            if(DateTimes.Count < 1)
+            {
+                MessageBox.Show("At least 1 date and time is required.");
+            }
+
+            int DurationTime;
+            if (Duration == null)
+            {
+                MessageBox.Show("You must enter duration time.");
+                return;
+            }
+            else
+            {
+                DurationTime = int.Parse(Duration);
+                if (DurationTime < 1)
+                {
+                    MessageBox.Show("Duration time must be greater then 0.");
+                    return;
+                }
+            }
+
+            List<string> ImageUrlsList = new List<string>();
+            if (CheckUrls(ImageUrls))
+            {
+                ImageUrlsList = MakeUrlsList(ImageUrls);
+            }
+            else return;
 
             Tour newTour = new Tour(TourName, location.Id, location, Description, LanguageIds, LanguageList, MaximumGuests, KeyPointsIds, KeyPointsList, DateTimes, DurationTime, ImageUrlsList);
             _toursRepository.Save(newTour);
@@ -245,7 +324,7 @@ namespace FiveStarTours.View
 
             Array _languages = language.Split(", ");
 
-            foreach(string l in _languages)
+            foreach (string l in _languages)
             {
                 Language lang = new Language(l);
                 _languagesRepository.Save(lang);
@@ -259,12 +338,23 @@ namespace FiveStarTours.View
         {
             List<int> result = new List<int>();
 
-            foreach(Language lang in languages)
+            foreach (Language lang in languages)
             {
                 result.Add(lang.Id);
             }
 
             return result;
+        }
+
+        public bool CheckLanguages(string languages)
+        {
+            if(languages == null)
+            {
+                MessageBox.Show("At least 1 language is required.");
+                return false;
+            }
+
+            return true;
         }
 
         // Convert from string to list of KeyPoints objects
@@ -276,12 +366,27 @@ namespace FiveStarTours.View
 
             foreach (string keyPoint in _keyPoints)
             {
+
                 KeyPoints kp = new KeyPoints(keyPoint);
                 _keyPointsRepository.Save(kp);
                 result.Add(kp);
+
             }
 
             return result;
+        }
+
+        public bool KeyPointsCheck(string keyPoints)
+        {
+
+            Array _keyPoints = keyPoints.Split(", ");
+            if(_keyPoints.Length < 2)
+            {
+                MessageBox.Show("At least 2 key points are required.");
+                return false;
+            }
+
+            return true;
         }
 
         public List<int> GetKeyPointsIds(List<KeyPoints> keyPoints)
@@ -310,7 +415,17 @@ namespace FiveStarTours.View
             }
 
             return result;
+        }
 
+        public bool CheckUrls(string urls)
+        {
+            if (urls == null)
+            {
+                MessageBox.Show("At least 1 URL is required.");
+                return false;
+            }
+
+            return true;
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -318,6 +433,6 @@ namespace FiveStarTours.View
             Close();
         }
 
-       
+
     }
 }

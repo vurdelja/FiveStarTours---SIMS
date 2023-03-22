@@ -14,7 +14,6 @@ namespace FiveStarTours.Model
         public string Username { get; set; }
         public string Password { get; set; }
 
-        public string Role { get; set; }
 
         public User() { }
 
@@ -36,7 +35,7 @@ namespace FiveStarTours.Model
             Id = Convert.ToInt32(values[0]);
             Username = values[1];
             Password = values[2];
-            Role = values[3];
+
         }
 
 

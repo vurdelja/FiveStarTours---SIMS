@@ -7,16 +7,75 @@
         mc:Ignorable="d"
         Title="TourView" Height="450" Width="800" ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
          WindowStartupLocation="CenterScreen">
-    <Grid DataContext="{Binding tour}">
+    <Grid Background="LemonChiffon">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="90"/>
         </Grid.RowDefinitions>
+        <!-- uredjujem prvi blok-->
+        <Grid Grid.Row="1" Grid.Column="1" Background="Pink" DataContext="{Binding tour}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content="Tour name:" FontSize="15"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Description:" FontSize="15"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="Beginning:" FontSize="15"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="Duration(in hours):" FontSize="15"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=Name}" FontSize="15"/>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=Description}" FontSize="15"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=Beginning}" FontSize="15"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=Duration}" FontSize="15"/>
+        </Grid>
+        <!-- uredjujem drugi blok-->
+        <Grid Grid.Row="1" Grid.Column="3" Background="Pink" DataContext="{Binding tour}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content="Location:" FontSize="15"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Key points:" FontSize="15"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="Max guests:" FontSize="15"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="Image urls:" FontSize="15"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=Location}" FontSize="15">
+                <TextBlock.BindingGroup>
+                    <MultiBinding StringFormat="{}{0}, {1}">
+                        <Binding Path="Location.State"/>
+                        <Binding Path="Location.City"/>
+                    </MultiBinding>
+                </TextBlock.BindingGroup>
+                </TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=KeyPoints}" FontSize="15"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=MaxGuests}" FontSize="15"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=ImageUrls}" FontSize="15"/>
+        </Grid>
+        <Grid Grid.Row="3" Grid.Column="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="RESERVATION" Width="100" Height="50" FontSize="15" Click="ReservationButton_Click" Background="LightGreen"/>
+            <Button Grid.Column="1" Content="GO BACK" Width="100" Height="50" FontSize="15" Click="GoBackButton_Click" Background="LightBlue"/>
+        </Grid>
     </Grid>
 </Window>

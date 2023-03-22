@@ -15,6 +15,7 @@ namespace FiveStarTours.Model
         public string GuestSurname { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+       
         public int VisitationDays { get; set; }
         public string AccommodationName { get; set; }
         public int GuestNumber { get; set; }
@@ -41,6 +42,7 @@ namespace FiveStarTours.Model
                 Id.ToString(),
                 GuestName,
                 GuestSurname,
+
                 string.Join(';', StartDate),
                 string.Join(';', EndDate),
                 VisitationDays.ToString(),
@@ -68,6 +70,6 @@ namespace FiveStarTours.Model
         }
 
     }
-    
+
 }
 
