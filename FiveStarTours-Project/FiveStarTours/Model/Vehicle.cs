@@ -59,7 +59,6 @@ namespace FiveStarTours.Model
                 IdLanguages = new List<int>();
                 
             }
-
             
             ImageUrls = values[4].Split(';').ToList();
         }
