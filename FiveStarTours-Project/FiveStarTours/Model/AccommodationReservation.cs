@@ -39,6 +39,7 @@ namespace FiveStarTours.Model
         {
             string[] csvValues =
            {
+                Id.ToString(),
                 GuestName,
                 GuestSurname,
 

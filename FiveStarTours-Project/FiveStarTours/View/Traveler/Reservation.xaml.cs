@@ -22,14 +22,14 @@ namespace FiveStarTours.View.Traveler
     /// <summary>
     /// Interaction logic for Reservation.xaml
     /// </summary>
-    public partial class Reservation : Window
+    public partial class Reservation : Window, INotifyPropertyChanged
     {
         private readonly AccommodationsReservationsRepository accommodationsReservationsRepository;
         private readonly AccommodationsRepository accommodationsRepository;
         public static ObservableCollection<AccommodationReservation> AccommodationReservations { get; set; }
         public event PropertyChangedEventHandler? PropertyChanged;
         public Accommodation SelectedAccommodation;
-        
+
 
         protected virtual void OnPropertyChanged([CallerMemberName] string properyName = null)
         {
@@ -40,7 +40,6 @@ namespace FiveStarTours.View.Traveler
         {
             InitializeComponent();
             DataContext = this;
-        
             accommodationsReservationsRepository = new AccommodationsReservationsRepository();
         }
         private string _guestName;
@@ -95,19 +94,7 @@ namespace FiveStarTours.View.Traveler
                 }
             }
         }
-        private string _selectedDate;
-        public string SelectedDate
-        {
-            get => _selectedDate;
-            set
-            {
-                if (value != _selectedDate)
-                {
-                    _selectedDate = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+ 
         private string _rated;
         public string Rated
         {
@@ -135,11 +122,7 @@ namespace FiveStarTours.View.Traveler
                 }
             }
         }
-        List<DateTime> Start = new List<DateTime>();
-        private DateTime firstSelectedDate;
-
-        List<DateTime> End = new List<DateTime>();
-        private DateTime lastSelectedDate;
+       
 
         private void goback(object sender, RoutedEventArgs e)
         {
@@ -152,24 +135,53 @@ namespace FiveStarTours.View.Traveler
             get; set;
         }
 
+        List<DateTime> Start = new List<DateTime>();
+        private DateTime firstSelectedDate;
+
+        List<DateTime> End = new List<DateTime>();
+        private DateTime lastSelectedDate;
+
+        public void SelestedDate(DateTime dateTime)
+        {
+            firstSelectedDate = (DateTime)first.SelectedDate;
+            
+
+        }
+        private void SelectedDate(DateTime dateTime)
+        {
+            lastSelectedDate = (DateTime)last.SelectedDate;
+        }
+        
+
         private void Submit(object sender, RoutedEventArgs e)
         {
             int visitationDays = int.Parse(VisitationDays);
             int guestNumber = int.Parse(GuestNumber);
+           
 
             int min = 0;
             if (!(int.TryParse(Lengthtxt.Text, out min)) || (Lengthtxt.Text.Equals("")))
             {
                 return;
             }
-            AccommodationReservation newRes = new AccommodationReservation(GuestName, GuestSurname, firstSelectedDate, lastSelectedDate,visitationDays, AccommodationName, guestNumber);
+            AccommodationReservation newRes = new AccommodationReservation(GuestName, GuestSurname, firstSelectedDate, lastSelectedDate, visitationDays, AccommodationName, guestNumber);
             accommodationsReservationsRepository.Save(newRes);
-          
-         
+            if(availableDates>Convert.ToInt32(VisitationDays))
+            {
+                MessageBox.Show($"There's no available dates for this reservation. Left seats : {availableDates}");
+                
+            }
+            else
+            {
+                ComplitedReservationxaml cr = new ComplitedReservationxaml();
+                cr.Show();
+            }
+            
             Close();
 
         }
     
+
     }
     }
 

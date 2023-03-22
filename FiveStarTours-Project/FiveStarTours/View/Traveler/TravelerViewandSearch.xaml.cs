@@ -24,7 +24,7 @@ namespace FiveStarTours.View.Traveler
     /// </summary>
     /// 
 
-    public partial class TravelerViewandSearch : Window
+    public partial class TravelerViewandSearch : Window,INotifyPropertyChanged
     {
 
         public static ObservableCollection<Accommodation> Accommodations { get; set; }
