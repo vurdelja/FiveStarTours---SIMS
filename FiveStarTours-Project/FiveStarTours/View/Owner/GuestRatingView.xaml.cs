@@ -42,7 +42,6 @@ namespace FiveStarTours.View.Owner
 
         }
 
-      
 
         public int tidiness;
 
@@ -211,12 +210,15 @@ namespace FiveStarTours.View.Owner
                 respectTime = 5;
             }
 
+            
+            
+
             AccommodationReservation reservation = _selectedReservation;
 
             GuestRating newGuestRate = new GuestRating(
                     reservation,
                     tidiness,
-                    friendliness,
+                    rulesFollowed,
                     quietness,
                     friendliness,
                     communication,
@@ -224,24 +226,40 @@ namespace FiveStarTours.View.Owner
                     Comment
                 );
 
+
             GuestsWithoutRateView guestsWithoutRateView = new GuestsWithoutRateView();
-            _rateRepository.Save(newGuestRate);
-            reservation.Rated = true;
 
-            _repository.Update(reservation);
-            System.Threading.Thread.Sleep(1000);
-            Close();
-            System.Threading.Thread.Sleep(2000);
-            
+            if (IsValid(newGuestRate))
+            {
+                _rateRepository.Save(newGuestRate);
+                reservation.Rated = true;
 
-            guestsWithoutRateView.Show();
+                _repository.Update(reservation);
+                System.Threading.Thread.Sleep(1000);
+                Close();
+                System.Threading.Thread.Sleep(2000);
 
 
-            
+                guestsWithoutRateView.Show();
+            }
+            else
+            {
+                MessageBox.Show("You must provide all info on your accommodation.");
+            }
 
+           
             
 
         }
+
+        public bool IsValid(GuestRating rating)
+        {
+            
+
+            return true;
+        }
+
+
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {

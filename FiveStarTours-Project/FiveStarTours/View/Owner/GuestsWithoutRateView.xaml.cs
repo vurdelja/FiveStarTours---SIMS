@@ -49,7 +49,7 @@ namespace FiveStarTours.View.Owner
             }
             else
             {
-                Close();
+                MessageBox.Show("You must select the guest.");
             }
         }
 

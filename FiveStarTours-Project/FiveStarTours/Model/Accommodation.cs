@@ -21,7 +21,6 @@ namespace FiveStarTours.Model
     {
         public int Id { get; set; }
         public string AccommodationName { get; set; }
-        //public int IdLocation { get; set; }
         public Location Location { get; set; }
         public AccommodationType Type { get; set; }
         public int MaxGuestNum { get; set; }
@@ -32,10 +31,9 @@ namespace FiveStarTours.Model
 
         public Accommodation() { }
 
-        public Accommodation(string accommodationName, /*int idLocation,*/ Location location, AccommodationType type, int maxGuestNum, int minReservationDays, int daysPossibleToCancel, List<string> imageURLs)
+        public Accommodation(string accommodationName, Location location, AccommodationType type, int maxGuestNum, int minReservationDays, int daysPossibleToCancel, List<string> imageURLs)
         {
             AccommodationName = accommodationName;
-            //IdLocation = idLocation;
             Location = location;
             Type = type;
             MaxGuestNum = maxGuestNum;
@@ -64,7 +62,7 @@ namespace FiveStarTours.Model
                 MaxGuestNum.ToString(),
                 MinReservationDays.ToString(),
                 DaysPossibleToCancel.ToString(),
-                imageURLsList.ToString()
+                string.Join(';', ImageURLs)
 
         };
             return csvValues;
@@ -74,25 +72,13 @@ namespace FiveStarTours.Model
         {
             Id = Convert.ToInt32(values[0]);
             AccommodationName = values[1];
-            //IdLocation = Convert.ToInt32(values[2]);
             Location = new Location() { Id = Convert.ToInt32(values[2]) };
             Type = Enum.Parse<AccommodationType>(values[3]);
             MaxGuestNum = int.Parse(values[4]);
             MinReservationDays = int.Parse(values[5]);
             DaysPossibleToCancel = int.Parse(values[6]);
 
-            string imageURLs = values[7];
-            string[] delimitedImageURLs = imageURLs.Split(",");
-            if (ImageURLs == null)
-            {
-                ImageURLs = new List<string>();
-            }
-
-            foreach (string imageURL in delimitedImageURLs)
-            {
-                string file = new string(imageURL);
-                ImageURLs.Add(file);
-            }
+            ImageURLs = values[7].Split(';').ToList();
         }
 
 

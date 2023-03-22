@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace FiveStarTours.Repository
 {
@@ -87,7 +88,6 @@ namespace FiveStarTours.Repository
                     if (accommodationReservation.Rated == false && now.AddDays(-5) < end)
                     {
                         reservations.Add(accommodationReservation);
-
                     }
                 }
             }
@@ -95,7 +95,38 @@ namespace FiveStarTours.Repository
  
         }
 
-        
+        public int CountUnrated()
+        {
+            int unrated = 0;
+            _reservations = GetUnratedAndLessThanFiveDaysAgo();
+
+            foreach (AccommodationReservation accommodationReservation in _reservations)
+            {
+                if (accommodationReservation.Rated == false)
+                {
+                    unrated++;
+                }
+            }
+            return unrated;
+
+        }
+
+        public void NotifyAboutUnratedGuests()
+        {
+            _reservations = GetAll();
+            int unrated = CountUnrated();
+            if(unrated > 0)
+            {
+                MessageBox.Show("You have " + unrated + " forms that are waiting to be filled. Please fill them before they become unavailable!");
+            }
+            else
+            {
+                return;
+            }
+            
+        }
+
+
 
     }
 }

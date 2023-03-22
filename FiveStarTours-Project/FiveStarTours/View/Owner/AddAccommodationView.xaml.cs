@@ -46,15 +46,18 @@ namespace FiveStarTours.View
             get => _accommodationName;
             set
             {
-                _accommodationName = value;
-                OnPropertyChanged();
+                if (value != _accommodationName)
+                {
+                    _accommodationName = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
 
         //Location - state and city
-        public string selectedState;
-        public string selectedCity;
+        private string selectedState;
+        private string selectedCity;
 
         private void stateComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -91,10 +94,9 @@ namespace FiveStarTours.View
         //Accommodation type
         public AccommodationType accommodationType;
 
-
         //Accommodation max guest number
-        public string _maxGuestNum;
-        public string MaxGuestNum
+        public int _maxGuestNum;
+        public int MaxGuestNum
         {
             get => _maxGuestNum;
             set
@@ -109,8 +111,8 @@ namespace FiveStarTours.View
 
 
         //Min days to make reservation
-        public string _minReservationDays;
-        public string MinReservationDays
+        private int _minReservationDays;
+        public int MinReservationDays
         {
             get => _minReservationDays;
             set
@@ -126,8 +128,8 @@ namespace FiveStarTours.View
 
 
         //Days possible to cancel
-        public string _daysPossibleToCancel;
-        public string DaysPossibleToCancel
+        private int _daysPossibleToCancel = 1;
+        public int DaysPossibleToCancel
         {
             get => _daysPossibleToCancel;
             set
@@ -141,7 +143,7 @@ namespace FiveStarTours.View
         }
 
         //Images
-        public string _imageURLs;
+        private string _imageURLs;
         public string ImageURLs
         {
             get => _imageURLs;
@@ -167,9 +169,12 @@ namespace FiveStarTours.View
         {
             Location location = GetSelectedLocation();
 
-            List<string> formattedImages = new List<string>();
-
-            string[] delimitedImages = ImageURLs.Split(",");
+            List<string> ImageURLsList = new List<string>();
+            if (ImageURLs != null)
+            {
+                ImageURLsList = MakeUrlsList(ImageURLs);
+            }
+            else return;
 
             string AccType = AccommodationTypeComboBox.Text;
 
@@ -186,26 +191,16 @@ namespace FiveStarTours.View
                 accommodationType = AccommodationType.cottage;
             }
 
-            foreach (string imageURL in delimitedImages)
-            {
-                formattedImages.Add(imageURL);
-            }
-
-            int MaximumGuests = int.Parse(MaxGuestNum);
-            int MinDays = int.Parse(MinReservationDays);
-            int PossibleToCancel = int.Parse(DaysPossibleToCancel);
-
 
             Accommodation newAccommodation = new Accommodation(
                     AccommodationName,
                     location,
                     accommodationType,
-                    MaximumGuests,
-                    MinDays,
-                    PossibleToCancel,
-                    formattedImages
+                    MaxGuestNum,
+                    MinReservationDays,
+                    DaysPossibleToCancel,
+                    ImageURLsList
                 );
-
 
 
             if(IsValid(newAccommodation))
@@ -215,12 +210,11 @@ namespace FiveStarTours.View
             }
             else
             {
-                MessageBox.Show("All necessary fields must be filled.");
+                MessageBox.Show("You must provide all info on your accommodation.");
             }
             
 
         }
-
 
         public string Error => null;
 
@@ -235,19 +229,21 @@ namespace FiveStarTours.View
                 }
                 else if (columnName == "MaxGuestNum")
                 {
-                    if (string.IsNullOrEmpty(MaxGuestNum))
+                    if (MaxGuestNum <1)
                         return "Type is required";
                 }
+
                 else if (columnName == "MinReservationDays")
                 {
-                    if (string.IsNullOrEmpty(MinReservationDays))
+                    if (MinReservationDays<1)
                         return "Type is required";
                 }
                 else if (columnName == "DaysPossibleToCancel")
                 {
-                    if (string.IsNullOrEmpty(DaysPossibleToCancel))
+                    if (DaysPossibleToCancel < 1)
                         return "Type is required";
                 }
+               
 
                 return null;
             }
@@ -255,7 +251,7 @@ namespace FiveStarTours.View
 
 
 
-        private readonly string[] _validatedProperties = { "AccommodationName", "MaxGuestNum", "MinReservationDays", "DaysPossibleToCancel" };
+        private readonly string[] _validatedProperties = { "AccommodationName", "MaxGuestNum", "MinReservationDays", "DaysPossibleToCancel"};
 
 
 
@@ -270,12 +266,32 @@ namespace FiveStarTours.View
             return true;
         }
 
+        public static bool IsValidUrl(string url)
+        {
+            return Uri.IsWellFormedUriString(url, UriKind.Absolute);
+        }
+
 
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
+
+        public List<string> MakeUrlsList(string urls)
+        {
+            List<string> result = new List<string>();
+
+            Array _urls = urls.Split(", ");
+
+            foreach (string url in _urls)
+            {
+                result.Add(url);
+            }
+
+            return result;
+        }
+
 
     }
     

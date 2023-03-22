@@ -96,11 +96,11 @@
 
 
                 <TextBox Grid.Row="0" Grid.Column="1" 
-                         Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged}"
+                         Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                         Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
                          Height="30"  
                          Margin="0 0 1 0" 
-                         FontSize="10"
-                         Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+                         FontSize="10">
 
                 </TextBox>
                 <ComboBox Grid.Row="1" Grid.Column="1"
