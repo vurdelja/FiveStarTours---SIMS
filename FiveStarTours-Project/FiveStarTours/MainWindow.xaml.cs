@@ -57,7 +57,8 @@ namespace FiveStarTours
 
         private void DriverButtonClick_Checked(object sender, RoutedEventArgs e)
         {
-
+            DriverMainWindow driverWindow = new DriverMainWindow();
+            driverWindow.Show();
         }
     }
 }

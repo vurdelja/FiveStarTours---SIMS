@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FiveStarTours.Serializer;
 using FiveStarTours.Repository;
+using FiveStarTours.Serializer;
 
 namespace FiveStarTours.Model
 {
@@ -125,9 +122,9 @@ namespace FiveStarTours.Model
         public Location getLocationById(int locationId)
         {
             LocationsRepository locationsRepository = new LocationsRepository();
-            foreach(Location location in locationsRepository.GetAll())
+            foreach (Location location in locationsRepository.GetAll())
             {
-                if(locationId == location.Id)
+                if (locationId == location.Id)
                 {
                     Location = location;
                     return location;
@@ -136,6 +133,25 @@ namespace FiveStarTours.Model
 
             return null;
 
+        }
+
+        public List<KeyPoints> getKeyPointsById(List<int> keyPointsId)
+        {
+            KeyPointsRepository keyPointsRepository = new KeyPointsRepository();
+            List<KeyPoints> result = new List<KeyPoints>();
+
+            foreach (KeyPoints keyPoint in keyPointsRepository.GetAll())
+            {
+                foreach (int keypoint in keyPointsId)
+                {
+                    if (keyPoint.Id == keypoint)
+                    {
+                        result.Add(keyPoint);
+                    }
+                }
+            }
+
+            return result;
         }
     }
 }

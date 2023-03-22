@@ -1,22 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using FiveStarTours.View;
-using FiveStarTours.Repository;
-using System.Collections.ObjectModel;
 using FiveStarTours.Model;
+using FiveStarTours.Repository;
+using FiveStarTours.View.Guide;
 
 namespace FiveStarTours.View
 {
@@ -27,13 +17,13 @@ namespace FiveStarTours.View
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         private readonly ToursRepository _repository;
+        public Tour SelectedTour { get; set; }
         public ObservableCollection<Tour> ToursCollection { get; set; }
         public Tours()
         {
             InitializeComponent();
-            DataContext = this;
             _repository = new ToursRepository();
-            
+            DataContext = this;
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -51,6 +41,18 @@ namespace FiveStarTours.View
         {
             ToursCollection = new ObservableCollection<Tour>(_repository.GetAllByDate((DateTime)ToursDate.SelectedDate));
             DataGridTours.ItemsSource = ToursCollection;
+        }
+
+        private void StartTourButton_CLick(object sender, RoutedEventArgs e)
+        {
+            if (SelectedTour == null)
+            {
+                MessageBox.Show("Choose tour first!");
+            }
+            else
+            {
+                LiveTourTracking liveTourTracking = new LiveTourTracking(SelectedTour);
+            }
         }
     }
 }
