@@ -8,11 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="Resources\" />
-    <Folder Include="Serializer\" />
-    <Folder Include="View\" />
-    <Folder Include="Repository\" />
+	  <Compile Remove="Resources\Images\**" />
+	  <EmbeddedResource Remove="Resources\Images\**" />
+	  <None Remove="Resources\Images\**" />
+	  <Page Remove="Resources\Images\**" />
+    <Folder Include="Resources\Images\" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.9" />
   </ItemGroup>
 
 </Project>

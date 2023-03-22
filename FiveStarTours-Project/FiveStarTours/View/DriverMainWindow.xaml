@@ -1,0 +1,19 @@
+﻿<Window x:Class="FiveStarTours.View.DriverMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FiveStarTours.View"
+        mc:Ignorable="d"
+        Title="DriverMainWindow" Height="450" Width="800">
+    <Grid>
+        <Button Content="Vehicle Registration" 
+                HorizontalAlignment="Left" 
+                Margin="60, 60, 0, 0" 
+                VerticalAlignment="Top" 
+                Height="50" Width="200" 
+                Click="VehicleRegistrationButton_Click"/>
+        <Button x:Name="VehicleOnAdressButton" Content="Vehicle On Adress" HorizontalAlignment="Left" Margin="60,140,0,0" VerticalAlignment="Top" Height="50" Width="200" Click="VehicleOnAdressButton_Click"/>
+
+    </Grid>
+</Window>

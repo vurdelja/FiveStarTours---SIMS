@@ -1,0 +1,17 @@
+﻿<Page x:Class="FiveStarTours.View.Traveler.NewDates"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FiveStarTours.View.Traveler"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="NewDates">
+
+    <Grid Background="#FFF39494">
+        <TextBlock HorizontalAlignment="Left" Margin="98,109,0,0" TextWrapping="Wrap" Text="UNFORTUNATELY THE DATES YOU HAVE PICKED ARE NOT AVAILABLE, HERE IS THE DISPLAY OF AVAILABLE DATES " VerticalAlignment="Top" FontSize="22" FontWeight="Bold" Width="659" FontFamily="Sitka Small"/>
+        <Calendar HorizontalAlignment="Center" Margin="0,204,0,0" VerticalAlignment="Top" Height="187" Width="368" RenderTransformOrigin="0.447,0.457"/>
+        <Button Content="GO BACK" HorizontalAlignment="Left" Margin="46,361,0,0" VerticalAlignment="Top" Height="50" Width="100" FontWeight="Bold" FontSize="18" Click="back"/>
+
+    </Grid>
+</Page>
