@@ -52,7 +52,7 @@ namespace FiveStarTours.View
             }
         }
 
-        //Location - state and city
+    
         private string selectedState;
         private string selectedCity;
 

@@ -52,6 +52,7 @@ namespace FiveStarTours.Repository
             }
             return _accommodations.Max(t => t.Id) + 1;
         }
-    }
+     
 
+    }
 }
