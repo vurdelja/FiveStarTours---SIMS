@@ -44,5 +44,17 @@ namespace FiveStarTours.Repository
             }
             return _keyPoints.Max(kp => kp.Id) + 1;
         }
+        public List<string> GetAllNames()
+        {
+            List<KeyPoints> keyPoints = new List<KeyPoints>();
+            keyPoints = GetAll();
+            List<string> result = new List<string>();
+            foreach (var keyPoint in keyPoints)
+            {
+                result.Add(keyPoint.Name);
+            }
+            return result;
+        }
+
     }
 }
