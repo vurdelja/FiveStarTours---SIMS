@@ -44,6 +44,12 @@ namespace FiveStarTours.Model
             Id = Convert.ToInt32(values[0]);
 
             Delays = Convert.ToInt32(values[1]);
+
+            if (DrivingsList == null)
+            {
+                DrivingsList = new List<Drivings>();
+
+            }
         }
     }
 }

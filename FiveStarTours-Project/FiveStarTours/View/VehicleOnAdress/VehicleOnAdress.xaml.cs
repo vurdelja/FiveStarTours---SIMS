@@ -11,6 +11,9 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using FiveStarTours.View.VehicleOnAdress;
+using System.IO;
+using System.Windows.Threading;
+
 
 namespace FiveStarTours.View.VehicleOnAdress
 {
@@ -85,8 +88,7 @@ namespace FiveStarTours.View.VehicleOnAdress
             if (DrivingsComboBox.SelectedItem != null)
             {
 
-                string selectedStateComboBox = DrivingsComboBox.SelectedItem.ToString();
-                
+
                 selectedDriving = DrivingsComboBox.SelectedItem as string;
             }
         }
@@ -123,6 +125,11 @@ namespace FiveStarTours.View.VehicleOnAdress
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void FinishedComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

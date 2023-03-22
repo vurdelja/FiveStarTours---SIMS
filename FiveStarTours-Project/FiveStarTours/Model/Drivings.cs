@@ -32,7 +32,12 @@ namespace FiveStarTours.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            Name = values[1];
+
+            if (Name == null)
+            {
+                Name = Convert.ToString(values[1]);
+
+            }
         }
 
         
