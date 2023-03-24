@@ -51,6 +51,14 @@ namespace FiveStarTours.View
             }
             else
             {
+                foreach(Tour t in _repository.GetAll())
+                {
+                    if(SelectedTour.Name == t.Name)
+                    {
+                        SelectedTour.Id = t.Id;
+                    }
+                }
+
                 LiveTourTracking liveTourTracking = new LiveTourTracking(SelectedTour);
             }
         }

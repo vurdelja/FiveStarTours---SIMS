@@ -28,7 +28,6 @@ namespace FiveStarTours.View
         {
             //CC.Content = new ToursListingView();
             ToursListingView toursListing = new ToursListingView();
-            this.Visibility = Visibility.Hidden;
             toursListing.Show();
        }
 

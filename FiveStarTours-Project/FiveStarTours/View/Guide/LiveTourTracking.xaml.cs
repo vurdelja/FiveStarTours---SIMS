@@ -29,18 +29,14 @@ namespace FiveStarTours.View.Guide
         LiveTour liveTour { get; set; }
         public LiveTourTracking(Tour selectedTour)
         {
-            selectedTour.Id += 1;
             _liveTourRepository = new LiveTourRepository();
             _visitorRepository = new VisitorRepository();
             if (StartLiveTour(selectedTour))
             {
                 InitializeComponent();
-                _liveTourRepository.Save(liveTour);
                 DataContext = liveTour;
-                Checkpoints = new ObservableCollection<string>();
-                IsChecked = new ObservableCollection<bool>();
                 Show();
-            }
+            } 
         }
 
         // Dictionary of visitors for tracking 
@@ -71,19 +67,15 @@ namespace FiveStarTours.View.Guide
                 Visitors.Add(name, false);
             }
 
-            if (Visitors.Count < 1)
-            {
-                Close();
-            }
             return Visitors;
         }
 
         public bool CheckVisitors(VisitorRepository visitorRepository, Tour tour)
         {
             List<Visitor> visitors = new List<Visitor>();
-            foreach (var v in _visitorRepository.GetAll())
+            foreach (Visitor v in _visitorRepository.GetAll())
             {
-                if (tour.Id == v.Id && tour.OneBeginningTime == v.DateTime)
+                if (tour.Id == v.TourId && tour.OneBeginningTime == v.DateTime)
                 {
                     visitors.Add(v);
                 }
@@ -98,8 +90,6 @@ namespace FiveStarTours.View.Guide
 
         public bool StartLiveTour(Tour tour)
         {
-            tour.KeyPoints = tour.getKeyPointsById(tour.IdKeyPoints);
-            tour.KeyPoints.ElementAt(0).Visited = true;
             if(CheckVisitors(_visitorRepository, tour))
             {
                 Visitor = GetAllVisitors(_visitorRepository, tour);
@@ -109,10 +99,9 @@ namespace FiveStarTours.View.Guide
                 MessageBox.Show("No visitors on this tour!");
                 return false;
             }
-            liveTour = new LiveTour(tour.Id, tour.Name, tour.OneBeginningTime, tour.IdKeyPoints, tour.KeyPoints, Visitor, true, false);
             foreach (var livetour in _liveTourRepository.GetAll())
             {
-                if (livetour.Ended && livetour.Date.Date == liveTour.Date.Date && string.Equals(livetour.Name, liveTour.Name, StringComparison.OrdinalIgnoreCase))
+                if (livetour.Ended && livetour.Date == liveTour.Date && string.Equals(livetour.Name, liveTour.Name, StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show("This tour is already over");
                     return false;
@@ -123,6 +112,12 @@ namespace FiveStarTours.View.Guide
                     return false;
                 }
             }
+
+            tour.KeyPoints = tour.getKeyPointsById(tour.IdKeyPoints);
+            tour.KeyPoints.ElementAt(0).Visited = true;
+            liveTour = new LiveTour(tour.Id, tour.Name, tour.OneBeginningTime, tour.IdKeyPoints, tour.KeyPoints, Visitor, true, false);
+            _liveTourRepository.Save(liveTour);
+            
             return true;
         }
 

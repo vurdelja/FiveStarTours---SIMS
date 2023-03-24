@@ -52,7 +52,6 @@ namespace FiveStarTours
         private void VisitorButtonClick_Checked(object sender, RoutedEventArgs e)
         {
             VisitorMainWindow visitorWindow = new VisitorMainWindow();
-            this.Visibility = Visibility.Hidden;
             visitorWindow.Show();
         }
 
