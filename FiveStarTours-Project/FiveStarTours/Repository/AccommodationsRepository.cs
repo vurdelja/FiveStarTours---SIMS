@@ -22,27 +22,36 @@ namespace FiveStarTours.Repository
         public AccommodationsRepository()
         {
             _serializer = new Serializer<Accommodation>();
-            _accommodations = _serializer.FromCSV(FilePath);
+            _accommodations = GetAllAccomodationBindLocation();
         }
 
         public List<Accommodation> GetAll()
         {
-            return _serializer.FromCSV(FilePath);
+            return GetAllAccomodationBindLocation();
+        }
+
+        public List<Accommodation> GetAllAccomodationBindLocation()
+        {
+            LocationsRepository locationsRepository = new LocationsRepository();
+            _accommodations = _serializer.FromCSV(FilePath);
+            foreach(Accommodation accommodation in _accommodations)
+            {
+                int locId = accommodation.Location.Id;
+                accommodation.Location = locationsRepository.GetById(locId);
+            }
+            return _accommodations;
         }
 
         public Accommodation Save(Accommodation accommodation)
         {
             accommodation.Id = NextId();
-            _accommodations = _serializer.FromCSV(FilePath);
+            _accommodations = GetAllAccomodationBindLocation();
             _accommodations.Add(accommodation);
             _serializer.ToCSV(FilePath, _accommodations);
             return accommodation;
         }
 
-        public List<Accommodation> Load()
-        {
-            return _serializer.FromCSV(FilePath);
-        }
+
 
         public int NextId()
         {
@@ -56,7 +65,7 @@ namespace FiveStarTours.Repository
 
         public void Delete(Accommodation accommodation)
         {
-            _accommodations = _serializer.FromCSV(FilePath);
+            _accommodations = GetAllAccomodationBindLocation();
             Accommodation founded = _accommodations.Find(c => c.Id == accommodation.Id);
             _accommodations.Remove(founded);
             _serializer.ToCSV(FilePath, _accommodations);
@@ -64,13 +73,92 @@ namespace FiveStarTours.Repository
 
         public Accommodation Update(Accommodation accommodation)
         {
-            _accommodations = _serializer.FromCSV(FilePath);
+            _accommodations = GetAllAccomodationBindLocation();
             Accommodation current = _accommodations.Find(c => c.Id == accommodation.Id);
             int index = _accommodations.IndexOf(current);
             _accommodations.Remove(current);
             _accommodations.Insert(index, accommodation);    
             _serializer.ToCSV(FilePath, _accommodations);
             return accommodation;
+        }
+
+        public Accommodation GetAccommodationForReservation(AccommodationReservation accommodationReservation)
+        {
+            foreach(Accommodation accommodation in _accommodations)
+            {
+                if(accommodationReservation.AccommodationName == accommodation.AccommodationName)
+                {
+                    return accommodation;
+                }
+            }
+            return null;
+        }
+
+
+
+        public bool SearchConditionAccommodationName(Accommodation accommodation, string name)
+        {
+                return accommodation.AccommodationName.ToLower().Contains(name.ToLower());
+        }
+
+        public bool SearchConditionAccommodationLocation(Accommodation accommodation, string state, string city)
+        {
+            return accommodation.Location.State.ToLower().Contains(state.ToLower()) && accommodation.Location.City.ToLower().Contains(city.ToLower());
+        }
+
+        public bool SearchConditionAccommodationType(Accommodation accommodation, string type)
+        {
+            return accommodation.Type.ToString().ToLower().Contains(type.ToLower());   
+        }
+        
+        public bool SearchConditionNumberOfGuest(Accommodation accommodation, string maxGuestNum)
+        {
+            if(maxGuestNum == null || maxGuestNum == "")
+            {
+                return true;
+            }
+            int maxGuests = Convert.ToInt32(maxGuestNum);
+            return accommodation.MaxGuestNum >=maxGuests;
+        }
+
+       public bool SearchConditionReservationDays(Accommodation accommodation, string minReservationDays)
+        {
+            if(minReservationDays == null || minReservationDays == "")
+            {
+                return true;
+            }
+            int minReserve = Convert.ToInt32(minReservationDays);
+            return accommodation.MinReservationDays <= minReserve;
+        }
+
+        public List<Accommodation> SearchAccomodations(string name, string state, string city, string maxGuestNum ,string type, string minReservationDays)
+        {
+            List<Accommodation> searchedAccommodations = new List<Accommodation>();
+            foreach(Accommodation accommodation in _accommodations)
+            {
+                if (!SearchConditionAccommodationName(accommodation, name))
+                {
+                    continue;
+                }
+                if(!SearchConditionAccommodationLocation(accommodation, state, city))
+                {
+                    continue;
+                }
+                if(!SearchConditionNumberOfGuest(accommodation, maxGuestNum))
+                {
+                    continue;
+                }
+                if(!SearchConditionAccommodationType(accommodation,type))
+                {
+                    continue;
+                }
+                if(!SearchConditionReservationDays(accommodation,minReservationDays))
+                {
+                    continue;
+                }
+                searchedAccommodations.Add(accommodation);
+            }
+            return searchedAccommodations;
         }
 
         
