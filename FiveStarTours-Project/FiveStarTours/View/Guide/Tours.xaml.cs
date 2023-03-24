@@ -49,6 +49,10 @@ namespace FiveStarTours.View
             {
                 MessageBox.Show("Choose tour first!");
             }
+            else if (SelectedTour.OneBeginningTime.Date != DateTime.Now.Date)
+            {
+                MessageBox.Show("This tour can not be started because it is not today.");
+            }
             else
             {
                 foreach(Tour t in _repository.GetAll())
