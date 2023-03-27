@@ -14,13 +14,13 @@ namespace FiveStarTours.Model
         //public List<Drivings> DrivingsList;
         public Drivings Drivings { get; set; }
         public int Delays { get; set; }
-        public string? SelectedFinishedComboBox { get; set; }
+        public string SelectedFinishedComboBox { get; set; }
 
 
 
         public OnAdress() { }
 
-        public OnAdress( Drivings drivings, int delays, string? selectedFinishedComboBox)
+        public OnAdress( Drivings drivings, int delays, string selectedFinishedComboBox)
         {
 
             //this.DrivingsList = drivingsList;
@@ -39,7 +39,7 @@ namespace FiveStarTours.Model
 
                 Delays.ToString(),
 
-                Drivings.ToString(),
+                //Drivings.ToString(),
 
                 SelectedFinishedComboBox.ToString()
             };
