@@ -9,10 +9,16 @@
     <Grid>
         <Button Content="Register new accommodation" 
                 HorizontalAlignment="Left" 
-                Margin="60, 60, 0, 0" 
+                Margin="92,298,0,0" 
                 VerticalAlignment="Top" 
                 Height="47" Width="213" 
-                Click="OwnerMainButton_Click"/>
-        
+                Click="AddAccommodationButton_Click"/>
+
+        <Button Content="Guest rating" 
+                HorizontalAlignment="Left" 
+                Margin="458,298,0,0" 
+                VerticalAlignment="Top" 
+                Height="47" Width="213" 
+                Click="GuestRatingButton_Click"/>
     </Grid>
 </Window>
