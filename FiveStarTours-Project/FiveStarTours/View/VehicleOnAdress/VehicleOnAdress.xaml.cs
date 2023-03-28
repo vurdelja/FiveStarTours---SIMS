@@ -30,10 +30,53 @@ namespace FiveStarTours.View.VehicleOnAdress
         public Drivings SelectedDrivings { get; set; }
         public static List<Drivings> Drivings { get; set; }
 
+        private string _driving;
+        public string Driving
+        {
 
+            get => _driving;
+            set
+            {
+                if (value != _driving)
+                {
+                    _driving = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
-        private string _delay;
-        public string Delay
+        private bool _onAdress;
+        public bool IsOnAdress
+        {
+
+            get => _onAdress;
+            set
+            {
+                if (value != _onAdress)
+                {
+                    _onAdress = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private bool _isDelay;
+        public bool IsDelay
+        {
+
+            get => _isDelay;
+            set
+            {
+                if (value != _isDelay)
+                {
+                    _isDelay = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private int _delay;
+        public int Delay
         {
 
             get => _delay;
@@ -77,27 +120,17 @@ namespace FiveStarTours.View.VehicleOnAdress
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-           
-        }
+            Drivings driving = Convert.ToString(Driving);
+            bool isOnAdress = Convert.ToBoolean(IsOnAdress);
+            bool isDelay = Convert.ToBoolean(IsDelay);
+            int delay = Convert.ToInt32(Delay);
 
-
-        /*
-
-        public void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-
-            // List<Drivings> DrivingsList = MakeDrivingsList(Drivings);
-            Drivings drivings= GetSelectedDriving();
-            int Delays = int.Parse(Delay);
-            string selectedFinishedComboBox = FinishedComboBox.SelectedItem.ToString();
-
-            OnAdress newVehicleOnAdress = new OnAdress( drivings , Delays, selectedFinishedComboBox);
+            OnAdress newVehicleOnAdress = new OnAdress(driving, isOnAdress, isDelay, delay);
             _vehicleOnAddressRepository.Save(newVehicleOnAdress);
             MessageBox.Show("Data saved successfully.");
 
             Close();
         }
-        */
 
     }
 }

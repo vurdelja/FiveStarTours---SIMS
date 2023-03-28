@@ -11,22 +11,23 @@ namespace FiveStarTours.Model
     {
 
         public int Id { get; set; }
-        //public List<Drivings> DrivingsList;
         public Drivings Drivings { get; set; }
+        public bool IsOnAdress { get; set; }
+        public bool IsDelay { get; set; }
         public int Delays { get; set; }
-        public string SelectedFinishedComboBox { get; set; }
+        
 
 
 
         public OnAdress() { }
 
-        public OnAdress( Drivings drivings, int delays)
+        public OnAdress( Drivings drivings, bool isOnAdress, bool isDelay, int delays)
         {
 
-            //this.DrivingsList = drivingsList;
             Drivings = drivings;
+            IsOnAdress = isOnAdress;
+            IsDelay = isDelay;
             Delays = delays;
-            //SelectedFinishedComboBox = selectedFinishedComboBox;
             
         }
 
@@ -36,12 +37,12 @@ namespace FiveStarTours.Model
             string[] csvValues =
             {
                 Id.ToString(),
-
+                
+                IsOnAdress.ToString(),
+                IsDelay.ToString(),
                 Delays.ToString(),
 
-                //Drivings.ToString(),
-
-                //SelectedFinishedComboBox.ToString()
+                
             };
 
             return csvValues;
@@ -50,13 +51,9 @@ namespace FiveStarTours.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-
-            Delays = Convert.ToInt32(values[1]);
-
-            //SelectedFinishedComboBox = values[3];
-
-            
-            
+            IsOnAdress = Convert.ToBoolean(values[1]);
+            IsDelay = Convert.ToBoolean(values[2]);
+            Delays = Convert.ToInt32(values[3]);
 
             
         }

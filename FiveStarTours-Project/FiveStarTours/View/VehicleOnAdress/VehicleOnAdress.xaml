@@ -24,8 +24,8 @@
             </DataGrid.Columns>
         </DataGrid>
         <Label Content="Today Drivings" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.177,0.285" FontSize="16"/>
-        <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="174,489,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.464,0.477" Height="30" Width="120" Click="SaveButton_Click"/>
-        <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="396,489,0,0" VerticalAlignment="Top" Width="120" Height="30" Click="CancelButton_Click"/>
+        <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="136,489,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.464,0.477" Height="30" Width="120" Click="SaveButton_Click"/>
+        <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="344,489,0,0" VerticalAlignment="Top" Width="120" Height="30" Click="CancelButton_Click"/>
         
     </Grid>
 </Window>
