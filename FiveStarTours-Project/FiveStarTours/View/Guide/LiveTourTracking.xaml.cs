@@ -21,20 +21,19 @@ namespace FiveStarTours.View.Guide
         private readonly LiveTourRepository _liveTourRepository;
         private readonly VisitorRepository _visitorRepository;
         private readonly AttendanceRepository _attendanceRepository;
-        private readonly KeyPointsRepository _keyPointsRepository;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public ObservableCollection<string> Checkpoints { get; set; }
         public ObservableCollection<bool> IsChecked { get; set; }
 
-        Tour tour { get; set; }
+        Tour Tour { get; set; }
         LiveTour liveTour { get; set; }
         public LiveTourTracking(Tour selectedTour)
         {
             _liveTourRepository = new LiveTourRepository();
             _visitorRepository = new VisitorRepository();
             _attendanceRepository = new AttendanceRepository();
-            _keyPointsRepository = new KeyPointsRepository();
+
             if (StartLiveTour(selectedTour))
             {
                 InitializeComponent();
@@ -131,11 +130,8 @@ namespace FiveStarTours.View.Guide
             _liveTourRepository.FindIdAndSave(liveTour, liveTour.Id);
             Close();
         }
-
-        private string keyPoint;
         private void CheckPoint_Checked(object sender, RoutedEventArgs e)
         {
-            string keyPoint = (string)((CheckBox)sender).Content;
             bool allChecked = true;
             foreach (KeyPoints item in liveTour.KeyPoints)
             {
@@ -188,8 +184,8 @@ namespace FiveStarTours.View.Guide
             if (result == MessageBoxResult.Yes)
             {
                 liveTour.Visitors[item] = true;
-                int idKeyPoint = _keyPointsRepository.FindIdByName(keyPoint);
                 int idVisitor = _visitorRepository.FindIdByName(item);
+                int idKeyPoint = FindLastVisited(liveTour);
                 Attendance attendance = new Attendance(idKeyPoint, idVisitor);
                 _attendanceRepository.Save(attendance);
             }
@@ -197,6 +193,20 @@ namespace FiveStarTours.View.Guide
             {
                 ((CheckBox)sender).IsChecked = false;
             }
+        }
+
+        public int FindLastVisited(LiveTour liveTour)
+        {
+            var keyPoints = liveTour.KeyPoints;
+            foreach (var keyPoint in keyPoints)
+            {
+                if (keyPoint.Visited == false)
+                {
+                    return keyPoint.Id - 1;
+                }
+            }
+
+            return 0;
         }
 
     }
