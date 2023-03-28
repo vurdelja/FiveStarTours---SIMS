@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FiveStarTours.Model;
+using FiveStarTours.Repository;
+using FiveStarTours.View.Owner;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,15 +22,31 @@ namespace FiveStarTours.View
     /// </summary>
     public partial class OwnerMainWindow : Window
     {
+        private readonly AccommodationReservationsRepository _repository;
+
         public OwnerMainWindow()
         {
             InitializeComponent();
+            DataContext = this;
+
+            _repository = new AccommodationReservationsRepository();
+
+            _repository.NotifyAboutUnratedGuests();
+
         }
 
-        private void OwnerMainButton_Click(object sender, RoutedEventArgs e)
+        private void AddAccommodationButton_Click(object sender, RoutedEventArgs e)
         {
             AddAccommodationView addAccommodation = new AddAccommodationView();
             addAccommodation.Show();
         }
+
+        private void GuestRatingButton_Click(object sender, RoutedEventArgs e)
+        {
+            GuestsWithoutRateView guestRating = new GuestsWithoutRateView();
+            guestRating.Show();
+        }
+
+        
     }
 }
