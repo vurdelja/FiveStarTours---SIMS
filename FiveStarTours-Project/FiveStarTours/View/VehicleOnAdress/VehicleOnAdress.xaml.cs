@@ -14,6 +14,7 @@ using FiveStarTours.View.VehicleOnAdress;
 using System.IO;
 using System.Windows.Threading;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
+using System.Reflection.PortableExecutable;
 
 
 namespace FiveStarTours.View.VehicleOnAdress
@@ -26,20 +27,9 @@ namespace FiveStarTours.View.VehicleOnAdress
 
         private readonly VehicleOnAdressRepository _vehicleOnAddressRepository;
         private readonly DrivingsRepository _drivingsRepository;
+        public Drivings SelectedDrivings { get; set; }
+        public static List<Drivings> Drivings { get; set; }
 
-        private string _drivings;
-        public string Drivings
-        {
-            get => _drivings;
-            set
-            {
-                if (value != _drivings)
-                {
-                    _drivings = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
 
 
         private string _delay;
@@ -72,27 +62,26 @@ namespace FiveStarTours.View.VehicleOnAdress
 
             _vehicleOnAddressRepository = new VehicleOnAdressRepository();
             _drivingsRepository = new DrivingsRepository();
-            
 
-            // Adding state and city trough combobox:
 
-            List<string> States = _drivingsRepository.GetAllNames();
-            DrivingsComboBox.ItemsSource = States;
-            DrivingsComboBox.SelectedValuePath = ".";
-            DrivingsComboBox.DisplayMemberPath = ".";
+            Drivings = new List<Drivings>(_drivingsRepository.GetAll());
+
         }
 
         
-        private string selectedDriving;
-        private void DrivingsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            if (DrivingsComboBox.SelectedItem != null)
-            {
-
-
-                selectedDriving = DrivingsComboBox.SelectedItem as string;
-            }
+            Close();
         }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+
+        /*
 
         public void SaveButton_Click(object sender, RoutedEventArgs e)
         {
@@ -108,44 +97,7 @@ namespace FiveStarTours.View.VehicleOnAdress
 
             Close();
         }
+        */
 
-        private Drivings GetSelectedDriving()
-        {
-            return new Drivings();
-        }
-
-        private List<Drivings> MakeDrivingsList(string drivings)
-        {
-            List<Drivings> result = new List<Drivings>();
-
-            Array _drivings = drivings.Split(",");
-
-            foreach (string d in _drivings)
-            {
-                Drivings driv = new Drivings();
-                _drivingsRepository.Save(driv);
-                result.Add(driv);
-            }
-
-            return result;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
-        
-
-        private void FinishedComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            if (FinishedComboBox.SelectedItem != null)
-            {
-
-                string selectedFinishedComboBox = FinishedComboBox.SelectedItem.ToString();
-                selectedFinishedComboBox = FinishedComboBox.SelectedItem as string;
-            }
-        }
     }
 }

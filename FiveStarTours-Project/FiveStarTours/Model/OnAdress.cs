@@ -20,13 +20,13 @@ namespace FiveStarTours.Model
 
         public OnAdress() { }
 
-        public OnAdress( Drivings drivings, int delays, string selectedFinishedComboBox)
+        public OnAdress( Drivings drivings, int delays)
         {
 
             //this.DrivingsList = drivingsList;
             Drivings = drivings;
             Delays = delays;
-            SelectedFinishedComboBox = selectedFinishedComboBox;
+            //SelectedFinishedComboBox = selectedFinishedComboBox;
             
         }
 
@@ -41,7 +41,7 @@ namespace FiveStarTours.Model
 
                 //Drivings.ToString(),
 
-                SelectedFinishedComboBox.ToString()
+                //SelectedFinishedComboBox.ToString()
             };
 
             return csvValues;
@@ -53,7 +53,7 @@ namespace FiveStarTours.Model
 
             Delays = Convert.ToInt32(values[1]);
 
-            SelectedFinishedComboBox = values[3];
+            //SelectedFinishedComboBox = values[3];
 
             
             
