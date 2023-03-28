@@ -104,7 +104,7 @@ namespace FiveStarTours.View.Guide
             }
             foreach (var livetour in _liveTourRepository.GetAll())
             {
-                if (livetour.Ended && livetour.Date == liveTour.Date && string.Equals(livetour.Name, liveTour.Name, StringComparison.OrdinalIgnoreCase))
+                if (livetour.Ended && livetour.Date == tour.OneBeginningTime && string.Equals(tour.Name, livetour.Name, StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show("This tour is already over");
                     return false;
