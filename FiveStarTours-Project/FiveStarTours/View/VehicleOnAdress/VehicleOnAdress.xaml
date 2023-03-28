@@ -17,8 +17,8 @@
                       FontSize="13" Margin="0,62,0,162">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" IsReadOnly="True" Binding="{Binding Name}" Width="150"/>
-                <DataGridCheckBoxColumn Header="On Adress" Binding="{Binding OnAdress}" Width="100" />
-                <DataGridCheckBoxColumn Header="Delay" Binding="{Binding Delay}" Width="100" />
+                <DataGridCheckBoxColumn Header="On Adress" Binding="{Binding IsOnAdress}" Width="100" />
+                <DataGridCheckBoxColumn Header="Delay" Binding="{Binding IsDelay}" Width="100" />
                 <DataGridTextColumn Header="Enter Delay" Binding="{Binding EnterDelay}" Width="100"/>
                 <DataGridComboBoxColumn Header="Finished" Width="150"></DataGridComboBoxColumn>
             </DataGrid.Columns>

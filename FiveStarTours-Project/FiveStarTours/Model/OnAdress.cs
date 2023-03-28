@@ -51,11 +51,26 @@ namespace FiveStarTours.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            IsOnAdress = Convert.ToBoolean(values[1]);
-            IsDelay = Convert.ToBoolean(values[2]);
-            Delays = Convert.ToInt32(values[3]);
-
-            
+            IsOnAdress.GetType().ToString();
+            IsDelay.GetType().ToString();
+            Delays.GetType().ToString();
+           
         }
+
+        public bool GetIsOnAdress()
+        {
+            return IsOnAdress;
+        }
+
+        public bool GetIsDelay()
+        {
+            return IsDelay;
+        }
+        public int GetDelays() 
+        {
+            return Delays;
+        }
+
+        
     }
 }

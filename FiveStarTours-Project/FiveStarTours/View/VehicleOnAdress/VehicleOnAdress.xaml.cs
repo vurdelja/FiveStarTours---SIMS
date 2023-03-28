@@ -15,6 +15,9 @@ using System.IO;
 using System.Windows.Threading;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 using System.Reflection.PortableExecutable;
+using FiveStarTours.Serializer;
+using ControlzEx.Standard;
+using System.Security.Policy;
 
 
 namespace FiveStarTours.View.VehicleOnAdress
@@ -30,16 +33,16 @@ namespace FiveStarTours.View.VehicleOnAdress
         public Drivings SelectedDrivings { get; set; }
         public static List<Drivings> Drivings { get; set; }
 
-        private string _driving;
-        public string Driving
+        private string _name;
+        public string Name
         {
 
-            get => _driving;
+            get => _name;
             set
             {
-                if (value != _driving)
+                if (value != _name)
                 {
-                    _driving = value;
+                    _name = value;
                     OnPropertyChanged();
                 }
             }
@@ -75,7 +78,23 @@ namespace FiveStarTours.View.VehicleOnAdress
             }
         }
 
+        private int _enterDelay;
+        public int EnterDelay
+        {
+
+            get => _enterDelay;
+            set
+            {
+                if (value != _enterDelay)
+                {
+                    _enterDelay = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         private int _delay;
+
         public int Delay
         {
 
@@ -107,8 +126,8 @@ namespace FiveStarTours.View.VehicleOnAdress
             _drivingsRepository = new DrivingsRepository();
 
 
-            Drivings = new List<Drivings>(_drivingsRepository.GetAll());
-
+            Drivings = _drivingsRepository.GetAll();
+            
         }
 
         
@@ -120,17 +139,27 @@ namespace FiveStarTours.View.VehicleOnAdress
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            Drivings driving = Convert.ToString(Driving);
+            
+            Drivings name = GetSelectedDriving();
             bool isOnAdress = Convert.ToBoolean(IsOnAdress);
             bool isDelay = Convert.ToBoolean(IsDelay);
-            int delay = Convert.ToInt32(Delay);
+            int delay = Convert.ToInt32(Delay); 
 
-            OnAdress newVehicleOnAdress = new OnAdress(driving, isOnAdress, isDelay, delay);
+
+            OnAdress newVehicleOnAdress = new OnAdress( name, isOnAdress, isDelay, delay);
             _vehicleOnAddressRepository.Save(newVehicleOnAdress);
             MessageBox.Show("Data saved successfully.");
-
+            
             Close();
         }
 
+       
+
+        
+        private Drivings GetSelectedDriving()
+        {
+            return new Drivings();
+        }
+        
     }
 }

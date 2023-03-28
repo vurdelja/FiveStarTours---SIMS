@@ -52,5 +52,10 @@ namespace FiveStarTours.Repository
             }
             return _drivings.Max(l => l.Id) + 1;
         }
+
+        internal List<string> GetAllDrivings()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
