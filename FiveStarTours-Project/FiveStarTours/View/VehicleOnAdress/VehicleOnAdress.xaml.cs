@@ -109,7 +109,23 @@ namespace FiveStarTours.View.VehicleOnAdress
             }
         }
 
+        private string _finished;
         
+
+        public string Finished
+        {
+
+            get => _finished;
+            set
+            {
+                if (value != _finished)
+                {
+                    _finished = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -129,8 +145,15 @@ namespace FiveStarTours.View.VehicleOnAdress
             Drivings = _drivingsRepository.GetAll();
             
         }
+        private string selectFinished;
+        private void FinishedComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (FinishedComboBox.SelectedItem != null)
+            {
 
-        
+                selectFinished = FinishedComboBox.SelectedItem as string;
+            }
+        }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
@@ -143,19 +166,22 @@ namespace FiveStarTours.View.VehicleOnAdress
             Drivings name = GetSelectedDriving();
             bool isOnAdress = Convert.ToBoolean(IsOnAdress);
             bool isDelay = Convert.ToBoolean(IsDelay);
-            int delay = Convert.ToInt32(Delay); 
+            int delay = Convert.ToInt32(Delay);
+            string finished = GetFinished();
 
 
-            OnAdress newVehicleOnAdress = new OnAdress( name, isOnAdress, isDelay, delay);
+            OnAdress newVehicleOnAdress = new OnAdress( name, isOnAdress, isDelay, delay, finished);
             _vehicleOnAddressRepository.Save(newVehicleOnAdress);
             MessageBox.Show("Data saved successfully.");
             
             Close();
         }
 
-       
+        private string GetFinished()
+        {
+            return FinishedComboBox.ToString();
+        }
 
-        
         private Drivings GetSelectedDriving()
         {
             return new Drivings();

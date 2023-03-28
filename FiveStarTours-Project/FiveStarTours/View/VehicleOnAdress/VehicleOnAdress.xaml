@@ -8,24 +8,29 @@
         xmlns:Model="clr-namespace:FiveStarTours.Model" xmlns:Repository="clr-namespace:FiveStarTours.Repository" 
         x:Class="FiveStarTours.View.VehicleOnAdress.VehicleOnAdress"
         mc:Ignorable="d"
-        Title="Vehicle On Adress" Height="600" Width="600">
+        Title="Vehicle On Adress" Height="550" Width="470">
     <Grid>
         <DataGrid ItemsSource="{Binding Drivings}"
                       SelectedItem="{Binding Path=SelectedDrivings}"
                        SelectionMode="Single"
-                      AutoGenerateColumns="False" Height="360" HeadersVisibility="Column"
-                      FontSize="13" Margin="0,62,0,162">
+                      AutoGenerateColumns="False" HeadersVisibility="Column"
+                      FontSize="13" Margin="0,62,0,191">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" IsReadOnly="True" Binding="{Binding Name}" Width="150"/>
                 <DataGridCheckBoxColumn Header="On Adress" Binding="{Binding IsOnAdress}" Width="100" />
                 <DataGridCheckBoxColumn Header="Delay" Binding="{Binding IsDelay}" Width="100" />
                 <DataGridTextColumn Header="Enter Delay" Binding="{Binding EnterDelay}" Width="100"/>
-                <DataGridComboBoxColumn Header="Finished" Width="150"></DataGridComboBoxColumn>
+
             </DataGrid.Columns>
         </DataGrid>
         <Label Content="Today Drivings" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.177,0.285" FontSize="16"/>
-        <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="136,489,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.464,0.477" Height="30" Width="120" Click="SaveButton_Click"/>
-        <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="344,489,0,0" VerticalAlignment="Top" Width="120" Height="30" Click="CancelButton_Click"/>
-        
+        <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="77,452,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.464,0.477" Height="30" Width="120" Click="SaveButton_Click"/>
+        <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="251,452,0,0" VerticalAlignment="Top" Width="120" Height="30" Click="CancelButton_Click" RenderTransformOrigin="0.005,0.66"/>
+        <ComboBox x:Name="FinishedComboBox"  HorizontalAlignment="Left" Margin="201,387,0,0" VerticalAlignment="Top" Width="170" Height="22" RenderTransformOrigin="0.472,-0.862" SelectionChanged="FinishedComboBox_SelectionChanged">
+            <ComboBoxItem Content="Driving Finished Successfully"/>
+            <ComboBoxItem Content="Guest Didn't Show Up"/>
+        </ComboBox>
+        <Label Content="Finished Driving*" HorizontalAlignment="Left" Margin="77,385,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.278,0.586"/>
+
     </Grid>
 </Window>
