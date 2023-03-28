@@ -20,6 +20,8 @@ namespace FiveStarTours.View.Guide
     {
         private readonly LiveTourRepository _liveTourRepository;
         private readonly VisitorRepository _visitorRepository;
+        private readonly AttendanceRepository _attendanceRepository;
+        private readonly KeyPointsRepository _keyPointsRepository;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public ObservableCollection<string> Checkpoints { get; set; }
@@ -31,6 +33,8 @@ namespace FiveStarTours.View.Guide
         {
             _liveTourRepository = new LiveTourRepository();
             _visitorRepository = new VisitorRepository();
+            _attendanceRepository = new AttendanceRepository();
+            _keyPointsRepository = new KeyPointsRepository();
             if (StartLiveTour(selectedTour))
             {
                 InitializeComponent();
@@ -128,8 +132,10 @@ namespace FiveStarTours.View.Guide
             Close();
         }
 
+        private string keyPoint;
         private void CheckPoint_Checked(object sender, RoutedEventArgs e)
         {
+            string keyPoint = (string)((CheckBox)sender).Content;
             bool allChecked = true;
             foreach (KeyPoints item in liveTour.KeyPoints)
             {
@@ -182,6 +188,10 @@ namespace FiveStarTours.View.Guide
             if (result == MessageBoxResult.Yes)
             {
                 liveTour.Visitors[item] = true;
+                int idKeyPoint = _keyPointsRepository.FindIdByName(keyPoint);
+                int idVisitor = _visitorRepository.FindIdByName(item);
+                Attendance attendance = new Attendance(idKeyPoint, idVisitor);
+                _attendanceRepository.Save(attendance);
             }
             else
             {

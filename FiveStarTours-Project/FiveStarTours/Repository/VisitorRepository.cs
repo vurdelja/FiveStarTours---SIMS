@@ -62,6 +62,20 @@ namespace FiveStarTours.Repository
             }
             return reservedSeats;
         }
+
+        public int FindIdByName(string name)
+        {
+            var visitors = GetAll();
+            foreach (var visitor in visitors)
+            {
+                if (visitor.VisitorName == name)
+                {
+                    return visitor.Id;
+                }
+            }
+
+            return 0;
+        }
     }
 }
    

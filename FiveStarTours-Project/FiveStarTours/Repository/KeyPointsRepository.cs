@@ -56,5 +56,19 @@ namespace FiveStarTours.Repository
             return result;
         }
 
+        public int FindIdByName (string name)
+        {
+            var keyPoints = GetAll();
+            foreach(var keyPoint in keyPoints)
+            {
+                if (keyPoint.Name == name)
+                {
+                    return keyPoint.Id;
+                }
+            }
+
+            return 0;
+        }
+
     }
 }
