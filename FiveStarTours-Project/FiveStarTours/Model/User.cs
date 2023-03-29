@@ -13,6 +13,7 @@ namespace FiveStarTours.Model
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public string Role { get; set; }    
 
 
         public User() { }
@@ -26,7 +27,7 @@ namespace FiveStarTours.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Username, Password };
+            string[] csvValues = { Id.ToString(), Username, Password ,Role};
             return csvValues;
         }
 
@@ -35,6 +36,7 @@ namespace FiveStarTours.Model
             Id = Convert.ToInt32(values[0]);
             Username = values[1];
             Password = values[2];
+            Role = values[3];   
 
         }
 
