@@ -33,5 +33,12 @@ namespace FiveStarTours.View
             VehicleRegistration.VehicleRegistration vehicleRegistration = new VehicleRegistration.VehicleRegistration();
             vehicleRegistration.Show();
         }
+
+        private void VehicleOnAdressButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            VehicleOnAdress.VehicleOnAdress vehicleOnAdress = new VehicleOnAdress.VehicleOnAdress();
+            vehicleOnAdress.Show();
+        }
     }
 }
