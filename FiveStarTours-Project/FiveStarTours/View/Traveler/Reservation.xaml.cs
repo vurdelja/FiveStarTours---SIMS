@@ -96,7 +96,7 @@ namespace FiveStarTours.View.Traveler
         }
  
         private string _rated;
-        public string Rated
+        public string RatedByOwner
         {
             get => _rated;
             set
