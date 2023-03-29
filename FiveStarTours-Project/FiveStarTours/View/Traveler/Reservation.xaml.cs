@@ -24,7 +24,7 @@ namespace FiveStarTours.View.Traveler
     /// </summary>
     public partial class Reservation : Window, INotifyPropertyChanged
     {
-        private readonly AccommodationsReservationsRepository accommodationsReservationsRepository;
+        private readonly AccommodationReservationsRepository accommodationReservationsRepository;
         private readonly AccommodationsRepository accommodationsRepository;
         public static ObservableCollection<AccommodationReservation> AccommodationReservations { get; set; }
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -40,7 +40,7 @@ namespace FiveStarTours.View.Traveler
         {
             InitializeComponent();
             DataContext = this;
-            accommodationsReservationsRepository = new AccommodationsReservationsRepository();
+            accommodationReservationsRepository = new AccommodationReservationsRepository();
         }
         private string _guestName;
         public string GuestName
@@ -152,7 +152,7 @@ namespace FiveStarTours.View.Traveler
             lastSelectedDate = (DateTime)last.SelectedDate;
         }
         
-
+        
         private void Submit(object sender, RoutedEventArgs e)
         {
             int visitationDays = int.Parse(VisitationDays);
@@ -165,7 +165,7 @@ namespace FiveStarTours.View.Traveler
                 return;
             }
             AccommodationReservation newRes = new AccommodationReservation(GuestName, GuestSurname, firstSelectedDate, lastSelectedDate, visitationDays, AccommodationName, guestNumber);
-            accommodationsReservationsRepository.Save(newRes);
+            accommodationReservationsRepository.Save(newRes);
             if(availableDates>Convert.ToInt32(VisitationDays))
             {
                 MessageBox.Show($"There's no available dates for this reservation. Left seats : {availableDates}");
