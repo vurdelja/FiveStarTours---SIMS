@@ -18,12 +18,15 @@ namespace FiveStarTours.View
         public event PropertyChangedEventHandler? PropertyChanged;
         private readonly ToursRepository _repository;
         public Tour SelectedTour { get; set; }
+        public User LoggedInUser { get; set; }
         public ObservableCollection<Tour> ToursCollection { get; set; }
-        public Tours()
+        public Tours(User user)
         {
             InitializeComponent();
             _repository = new ToursRepository();
             DataContext = this;
+            LoggedInUser = user;
+            ToursCollection = new ObservableCollection<Tour>(_repository.GetByUser(user));
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -33,13 +36,13 @@ namespace FiveStarTours.View
 
         private void NewButton_Click(object sender, RoutedEventArgs e)
         {
-            TourRegistrationForm tourRegistration = new TourRegistrationForm();
+            TourRegistrationForm tourRegistration = new TourRegistrationForm(LoggedInUser);
             tourRegistration.Show();
         }
 
         private void ToursDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            ToursCollection = new ObservableCollection<Tour>(_repository.GetAllByDate((DateTime)ToursDate.SelectedDate));
+            ToursCollection = new ObservableCollection<Tour>(_repository.GetAllByDate((DateTime)ToursDate.SelectedDate, LoggedInUser));
             DataGridTours.ItemsSource = ToursCollection;
         }
 
