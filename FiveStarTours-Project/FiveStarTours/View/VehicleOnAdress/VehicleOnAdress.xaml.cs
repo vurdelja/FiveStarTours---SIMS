@@ -20,6 +20,7 @@ using ControlzEx.Standard;
 using System.Security.Policy;
 
 
+
 namespace FiveStarTours.View.VehicleOnAdress
 {
     /// <summary>
@@ -30,7 +31,7 @@ namespace FiveStarTours.View.VehicleOnAdress
 
         private readonly VehicleOnAdressRepository _vehicleOnAddressRepository;
         private readonly DrivingsRepository _drivingsRepository;
-        public Drivings SelectedDrivings { get; set; }
+        //public Drivings SelectedDrivings { get; set; }
         public static List<Drivings> Drivings { get; set; }
 
         private string _name;
@@ -48,8 +49,10 @@ namespace FiveStarTours.View.VehicleOnAdress
             }
         }
 
+        
+
         private bool _onAdress;
-        public bool IsOnAdress
+        public bool OnAdress
         {
 
             get => _onAdress;
@@ -59,6 +62,7 @@ namespace FiveStarTours.View.VehicleOnAdress
                 {
                     _onAdress = value;
                     OnPropertyChanged();
+                    
                 }
             }
         }
@@ -93,25 +97,9 @@ namespace FiveStarTours.View.VehicleOnAdress
             }
         }
 
-        private int _delay;
-
-        public int Delay
-        {
-
-            get => _delay;
-            set
-            {
-                if (value != _delay)
-                {
-                    _delay = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _finished;
         
 
+        private string _finished;
         public string Finished
         {
 
@@ -131,6 +119,9 @@ namespace FiveStarTours.View.VehicleOnAdress
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+           
+            
         }
 
         public VehicleOnAdress()
@@ -143,31 +134,39 @@ namespace FiveStarTours.View.VehicleOnAdress
 
 
             Drivings = _drivingsRepository.GetAll();
-            
+
+            if (OnAdressCheckBox.IsThreeState == true)
+
+            {
+                IsDelayCheckBox.IsReadOnly = true;
+                EnterDelayTextBox.IsReadOnly = true;
+            }
+            else
+            {
+                IsDelayCheckBox.IsReadOnly = false;
+                EnterDelayTextBox.IsReadOnly = false;
+            }
+
         }
-        private string selectFinished;
+        
         private void FinishedComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (FinishedComboBox.SelectedItem != null)
             {
 
-                selectFinished = FinishedComboBox.SelectedItem as string;
+                string selectedFinishedComboBox = FinishedComboBox.SelectedItem.ToString();
+                selectedFinishedComboBox = FinishedComboBox.SelectedItem as string;
             }
-        }
-
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             
             Drivings name = GetSelectedDriving();
-            bool isOnAdress = Convert.ToBoolean(IsOnAdress);
+            bool isOnAdress = Convert.ToBoolean(OnAdress);
             bool isDelay = Convert.ToBoolean(IsDelay);
-            int delay = Convert.ToInt32(Delay);
-            string finished = GetFinished();
+            int delay = Convert.ToInt32(EnterDelay);
+            string finished = FinishedComboBox.SelectedItem.ToString();
 
 
             OnAdress newVehicleOnAdress = new OnAdress( name, isOnAdress, isDelay, delay, finished);
@@ -177,15 +176,15 @@ namespace FiveStarTours.View.VehicleOnAdress
             Close();
         }
 
-        private string GetFinished()
-        {
-            return FinishedComboBox.ToString();
-        }
-
+   
         private Drivings GetSelectedDriving()
         {
             return new Drivings();
         }
-        
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

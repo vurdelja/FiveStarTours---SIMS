@@ -38,15 +38,11 @@ namespace FiveStarTours.Model
             string[] csvValues =
             {
                 Id.ToString(),
-
                 IsOnAdress.ToString(),
                 IsDelay.ToString(),
                 Delays.ToString(),
-                Finished.ToString()
-
-                
+                //Finished.ToString()
             };
-
             return csvValues;
         }
 
@@ -59,12 +55,12 @@ namespace FiveStarTours.Model
             Delays = Convert.ToInt32(values[3]);
             Finished = Convert.ToString(values[4]);
             */
-            
+
             IsOnAdress.GetType().ToString();
             IsDelay.GetType().ToString();
             Delays.GetType().ToString();
             //Finished.GetType().ToString();
-
+            
             if (Finished == null)
             {
                 GetFinished();
