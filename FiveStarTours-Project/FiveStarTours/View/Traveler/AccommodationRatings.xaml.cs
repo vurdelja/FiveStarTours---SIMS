@@ -15,19 +15,15 @@ using System.Windows.Shapes;
 namespace FiveStarTours.View.Traveler
 {
     /// <summary>
-    /// Interaction logic for ComplitedReservationxaml.xaml
+    /// Interaction logic for AccommodationRatings.xaml
     /// </summary>
-    public partial class ComplitedReservationxaml : Window
+    public partial class AccommodationRatings : Window
     {
-        public ComplitedReservationxaml()
+        public AccommodationRatings()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow mw = new MainWindow();
-            mw.Show();
-        }
+      
     }
 }

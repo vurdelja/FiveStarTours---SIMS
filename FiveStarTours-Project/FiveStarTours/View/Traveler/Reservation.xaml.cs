@@ -28,7 +28,13 @@ namespace FiveStarTours.View.Traveler
         private readonly AccommodationsRepository accommodationsRepository;
         public static ObservableCollection<AccommodationReservation> AccommodationReservations { get; set; }
         public event PropertyChangedEventHandler? PropertyChanged;
-        public Accommodation SelectedAccommodation;
+        public Accommodation SelectedAccommodation { get; set; }
+        public int VisitationDays { get; set; }
+
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+      
+
 
 
         protected virtual void OnPropertyChanged([CallerMemberName] string properyName = null)
@@ -36,152 +42,32 @@ namespace FiveStarTours.View.Traveler
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(properyName));
         }
 
-        public Reservation()
+        public Reservation(Accommodation selectedAccommoodation)
         {
             InitializeComponent();
             DataContext = this;
             accommodationReservationsRepository = new AccommodationReservationsRepository();
-        }
-        private string _guestName;
-        public string GuestName
-        {
-            get => _guestName;
-            set
-            {
-                if (value != _guestName)
-                {
-                    _guestName = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        private string _guestSurname;
-        public string GuestSurname
-        {
-            get => _guestSurname;
-            set
-            {
-                if (value != _guestSurname)
-                {
-                    _guestSurname = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        private string _visitationDays;
-        public string VisitationDays
-        {
-            get => _visitationDays;
-            set
-            {
-                if (value != _visitationDays)
-                {
-                    _visitationDays = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        private string _guestNumber;
-        public string GuestNumber
-        {
-            get => _guestNumber;
-            set
-            {
-                if (value != _guestNumber)
-                {
-                    _guestNumber = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
- 
-        private string _rated;
-        public string Rated
-        {
-            get => _rated;
-            set
-            {
-                if (value != _rated)
-                {
-                    _rated = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _accommodationName;
-        public string AccommodationName
-        {
-            get => _accommodationName;
-            set
-            {
-                if (value != _accommodationName)
-                {
-                    _accommodationName = value;
-                    OnPropertyChanged();
-                }
-            }
+            SelectedAccommodation = selectedAccommoodation;
+            StartDate = DateTime.Now;
+            EndDate = DateTime.Now;
         }
        
-
         private void goback(object sender, RoutedEventArgs e)
         {
             TravelerViewandSearch tvs = new TravelerViewandSearch();
             tvs.Show();
         }
 
-        int availableDates
+        private void checkButton_Click(object sender, RoutedEventArgs e)
         {
-            get; set;
-        }
-
-        List<DateTime> Start = new List<DateTime>();
-        private DateTime firstSelectedDate;
-
-        List<DateTime> End = new List<DateTime>();
-        private DateTime lastSelectedDate;
-
-        public void SelestedDate(DateTime dateTime)
-        {
-            firstSelectedDate = (DateTime)first.SelectedDate;
-            
-
-        }
-        private void SelectedDate(DateTime dateTime)
-        {
-            lastSelectedDate = (DateTime)last.SelectedDate;
-        }
-        
-        
-        private void Submit(object sender, RoutedEventArgs e)
-        {
-            int visitationDays = int.Parse(VisitationDays);
-            int guestNumber = int.Parse(GuestNumber);
-           
-
-            int min = 0;
-            if (!(int.TryParse(Lengthtxt.Text, out min)) || (Lengthtxt.Text.Equals("")))
+            if(VisitationDays < SelectedAccommodation.MinReservationDays)
             {
+                MessageBox.Show("Min number of days for this accommodation is " + SelectedAccommodation.MinReservationDays + ".", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            AccommodationReservation newRes = new AccommodationReservation(GuestName, GuestSurname, firstSelectedDate, lastSelectedDate, visitationDays, AccommodationName, guestNumber);
-            accommodationReservationsRepository.Save(newRes);
-            if(availableDates>Convert.ToInt32(VisitationDays))
-            {
-                MessageBox.Show($"There's no available dates for this reservation. Left seats : {availableDates}");
-                
-            }
-            else
-            {
-                ComplitedReservationxaml cr = new ComplitedReservationxaml();
-                cr.Show();
-            }
-            
-            Close();
-
+            AvailableDates availableDates = new AvailableDates(accommodationReservationsRepository.GetFreeDateIntervals(SelectedAccommodation.AccommodationName, StartDate, EndDate, VisitationDays), SelectedAccommodation.AccommodationName);
+            availableDates.Show();
         }
-    
-
     }
-    }
+}
 

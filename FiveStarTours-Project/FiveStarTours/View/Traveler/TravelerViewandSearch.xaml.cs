@@ -187,7 +187,7 @@ namespace FiveStarTours.View.Traveler
                 if (result == MessageBoxResult.Yes)
                 {
                    
-                    Reservation rs = new Reservation();
+                    Reservation rs = new Reservation(SelectAccommodation);
                     rs.Show();
 
                 }
