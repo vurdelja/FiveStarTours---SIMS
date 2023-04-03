@@ -18,11 +18,17 @@ namespace FiveStarTours.Model
         
         public string Finished { get; set; }
 
+        public bool IsDrivingStarted { get; set; }
+         
+        public int StartPrice { get; set; }
+
+        public string Taximeter { get; set; }
+
 
 
         public OnAdress() { }
 
-        public OnAdress( Drivings drivings, bool isOnAdress, bool isDelay, int delays, string finished)
+        public OnAdress( Drivings drivings, bool isOnAdress, bool isDelay, int delays, string finished, bool isDrivingStarted, int startPrice, string taximeter)
         {
 
             Drivings = drivings;
@@ -30,6 +36,9 @@ namespace FiveStarTours.Model
             IsDelay = isDelay;
             Delays = delays;
             Finished = finished;
+            IsDrivingStarted = isDrivingStarted;
+            StartPrice = startPrice;
+            Taximeter = taximeter;
         }
 
         public string[] ToCSV()
@@ -42,6 +51,9 @@ namespace FiveStarTours.Model
                 IsDelay.ToString(),
                 Delays.ToString(),
                 //Finished.ToString()
+                IsDrivingStarted.ToString(),
+                StartPrice.ToString(),
+                Taximeter.ToString(),   
             };
             return csvValues;
         }
@@ -66,6 +78,9 @@ namespace FiveStarTours.Model
                 GetFinished();
 
             }
+            IsDrivingStarted.CompareTo(Convert.ToInt32(values[1])); 
+            StartPrice.ToString();
+            Taximeter.CompareTo(Convert.ToInt32(values[2]));        
 
         }
 

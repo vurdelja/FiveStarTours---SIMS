@@ -114,6 +114,34 @@ namespace FiveStarTours.View.VehicleOnAdress
             }
         }
 
+        private bool _drivingStarts;
+        public bool DrivingStarts
+        {
+
+            get => _drivingStarts;
+            set
+            {
+                if (value != _drivingStarts)
+                {
+                    _drivingStarts = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private int _enterStartPrice;
+        public int EnterStartPrice
+        {
+
+            get => _enterStartPrice;
+            set
+            {
+                if (value != _enterStartPrice)
+                {
+                    _enterStartPrice = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -167,16 +195,23 @@ namespace FiveStarTours.View.VehicleOnAdress
             bool isDelay = Convert.ToBoolean(IsDelay);
             int delay = Convert.ToInt32(EnterDelay);
             string finished = FinishedComboBox.SelectedItem.ToString();
+            bool drivingStarts = Convert.ToBoolean(DrivingStarts);
+            int enterStartPrice = Convert.ToInt32(EnterStartPrice);
+            string taximeter = GetTaximeter();
 
 
-            OnAdress newVehicleOnAdress = new OnAdress( name, isOnAdress, isDelay, delay, finished);
+            OnAdress newVehicleOnAdress = new OnAdress( name, isOnAdress, isDelay, delay, finished, drivingStarts, enterStartPrice, taximeter);
             _vehicleOnAddressRepository.Save(newVehicleOnAdress);
-            MessageBox.Show("Data saved successfully.");
+            MessageBox.Show("Driving Duration:");
             
             Close();
         }
 
-   
+        private string GetTaximeter()
+        {
+            throw new NotImplementedException();
+        }
+
         private Drivings GetSelectedDriving()
         {
             return new Drivings();
