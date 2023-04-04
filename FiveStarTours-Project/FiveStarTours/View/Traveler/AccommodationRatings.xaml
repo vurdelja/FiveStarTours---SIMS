@@ -6,78 +6,124 @@
         xmlns:local="clr-namespace:FiveStarTours.View.Traveler"
         mc:Ignorable="d"
         Title="AccommodationRatings" Height="450" Width="800">
-    <Grid Background="#FFF4DFDF">
-        <Label Content="Rate accommodation " FontWeight="Bold" FontSize="20" Margin="0,0,10,391" Background="#FFEDBABA" HorizontalContentAlignment="Center"/>
-        <Label Content="!!1-Strongly disagree 2-disagree 3-no opinion 4- agree 5-strongly agree!!" HorizontalAlignment="Left" Margin="19,48,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" Width="771" Foreground="#FFF10A0A" HorizontalContentAlignment="Center" FontStyle="Italic"/>
-        <Grid RenderTransformOrigin="0.518,0.812" Margin="0,0,10,0">
-            <Label Content="OWNER FULFILLED THE AGTEEMENT:" HorizontalAlignment="Left" Margin="260,99,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="298" HorizontalContentAlignment="Center"/>
-            <RadioButton Content="1" HorizontalAlignment="Left" Margin="105,142,0,0" VerticalAlignment="Top"/>
-            <RadioButton Content="2" HorizontalAlignment="Left" Margin="217,142,0,0" VerticalAlignment="Top" />
-            <RadioButton Content="3" HorizontalAlignment="Left" Margin="320,142,0,0" VerticalAlignment="Top"/>
-            <RadioButton Content="4" HorizontalAlignment="Left" Margin="440,142,0,0" VerticalAlignment="Top"/>
-            <RadioButton Content="5" HorizontalAlignment="Left" Margin="557,142,0,0" VerticalAlignment="Top"/>
-            <Label Content="ACCOMMODATION WAS VERY CLEAN:" HorizontalAlignment="Center" Margin="0,162,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="11"/>
-            <Grid RenderTransformOrigin="0.518,0.812" Margin="0,63,-31,-122">
-                <RadioButton Content="1" HorizontalAlignment="Left" Margin="105,142,0,0" VerticalAlignment="Top"/>
-                <RadioButton Content="2" HorizontalAlignment="Left" Margin="217,142,0,0" VerticalAlignment="Top" />
-                <RadioButton Content="3" HorizontalAlignment="Left" Margin="320,142,0,0" VerticalAlignment="Top"/>
-                <RadioButton Content="4" HorizontalAlignment="Left" Margin="440,142,0,0" VerticalAlignment="Top"/>
-                <RadioButton Content="5" HorizontalAlignment="Left" Margin="557,142,0,0" VerticalAlignment="Top"/>
-                <Label Content="ACCOMMODATION AS IN PICTURE:" HorizontalAlignment="Left" Margin="299,174,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="11"/>
-                <Grid RenderTransformOrigin="0.518,0.812" Margin="-4,59,35,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="11*"/>
-                        <ColumnDefinition Width="39*"/>
-                    </Grid.ColumnDefinitions>
-                    <RadioButton Content="1" HorizontalAlignment="Left" Margin="105,142,0,0" VerticalAlignment="Top"/>
-                    <RadioButton Content="2" HorizontalAlignment="Left" Margin="41,142,0,0" VerticalAlignment="Top" Grid.Column="1" />
-                    <RadioButton Content="3" HorizontalAlignment="Left" Margin="144,142,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                    <RadioButton Content="4" HorizontalAlignment="Left" Margin="264,142,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                    <RadioButton Content="5" HorizontalAlignment="Left" Margin="381,142,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                    <Label Content="EVERYTHING WORKED CORRECTLY:" HorizontalAlignment="Left" Margin="127,162,0,0" VerticalAlignment="Top" FontSize="11" FontWeight="Bold" Grid.Column="1"/>
-                    <RadioButton Content="1" HorizontalAlignment="Left" Margin="106,0,0,0" VerticalAlignment="Center"/>
-                    <RadioButton Content="2" HorizontalAlignment="Left" Margin="41,0,0,0" VerticalAlignment="Center" Grid.Column="1"/>
-                    <RadioButton Content="3" HorizontalAlignment="Left" Margin="144,0,0,0" VerticalAlignment="Center" Grid.Column="1"/>
-                    <RadioButton Content="4" HorizontalAlignment="Left" Margin="264,0,0,0" VerticalAlignment="Center" Grid.Column="1"/>
-                    <RadioButton Content="5" HorizontalAlignment="Left" Margin="381,202,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                    <Label Grid.Column="1" Content="OVERALL GREAT EXPERIENCE:" HorizontalAlignment="Left" Margin="142,229,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="11"/>
-                    <RadioButton Content="1" HorizontalAlignment="Left" Margin="108,257,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
-                        <RadioButton.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="-0.196"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </RadioButton.RenderTransform>
-                    </RadioButton>
-                    <RadioButton Content="2" HorizontalAlignment="Left" Margin="41,256,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
-                        <RadioButton.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="0.847"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </RadioButton.RenderTransform>
-                    </RadioButton>
-                    <RadioButton Content="3" HorizontalAlignment="Left" Margin="144,263,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                    <RadioButton Content="4" HorizontalAlignment="Left" Margin="264,263,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                    <RadioButton Content="5" HorizontalAlignment="Left" Margin="381,263,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                    <Button Grid.Column="1" Content="ADD PHOTOS" HorizontalAlignment="Left" Margin="491,189,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
-                    <Button Grid.Column="1" Content="ADD COMMENT" HorizontalAlignment="Left" Margin="469,229,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
-                    <Button Grid.Column="1" Content="ADD RECOMODATION" HorizontalAlignment="Left" Margin="423,270,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18"/>
-                    <Button Grid.Column="1" Content="SUBMIT" HorizontalAlignment="Left" Margin="491,95,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="97" FontSize="16"/>
+    <Grid Background="#FFF4DFDF" Margin="0,0,0,-35">
+        <Label Content="Rate accommodation " FontWeight="Bold" FontSize="20" Margin="0,0,0,404" Background="#FFEDBABA" HorizontalContentAlignment="Center"/>
+        <Label Content="!!1-Strongly disagree 2-Disagree 3-No opinion 4- Agree 5-Strongly agree!!" HorizontalAlignment="Left" Margin="19,30,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" Width="771" Foreground="#FFF10A0A" HorizontalContentAlignment="Center" FontStyle="Italic" BorderBrush="#FFE31818" BorderThickness="4,4,4,4" IsEnabled="False"/>
+        <Grid Grid.Row="0" Grid.Column="0" Margin="19,68,222,-66">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="194*"></ColumnDefinition>
+                <ColumnDefinition Width="201*"></ColumnDefinition>
+
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0"
+                       Content="OWNER FULLFILED THE AGREEMENT: " 
+                       Margin="3,16,284,10"
+                       Foreground="#FF1E1C1E" FontWeight="Bold" Grid.ColumnSpan="2"/>
+            <Label Grid.Row="1" Grid.Column="0"
+                       Content="ACCOMMODATION WAS VERY CLEAN: " 
+                       Margin="3,16,0,16"
+                       Foreground="#FF131213" FontWeight="Bold"/>
+            <Label Grid.Row="2" Grid.Column="0"
+                       Content="ACCOMMODATION AS IN PICTURE:" 
+                       Margin="3,16,0,16"
+                       Foreground="#FF171717" FontWeight="Bold"/>
+            <Label Grid.Row="3" Grid.Column="0"
+                       Content="EVERYTHING WORKED CORRECTLY: " 
+                       Margin="3,16,0,16"
+                       Foreground="#FF141314" FontWeight="Bold"/>
+            <Label Grid.Row="4" Grid.Column="0"
+                       Content="OVERALL GREAT EXPERIENCE: " 
+                       Margin="3,16,0,16"
+                       Foreground="#FF1A191A" FontWeight="Bold"/>
+
+            <Label Grid.Row="5" Grid.Column="0"
+                       Content="COMMENT:" 
+                       Margin="3,16,0,16"
+                       Foreground="#FF111111" FontWeight="Bold"/>
+            <Label Grid.Row="6" Grid.Column="0"
+                   Content="ADD PHOTO(OPTIONAL):" FontWeight="Bold"
+                   />
 
 
-                </Grid>
+            <ComboBox Grid.Row="0" Grid.Column="1"
+                           x:Name="RatingOwnerComboBox"  
+                         Margin="0,16,10,16" FontSize="10">
+                <ComboBoxItem Content="1"/>
+                <ComboBoxItem Content="2"/>
+                <ComboBoxItem Content="3"/>
+                <ComboBoxItem Content="4"/>
+                <ComboBoxItem Content="5"/>
+            </ComboBox>
 
-            </Grid>
+
+            <ComboBox Grid.Row="1" Grid.Column="1"
+                           x:Name="AccCleannessComboBox"  
+                         Margin="0,16,10,16" FontSize="10">
+                <ComboBoxItem Content="1"/>
+                <ComboBoxItem Content="2"/>
+                <ComboBoxItem Content="3"/>
+                <ComboBoxItem Content="4"/>
+                <ComboBoxItem Content="5"/>
+            </ComboBox>
+
+            <ComboBox Grid.Row="2" Grid.Column="1"
+                           x:Name="AcAsInPictureComboBox"  
+                         Margin="0,16,10,16" FontSize="10">
+                <ComboBoxItem Content="1"/>
+                <ComboBoxItem Content="2"/>
+                <ComboBoxItem Content="3"/>
+                <ComboBoxItem Content="4"/>
+                <ComboBoxItem Content="5"/>
+            </ComboBox>
+
+            <ComboBox Grid.Row="3" Grid.Column="1"
+                           x:Name="AccCorectnessComboBox"  
+                         Margin="0,16,10,16" FontSize="10">
+                <ComboBoxItem Content="1"/>
+                <ComboBoxItem Content="2"/>
+                <ComboBoxItem Content="3"/>
+                <ComboBoxItem Content="4"/>
+                <ComboBoxItem Content="5"/>
+            </ComboBox>
+
+            <ComboBox Grid.Row="4" Grid.Column="1"
+                           x:Name="AccExperienceComboBox"  
+                         Margin="0,16,10,16" FontSize="10">
+                <ComboBoxItem Content="1"/>
+                <ComboBoxItem Content="2"/>
+                <ComboBoxItem Content="3"/>
+                <ComboBoxItem Content="4"/>
+                <ComboBoxItem Content="5"/>
+            </ComboBox>
+
+            <TextBox Grid.Row="5" Grid.Column="1"
+                         Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}"  
+                         Margin="0,10,-200,10" 
+                         FontSize="10"/>
+            <TextBox Grid.Row="6" Grid.Column="1"
+                         Text="{Binding Path=ImageURLs, UpdateSourceTrigger=PropertyChanged}"  
+                         Margin="0,5,-21,28" 
+                         FontSize="10"/>
+
 
         </Grid>
-
-
+        <Button Content="SUBMIT" HorizontalAlignment="Left" Margin="641,211,0,0" VerticalAlignment="Top" FontSize="18" Foreground="#FFDC7171" BorderThickness="3,3,3,3" FontWeight="Bold" Width="113" Click="Submit"/>
 
 
     </Grid>
+
+
+
+
+
 </Window>

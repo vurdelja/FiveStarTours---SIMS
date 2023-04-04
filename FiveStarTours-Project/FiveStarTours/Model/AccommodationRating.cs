@@ -18,7 +18,6 @@ namespace FiveStarTours.Model
         public int AccCorectness { get; set; }
         public int AccExperience { get; set; }
         public string Comment { get; set; }
-        public string Recomodations { get; set; }
         public List<string> ImageURLs { get; set; }
 
 
@@ -26,7 +25,7 @@ namespace FiveStarTours.Model
         {
             AccommodationReservation=new AccommodationReservation();
         }
-        public AccommodationRating(int id, AccommodationReservation accommodationReservation, int raitingOwner, int accCleanness, int accAsInPicture, int accCorectness, int accExperience, string comment, string recomodations, List<string> imageURLs)
+        public AccommodationRating(int id, AccommodationReservation accommodationReservation, int raitingOwner, int accCleanness, int accAsInPicture, int accCorectness, int accExperience, string comment,  List<string> imageURLs)
         {
             
             AccommodationReservation = accommodationReservation;
@@ -36,7 +35,6 @@ namespace FiveStarTours.Model
             AccCorectness = accCorectness;
             AccExperience = accExperience;
             Comment = comment;
-            Recomodations = recomodations;
             ImageURLs = imageURLs;
         }
         public string[] ToCSV()
@@ -60,7 +58,6 @@ namespace FiveStarTours.Model
                 AccCorectness.ToString(),
                 AccExperience.ToString(),
                 Comment,
-                Recomodations,
                 string.Join(';', ImageURLs)
             };
             return csvValues;
@@ -75,8 +72,7 @@ namespace FiveStarTours.Model
             AccCorectness = int.Parse(values[5]);
             AccExperience = int.Parse(values[6]);
             Comment = values[7];
-            Recomodations = values[8];
-            ImageURLs = values[9].Split(';').ToList();
+            ImageURLs = values[8].Split(';').ToList();
         }
     }
 

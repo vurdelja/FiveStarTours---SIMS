@@ -95,7 +95,7 @@ namespace FiveStarTours.View.Traveler
 
         private void Rate(object sender, RoutedEventArgs e)
         {
-            AccommodationRatings rating = new AccommodationRatings();
+            AccommodationRatings rating = new AccommodationRatings(SelectedReservation);
             rating.Show();
         }
     }
