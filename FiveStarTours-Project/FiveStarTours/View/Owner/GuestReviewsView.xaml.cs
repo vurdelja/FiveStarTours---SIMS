@@ -32,7 +32,7 @@ namespace FiveStarTours.View.Owner
             InitializeComponent();
             DataContext = this;
             _repository = new AccommodationReservationsRepository();
-            Reservations = new ObservableCollection<AccommodationReservation>(_repository.GetGuestReviewsAvailableForOwner());
+            Reservations = new ObservableCollection<AccommodationReservation>(_repository.GetRatedByOwner());
 
         }
 
@@ -43,7 +43,6 @@ namespace FiveStarTours.View.Owner
                 FullGuestReviewView fullReview = new FullGuestReviewView(SelectedReservation);
                 fullReview.Show();
                 Close();
-
             }
             else
             {

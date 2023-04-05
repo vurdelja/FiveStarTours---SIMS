@@ -24,8 +24,11 @@ namespace FiveStarTours.View.Owner
     {
         public AccommodationReservation _selectedReservation { get; set; }
 
-        private readonly AccommodationReservationsRepository _repository;
-        //private readonly GuestRatingsRepository _rateRepository;
+
+        private readonly AccommodationRatingRepository _rateRepository;
+
+        public AccommodationRating accommodationRating { get; set; }
+
 
 
         public FullGuestReviewView(AccommodationReservation selectedReservation)
@@ -35,10 +38,16 @@ namespace FiveStarTours.View.Owner
 
             _selectedReservation = selectedReservation;
 
+            _rateRepository = new AccommodationRatingRepository();
 
-            _repository = new AccommodationReservationsRepository();
-            //_rateRepository = new GuestRatingsRepository();
+            accommodationRating = new AccommodationRating();
+            accommodationRating = _rateRepository.GetById(selectedReservation.Id);
 
+        }
+
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

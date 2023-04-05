@@ -95,6 +95,21 @@ namespace FiveStarTours.Repository
  
         }
 
+        public List<AccommodationReservation> GetRatedByOwner()
+        {
+            List<AccommodationReservation> reservations = new List<AccommodationReservation>();
+            foreach (AccommodationReservation accommodationReservation in _reservations)
+            {
+                if (accommodationReservation.RatedByOwner == true)
+                {
+                    reservations.Add(accommodationReservation);
+                }
+            }
+            return reservations;
+        }
+
+
+
         public int CountUnrated()
         {
             int unrated = 0;
