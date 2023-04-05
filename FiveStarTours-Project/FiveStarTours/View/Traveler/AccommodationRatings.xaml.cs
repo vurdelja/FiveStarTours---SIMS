@@ -198,12 +198,12 @@ namespace FiveStarTours.View.Traveler
             }
 
             AccommodationReservation reservation = _selectedReservation;
-            AccommodationRating newAccommodationRate= new AccommodationRating(id,reservation,ratingOwner,accCleanness,accAsInPicture,accCorectness,accExperience,Comment, ImageURLsList);
+            AccommodationRating newAccommodationRate= new AccommodationRating(reservation,ratingOwner,accCleanness,accAsInPicture,accCorectness,accExperience,Comment, ImageURLsList);
 
             if (IsValid(newAccommodationRate))
             {
                 _raterepository.Save(newAccommodationRate);
-                reservation.Rated = true;
+                reservation.RatedByOwner = true;
 
                 _repository.Update(reservation);
                 System.Threading.Thread.Sleep(1000);
