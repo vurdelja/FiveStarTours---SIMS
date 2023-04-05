@@ -20,5 +20,12 @@
                 VerticalAlignment="Top" 
                 Height="47" Width="213" 
                 Click="GuestRatingButton_Click"/>
+
+        <Button Content="Guest reviews" 
+                HorizontalAlignment="Left" 
+                Margin="458,97,0,0" 
+                VerticalAlignment="Top" 
+                Height="47" Width="213" 
+                Click="GuestReviewsButton_Click"/>
     </Grid>
 </Window>

@@ -85,7 +85,7 @@ namespace FiveStarTours.Repository
                 DateTime end = accommodationReservation.EndDate;
                 if(end<now)
                 {
-                    if (accommodationReservation.Rated == false && now.AddDays(-5) < end)
+                    if (accommodationReservation.RatedByOwner == false && now.AddDays(-5) < end)
                     {
                         reservations.Add(accommodationReservation);
                     }
@@ -95,6 +95,21 @@ namespace FiveStarTours.Repository
  
         }
 
+        public List<AccommodationReservation> GetRatedByOwner()
+        {
+            List<AccommodationReservation> reservations = new List<AccommodationReservation>();
+            foreach (AccommodationReservation accommodationReservation in _reservations)
+            {
+                if (accommodationReservation.RatedByOwner == true)
+                {
+                    reservations.Add(accommodationReservation);
+                }
+            }
+            return reservations;
+        }
+
+
+
         public int CountUnrated()
         {
             int unrated = 0;
@@ -102,7 +117,7 @@ namespace FiveStarTours.Repository
 
             foreach (AccommodationReservation accommodationReservation in _reservations)
             {
-                if (accommodationReservation.Rated == false)
+                if (accommodationReservation.RatedByOwner == false)
                 {
                     unrated++;
                 }

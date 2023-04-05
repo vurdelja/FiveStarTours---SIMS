@@ -203,7 +203,7 @@ namespace FiveStarTours.View.Traveler
             if (IsValid(newAccommodationRate))
             {
                 _raterepository.Save(newAccommodationRate);
-                reservation.Rated = true;
+                reservation.RatedByOwner = true;
 
                 _repository.Update(reservation);
                 System.Threading.Thread.Sleep(1000);

@@ -41,6 +41,12 @@ namespace FiveStarTours.View
             addAccommodation.Show();
         }
 
+        private void GuestReviewsButton_Click(object sender, RoutedEventArgs e)
+        {
+            GuestReviewsView guestReviews = new GuestReviewsView();
+            guestReviews.Show();
+        }
+
         private void GuestRatingButton_Click(object sender, RoutedEventArgs e)
         {
             GuestsWithoutRateView guestRating = new GuestsWithoutRateView();
@@ -48,5 +54,10 @@ namespace FiveStarTours.View
         }
 
         
+
+
+
+
+
     }
 }

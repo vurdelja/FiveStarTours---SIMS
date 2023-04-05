@@ -23,7 +23,7 @@ namespace FiveStarTours.Model
 
         public AccommodationRating()
         {
-            AccommodationReservation=new AccommodationReservation();
+            AccommodationReservation = new AccommodationReservation();
         }
         public AccommodationRating(AccommodationReservation accommodationReservation, int raitingOwner, int accCleanness, int accAsInPicture, int accCorectness, int accExperience, string comment,  List<string> imageURLs)
         {
