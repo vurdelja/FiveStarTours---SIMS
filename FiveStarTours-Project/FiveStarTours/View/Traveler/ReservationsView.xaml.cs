@@ -98,5 +98,24 @@ namespace FiveStarTours.View.Traveler
             AccommodationRatings rating = new AccommodationRatings(SelectedReservation);
             rating.Show();
         }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            string messageBoxText = "Are you sure you want to cancel this reservation?";
+            string caption = "Reservation cancelation";
+            MessageBoxButton button = MessageBoxButton.YesNo;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBoxResult result;
+
+            result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+            if (result == MessageBoxResult.Yes)
+            {
+
+            }
+            else
+            {
+                return;
+            }
+        }
     }
 }

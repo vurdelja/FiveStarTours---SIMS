@@ -34,7 +34,7 @@
                 </Style>
             </DataGrid.Resources>
         </DataGrid>
-        <Button Content="CANCEL RESERVATION" HorizontalAlignment="Left" Margin="31,320,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="22" Background="#FFCF748B" Height="43" BorderThickness="3,3,3,3" BorderBrush="#FF161414" Width="260"/>
+        <Button Content="CANCEL RESERVATION" HorizontalAlignment="Left" Margin="31,320,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="22" Background="#FFCF748B" Height="43" BorderThickness="3,3,3,3" BorderBrush="#FF161414" Width="260" Click="Cancel"/>
         <Button Content="CHANGE RESERVATION" HorizontalAlignment="Left" Margin="291,320,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" Background="#FFCF748B" Height="43" BorderThickness="3,3,3,3" BorderBrush="#FF131212"/>
         <Button Content="RATE" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="22" FontWeight="Bold" Background="#FFCF748B" Height="43" BorderThickness="3,3,3,3" BorderBrush="#FF131212" Margin="542,320,0,0" Width="213" Click="Rate"/>
         <Label Content="All reservations" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="22" Background="#FFDF9090" Width="578" Height="52" HorizontalContentAlignment="Center" BorderThickness="3,3,3,3" BorderBrush="#FF100E0E" Margin="0,5,0,0"/>
