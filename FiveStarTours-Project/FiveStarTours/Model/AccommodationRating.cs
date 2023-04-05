@@ -27,6 +27,7 @@ namespace FiveStarTours.Model
         }
         public AccommodationRating(AccommodationReservation accommodationReservation, int raitingOwner, int accCleanness, int accAsInPicture, int accCorectness, int accExperience, string comment, List<string> imageURLs)
         {
+            
             AccommodationReservation = accommodationReservation;
             RaitingOwner = raitingOwner;
             AccCleanness = accCleanness;

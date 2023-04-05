@@ -7,27 +7,20 @@
         mc:Ignorable="d"
         Title="Reservation" Height="450" Width="800">
     <Grid Background="#FFED9C9C">
-        <Label Content="Choose dates for your reservation" HorizontalAlignment="Left" Margin="176,10,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Width="381" HorizontalContentAlignment="Center" BorderThickness="8,8,8,8" BorderBrush="#FF8D3A92"/>
+        <Label Content="Choose dates for your reservation" HorizontalAlignment="Left" Margin="176,10,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Width="381" HorizontalContentAlignment="Center" BorderThickness="2,2,2,2" BorderBrush="Yellow"/>
         <Grid>
             <Label Content="ARRIVAL DATE:" HorizontalAlignment="Left" Margin="40,150,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
             <Label Content="DEPARTURE DATE:" HorizontalAlignment="Left" Margin="40,211,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
-            <Label Content="LENGTH OF STAY:" HorizontalAlignment="Left" Margin="40,274,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Height="40" Width="202"/>
-            <DatePicker x:Name="first" Text="{Binding Path=StartDate, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,136,0,0" VerticalAlignment="Top" Height="51" Width="332" />
-            <DatePicker x:Name="last" Text="{Binding Path=EndDate, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,211,0,0" VerticalAlignment="Top" Height="53" Width="332" />
-            <TextBox x:Name="Lengthtxt" HorizontalAlignment="Left" Margin="242,274,0,0" TextWrapping="Wrap" Text="{Binding Path=VisitationDays, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="189" Height="40"/>
-            <Button x:Name="Enter" Content="Continue reservation" HorizontalAlignment="Left" Margin="451,370,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" BorderThickness="5,5,5,5" Height="44" Width="295" Click="Submit">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black"/>
-                        <GradientStop Color="#FFE89A9A" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
+            <Label x:Name="Length" Content="LENGTH OF STAY:" HorizontalAlignment="Left" Margin="148,274,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Height="40" Width="202"/>
+            <DatePicker x:Name="first" SelectedDate="{Binding Path=StartDate, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,136,0,0" VerticalAlignment="Top" Height="51" Width="332" />
+            <DatePicker x:Name="last" SelectedDate="{Binding Path=EndDate, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,211,0,0" VerticalAlignment="Top" Height="53" Width="332" />
+            <TextBox x:Name="Lengthtxt" HorizontalAlignment="Center" Margin="0,274,0,0" TextWrapping="Wrap" Text="{Binding Path=VisitationDays, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="100" Height="40"/>
             <Button Content="Go back" HorizontalAlignment="Left" Margin="10,370,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" BorderThickness="4,4,4,4" BorderBrush="#FF8B3636" Height="54" Width="214" Click="goback"/>
 
             <Label Content="ACCOMMODATION NAME:" HorizontalAlignment="Left" Margin="35,77,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
 
-            <TextBox Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="276,84,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="290" Height="24"/>
+            <TextBox IsEnabled="False" Text="{Binding Path=SelectedAccommodation.AccommodationName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="276,84,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="290" Height="24"/>
+            <Button x:Name="checkButton" Content="Check availability" Click="checkButton_Click" HorizontalAlignment="Left" Margin="526,309,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" BorderThickness="4,4,4,4" Width="192" Height="88"/>
         </Grid>
 
     </Grid>

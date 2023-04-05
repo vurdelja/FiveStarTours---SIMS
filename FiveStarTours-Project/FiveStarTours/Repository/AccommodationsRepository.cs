@@ -95,7 +95,6 @@ namespace FiveStarTours.Repository
         }
 
 
-
         public bool SearchConditionAccommodationName(Accommodation accommodation, string name)
         {
                 return accommodation.AccommodationName.ToLower().Contains(name.ToLower());
@@ -161,8 +160,30 @@ namespace FiveStarTours.Repository
             return searchedAccommodations;
         }
 
-        
 
+
+        public Accommodation GetAccommodationForAccommodationName(string accommodationName)
+        {
+            foreach (Accommodation accommodation in _accommodations)
+            {
+                if (accommodationName == accommodation.AccommodationName)
+                {
+                    return accommodation;
+                }
+            }
+            return null;
+        }
+
+        public bool CheckReservationDays(Accommodation accommodation, string minDays)
+        {
+            if (minDays == null || minDays == "")
+            {
+                return true;
+            }
+            int minReserve = Convert.ToInt32(minDays);
+            return accommodation.MinReservationDays <= minReserve;
+        }
+       
 
 
     }

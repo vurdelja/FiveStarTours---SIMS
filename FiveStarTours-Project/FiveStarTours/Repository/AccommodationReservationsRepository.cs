@@ -168,15 +168,42 @@ namespace FiveStarTours.Repository
              return accommodationReservations;
         }
 
-        public List<DateInterval> GetFreeDateIntervals(string accommodationName, DateTime start, DateTime end, int numberOfDays)
+        public bool DoesInterwalIntertwineWithReservations(List<AccommodationReservation> reservations, DateTime start, DateTime end)
         {
+            foreach(AccommodationReservation accommodationReservation in reservations)
+            {
+                if(DatesIntertwine(accommodationReservation.StartDate, accommodationReservation.EndDate, start, end))
+                {
+                    return true;
+                }
+            }
 
-
-
-            return null;
+            return false;
         }
 
 
 
+        public List<DateInterval> GetFreeDateIntervals(string accommodationName, DateTime start, DateTime end, int numberOfDays)
+        {
+            DateTime iterDate = start;
+            List<AccommodationReservation> reservations = GetAllReservationsForAccommodationDateInterval(accommodationName, start, end);
+            List<DateInterval> freeIntervals = new List<DateInterval>();
+
+            while (iterDate.AddDays(numberOfDays).Date <= end.Date)
+            {
+                if(!DoesInterwalIntertwineWithReservations(reservations, iterDate, iterDate.AddDays(numberOfDays)))
+                {
+                    freeIntervals.Add(new DateInterval(iterDate, iterDate.AddDays(numberOfDays)));
+                }
+
+                iterDate = iterDate.AddDays(1);
+            }
+
+
+            return freeIntervals;
+        }
+
+
+     
     }
 }
