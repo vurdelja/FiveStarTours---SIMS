@@ -16,17 +16,17 @@ namespace FiveStarTours.View
     public partial class Tours : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-        private readonly ToursRepository _repository;
+        private readonly ToursRepository _toursRepository;
         public Tour SelectedTour { get; set; }
         public User LoggedInUser { get; set; }
         public ObservableCollection<Tour> ToursCollection { get; set; }
         public Tours(User user)
         {
             InitializeComponent();
-            _repository = new ToursRepository();
+            _toursRepository = new ToursRepository();
             DataContext = this;
             LoggedInUser = user;
-            ToursCollection = new ObservableCollection<Tour>(_repository.GetByUser(user));
+            ToursCollection = new ObservableCollection<Tour>(_toursRepository.GetByUser(user));
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -42,7 +42,7 @@ namespace FiveStarTours.View
 
         private void ToursDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            ToursCollection = new ObservableCollection<Tour>(_repository.GetAllByDate((DateTime)ToursDate.SelectedDate, LoggedInUser));
+            ToursCollection = new ObservableCollection<Tour>(_toursRepository.GetAllByDate((DateTime)ToursDate.SelectedDate, LoggedInUser));
             DataGridTours.ItemsSource = ToursCollection;
         }
 
@@ -58,7 +58,7 @@ namespace FiveStarTours.View
             }
             else
             {
-                foreach(Tour t in _repository.GetAll())
+                foreach(Tour t in _toursRepository.GetAll())
                 {
                     if(SelectedTour.Name == t.Name)
                     {
@@ -67,6 +67,24 @@ namespace FiveStarTours.View
                 }
 
                 LiveTourTracking liveTourTracking = new LiveTourTracking(SelectedTour);
+            }
+        }
+
+        private void CancelTour_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime fixedDateTime = SelectedTour.OneBeginningTime;
+            TimeSpan timeDifference = fixedDateTime - DateTime.Now;
+            if (SelectedTour == null)
+            {
+                MessageBox.Show("Choose tour first!");
+            }
+            else if (timeDifference.TotalHours < 48)
+            {
+                MessageBox.Show("It is less than 48 hours from this tour.");
+            }
+            else
+            {
+                _toursRepository.Delete(SelectedTour);
             }
         }
     }

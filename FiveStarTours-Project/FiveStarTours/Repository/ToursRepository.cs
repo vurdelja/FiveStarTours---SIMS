@@ -89,5 +89,13 @@ namespace FiveStarTours.Repository
             _tours = _serializer.FromCSV(FilePath);
             return _tours.FindAll(c => c.User.Id == user.Id);
         }
+
+        public void Delete(Tour tour)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            Tour founded = _tours.Find(t => t.Id == tour.Id);
+            _tours.Remove(founded);
+            _serializer.ToCSV(FilePath, _tours);
+        }
     }
 }
