@@ -16,30 +16,20 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using FiveStarTours.Model;
 
-namespace FiveStarTours.View
+namespace FiveStarTours.View.Visitor
 {
     /// <summary>
     /// Interaction logic for ReservationView.xaml
     /// </summary>
     public partial class ReservationView : Window, INotifyPropertyChanged
     {
-        private readonly VisitorRepository _visitorRepository;
+        public User LoggedInUser { get; set; }
+
+        private readonly TourReservationRepository _visitorRepository;
         private readonly KeyPointsRepository _keyPointsRepository;
 
 
-        private string _visitorName;
-        public string VisitorName
-        {
-            get => _visitorName;
-            set
-            {
-                if(value != _visitorName)
-                {
-                    _visitorName = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        
 
         private string _phoneNumber;
         public string PhoneNumber
@@ -89,22 +79,25 @@ namespace FiveStarTours.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         List<DateTime> DateTimeTour = new List<DateTime>();
+        List<string> Names = new List<string>();
         int freeSeats
         {
             get; set;
         }
-        public ReservationView(Tour selectedTour)
+        public ReservationView(Tour selectedTour, User user)
         {
+            LoggedInUser = user;
             InitializeComponent();
             DataContext = this;
             freeSeats = selectedTour.MaxGuests;
             SelectedTour = selectedTour;
 
-            _visitorRepository = new VisitorRepository();
+            _visitorRepository = new TourReservationRepository();
             _keyPointsRepository = new KeyPointsRepository();
 
-            List<string> KeyPoints = _keyPointsRepository.GetAllNames();
-            StartingKeyPoint.ItemsSource = KeyPoints;
+            List<int> KeyPoints = selectedTour.IdKeyPoints;
+            List<string> Points = GetName(KeyPoints);
+            StartingKeyPoint.ItemsSource = Points;
             StartingKeyPoint.SelectedValuePath = ".";
             StartingKeyPoint.DisplayMemberPath = ".";
 
@@ -115,6 +108,15 @@ namespace FiveStarTours.View
 
             freeSeats -= _visitorRepository.ReservedSeats(SelectedTour);
 
+        }
+        public List<string> GetName(List<int> keyPoints)
+        {
+            List<string> result  = new List<string>();
+            foreach (int i in keyPoints)
+            {
+                result.Add(_keyPointsRepository.GetById(i));
+            }
+            return result;
         }
         public Tour SelectedTour;
         private void ReservationButton_Click(object sender, RoutedEventArgs e)
@@ -136,7 +138,7 @@ namespace FiveStarTours.View
             DateTime dateTime = new DateTime();
             dateTime = selectedDateTime;
             
-            Visitor visitor = new Visitor(VisitorName, PhoneNumber, SelectedTour.Id, startingKeyPoint.Id, startingKeyPoint, dateTime, Convert.ToInt32(MembersNumber), Email);
+            TourReservation visitor = new TourReservation(Names, PhoneNumber, SelectedTour.Id, startingKeyPoint.Id, startingKeyPoint, dateTime, Convert.ToInt32(MembersNumber), Email);
             _visitorRepository.Save(visitor);
             Close();
 
@@ -163,6 +165,18 @@ namespace FiveStarTours.View
             {
                 selectedDateTime = (DateTime)DateTimeComboBox.SelectedItem;//as DateTime;
             }
+        }
+
+        private void GiftCardComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void User_Checked(object sender, RoutedEventArgs e)
+        {
+            string item = (string)((CheckBox)sender).Content;
+            Names.Add(LoggedInUser.Name);
+            Names.Add(item);
         }
     }
 }

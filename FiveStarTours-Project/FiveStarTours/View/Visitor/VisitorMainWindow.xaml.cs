@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FiveStarTours.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,22 +13,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace FiveStarTours.View
+namespace FiveStarTours.View.Visitor
 {
     /// <summary>
     /// Interaction logic for VisitorMainWindow.xaml
     /// </summary>
     public partial class VisitorMainWindow : Window
     {
-        public VisitorMainWindow()
+        public User LoggedInUser { get; set; }
+        public VisitorMainWindow(User user)
         {
+            LoggedInUser = user;
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //CC.Content = new ToursListingView();
-            ToursListingView toursListing = new ToursListingView();
+            ToursListingView toursListing = new ToursListingView(LoggedInUser);
             this.Visibility = Visibility.Hidden;
             toursListing.Show();
        }

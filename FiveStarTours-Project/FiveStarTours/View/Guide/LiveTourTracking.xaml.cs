@@ -19,7 +19,7 @@ namespace FiveStarTours.View.Guide
     public partial class LiveTourTracking : Window, INotifyPropertyChanged
     {
         private readonly LiveTourRepository _liveTourRepository;
-        private readonly VisitorRepository _visitorRepository;
+        private readonly TourReservationRepository _visitorRepository;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public ObservableCollection<string> Checkpoints { get; set; }
@@ -31,7 +31,7 @@ namespace FiveStarTours.View.Guide
         {
             selectedTour.Id += 1;
             _liveTourRepository = new LiveTourRepository();
-            _visitorRepository = new VisitorRepository();
+            _visitorRepository = new TourReservationRepository();
             if (StartLiveTour(selectedTour))
             {
                 InitializeComponent();
@@ -47,10 +47,10 @@ namespace FiveStarTours.View.Guide
 
         Dictionary<string, bool> Visitor;
 
-        public Dictionary<string, bool> GetAllVisitors(VisitorRepository visitorRepository, Tour tour)
+        public Dictionary<string, bool> GetAllVisitors(TourReservationRepository visitorRepository, Tour tour)
         {
             Dictionary<string, bool> Visitors = new Dictionary<string, bool>();
-            List<Visitor> visitors = new List<Visitor>();
+            List<TourReservation> visitors = new List<TourReservation>();
             foreach(var v in _visitorRepository.GetAll())
             {
                 if(tour.Id == v.TourId && tour.OneBeginningTime == v.DateTime)
@@ -78,9 +78,9 @@ namespace FiveStarTours.View.Guide
             return Visitors;
         }
 
-        public bool CheckVisitors(VisitorRepository visitorRepository, Tour tour)
+        public bool CheckVisitors(TourReservationRepository visitorRepository, Tour tour)
         {
-            List<Visitor> visitors = new List<Visitor>();
+            List<TourReservation> visitors = new List<TourReservation>();
             foreach (var v in _visitorRepository.GetAll())
             {
                 if (tour.Id == v.Id && tour.OneBeginningTime == v.DateTime)
