@@ -25,7 +25,7 @@ namespace FiveStarTours.Model
         {
             AccommodationReservation = new AccommodationReservation();
         }
-        public AccommodationRating(AccommodationReservation accommodationReservation, int raitingOwner, int accCleanness, int accAsInPicture, int accCorectness, int accExperience, string comment, List<string> imageURLs)
+        public AccommodationRating(AccommodationReservation accommodationReservation, int raitingOwner, int accCleanness, int accAsInPicture, int accCorectness, int accExperience, string comment,  List<string> imageURLs)
         {
             
             AccommodationReservation = accommodationReservation;
