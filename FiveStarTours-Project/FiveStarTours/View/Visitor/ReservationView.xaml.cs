@@ -15,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using FiveStarTours.Model;
+using FiveStarTours.View.Traveler;
+using System.Collections.ObjectModel;
 
 namespace FiveStarTours.View.Visitor
 {
@@ -27,9 +29,10 @@ namespace FiveStarTours.View.Visitor
 
         private readonly TourReservationRepository _visitorRepository;
         private readonly KeyPointsRepository _keyPointsRepository;
+        private readonly UserRepository _userRepository;
+        private readonly GiftCardRepository _giftCardRepository;
 
-
-        
+        public ObservableCollection<User> Visitors { get; set; }
 
         private string _phoneNumber;
         public string PhoneNumber
@@ -79,6 +82,7 @@ namespace FiveStarTours.View.Visitor
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         List<DateTime> DateTimeTour = new List<DateTime>();
+        List<DateTime> ExpiringDates = new List<DateTime>();
         List<string> Names = new List<string>();
         int freeSeats
         {
@@ -94,6 +98,10 @@ namespace FiveStarTours.View.Visitor
 
             _visitorRepository = new TourReservationRepository();
             _keyPointsRepository = new KeyPointsRepository();
+            _userRepository = new UserRepository();
+            _giftCardRepository = new GiftCardRepository();
+
+            Visitors = new ObservableCollection<User>(_userRepository.GetAll());
 
             List<int> KeyPoints = selectedTour.IdKeyPoints;
             List<string> Points = GetName(KeyPoints);
@@ -105,6 +113,11 @@ namespace FiveStarTours.View.Visitor
             DateTimeComboBox.ItemsSource = DateTimeTour;
             DateTimeComboBox.SelectedValuePath = ".";
             DateTimeComboBox.DisplayMemberPath = ".";
+
+            ExpiringDates = _giftCardRepository.GetAllDatesById(user.Id);
+            GiftCardComboBox.ItemsSource = ExpiringDates;
+            GiftCardComboBox.SelectedValuePath = ".";
+            GiftCardComboBox.DisplayMemberPath = ".";
 
             freeSeats -= _visitorRepository.ReservedSeats(SelectedTour);
 
@@ -119,6 +132,7 @@ namespace FiveStarTours.View.Visitor
             return result;
         }
         public Tour SelectedTour;
+        public bool giftCard;
         private void ReservationButton_Click(object sender, RoutedEventArgs e)
         {
             KeyPoints startingKeyPoint = new KeyPoints();
@@ -138,7 +152,7 @@ namespace FiveStarTours.View.Visitor
             DateTime dateTime = new DateTime();
             dateTime = selectedDateTime;
             
-            TourReservation visitor = new TourReservation(Names, PhoneNumber, SelectedTour.Id, startingKeyPoint.Id, startingKeyPoint, dateTime, Convert.ToInt32(MembersNumber), Email);
+            TourReservation visitor = new TourReservation(Names, PhoneNumber, SelectedTour.Id, startingKeyPoint.Id, startingKeyPoint, dateTime, Convert.ToInt32(MembersNumber), Email, giftCard);
             _visitorRepository.Save(visitor);
             Close();
 
@@ -166,17 +180,27 @@ namespace FiveStarTours.View.Visitor
                 selectedDateTime = (DateTime)DateTimeComboBox.SelectedItem;//as DateTime;
             }
         }
-
         private void GiftCardComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if(GiftCardComboBox.SelectedItem != null)
+            {
+                giftCard = true;
+                _giftCardRepository.Delete(GiftCardComboBox.SelectedItem.ToString());
+            }
+            else
+            {
+                giftCard = false;
+            }
         }
 
         private void User_Checked(object sender, RoutedEventArgs e)
         {
             string item = (string)((CheckBox)sender).Content;
-            Names.Add(LoggedInUser.Name);
             Names.Add(item);
         }
+
+      
+
+       
     }
 }

@@ -8,10 +8,14 @@
         Title="VisitorMainWindow" Height="450" Width="800" ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
          WindowStartupLocation="CenterScreen">
     <Grid Background="LavenderBlush">
-        <Button Content="TOURS" HorizontalAlignment="Left" Margin="60, 60, 0, 0" VerticalAlignment="Top"
-                Height="47" Width="95" Click="Button_Click" Background="LightCyan" FontSize="20"/>
-        <Label Content="Click on the button below if you want to view the tours we have to offer
-" HorizontalAlignment="Left" Margin="20, 20, 0, 0" VerticalAlignment="Top" FontSize="15" Background="LemonChiffon"/>
-        
+        <Button Content="TOURS" HorizontalAlignment="Center" Margin="0,78,0,0" VerticalAlignment="Top"
+                Height="47" Width="130" Click="ToursButton_Click" Background="LightBlue" FontSize="20"/>
+        <Button Content="NOTIFICATIONS" HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top"
+                Height="47" Width="130" Click="NotificationsButton_Click" Background="Pink" FontSize="15"/>
+        <Label Content="Click on the button below if you want to view the tours we have to offer"
+               HorizontalAlignment="Center" Margin="0,27,0,0" VerticalAlignment="Top" FontSize="15" Background="LemonChiffon" Width="484"/>
+        <Label Content="Click on the button below if you want to view your notifications"
+               HorizontalAlignment="Center" Margin="0,147,0,0" VerticalAlignment="Top" FontSize="15" Background="LemonChiffon" Width="485"/>
+
     </Grid>
 </Window>

@@ -53,6 +53,20 @@ namespace FiveStarTours.Repository
             }
             return result;
         }
+        public List<DateTime> GetAllDatesById(int id)
+        {
+            _giftCards = GetAll();
+            List<DateTime> result = new List<DateTime>();
+            foreach (GiftCard card in _giftCards)
+            {
+                if (card.UserId == id)
+                {
+                    result.Add(card.ExpiringDate);
+                }
+            }
+            return result;
+        }
+
         public int NextId()
         {
             _giftCards = _serializer.FromCSV(FilePath);
@@ -69,6 +83,20 @@ namespace FiveStarTours.Repository
             _giftCards.Add(giftCard);
             _serializer.ToCSV(FilePath, _giftCards);
             return giftCard;
+        }
+        public void Delete(string giftCard)
+        {
+            _giftCards = GetAll();
+            GiftCard founded = new GiftCard();
+            foreach(var gc in _giftCards)
+            {
+                if(Convert.ToDateTime(giftCard) == gc.ExpiringDate)
+                {
+                    founded = gc;
+                }
+            }
+            _giftCards.Remove(founded);
+            _serializer.ToCSV(FilePath, _giftCards);
         }
     }
 }

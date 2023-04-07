@@ -28,7 +28,8 @@
                       AutoGenerateColumns="False" Height="360" HeadersVisibility="Column"
                       FontSize="13">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Gift card Id" Binding="{Binding Id}" Width="100"/>
+                    <DataGridTextColumn Header="Gift card ID" Binding="{Binding Id}" Width="100"/>
+                    <DataGridTextColumn Header="User ID" Binding="{Binding UserId}" Width="100"/>
                     <DataGridTextColumn Header="ExpiringDate" Binding="{Binding ExpiringDate}" Width="100"/>
                 </DataGrid.Columns>
             </DataGrid>
@@ -36,9 +37,7 @@
         <ToolBar Grid.Row="0" Grid.ColumnSpan="3">
             <Label Content=" Gift Cards" FontSize="21"/>
             <Separator/>
-            <Button Click="ChoseGiftCard" Content="CHOSE"
-                    Width="50" Height="20" Background="LemonChiffon"/>
-            <Separator/>
+            
         </ToolBar>
        
     </Grid>

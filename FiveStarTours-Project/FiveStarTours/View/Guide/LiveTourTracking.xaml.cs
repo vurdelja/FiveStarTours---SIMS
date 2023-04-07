@@ -63,7 +63,7 @@ namespace FiveStarTours.View.Guide
 
             foreach(var visitor in visitors)
             {
-                Names.Add(visitor.VisitorName);
+               // Names.Add(visitor.VisitorName);
             }
 
             foreach(var name in Names)

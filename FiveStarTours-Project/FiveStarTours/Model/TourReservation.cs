@@ -22,10 +22,9 @@ namespace FiveStarTours.Model
         public DateTime DateTime { get; set; }
         public int MembersNumber { get; set; }
         public string Email { get; set; }
-
-        // public bool GiftCard {get; set;}
+         public bool GiftCard {get; set;}
         public TourReservation() { }
-        public TourReservation(List<string> visitorName, string phoneNumber, int tourId, int idKeyPoint, KeyPoints startingKeyPoint, DateTime dateTime, int membersNumber, string email)
+        public TourReservation(List<string> visitorName, string phoneNumber, int tourId, int idKeyPoint, KeyPoints startingKeyPoint, DateTime dateTime, int membersNumber, string email, bool giftCard)
         {
             VisitorName = visitorName;
             PhoneNumber = phoneNumber;
@@ -35,6 +34,7 @@ namespace FiveStarTours.Model
             DateTime = dateTime;
             MembersNumber = membersNumber;
             Email = email;
+            GiftCard = giftCard;
         }
         
         public string[] ToCSV()
@@ -48,7 +48,8 @@ namespace FiveStarTours.Model
               IdKeyPoint.ToString(),
               DateTime.ToString(),
               MembersNumber.ToString(),
-              Email
+              Email,
+              GiftCard.ToString()
             };
             return csvValues;
         }
@@ -61,7 +62,8 @@ namespace FiveStarTours.Model
             IdKeyPoint = Convert.ToInt32(values[4]);
             DateTime = Convert.ToDateTime(values[5]);
             MembersNumber = Convert.ToInt32(values[6]);
-            Email = values[7];           
+            Email = values[7]; 
+            GiftCard = Convert.ToBoolean(values[8]);
         }
     }
 }

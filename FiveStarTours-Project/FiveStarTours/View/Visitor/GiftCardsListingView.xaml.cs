@@ -21,24 +21,26 @@ namespace FiveStarTours.View.Visitor
     /// Interaction logic for GiftCardsListingView.xaml
     /// </summary>
     public partial class GiftCardsListingView : Window
-    {
+    {     
+        public User LoggedInUser { get; set; }
         public static ObservableCollection<GiftCard> GiftCards { get; set; }
         public GiftCard SelectedGiftCard { get; set; }
         private readonly GiftCardRepository _repository;
 
-        public GiftCardsListingView()
+        public GiftCardsListingView(User user)
         {
+            LoggedInUser = user;
             InitializeComponent();
             DataContext = this;
             _repository = new GiftCardRepository();
-            //GiftCards = new ObservableCollection<GiftCard>(_repository.GetAllById(UserId));
+            //GiftCards = new ObservableCollection<GiftCard>(_repository.GetAllById(user));
         }
 
         private void ChoseGiftCard(object sender, RoutedEventArgs e)
         {
             /*if (SelectedGiftCard != null)
             {
-                ReservationView reservationView = new ReservationView(SelectedGiftCard);
+                ReservationView reservationView = new ReservationView(SelectedGiftCard, LoggedInUser);
                 reservationView.Show();
 
             }*/

@@ -34,10 +34,10 @@
             <Label Grid.Row="4" Grid.Column="0" Height="40" Width="160" Content="Your contact(phone):" FontSize="15"/>
             <Label Grid.Row="5" Grid.Column="0" Height="40" Width="160" Content="Your email:" FontSize="15"/>
             <Label Grid.Row="6" Grid.Column="0" Height="40" Width="160" Content="Gift Card:" FontSize="15"/>
-            <ItemsControl Grid.Row="0" Grid.Column="1" x:Name="Users" DockPanel.Dock="Left" ItemsSource="{Binding User}" Width="400" Height="160">
+            <ItemsControl Grid.Row="0" Grid.Column="1" x:Name="Users" ItemsSource="{Binding Visitors}" Width="400" Height="160">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <CheckBox x:Name="User" Content="{Binding Name}" Checked="User_Checked" />
+                        <CheckBox x:Name="User" Content="{Binding Name}" Checked="User_Checked"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -47,6 +47,7 @@
             <TextBox Grid.Row="4" Grid.Column="1" Height="40" Width="400" Text="{Binding Path=PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBox Grid.Row="5" Grid.Column="1" Height="40" Width="400" Text="{Binding Path=Email, UpdateSourceTrigger=PropertyChanged}"/>
             <ComboBox Grid.Row="6" Grid.Column="1" Height="40" Width="400" x:Name="GiftCardComboBox" SelectionChanged="GiftCardComboBox_SelectionChanged" />
+            
         </Grid>
         <Grid Grid.Row="3" Grid.Column="0">
             <Grid.ColumnDefinitions>
