@@ -16,9 +16,8 @@ namespace FiveStarTours.Model
         
         public GiftCard() { }
 
-        public GiftCard(int id, int userId, DateTime expiringDate)
+        public GiftCard( int userId, DateTime expiringDate)
         {
-            Id = id;
             UserId = userId;
             ExpiringDate = expiringDate;
         }

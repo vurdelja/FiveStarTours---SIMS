@@ -90,11 +90,17 @@ namespace FiveStarTours.Repository
             return _tours.FindAll(c => c.User.Id == user.Id);
         }
 
-        public void Delete(Tour tour)
+        public void DeleteByDate(Tour tour)
         {
             _tours = _serializer.FromCSV(FilePath);
             Tour founded = _tours.Find(t => t.Id == tour.Id);
-            _tours.Remove(founded);
+            foreach(DateTime date in founded.Beginning)
+            {
+                if(date == tour.OneBeginningTime)
+                {
+                    founded.Beginning.Remove(date);
+                }
+            }
             _serializer.ToCSV(FilePath, _tours);
         }
     }

@@ -13,6 +13,7 @@ namespace FiveStarTours.Model
         public DateTime Date { get; set; }
         public List<int> IdKeyPoints { get; set; }
         public List<KeyPoints> KeyPoints { get; set; }
+        public List<string> Visitors { get; set; }
         public bool Started { get; set; }
         public bool Ended { get; set; }
 

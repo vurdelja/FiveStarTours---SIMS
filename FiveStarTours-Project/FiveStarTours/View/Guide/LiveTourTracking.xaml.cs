@@ -21,19 +21,20 @@ namespace FiveStarTours.View.Guide
         private readonly LiveTourRepository _liveTourRepository;
         private readonly AttendanceRepository _attendanceRepository;
         private readonly TourReservationRepository _tourReservationRepository;
+        private readonly UserRepository _userRepository;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public ObservableCollection<string> Checkpoints { get; set; }
         public ObservableCollection<bool> IsChecked { get; set; }
 
         public List<string> Visitor { get ; set; } 
-        Tour tour { get; set; }
         LiveTour liveTour { get; set; }
         public LiveTourTracking(Tour selectedTour)
         {
             _liveTourRepository = new LiveTourRepository();
             _attendanceRepository = new AttendanceRepository();
             _tourReservationRepository = new TourReservationRepository();
+            _userRepository = new UserRepository();
             if (StartLiveTour(selectedTour))
             {
                 InitializeComponent();
@@ -89,7 +90,7 @@ namespace FiveStarTours.View.Guide
 
             tour.KeyPoints = tour.getKeyPointsById(tour.IdKeyPoints);
             tour.KeyPoints.ElementAt(0).Visited = true;
-            liveTour = new LiveTour(tour.Id, tour.Name, tour.OneBeginningTime, tour.IdKeyPoints, tour.KeyPoints, Visitor, true, false);
+            liveTour = new LiveTour(tour.Id, tour.Name, tour.OneBeginningTime, tour.IdKeyPoints, tour.KeyPoints, true, false);
             _liveTourRepository.Save(liveTour);
             
             return true;
@@ -154,11 +155,10 @@ namespace FiveStarTours.View.Guide
 
             if (result == MessageBoxResult.Yes)
             {
-                //liveTour.Visitors[item] = true;
-                //int idVisitor = _visitorRepository.FindIdByName(item);
-                //int idKeyPoint = FindLastVisited(liveTour);
-                //Attendance attendance = new Attendance(idKeyPoint, idVisitor);
-                //_attendanceRepository.Save(attendance);
+                int idVisitor = _userRepository.FindIdByName(item);
+                int idKeyPoint = FindLastVisited(liveTour);
+                Attendance attendance = new Attendance(liveTour.IdTour,idKeyPoint, idVisitor);
+                _attendanceRepository.Save(attendance);
             }
             else
             {
