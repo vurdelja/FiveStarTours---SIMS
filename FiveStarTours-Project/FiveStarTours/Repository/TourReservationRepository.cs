@@ -62,6 +62,22 @@ namespace FiveStarTours.Repository
             }
             return reservedSeats;
         }
+
+        public List<string> GetAllVisitors(Tour tour)
+        {
+            List<string> visitors = new List<string>();
+            foreach(var tourReservation in _tourReservations)
+            {
+                if(tourReservation.TourId == tour.Id)
+                {
+                    foreach(var name in tourReservation.VisitorName)
+                    {
+                        visitors.Add(name);
+                    }
+                }
+            }
+            return visitors;
+        }
     }
 }
    
