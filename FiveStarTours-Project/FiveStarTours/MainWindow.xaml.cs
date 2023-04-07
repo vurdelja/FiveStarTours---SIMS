@@ -96,8 +96,9 @@ namespace FiveStarTours
             }
             else if (String.Equals(user.Role.ToLower(), "guide"))
             {
-                Tours tours = new Tours();
+                Tours tours = new Tours(user);
                 tours.Show();
+                Close();
             }
             else if (String.Equals(user.Role.ToLower(), "visitor"))
             {

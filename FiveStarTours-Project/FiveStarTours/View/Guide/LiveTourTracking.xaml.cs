@@ -19,6 +19,7 @@ namespace FiveStarTours.View.Guide
     public partial class LiveTourTracking : Window, INotifyPropertyChanged
     {
         private readonly LiveTourRepository _liveTourRepository;
+        private readonly AttendanceRepository _attendanceRepository;
         private readonly TourReservationRepository _tourReservationRepository;
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -30,18 +31,15 @@ namespace FiveStarTours.View.Guide
         LiveTour liveTour { get; set; }
         public LiveTourTracking(Tour selectedTour)
         {
-            selectedTour.Id += 1;
             _liveTourRepository = new LiveTourRepository();
+            _attendanceRepository = new AttendanceRepository();
             _tourReservationRepository = new TourReservationRepository();
             if (StartLiveTour(selectedTour))
             {
                 InitializeComponent();
-                _liveTourRepository.Save(liveTour);
                 DataContext = liveTour;
-                Checkpoints = new ObservableCollection<string>();
-                IsChecked = new ObservableCollection<bool>();
                 Show();
-            }
+            } 
         }
         public bool CheckVisitors(TourReservationRepository visitorRepository, Tour tour)
         {
@@ -77,7 +75,7 @@ namespace FiveStarTours.View.Guide
             liveTour = new LiveTour(tour.Id, tour.Name, tour.OneBeginningTime, tour.IdKeyPoints, tour.KeyPoints, true, false);
             foreach (var livetour in _liveTourRepository.GetAll())
             {
-                if (livetour.Ended && livetour.Date.Date == liveTour.Date.Date && string.Equals(livetour.Name, liveTour.Name, StringComparison.OrdinalIgnoreCase))
+                if (livetour.Ended && livetour.Date == tour.OneBeginningTime && string.Equals(tour.Name, livetour.Name, StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show("This tour is already over");
                     return false;
@@ -88,6 +86,12 @@ namespace FiveStarTours.View.Guide
                     return false;
                 }
             }
+
+            tour.KeyPoints = tour.getKeyPointsById(tour.IdKeyPoints);
+            tour.KeyPoints.ElementAt(0).Visited = true;
+            liveTour = new LiveTour(tour.Id, tour.Name, tour.OneBeginningTime, tour.IdKeyPoints, tour.KeyPoints, Visitor, true, false);
+            _liveTourRepository.Save(liveTour);
+            
             return true;
         }
 
@@ -97,7 +101,6 @@ namespace FiveStarTours.View.Guide
             _liveTourRepository.FindIdAndSave(liveTour, liveTour.Id);
             Close();
         }
-
         private void CheckPoint_Checked(object sender, RoutedEventArgs e)
         {
             bool allChecked = true;
@@ -152,11 +155,29 @@ namespace FiveStarTours.View.Guide
             if (result == MessageBoxResult.Yes)
             {
                 //liveTour.Visitors[item] = true;
+                //int idVisitor = _visitorRepository.FindIdByName(item);
+                //int idKeyPoint = FindLastVisited(liveTour);
+                //Attendance attendance = new Attendance(idKeyPoint, idVisitor);
+                //_attendanceRepository.Save(attendance);
             }
             else
             {
                 ((CheckBox)sender).IsChecked = false;
             }
+        }
+
+        public int FindLastVisited(LiveTour liveTour)
+        {
+            var keyPoints = liveTour.KeyPoints;
+            foreach (var keyPoint in keyPoints)
+            {
+                if (keyPoint.Visited == false)
+                {
+                    return keyPoint.Id - 1;
+                }
+            }
+
+            return 0;
         }
 
     }

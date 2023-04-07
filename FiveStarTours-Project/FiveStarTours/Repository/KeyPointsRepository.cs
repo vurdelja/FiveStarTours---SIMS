@@ -70,6 +70,5 @@ namespace FiveStarTours.Repository
             }
             return result;
         }
-
     }
 }
