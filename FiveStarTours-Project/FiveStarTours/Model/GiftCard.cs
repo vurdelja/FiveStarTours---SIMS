@@ -13,7 +13,7 @@ namespace FiveStarTours.Model
         public int Id { get; set; }
         public int UserId { get; set; }
         public DateTime ExpiringDate { get; set; }
-        
+
         public GiftCard() { }
 
         public GiftCard( int userId, DateTime expiringDate)
