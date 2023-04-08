@@ -78,6 +78,29 @@ namespace FiveStarTours.Repository
             }
             return visitors;
         }
+
+        public void DeleteById(Tour tour)
+        {
+            List <TourReservation> tourReservations = GetAll();
+            _tourReservations = _serializerVisitor.FromCSV(FilePath);
+            foreach (TourReservation tourReservation in tourReservations)
+            {
+                if(tourReservation.TourId == tour.Id && tourReservation.DateTime == tour.OneBeginningTime)
+                {
+                    Delete(tourReservation);
+                }
+            }
+
+            _serializerVisitor.ToCSV(FilePath, _tourReservations);
+        }
+
+        public void Delete(TourReservation tourReservation)
+        {
+            _tourReservations = GetAll();
+            TourReservation founded = _tourReservations.Find(t => t.Id == tourReservation.Id);
+            _tourReservations.Remove(founded);
+            _serializerVisitor.ToCSV(FilePath, _tourReservations);
+        }
     }
 }
    

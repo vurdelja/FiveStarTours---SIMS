@@ -110,8 +110,8 @@ namespace FiveStarTours.View
                 {
                     int Visitor = _userRepository.FindIdByName(visitor);
                     Visitors.Add(Visitor);
-
                 }
+
                 foreach (int id in Visitors)
                 {
                     GiftCard giftCard = new GiftCard(id, DateTime.Today.AddYears(1));
@@ -119,7 +119,8 @@ namespace FiveStarTours.View
                 }
 
                 _toursRepository.DeleteByDate(SelectedTour);
-                
+                _tourReservationRepository.DeleteById(SelectedTour);
+   
             }
         }
 

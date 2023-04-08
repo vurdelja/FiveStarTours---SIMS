@@ -102,9 +102,10 @@ namespace FiveStarTours.Repository
                     if (founded.Beginning.Count == 0)
                     {
                         _tours.Remove(founded);
-                        break;
                     }
-                }  
+                    break;
+                }
+                
             }
             _serializer.ToCSV(FilePath, _tours);
         }
