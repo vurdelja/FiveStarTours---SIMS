@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.View.Visitor;
 
 namespace FiveStarTours.View.Guide
 {
@@ -153,21 +154,32 @@ namespace FiveStarTours.View.Guide
             string item = (string)((CheckBox)sender).Content;
 
             // Poslati notifikaciju i cekati odgovor
-            MessageBoxResult result = MessageBox.Show($"Do you want to check {item}?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            if (result == MessageBoxResult.Yes)
+            //MessageBoxResult result = MessageBox.Show($"Do you want to send request for attendance for {item}?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            User User = new User();
+            foreach(User user in _userRepository.GetAll())
             {
+                if(user.Name == item)
+                {
+                    User = user;
+                }
+            }
+            Notification.User = User;
+            Notification.SentNotification = true;
+            if (Notification.Answer)
+            {
+                MessageBox.Show($"The visitor {item} has confirmed his/hers presence.");
                 int idVisitor = _userRepository.FindIdByName(item);
                 int idKeyPoint = FindLastVisited(liveTour);
                 Attendance attendance = new Attendance(liveTour.IdTour,idKeyPoint, idVisitor);
                 _attendanceRepository.Save(attendance);
+                Notification.Answer = false;
             }
             else
             {
+                MessageBox.Show($"The visitor {item} has not confirmed his/hers presence.");
                 ((CheckBox)sender).IsChecked = false;
             }
         }
-
         public int FindLastVisited(LiveTour liveTour)
         {
             var keyPoints = liveTour.KeyPoints;

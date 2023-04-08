@@ -28,10 +28,6 @@ namespace FiveStarTours.View.Visitor
             InitializeComponent();
            
         }
-        private void NotificationReceived()
-        {
-            notificationReceived = true;
-        }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -49,16 +45,30 @@ namespace FiveStarTours.View.Visitor
 
         private void NotificationsButton_Click(object sender, RoutedEventArgs e)
         {
-            
-            if (!notificationReceived)
-            {
-                MessageBox.Show("No notifications yet");
+            notificationReceived = Notification.SentNotification;
 
+            // Check if there are any notifications
+            if (!notificationReceived || Notification.User.Id != LoggedInUser.Id)
+            {
+                MessageBox.Show("There are no notifications.", "No Notifications", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
             }
             else
             {
-                NotificationsView notificationsView = new NotificationsView(LoggedInUser);
-                notificationsView.Show();
+                NotificationsView notificationWindow = new NotificationsView(LoggedInUser);
+                notificationWindow.ShowDialog();
+
+                if (notificationWindow.UserResponse == "yes")
+                {
+                    Notification.Answer = true;
+
+                }
+                else if (notificationWindow.UserResponse == "no")
+                {
+                    Notification.Answer = false;
+                }
+
+                Notification.SentNotification = false;
             }
         }
 

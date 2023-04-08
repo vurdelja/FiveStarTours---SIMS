@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.View.Guide;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,6 +26,7 @@ namespace FiveStarTours.View.Visitor
     {
         public User LoggedInUser { get; set; }
         public readonly GiftCardRepository _repository;
+        public string UserResponse { get; set; }
         public NotificationsView(User user)
         {
             LoggedInUser = user;
@@ -42,6 +44,7 @@ namespace FiveStarTours.View.Visitor
 
         private void NoButton_Click(object sender, RoutedEventArgs e)
         {
+            UserResponse = "false";
             MessageBox.Show("OK");
 
         }
@@ -49,6 +52,7 @@ namespace FiveStarTours.View.Visitor
         private int yesCounter = 0;
         private void YesButton_Click(object sender, RoutedEventArgs e)
         {
+            UserResponse = "yes";
             yesCounter++;
             MessageBox.Show("OK");
             if(yesCounter == 5)
@@ -61,7 +65,6 @@ namespace FiveStarTours.View.Visitor
             }
             Close();
         }
-
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             VisitorMainWindow visitorMainView = new VisitorMainWindow(LoggedInUser);
