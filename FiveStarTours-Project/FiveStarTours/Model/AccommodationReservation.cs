@@ -21,6 +21,7 @@ namespace FiveStarTours.Model
         public int GuestNumber { get; set; }
 
         public bool RatedByOwner { get; set; }
+        public bool RatedByGuest { get; set; }
 
         public AccommodationReservation(string name, string surname, DateTime startDate, DateTime endDate, int visitationDays, string accommodationName, int guestNum)
         {
@@ -32,6 +33,7 @@ namespace FiveStarTours.Model
             this.AccommodationName = accommodationName;
             this.GuestNumber = guestNum;
             RatedByOwner = false;
+            RatedByGuest = false;
         }
         public AccommodationReservation()
         { }
@@ -48,7 +50,8 @@ namespace FiveStarTours.Model
                 VisitationDays.ToString(),
                 AccommodationName,
                 GuestNumber.ToString(),
-                RatedByOwner.ToString()
+                RatedByOwner.ToString(),
+                RatedByGuest.ToString()
 
             };
 
@@ -67,6 +70,7 @@ namespace FiveStarTours.Model
             AccommodationName = values[6];
             GuestNumber = Convert.ToInt32(values[7]);
             RatedByOwner = Convert.ToBoolean(values[8]);
+            RatedByGuest = Convert.ToBoolean(values[9]);
         }
 
     }

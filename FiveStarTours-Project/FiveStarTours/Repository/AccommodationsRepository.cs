@@ -29,7 +29,6 @@ namespace FiveStarTours.Repository
         {
             return GetAllAccomodationBindLocation();
         }
-
         public List<Accommodation> GetAllAccomodationBindLocation()
         {
             LocationsRepository locationsRepository = new LocationsRepository();

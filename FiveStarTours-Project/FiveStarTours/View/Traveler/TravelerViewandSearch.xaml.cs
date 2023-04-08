@@ -200,6 +200,10 @@ namespace FiveStarTours.View.Traveler
 
         }
 
-
+        private void ViewReservations(object sender, RoutedEventArgs e)
+        {
+            ReservationsView reservationsView = new ReservationsView();
+            reservationsView.Show();
+        }
     }
 }

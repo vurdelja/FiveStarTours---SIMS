@@ -64,7 +64,7 @@ namespace FiveStarTours.View.Traveler
 
             FreeDates = new ObservableCollection<DateInterval>(freeIntervals);
             AccommodationName = accommodationName;
-            accommodationReservationsRepository = new AccommodationReservationsRepository();
+            accommodationReservationsRepository =AccommodationReservationsRepository.GetInstace();
             accommodationsRepository = new AccommodationsRepository();
 
 

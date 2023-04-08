@@ -13,8 +13,16 @@ namespace FiveStarTours.Repository
         private const string FilePath = "../../../Resources/Data/users.csv";
 
         private readonly Serializer<User> _serializer;
-
+        private static UserRepository instance = null;
         private List<User> _users;
+        public static UserRepository GetInstace()
+        {
+            if (instance == null)
+            {
+                instance = new UserRepository();
+            }
+            return instance;
+        }
 
         public UserRepository()
         {

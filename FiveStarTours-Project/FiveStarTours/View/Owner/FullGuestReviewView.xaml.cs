@@ -38,7 +38,7 @@ namespace FiveStarTours.View.Owner
 
             _selectedReservation = selectedReservation;
 
-            _rateRepository = new AccommodationRatingRepository();
+            _rateRepository = AccommodationRatingRepository.GetInstace();
 
             accommodationRating = new AccommodationRating();
             accommodationRating = _rateRepository.GetById(selectedReservation.Id);

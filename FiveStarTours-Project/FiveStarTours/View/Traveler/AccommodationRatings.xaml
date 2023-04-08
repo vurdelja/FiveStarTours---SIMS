@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FiveStarTours.View.Traveler"
         mc:Ignorable="d"
-        Title="AccommodationRatings" Height="450" Width="800">
+        Title="AccommodationRatings" Height="460" Width="800">
     <Grid Background="#FFF4DFDF" Margin="0,0,0,-35">
         <Label Content="Rate accommodation " FontWeight="Bold" FontSize="20" Margin="0,0,0,404" Background="#FFEDBABA" HorizontalContentAlignment="Center"/>
         <Label Content="!!1-Strongly disagree 2-Disagree 3-No opinion 4- Agree 5-Strongly agree!!" HorizontalAlignment="Left" Margin="19,30,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" Width="771" Foreground="#FFF10A0A" HorizontalContentAlignment="Center" FontStyle="Italic" BorderBrush="#FFE31818" BorderThickness="4,4,4,4" IsEnabled="False"/>

@@ -14,8 +14,17 @@ namespace FiveStarTours.Repository
 
         private readonly Serializer<AccommodationRating> _serializer;
 
-        private List<AccommodationRating> _accratings;
+        private static AccommodationRatingRepository instance = null;
 
+        private List<AccommodationRating> _accratings;
+        public static AccommodationRatingRepository GetInstace()
+        {
+            if (instance == null)
+            {
+                instance = new AccommodationRatingRepository();
+            }
+            return instance;
+        }
         public AccommodationRatingRepository()
         {
             _serializer = new Serializer<AccommodationRating>();
@@ -68,6 +77,18 @@ namespace FiveStarTours.Repository
             _accratings.Insert(index, rating);
             _serializer.ToCSV(FilePath, _accratings);
             return rating;
+        }
+
+        public bool ExistsRateForReservation(int reservationId)
+        {
+            foreach(AccommodationRating rating in _accratings)
+            {
+                if(rating.AccommodationReservation.Id == reservationId)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
     }

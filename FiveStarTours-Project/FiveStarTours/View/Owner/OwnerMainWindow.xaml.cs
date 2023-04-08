@@ -29,7 +29,7 @@ namespace FiveStarTours.View
             InitializeComponent();
             DataContext = this;
 
-            _repository = new AccommodationReservationsRepository();
+            _repository = AccommodationReservationsRepository.GetInstace();
 
             _repository.NotifyAboutUnratedGuests();
 

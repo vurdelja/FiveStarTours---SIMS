@@ -33,7 +33,7 @@ namespace FiveStarTours.View.Traveler
         {
             InitializeComponent();
             DataContext = this;
-            accommodationReservationsRepository= new AccommodationReservationsRepository();
+            accommodationReservationsRepository=AccommodationReservationsRepository.GetInstace();
             Reservations = new ObservableCollection<AccommodationReservation>(accommodationReservationsRepository.GetAll());
         }
         private string _guestName;
@@ -95,26 +95,56 @@ namespace FiveStarTours.View.Traveler
 
         private void Rate(object sender, RoutedEventArgs e)
         {
-            AccommodationRatings rating = new AccommodationRatings(SelectedReservation);
-            rating.Show();
+            if (SelectedReservation != null)
+            {
+                if (accommodationReservationsRepository.IsAbleToRate(SelectedReservation.Id))
+                {
+                    AccommodationRatings rating = new AccommodationRatings(SelectedReservation);
+                    rating.Show();
+                   
+                }
+                else
+                {
+                    MessageBox.Show("You are not able to rate");
+                }
+            }
+            else
+            {
+                MessageBox.Show("You must select accommodation to rate");
+
+            }
         }
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
-            string messageBoxText = "Are you sure you want to cancel this reservation?";
-            string caption = "Reservation cancelation";
-            MessageBoxButton button = MessageBoxButton.YesNo;
-            MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBoxResult result;
-
-            result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-            if (result == MessageBoxResult.Yes)
+            if (SelectedReservation != null)
             {
-
+                MessageBoxResult result = MessageBox.Show("Are you sure?", "Cancel reservation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    accommodationReservationsRepository.Delete(SelectedReservation);
+                    Reservations.Remove(SelectedReservation);
+                }
             }
             else
             {
-                return;
+                MessageBox.Show("You must select accommodation to cancel");
+
+            }
+        }
+
+        private void Change(object sender, RoutedEventArgs e)
+        {
+            if (SelectedReservation != null)
+
+            {
+                ChangeReservation change = new ChangeReservation();
+                change.Show();
+            }
+            else
+            {
+                MessageBox.Show("You must select accommodation to change");
+
             }
         }
     }

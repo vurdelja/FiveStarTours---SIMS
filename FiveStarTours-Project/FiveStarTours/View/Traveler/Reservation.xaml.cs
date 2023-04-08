@@ -46,7 +46,7 @@ namespace FiveStarTours.View.Traveler
         {
             InitializeComponent();
             DataContext = this;
-            accommodationReservationsRepository = new AccommodationReservationsRepository();
+            accommodationReservationsRepository = AccommodationReservationsRepository.GetInstace();
             SelectedAccommodation = selectedAccommoodation;
             StartDate = DateTime.Now;
             EndDate = DateTime.Now;
