@@ -99,7 +99,12 @@ namespace FiveStarTours.Repository
                 if(date == tour.OneBeginningTime)
                 {
                     founded.Beginning.Remove(date);
-                }
+                    if (founded.Beginning.Count == 0)
+                    {
+                        _tours.Remove(founded);
+                        break;
+                    }
+                }  
             }
             _serializer.ToCSV(FilePath, _tours);
         }

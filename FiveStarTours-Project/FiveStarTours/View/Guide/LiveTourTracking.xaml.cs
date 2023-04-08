@@ -91,6 +91,7 @@ namespace FiveStarTours.View.Guide
             tour.KeyPoints = tour.getKeyPointsById(tour.IdKeyPoints);
             tour.KeyPoints.ElementAt(0).Visited = true;
             liveTour = new LiveTour(tour.Id, tour.Name, tour.OneBeginningTime, tour.IdKeyPoints, tour.KeyPoints, true, false);
+            liveTour.Visitors = Visitor;
             _liveTourRepository.Save(liveTour);
             
             return true;
@@ -151,6 +152,7 @@ namespace FiveStarTours.View.Guide
         {
             string item = (string)((CheckBox)sender).Content;
 
+            // Poslati notifikaciju i cekati odgovor
             MessageBoxResult result = MessageBox.Show($"Do you want to check {item}?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)

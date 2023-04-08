@@ -97,13 +97,22 @@ namespace FiveStarTours.View
             else
             { 
                 List<int> Visitors = new List<int>(); 
+                
+                foreach (Tour t in _toursRepository.GetAll())
+                {
+                    if (SelectedTour.Name == t.Name)
+                    {
+                        SelectedTour.Id = t.Id;
+                    }
+                }
+
                 foreach (string visitor in _tourReservationRepository.GetAllVisitors(SelectedTour))
                 {
                     int Visitor = _userRepository.FindIdByName(visitor);
                     Visitors.Add(Visitor);
 
                 }
-                foreach(int id in Visitors)
+                foreach (int id in Visitors)
                 {
                     GiftCard giftCard = new GiftCard(id, DateTime.Today.AddYears(1));
                     _giftCardRepository.Save(giftCard);
