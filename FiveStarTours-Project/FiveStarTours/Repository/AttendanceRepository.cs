@@ -153,5 +153,13 @@ namespace FiveStarTours.Repository
 
             return result;
         }
+
+        public int  GetMostVisitedTour()
+        {
+            int id;
+            _attendances = GetAll();
+            id = _attendances.GroupBy(a => a.IdTour).OrderByDescending(t => t.Count()).Select(mv => mv.Key).FirstOrDefault();
+            return id;
+        }
     }
 }

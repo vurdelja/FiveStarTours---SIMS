@@ -170,7 +170,7 @@ namespace FiveStarTours.View.Guide
                 MessageBox.Show($"The visitor {item} has confirmed his/hers presence.");
                 int idVisitor = _userRepository.FindIdByName(item);
                 int idKeyPoint = FindLastVisited(liveTour);
-                Attendance attendance = new Attendance(liveTour.IdTour,idKeyPoint, idVisitor);
+                Attendance attendance = new Attendance(liveTour.Id,liveTour.IdTour, idVisitor, idKeyPoint);
                 _attendanceRepository.Save(attendance);
                 Notification.Answer = false;
             }

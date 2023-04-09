@@ -28,10 +28,10 @@ namespace FiveStarTours.View.Guide
         private readonly AttendanceRepository _attendanceRepository;
         private readonly UserRepository _userRepository;
         private readonly TourReservationRepository _tourReservationRepository;
+        private readonly ToursRepository _toursRepository;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public List<int> Years { get; } = Enumerable.Range(2000, DateTime.Now.Year - 2000 + 1).ToList();
-
         public Statistics()
         {
             InitializeComponent();
@@ -39,8 +39,10 @@ namespace FiveStarTours.View.Guide
             _attendanceRepository = new AttendanceRepository();
             _userRepository = new UserRepository();
             _tourReservationRepository = new TourReservationRepository();
+            _toursRepository = new ToursRepository();
             DataContext = this;
 
+            MostVisited.Text = GetMostVisitedAllTime();
 
             List<string> endedTours = _liveTourRepository.GetEndedTours();
             EndedTours.ItemsSource = endedTours;
@@ -115,10 +117,18 @@ namespace FiveStarTours.View.Guide
             return Convert.ToString(number);
         }
 
+        public string GetMostVisitedAllTime()
+        {
+            int id;
+            string result;
+            id = _attendanceRepository.GetMostVisitedTour();
+            result = _toursRepository.GetById(id).Name;
+            return result;
+        }
+
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
     }
 }
