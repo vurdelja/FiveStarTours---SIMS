@@ -15,6 +15,8 @@ namespace FiveStarTours.Model
         public string Password { get; set; }
         public string Role { get; set; }    
 
+        public bool Super { get; set; }
+
 
         public User() { }
 
@@ -23,11 +25,12 @@ namespace FiveStarTours.Model
             Id = id;
             Username = username;
             Password = password;
+            Super = false;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Username, Password ,Role};
+            string[] csvValues = { Id.ToString(), Username, Password ,Role, Super.ToString() };
             return csvValues;
         }
 
@@ -37,7 +40,7 @@ namespace FiveStarTours.Model
             Username = values[1];
             Password = values[2];
             Role = values[3];   
-
+            Super = Convert.ToBoolean(values[4]);
         }
 
 

@@ -76,6 +76,8 @@ namespace FiveStarTours.Repository
             return reservation;
         }
 
+
+        //SHOW UNRATED GUESTS FOR OWNER TO RATE
         public List<AccommodationReservation> GetUnratedAndLessThanFiveDaysAgo()
         {
             List<AccommodationReservation> reservations = new List<AccommodationReservation>();
@@ -95,6 +97,7 @@ namespace FiveStarTours.Repository
  
         }
 
+        //SHOW GUEST REVIEWS TO OWNER
         public List<AccommodationReservation> GetRatedByOwner()
         {
             List<AccommodationReservation> reservations = new List<AccommodationReservation>();
@@ -108,8 +111,27 @@ namespace FiveStarTours.Repository
             return reservations;
         }
 
+        //SHOW GUEST REVIEWS TO OWNER
+
+        /*
+        public List<AccommodationReservation> GetRatedByOwnerAndGuest()
+        {
+            List<AccommodationReservation> reservations = new List<AccommodationReservation>();
+            reservations = GetRatedByOwner();
+
+            foreach (AccommodationReservation accommodationReservation in _reservations)
+            {
+                if (accommodationReservation.RatedByGuest == false)
+                {
+                    reservations.Remove(accommodationReservation);
+                }
+            }
+            return reservations;
+        }
+        */
 
 
+        //NOTIFICATION FOR OWNER ABOUT UNRATED GUESTS
         public int CountUnrated()
         {
             int unrated = 0;
@@ -140,6 +162,7 @@ namespace FiveStarTours.Repository
             }
             
         }
+        //END
 
         public bool DatesIntertwine(DateTime startAcc, DateTime endAcc, DateTime start, DateTime end)
         {

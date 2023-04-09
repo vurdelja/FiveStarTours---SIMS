@@ -1,0 +1,17 @@
+﻿<Window x:Class="FiveStarTours.View.Owner.SuperOwnerView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FiveStarTours.View.Owner"
+        mc:Ignorable="d"
+        Title="SuperOwnerView" Height="750" Width="430">
+    <Grid>
+        <Label Content="Are you the super-owner?" HorizontalAlignment="Center" Margin="0,40,0,0" VerticalAlignment="Top" Width="334" Height="56" FontSize="24" FontWeight="Bold"/>
+        <Label Content="Average rate:" HorizontalAlignment="Center" Margin="0,311,0,0" VerticalAlignment="Top" Width="334" Height="56" FontSize="24" FontWeight="Bold"/>
+        <Label Content="Number of reviews:" HorizontalAlignment="Center" Margin="0,218,0,0" VerticalAlignment="Top" Width="225" Height="56" FontSize="20" FontWeight="Bold"/>
+        <TextBox Text="{Binding Path=NumberOfReviews}" Margin="243,274,67,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding Path = AverageRate}" Margin="278,321,32,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

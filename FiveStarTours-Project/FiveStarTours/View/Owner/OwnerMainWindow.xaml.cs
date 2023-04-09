@@ -23,13 +23,16 @@ namespace FiveStarTours.View
     public partial class OwnerMainWindow : Window
     {
         private readonly AccommodationReservationsRepository _repository;
+        public User LoggedInUser { get; set; }
 
-        public OwnerMainWindow()
+        public OwnerMainWindow(User user)
         {
             InitializeComponent();
             DataContext = this;
 
             _repository = new AccommodationReservationsRepository();
+
+            LoggedInUser= user;
 
             _repository.NotifyAboutUnratedGuests();
 
@@ -53,7 +56,13 @@ namespace FiveStarTours.View
             guestRating.Show();
         }
 
-        
+        private void SuperOwnerButton_Click(object sender, RoutedEventArgs e)
+        {
+            SuperOwnerView superOwner = new SuperOwnerView(LoggedInUser);
+            superOwner.Show();
+        }
+
+
 
 
 

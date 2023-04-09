@@ -27,5 +27,11 @@
                 VerticalAlignment="Top" 
                 Height="47" Width="213" 
                 Click="GuestReviewsButton_Click"/>
+        <Button Content="Super owner" 
+            HorizontalAlignment="Left" 
+            Margin="92,97,0,0" 
+            VerticalAlignment="Top" 
+            Height="47" Width="213" 
+            Click="SuperOwnerButton_Click"/>
     </Grid>
 </Window>
