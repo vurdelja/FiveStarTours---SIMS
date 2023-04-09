@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FiveStarTours.Model;
 using FiveStarTours.Serializer;
+using FiveStarTours.View;
 
 namespace FiveStarTours.Repository
 {
@@ -34,6 +35,20 @@ namespace FiveStarTours.Repository
             _serializer.ToCSV(FilePath, _keyPoints);
             return keyPoint;
         }
+        
+        public string GetById(int id)
+        {
+            string result = null;
+            _keyPoints = GetAll();
+            foreach (KeyPoints keyPoints in _keyPoints)
+            {
+                if (keyPoints.Id == id)
+                {
+                   result = keyPoints.Name;
+                }
+            }
+            return result;
+        }
 
         public int NextId()
         {
@@ -55,6 +70,5 @@ namespace FiveStarTours.Repository
             }
             return result;
         }
-
     }
 }

@@ -2,6 +2,7 @@
 using FiveStarTours.Repository;
 using FiveStarTours.View;
 using FiveStarTours.View.Traveler;
+using FiveStarTours.View.Visitor;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -95,12 +96,12 @@ namespace FiveStarTours
             }
             else if (String.Equals(user.Role.ToLower(), "guide"))
             {
-                Tours tours = new Tours();
+                Tours tours = new Tours(user);
                 tours.Show();
             }
             else if (String.Equals(user.Role.ToLower(), "visitor"))
             {
-                VisitorMainWindow visitorMainWindow = new VisitorMainWindow();
+                VisitorMainWindow visitorMainWindow = new VisitorMainWindow(user);
                 visitorMainWindow.Show();
             }
             else 

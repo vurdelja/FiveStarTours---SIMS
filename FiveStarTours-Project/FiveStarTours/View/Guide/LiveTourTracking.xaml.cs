@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.View.Visitor;
 
 namespace FiveStarTours.View.Guide
 {
@@ -19,69 +20,33 @@ namespace FiveStarTours.View.Guide
     public partial class LiveTourTracking : Window, INotifyPropertyChanged
     {
         private readonly LiveTourRepository _liveTourRepository;
-        private readonly VisitorRepository _visitorRepository;
+        private readonly AttendanceRepository _attendanceRepository;
+        private readonly TourReservationRepository _tourReservationRepository;
+        private readonly UserRepository _userRepository;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public ObservableCollection<string> Checkpoints { get; set; }
         public ObservableCollection<bool> IsChecked { get; set; }
 
-        Tour tour { get; set; }
+        public List<string> Visitor { get ; set; } 
         LiveTour liveTour { get; set; }
         public LiveTourTracking(Tour selectedTour)
         {
-            selectedTour.Id += 1;
             _liveTourRepository = new LiveTourRepository();
-            _visitorRepository = new VisitorRepository();
+            _attendanceRepository = new AttendanceRepository();
+            _tourReservationRepository = new TourReservationRepository();
+            _userRepository = new UserRepository();
             if (StartLiveTour(selectedTour))
             {
                 InitializeComponent();
-                _liveTourRepository.Save(liveTour);
                 DataContext = liveTour;
-                Checkpoints = new ObservableCollection<string>();
-                IsChecked = new ObservableCollection<bool>();
                 Show();
-            }
+            } 
         }
-
-        // Dictionary of visitors for tracking 
-
-        Dictionary<string, bool> Visitor;
-
-        public Dictionary<string, bool> GetAllVisitors(VisitorRepository visitorRepository, Tour tour)
+        public bool CheckVisitors(TourReservationRepository visitorRepository, Tour tour)
         {
-            Dictionary<string, bool> Visitors = new Dictionary<string, bool>();
-            List<Visitor> visitors = new List<Visitor>();
-            foreach(var v in _visitorRepository.GetAll())
-            {
-                if(tour.Id == v.TourId && tour.OneBeginningTime == v.DateTime)
-                {
-                    visitors.Add(v);
-                }
-            }
-
-            List<string> Names = new List<string>();
-
-            foreach(var visitor in visitors)
-            {
-                Names.Add(visitor.VisitorName);
-            }
-
-            foreach(var name in Names)
-            {
-                Visitors.Add(name, false);
-            }
-
-            if (Visitors.Count < 1)
-            {
-                Close();
-            }
-            return Visitors;
-        }
-
-        public bool CheckVisitors(VisitorRepository visitorRepository, Tour tour)
-        {
-            List<Visitor> visitors = new List<Visitor>();
-            foreach (var v in _visitorRepository.GetAll())
+            List<TourReservation> visitors = new List<TourReservation>();
+            foreach (var v in _tourReservationRepository.GetAll())
             {
                 if (tour.Id == v.Id && tour.OneBeginningTime == v.DateTime)
                 {
@@ -100,19 +65,19 @@ namespace FiveStarTours.View.Guide
         {
             tour.KeyPoints = tour.getKeyPointsById(tour.IdKeyPoints);
             tour.KeyPoints.ElementAt(0).Visited = true;
-            if(CheckVisitors(_visitorRepository, tour))
+            if(CheckVisitors(_tourReservationRepository, tour))
             {
-                Visitor = GetAllVisitors(_visitorRepository, tour);
+                Visitor = _tourReservationRepository.GetAllVisitors(tour);
             }
             else
             {
                 MessageBox.Show("No visitors on this tour!");
                 return false;
             }
-            liveTour = new LiveTour(tour.Id, tour.Name, tour.OneBeginningTime, tour.IdKeyPoints, tour.KeyPoints, Visitor, true, false);
+            liveTour = new LiveTour(tour.Id, tour.Name, tour.OneBeginningTime, tour.IdKeyPoints, tour.KeyPoints, true, false);
             foreach (var livetour in _liveTourRepository.GetAll())
             {
-                if (livetour.Ended && livetour.Date.Date == liveTour.Date.Date && string.Equals(livetour.Name, liveTour.Name, StringComparison.OrdinalIgnoreCase))
+                if (livetour.Ended && livetour.Date == tour.OneBeginningTime && string.Equals(tour.Name, livetour.Name, StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show("This tour is already over");
                     return false;
@@ -123,6 +88,13 @@ namespace FiveStarTours.View.Guide
                     return false;
                 }
             }
+
+            tour.KeyPoints = tour.getKeyPointsById(tour.IdKeyPoints);
+            tour.KeyPoints.ElementAt(0).Visited = true;
+            liveTour = new LiveTour(tour.Id, tour.Name, tour.OneBeginningTime, tour.IdKeyPoints, tour.KeyPoints, true, false);
+            liveTour.Visitors = Visitor;
+            _liveTourRepository.Save(liveTour);
+            
             return true;
         }
 
@@ -132,7 +104,6 @@ namespace FiveStarTours.View.Guide
             _liveTourRepository.FindIdAndSave(liveTour, liveTour.Id);
             Close();
         }
-
         private void CheckPoint_Checked(object sender, RoutedEventArgs e)
         {
             bool allChecked = true;
@@ -182,16 +153,45 @@ namespace FiveStarTours.View.Guide
         {
             string item = (string)((CheckBox)sender).Content;
 
-            MessageBoxResult result = MessageBox.Show($"Do you want to check {item}?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            if (result == MessageBoxResult.Yes)
+            // Poslati notifikaciju i cekati odgovor
+            //MessageBoxResult result = MessageBox.Show($"Do you want to send request for attendance for {item}?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            User User = new User();
+            foreach(User user in _userRepository.GetAll())
             {
-                liveTour.Visitors[item] = true;
+                if(user.Name == item)
+                {
+                    User = user;
+                }
+            }
+            Notification.User = User;
+            Notification.SentNotification = true;
+            if (Notification.Answer)
+            {
+                MessageBox.Show($"The visitor {item} has confirmed his/hers presence.");
+                int idVisitor = _userRepository.FindIdByName(item);
+                int idKeyPoint = FindLastVisited(liveTour);
+                Attendance attendance = new Attendance(liveTour.IdTour, idVisitor, idKeyPoint);
+                _attendanceRepository.Save(attendance);
+                Notification.Answer = false;
             }
             else
             {
+                MessageBox.Show($"The visitor {item} has not confirmed his/hers presence.");
                 ((CheckBox)sender).IsChecked = false;
             }
+        }
+        public int FindLastVisited(LiveTour liveTour)
+        {
+            var keyPoints = liveTour.KeyPoints;
+            foreach (var keyPoint in keyPoints)
+            {
+                if (keyPoint.Visited == false)
+                {
+                    return keyPoint.Id - 1;
+                }
+            }
+
+            return 0;
         }
 
     }

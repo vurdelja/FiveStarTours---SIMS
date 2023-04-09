@@ -11,7 +11,10 @@
             <ToolBar DockPanel.Dock="Top" Height="30" Width="797">
                 <Button x:Name="New"  Content="New" HorizontalAlignment="Left" VerticalAlignment="Top" Click="NewButton_Click"/>
                 <Button x:Name ="StartTour"  Content="Start" HorizontalAlignment="Left" VerticalAlignment="Top" Click="StartTourButton_CLick"/>
-                <DatePicker x:Name="ToursDate" HorizontalAlignment="Center" Height="23" Width="114" Margin="590,0,0,0" SelectedDateChanged="ToursDate_SelectedDateChanged"/>
+                <Button x:Name="Cancel" Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Click="CancelTour_Click"/>
+                <Button x:Name="Statistic" Content="Statistic" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Statistic_Click"/>
+                <DatePicker x:Name="ToursDate" HorizontalAlignment="Center" Height="23" Width="114" Margin="500,0,0,0" SelectedDateChanged="ToursDate_SelectedDateChanged"/>
+                
             </ToolBar>
             <StackPanel Width="776">
                 <DataGrid x:Name="DataGridTours" AutoGenerateColumns="False" Width="776" Height="383" IsReadOnly="True"

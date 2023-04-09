@@ -15,7 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace FiveStarTours.View
+namespace FiveStarTours.View.Visitor
 {
     /// <summary>
     /// Interaction logic for TourView.xaml
@@ -24,12 +24,15 @@ namespace FiveStarTours.View
     public partial class TourView : Window
     {
         //public static ObservableCollection<Tour> Tours { get; set; }
+        public User LoggedInUser { get; set; }
+
         public Tour SelectedTour { get; set; }
         private readonly ToursRepository _repository;
         public Tour tour { get; set; }
 
-        public TourView(Tour selectedTour)
+        public TourView(Tour selectedTour, User user)
         {
+            LoggedInUser = user;
             InitializeComponent();
             DataContext = this;
             _repository = new ToursRepository();
@@ -41,13 +44,13 @@ namespace FiveStarTours.View
 
         private void ReservationButton_Click(object sender, RoutedEventArgs e)
         {
-            ReservationView reservationView = new ReservationView(SelectedTour);
+            ReservationView reservationView = new ReservationView(SelectedTour, LoggedInUser);
             reservationView.Show();
         }
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-            ToursListingView toursListingView = new ToursListingView();
+            ToursListingView toursListingView = new ToursListingView(LoggedInUser);
             //this.Visibility = Visibility.Hidden;
             toursListingView.Show();
         }

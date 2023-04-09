@@ -13,20 +13,19 @@ namespace FiveStarTours.Model
         public DateTime Date { get; set; }
         public List<int> IdKeyPoints { get; set; }
         public List<KeyPoints> KeyPoints { get; set; }
-        public Dictionary<string, bool> Visitors { get; set; }
+        public List<string> Visitors { get; set; }
         public bool Started { get; set; }
         public bool Ended { get; set; }
 
         public LiveTour() { }
 
-        public LiveTour(int idTour, string name, DateTime date, List<int> idKeyPoints, List<KeyPoints> keyPoints, Dictionary<string, bool> visitors ,bool started, bool ended)
+        public LiveTour(int idTour, string name, DateTime date, List<int> idKeyPoints, List<KeyPoints> keyPoints, bool started, bool ended)
         {
             IdTour = idTour;
             Name = name;
             Date = date;
             IdKeyPoints = idKeyPoints;
             KeyPoints = keyPoints;
-            Visitors = visitors;
             Started = started;
             Ended = ended;
         }

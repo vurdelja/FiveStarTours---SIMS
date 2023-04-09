@@ -18,7 +18,7 @@ using FiveStarTours.Repository;
 using FiveStarTours.View;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace FiveStarTours.View
+namespace FiveStarTours.View.Visitor
 {
     /// <summary>
     /// Interaction logic for ToursListingView.xaml
@@ -26,15 +26,17 @@ namespace FiveStarTours.View
     /// 
 
     public partial class ToursListingView : Window
-    { 
+    {
+        public User LoggedInUser { get; set; }
         public static ObservableCollection<Tour> Tours { get; set; }
         public Tour SelectedTour{ get; set; }
         private readonly ToursRepository _repository;
 
 
 
-        public ToursListingView()
+        public ToursListingView(User user)
         {
+            LoggedInUser = user;
             InitializeComponent();
             DataContext = this;
             _repository = new ToursRepository();
@@ -52,7 +54,7 @@ namespace FiveStarTours.View
             
             if(SelectedTour != null)
             {
-                TourView tourView = new TourView(SelectedTour);
+                TourView tourView = new TourView(SelectedTour, LoggedInUser);
                 tourView.Show();
                 
             }
