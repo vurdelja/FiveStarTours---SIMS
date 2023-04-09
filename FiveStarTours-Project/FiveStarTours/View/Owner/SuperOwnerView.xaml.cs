@@ -33,7 +33,8 @@ namespace FiveStarTours.View.Owner
 
         public double AverageRate { get; set; }
 
-        
+        public bool IsSuperOwner { get; set; }
+
 
         public SuperOwnerView(User user)
         {
@@ -63,11 +64,21 @@ namespace FiveStarTours.View.Owner
                 _userRepository.Update(LoggedInUser);
             }
 
+            if(LoggedInUser.Super == true)
+            {
+                IsSuperOwner = true;
+            }
+            else
+            {
+                IsSuperOwner = false;
+            }
+
             return;
 
 
         }
-
+ 
+        
 
     }
 }

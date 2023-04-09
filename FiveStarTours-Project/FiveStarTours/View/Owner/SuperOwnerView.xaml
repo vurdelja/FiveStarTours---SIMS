@@ -6,12 +6,26 @@
         xmlns:local="clr-namespace:FiveStarTours.View.Owner"
         mc:Ignorable="d"
         Title="SuperOwnerView" Height="750" Width="430">
-    <Grid>
-        <Label Content="Are you the super-owner?" HorizontalAlignment="Center" Margin="0,40,0,0" VerticalAlignment="Top" Width="334" Height="56" FontSize="24" FontWeight="Bold"/>
-        <Label Content="Average rate:" HorizontalAlignment="Center" Margin="0,311,0,0" VerticalAlignment="Top" Width="334" Height="56" FontSize="24" FontWeight="Bold"/>
-        <Label Content="Number of reviews:" HorizontalAlignment="Center" Margin="0,218,0,0" VerticalAlignment="Top" Width="225" Height="56" FontSize="20" FontWeight="Bold"/>
-        <TextBox Text="{Binding Path=NumberOfReviews}" Margin="243,274,67,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding Path = AverageRate}" Margin="278,321,32,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+    <Grid ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="0,0,0,648">
+            <Label Content="Are you the super-owner?" FontSize="24" FontWeight="Bold" Height="52" Width="310"/>
+        </StackPanel>
+        <StackPanel Margin="0,91,0,557">
+            <CheckBox IsChecked="{Binding IsSuperOwner}" IsEnabled="False" Content="Super-owner" HorizontalAlignment="Center" FontSize="36" BorderThickness="10,10,10,10"/>
+        </StackPanel>
+        <StackPanel Margin="0,177,0,471"/>
+        <StackPanel Margin="0,312,0,336"/>
+        <StackPanel Margin="0,403,215,245">
+            <Label Content="Number of reviews:" FontSize="20"/>
+        </StackPanel>
+        <StackPanel Margin="0,489,215,159">
+            <Label Content="Average rate:" FontSize="20"/>
+        </StackPanel>
+        <TextBlock HorizontalAlignment="Left" Margin="294,403,0,0" TextWrapping="Wrap" Text="{Binding Path=NumberOfReviews}" VerticalAlignment="Top" Height="43" Width="80"/>
+        <TextBlock HorizontalAlignment="Left" Margin="294,489,0,0" TextWrapping="Wrap" Text="{Binding Path = AverageRate}" VerticalAlignment="Top" Height="43" Width="80"/>
 
     </Grid>
 </Window>
