@@ -58,5 +58,45 @@ namespace FiveStarTours.Repository
 
             _serializer.ToCSV(FilePath, _liveTours);
         }
+
+        public List<string> GetEndedTours()
+        {
+            List<string> result = new List<string>();
+            foreach (LiveTour liveTour in GetAll())
+            {
+                if (liveTour.Ended)
+                {
+                    result.Add(liveTour.Name);
+                }
+            }
+
+            return result;
+        }
+
+        public List<string> GetDates(string liveTour)
+        {
+            var result = new List<string>();
+            foreach(LiveTour lt in GetAll())
+            {
+                if(lt.Name == liveTour)
+                {
+                    result.Add(Convert.ToString(lt.Date));
+                }
+            }
+            return result;
+        }
+
+        public LiveTour GetByNameAndDate(string name, DateTime date)
+        {
+            LiveTour result = new LiveTour();
+            foreach(LiveTour lt in GetAll())
+            {
+                if(name == lt.Name && date == lt.Date)
+                {
+                    result = lt;
+                }
+            }
+            return result;
+        }
     }
 }

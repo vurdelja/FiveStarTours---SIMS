@@ -6,41 +6,41 @@
         xmlns:local="clr-namespace:FiveStarTours.View.Guide"
 
         mc:Ignorable="d"
-        Title="Statistics" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Statistics" Height="450" Width="600" WindowStartupLocation="CenterScreen">
     <Grid>
         <DockPanel>
             <Label DockPanel.Dock="Top" Content="Statistics" Height="50" Margin="135,0,135,0" FontSize="30" Width="125" ></Label>
             <Label DockPanel.Dock="Top" Height="27">Most visited tour (default - all time, choose year for most visited that year): </Label>
-            <ComboBox DockPanel.Dock="Top" Margin="-700, 0, 0, 0" ItemsSource="{Binding YearList}" Width="50" />
-            <Border BorderThickness="1" BorderBrush="Black" Width="400" Height="286" Margin="-350, 0, 0, 0">
+            <ComboBox DockPanel.Dock="Top" Margin="-500, 0, 0, 0" ItemsSource="{Binding Years}" Width="70" />
+            <Border BorderThickness="1" BorderBrush="Black" Width="400" Height="286">
             <StackPanel DockPanel.Dock="Left" Width="400" Height="286">
                 <Label>Select ended tour which statistics you want to see:</Label>
-                <ComboBox Width="380"></ComboBox>
+                    <ComboBox x:Name="EndedTours"  Width="380" SelectionChanged="EndedToursComboBox_SelectionChanged"></ComboBox>
                     <StackPanel Orientation="Horizontal" Margin="0, 20, 20, 0" >
                         <Label Content=" Select date of tour :"></Label>
-                        <ComboBox Width="200"></ComboBox>
-
+                        <ComboBox x:Name="DateOfTour" Width="200" SelectionChanged="DateOfTour_SelectionChanged"></ComboBox>
+                        <Button x:Name="Search" Content="Search" Margin="10, 0, 0, 0" Click="Search_Click"> </Button>
                     </StackPanel>
                     <Label Content="Number of visitors on tour by years:" Margin="0, 20, 20, 0"></Label>
                 <StackPanel Orientation="Horizontal" >
                     <Label Content=" &lt;18 :" Width="50"></Label>
-                    <Label Width="50"></Label>
+                        <TextBox x:Name="LowerThan18" Width="50" Margin="-10, 3, 0, 3" IsReadOnly="True"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content=" 18 - 50 :"></Label>
-                    <Label Width="50"></Label>
+                        <TextBox x:Name="Between18and50" Width="50" Margin="0, 3, 0, 3" IsReadOnly="True"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content=" &gt;50 :"></Label>
-                    <Label Width="50"></Label>
+                        <TextBox x:Name="GreaterThan50" Width="50" Margin="0, 3, 0, 3" IsReadOnly="True"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content=" Percent of visitors with GitfCard: "></Label>
-                    <Label Width="50"></Label>
+                        <TextBox x:Name="WithGitfCards" Width="50" Margin="0, 3, 0, 3" IsReadOnly="True"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content=" Percent of visitors without GitfCard: "></Label>
-                    <Label Width="50"></Label>
+                    <TextBox x:Name="WithoutGitfCards" Width="50" Margin="0, 3, 0, 3" IsReadOnly="True"></TextBox>
                 </StackPanel>
             </StackPanel>
             </Border>

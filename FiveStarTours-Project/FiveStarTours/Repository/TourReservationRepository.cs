@@ -79,6 +79,38 @@ namespace FiveStarTours.Repository
             return visitors;
         }
 
+        public int GetWithGiftCard(int id, AttendanceRepository attendanceRepository, UserRepository userRepository)
+        {
+            int result = 0;
+            _tourReservations = GetAll();
+            List<Attendance> attendances = attendanceRepository.GetAll();
+            List<User> users = userRepository.GetAll();
+            foreach (var tourReservation in _tourReservations)
+            {
+                if(tourReservation.TourId == id && tourReservation.GiftCard)
+                {
+                    foreach(string name in tourReservation.VisitorName)
+                    {
+                        foreach(var user in users)
+                        {
+                            if(user.Name == name)
+                            {
+                                foreach(Attendance attendance in attendances)
+                                {
+                                    if(user.Id == attendance.IdVisitor)
+                                    {
+                                        result++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
         public void DeleteById(Tour tour)
         {
             List <TourReservation> tourReservations = GetAll();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -92,9 +93,8 @@ namespace FiveStarTours.View.Guide
             tour.KeyPoints = tour.getKeyPointsById(tour.IdKeyPoints);
             tour.KeyPoints.ElementAt(0).Visited = true;
             liveTour = new LiveTour(tour.Id, tour.Name, tour.OneBeginningTime, tour.IdKeyPoints, tour.KeyPoints, true, false);
-            liveTour.Visitors = Visitor;
             _liveTourRepository.Save(liveTour);
-            
+            liveTour.Visitors = Visitor;
             return true;
         }
 
@@ -192,6 +192,10 @@ namespace FiveStarTours.View.Guide
             }
 
             return 0;
+        }
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
     }
