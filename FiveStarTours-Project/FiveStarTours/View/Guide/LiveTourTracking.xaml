@@ -21,7 +21,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <CheckBox x:Name="Visitor" Content="{Binding Key}" IsChecked="{Binding Value, Mode=OneWay}" Checked="Visitor_Checked" />
+                            <CheckBox x:Name="Visitor" Content="{Binding}" Checked="Visitor_Checked" />
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

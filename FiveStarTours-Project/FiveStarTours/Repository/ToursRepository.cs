@@ -12,33 +12,33 @@ namespace FiveStarTours.Repository
     {
         private const string FilePath = "../../../Resources/Data/tours.csv";
 
-        private readonly Serializer<Tour> _serializerTour;
+        private readonly Serializer<Tour> _serializer;
 
         private List<Tour> _tours;
 
         public ToursRepository()
         {
-            _serializerTour = new Serializer<Tour>();
-            _tours = _serializerTour.FromCSV(FilePath);
+            _serializer = new Serializer<Tour>();
+            _tours = _serializer.FromCSV(FilePath);
         }
 
         public List<Tour> GetAll()
         {
-            return _serializerTour.FromCSV(FilePath);
+            return _serializer.FromCSV(FilePath);
         }
 
         public Tour Save(Tour tour)
         {
             tour.Id = NextId();
-            _tours = _serializerTour.FromCSV(FilePath);
+            _tours = _serializer.FromCSV(FilePath);
             _tours.Add(tour);
-            _serializerTour.ToCSV(FilePath, _tours);
+            _serializer.ToCSV(FilePath, _tours);
             return tour;
         }
 
         public int NextId()
         {
-            _tours = _serializerTour.FromCSV(FilePath);
+            _tours = _serializer.FromCSV(FilePath);
             if (_tours.Count < 1)
             {
                 return 1;
@@ -59,10 +59,10 @@ namespace FiveStarTours.Repository
             return null;
         }
 
-        public List<Tour> GetAllByDate(DateTime date)
+        public List<Tour> GetAllByDate(DateTime date, User user)
         {
             List<Tour> toursByDate = new List<Tour>();
-            var tours = GetAll();
+            var tours = GetByUser(user);
             foreach (var tour in tours)
             {
                 foreach (DateTime dateTime in tour.Beginning)
@@ -74,7 +74,7 @@ namespace FiveStarTours.Repository
 
                         DateTime newDate = new DateTime(tourDate.Year, tourDate.Month, tourDate.Day, tourTime.Hours, tourTime.Minutes, tourTime.Seconds);
                         Location location = tour.getLocationById(tour.IdLocation);
-                        Tour newTour = new Tour(tour.Name, tour.IdLocation, location, tour.Description, tour.IdLanguages, tour.Languages, tour.MaxGuests, tour.IdKeyPoints, tour.KeyPoints, newDate, tour.Duration, tour.ImageUrls);
+                        Tour newTour = new Tour(tour.Name,tour.User, tour.IdLocation, location, tour.Description, tour.IdLanguages, tour.Languages, tour.MaxGuests, tour.IdKeyPoints, tour.KeyPoints, newDate, tour.Duration, tour.ImageUrls);
                         toursByDate.Add(newTour);
 
                     }
@@ -82,6 +82,32 @@ namespace FiveStarTours.Repository
             }
 
             return toursByDate;
-        }  
+        }
+
+        public List<Tour> GetByUser(User user)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            return _tours.FindAll(c => c.User.Id == user.Id);
+        }
+
+        public void DeleteByDate(Tour tour)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            Tour founded = _tours.Find(t => t.Id == tour.Id);
+            foreach(DateTime date in founded.Beginning)
+            {
+                if(date == tour.OneBeginningTime)
+                {
+                    founded.Beginning.Remove(date);
+                    if (founded.Beginning.Count == 0)
+                    {
+                        _tours.Remove(founded);
+                    }
+                    break;
+                }
+                
+            }
+            _serializer.ToCSV(FilePath, _tours);
+        }
     }
 }

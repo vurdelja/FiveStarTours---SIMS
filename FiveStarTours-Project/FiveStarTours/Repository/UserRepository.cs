@@ -59,5 +59,20 @@ namespace FiveStarTours.Repository
             }
             return null;
         }
+
+        public int FindIdByName(String name)
+        {
+            _users = GetAll();
+            int id = 0;
+            foreach(User user in _users)
+            {
+                if(user.Name == name)
+                {
+                    id = user.Id;
+                }
+            }
+
+            return id;
+        }
     }
 }

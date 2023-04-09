@@ -1,0 +1,18 @@
+﻿<Window x:Class="FiveStarTours.View.Visitor.NotificationsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FiveStarTours.View.Visitor"
+        mc:Ignorable="d"
+        Title="NotificationsWindow" Height="450" Width="800" ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
+         WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label Content="Hello! Did you join the tour?"
+               HorizontalAlignment="Left" Margin="278,101,0,0" VerticalAlignment="Top" FontSize="15" Background="LemonChiffon" Width="200"/>
+        <Button Content="NO" HorizontalAlignment="Center" Margin="0,179,300,0" VerticalAlignment="Top"
+                Height="47" Width="130" Click="NoButton_Click" FontSize="20" Background="LightSeaGreen"/>
+        <Button Content="YES" HorizontalAlignment="Left" Margin="430,179,0,0" VerticalAlignment="Top"
+                Height="47" Width="130" Click="YesButton_Click" FontSize="15" Background="pink"/>
+    </Grid>
+</Window>
