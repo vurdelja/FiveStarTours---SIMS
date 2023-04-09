@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FiveStarTours.Model;
 using FiveStarTours.Serializer;
+using FiveStarTours.View.VehicleOnAdress;
 
 namespace FiveStarTours.Repository
 {
@@ -43,6 +44,15 @@ namespace FiveStarTours.Repository
             return drivings;
         }
 
+        public Drivings Delete(Drivings drivings) 
+        {
+            drivings.Id = NextId();
+            _drivings = _serializer.FromCSV(FilePath);
+            _drivings.Remove(drivings);
+           
+            return drivings;
+        }
+
         public int NextId()
         {
             _drivings = _serializer.FromCSV(FilePath);
@@ -51,6 +61,16 @@ namespace FiveStarTours.Repository
                 return 1;
             }
             return _drivings.Max(l => l.Id) + 1;
+        }
+
+        internal List<string> GetAllDrivings()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void Delete(object drivings)
+        {
+            throw new NotImplementedException();
         }
     }
 }

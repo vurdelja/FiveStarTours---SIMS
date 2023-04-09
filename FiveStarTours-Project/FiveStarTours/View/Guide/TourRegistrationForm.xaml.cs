@@ -16,6 +16,8 @@ namespace FiveStarTours.View
     /// </summary>
     public partial class TourRegistrationForm : Window, INotifyPropertyChanged
     {
+        public User LoggedInUser { get; set; }
+
         private readonly ToursRepository _toursRepository;
         private readonly LanguagesRepository _languagesRepository;
         private readonly LocationsRepository _locationsRepository;
@@ -130,7 +132,7 @@ namespace FiveStarTours.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public TourRegistrationForm()
+        public TourRegistrationForm(User user)
         {
             InitializeComponent();
             DataContext = this;
@@ -140,6 +142,7 @@ namespace FiveStarTours.View
             _locationsRepository = new LocationsRepository();
             _keyPointsRepository = new KeyPointsRepository();
 
+            LoggedInUser = user;
 
             // Adding state and city trough combobox:
 
@@ -311,7 +314,7 @@ namespace FiveStarTours.View
             }
             else return;
 
-            Tour newTour = new Tour(TourName, location.Id, location, Description, LanguageIds, LanguageList, MaximumGuests, KeyPointsIds, KeyPointsList, DateTimes, DurationTime, ImageUrlsList);
+            Tour newTour = new Tour(TourName, LoggedInUser, location.Id, location, Description, LanguageIds, LanguageList, MaximumGuests, KeyPointsIds, KeyPointsList, DateTimes, DurationTime, ImageUrlsList);
             _toursRepository.Save(newTour);
 
             Close();

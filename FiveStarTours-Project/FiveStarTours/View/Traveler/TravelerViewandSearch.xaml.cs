@@ -130,91 +130,38 @@ namespace FiveStarTours.View.Traveler
             return null;
         }*/
 
-
-        private void Search_enter(object sender, RoutedEventArgs e)
+        private void RefreshAccommodations(List<Accommodation> accommodations)
         {
             Accommodations.Clear();
-            foreach (Accommodation accommodation in Accommodations)
+            foreach(Accommodation accommodation in accommodations)
             {
                 Accommodations.Add(accommodation);
             }
-            /*String Name = NameSearch.Text;
-            String State = StateSearch.Text;
-            String City = CitySearch.Text;
-            String GuestNum = NumberSearch.Text;
-            String LengtH=LengthSearch.Text;
-            List<Accommodation>ac=new List<Accommodation>();
-            */
-            String Name = NameSearch.Text;
-            String[] splitLocation = StateSearch.Text.Split(",");
-            String[] splitLocation1 = CitySearch.Text.Split(",");
-            String[] splitNumber = NumberSearch.Text.Split(",");
-            String[] splitType = TypeBox.Text.Split(",");
-            String[] splitLeng = LengthSearch.Text.Split(",");
-
-
-
-            int max = 0;
-            int min = 0;
-            if (!(int.TryParse(NumberSearch.Text, out max) || (NumberSearch.Text.Equals(""))) || !(int.TryParse(LengthSearch.Text, out min) || (LengthSearch.Text.Equals(""))))
-            {
-                return;
-            }
-            foreach (Accommodation accommodation in Accommodations)
-            {
-                if (accommodation.AccommodationName.ToLower().Contains(NameSearch.Text.ToLower()) && accommodation.Location.State.ToLower().Contains(StateSearch.Text.ToLower()) && accommodation.Location.City.ToLower().Contains(CitySearch.Text.ToLower()) && (accommodation.MaxGuestNum - max >= 0 || NumberSearch.Text.Equals("")) && (accommodation.MinReservationDays - min <= 0 || LengthSearch.Text.Equals("")) && accommodation.Type.Equals(TypeBox))
-                {
-                    Accommodations.Add(accommodation);
-
-                }
-
-
-            }
         }
-        /* foreach(Accommodation accommodation in Accommodations)
-         {
-             if(AllMatchesGood(accommodation, _accomodationName, _accomodationLocation, _accomodationMaxGuest, _accomodationType, _accomodationMinReservationDays))
-             {
-                 if(!Accommodations.Contains(accommodation))
-                     Accommodations.Add(accommodation);
-                 MyDisplay.ItemsSource = Accommodations;
-             }
 
-         }
-         MyDisplay.ItemsSource = Accommodations;
-     }
 
-     private bool AllMatchesGood(Accommodation accommodation, string _accomodationName, string _accomodationLocation, string _accomodationMaxGuest, _accomodationType, _accomodationMinReservationDays)
-     {
-         bool same = false;
-         if ((_accomodationName.ToLower().Trim().Contains(Name) || string.IsNullOrEmpty(Name)) &&
-             (GuestNumGoodMatch(_accomodationMaxGuest,AccomodationMaxGuest) || string.IsNullOrEmpty(MaxGues)) &&
-             (MinReservationGoodMatch(_accommodationMinResevationDays, MinReservationDays) || string.IsNullOrEmpty(MinReservationDays)))
-         {
-             same = true;
-         }
-         return same;
-     }
+        private void Search_enter(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string name = NameSearch.Text;
+                string state = StateSearch.Text;
+                string city = CitySearch.Text;
+                string guestNum = NumberSearch.Text;
+                string type = TypeBox.Text;
+                string length= LengthSearch.Text;
 
-     public bool  GuestNumGoodMatch(Accommodation accommodation,string MaxGuestNum)
-     {
-         bool good = false;
-         if(int.Parse(MaxGuestNum, out int parsedGuestNum)&& parsedGuestNum<=accommodation.MaxGuestNum)
-         {
-             good = true;
-         }
-         return good;
-     }
-     public bool MinReservationGoodMatch(Accommodation accommodation, string MinReservationDays)
-     {
-         bool good = false;
-         if (int.Parse(MaxGuestNum, out int parsedReservation) && parsedReservation <= accommodation.MaxGuestNum)
-         {
-             good = true;
-         }
-         return good;
-     }
-        */
+                List<Accommodation> seachedAccommodations = accommodationsRepository.SearchAccomodations(name, state, city, guestNum,type, length);
+                RefreshAccommodations(seachedAccommodations);
+
+            }catch(Exception ex)
+            {
+                MessageBox.Show("Invalid inputs");
+            }
+
+            
+        }
+       
 
 
         private string _selectedReservation;
