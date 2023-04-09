@@ -109,5 +109,36 @@ namespace FiveStarTours.Repository
             }
             _serializer.ToCSV(FilePath, _tours);
         }
+
+        public List<string> GetNamesById(List<int> ids)
+        {
+            List<string> result = new List<string>();
+            _tours = GetAll();
+            foreach (int id in ids)
+            {
+                foreach(var tour in _tours)
+                {
+                    if(tour.Id == id)
+                    {
+                        result.Add(tour.Name);
+                    }
+                }
+            }
+            return result;
+        }
+
+        public int GetByName(string name)
+        {
+            _tours = GetAll();
+            int result = 0;
+            foreach(var tour in _tours)
+            {
+                if(tour.Name == name)
+                {
+                    result = tour.Id;
+                }
+            }
+            return result;
+        }
     }
 }

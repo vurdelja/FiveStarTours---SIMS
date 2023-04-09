@@ -27,6 +27,7 @@ namespace FiveStarTours.Repository
             return _serializer.FromCSV(FilePath);
         }
 
+        
         public Attendance Save(Attendance attendance)
         {
             attendance.Id = NextId();
@@ -44,6 +45,19 @@ namespace FiveStarTours.Repository
                 return 1;
             }
             return _attendances.Max(a => a.Id) + 1;
+        }
+        public List<int> GetVisitedTours(int id)
+        {
+            List<int> result = new List<int>();
+            _attendances = GetAll();
+            foreach(var attendance in _attendances)
+            {
+                if(attendance.IdVisitor == id)
+                {
+                    result.Add(attendance.IdTour);
+                }
+            }
+            return result;
         }
     }
 }

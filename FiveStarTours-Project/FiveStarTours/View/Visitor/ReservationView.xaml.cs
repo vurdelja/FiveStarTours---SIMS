@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using FiveStarTours.Model;
 using FiveStarTours.View.Traveler;
 using System.Collections.ObjectModel;
+using FiveStarTours.View.Owner;
 
 namespace FiveStarTours.View.Visitor
 {
@@ -154,6 +155,9 @@ namespace FiveStarTours.View.Visitor
             
             TourReservation visitor = new TourReservation(Names, PhoneNumber, SelectedTour.Id, startingKeyPoint.Id, startingKeyPoint, dateTime, Convert.ToInt32(MembersNumber), Email, giftCard);
             _visitorRepository.Save(visitor);
+            MessageBox.Show("Reservation has just made.");
+            ReservedToursView reserved = new ReservedToursView(SelectedTour, LoggedInUser);
+            reserved.Show();
             Close();
 
         }

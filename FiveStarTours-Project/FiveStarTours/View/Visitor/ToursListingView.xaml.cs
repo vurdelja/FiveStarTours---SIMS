@@ -59,5 +59,11 @@ namespace FiveStarTours.View.Visitor
                 
             }
         }
+
+        private void RateClick(object sender, RoutedEventArgs e)
+        {
+            TourRatingView rate = new TourRatingView(LoggedInUser);
+            rate.Show();
+        }
     }
 }
