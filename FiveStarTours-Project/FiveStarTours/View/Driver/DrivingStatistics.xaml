@@ -1,0 +1,25 @@
+﻿<Window x:Class="FiveStarTours.View.Driver.DrivingStatistics"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Driving Statistics" Height="450" Width="700">
+    <Grid>
+        <Label Content="Driving Statistics" HorizontalAlignment="Center" Margin="0,31,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <DataGrid ItemsSource="{Binding DrivingStatisticsData}"
+                  
+                  SelectionMode="Single" 
+                  HeadersVisibility="Column"
+                  FontSize="13" 
+                  Margin="0,115,0,127" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Year" IsReadOnly="True" Binding="{Binding DrivingYear, Mode=TwoWay}" Width="100"/>
+                <DataGridTextColumn Header="Driving Number" IsReadOnly="True" Binding="{Binding DrivingNumber, Mode=TwoWay}" Width="150"/>
+                <DataGridTextColumn Header="Driving Duration" IsReadOnly="True" Binding="{Binding DrivingDuration, Mode=TwoWay}" Width="150"/>
+                <DataGridTextColumn Header="Driving Price" IsReadOnly="True" Binding="{Binding DrivingPrice, Mode=TwoWay}" Width="150"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+    </Grid>
+</Window>
