@@ -99,7 +99,8 @@ namespace FiveStarTours.View.Traveler
                 {
                     int days = (int)(SelectedDate.End.Date - SelectedDate.Start.Date).TotalDays;
 
-                    AccommodationReservation accommodationReservation = new AccommodationReservation("", "", SelectedDate.Start, SelectedDate.End, days, AccommodationName, GuestNumber);
+                    GuestName = MainWindow.LoggedUser.Name;
+                    AccommodationReservation accommodationReservation = new AccommodationReservation(GuestName, SelectedDate.Start, SelectedDate.End, days, AccommodationName, GuestNumber);
                     accommodationReservationsRepository.Save(accommodationReservation);
 
                     ReservationsView rs = new ReservationsView();

@@ -19,12 +19,18 @@ namespace FiveStarTours.Repository
 
         private static AccommodationReservationsRepository instance = null;
         private AccommodationRatingRepository _ratingRepository;
+        private AccommodationsRepository _accommodationsRepository;
+        private CancelationNotificationRepository _cancelationNotificationRepository;
+        private UserRepository _userRepository;
 
         private AccommodationReservationsRepository()
         {
             _serializer = new Serializer<AccommodationReservation>();
             _reservations = _serializer.FromCSV(FilePath);
             _ratingRepository = AccommodationRatingRepository.GetInstace();
+            _accommodationsRepository = new AccommodationsRepository();
+            _cancelationNotificationRepository = new CancelationNotificationRepository();
+            _userRepository = new UserRepository();
         }
 
         public static AccommodationReservationsRepository GetInstace()
@@ -255,14 +261,23 @@ namespace FiveStarTours.Repository
         public bool IsAbleToCancel(int reservationId)
         {
             AccommodationReservation reservation = GetById(reservationId);
-          
             DateTime now = DateTime.Now;
-            if(reservation.StartDate>now.AddHours(-24) && reservation.StartDate>now)
+            Accommodation accommodation = _accommodationsRepository.GetAccommodationForAccommodationName(reservation.AccommodationName);
+            if (reservation.StartDate>now.AddDays(1) && reservation.StartDate>now.AddDays(accommodation.DaysPossibleToCancel))
             {
-                return false;
+                return true;
             }
 
-            return true; ;
+            return false;
+        }
+
+        public void UserCancelsReservation(AccommodationReservation accommodationReservation)
+        {
+            int ownerId = 2;
+            User guest = _userRepository.GetByNameSurname(accommodationReservation.GuestName);
+            User owner = _userRepository.GetById(ownerId);
+            CancelationNotification cancelationNotification = new CancelationNotification(-1, owner, guest, false);
+            _cancelationNotificationRepository.Save(cancelationNotification);
         }
     }
 }

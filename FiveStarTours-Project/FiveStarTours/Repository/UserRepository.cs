@@ -36,6 +36,11 @@ namespace FiveStarTours.Repository
             return _users.FirstOrDefault(u => u.Username == username);
         }
 
+        public User GetByNameSurname(string name)
+        {
+            return _users.FirstOrDefault(u => u.Name == name);
+        }
+
 
         public List<User> GetAll()
         {

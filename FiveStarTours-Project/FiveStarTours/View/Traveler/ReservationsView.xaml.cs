@@ -26,9 +26,9 @@ namespace FiveStarTours.View.Traveler
     {
         public static ObservableCollection<AccommodationReservation> Reservations { get; set; }
         public AccommodationReservation SelectedReservation { get; set; }
+        public Accommodation SelectedAccommodation  { get; set; }
         private readonly AccommodationReservationsRepository accommodationReservationsRepository;
-
-
+        
         public ReservationsView()
         {
             InitializeComponent();
@@ -119,11 +119,20 @@ namespace FiveStarTours.View.Traveler
         {
             if (SelectedReservation != null)
             {
-                MessageBoxResult result = MessageBox.Show("Are you sure?", "Cancel reservation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to cancel?", "Cancel reservation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                    accommodationReservationsRepository.Delete(SelectedReservation);
-                    Reservations.Remove(SelectedReservation);
+                    if(accommodationReservationsRepository.IsAbleToCancel(SelectedReservation.Id))
+                    {
+                        accommodationReservationsRepository.UserCancelsReservation(SelectedReservation);
+                        accommodationReservationsRepository.Delete(SelectedReservation);
+                        Reservations.Remove(SelectedReservation);
+                    }
+                    else
+                    {
+                        MessageBox.Show("You are not able to cancel this reservation");
+                    }
+               
                 }
             }
             else

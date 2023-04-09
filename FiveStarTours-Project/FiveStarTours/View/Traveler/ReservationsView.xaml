@@ -14,9 +14,8 @@
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id }" Width="20"/>
-                <DataGridTextColumn Header="Name" Binding="{Binding GuestName}" Width="60"/>
-                <DataGridTextColumn Header="Surname" Binding="{Binding GuestSurname }" Width="82"/>
-                <DataGridTextColumn Header="Accommodation name" Binding="{Binding AccommodationName }" Width="140"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding GuestName}" Width="70"/>
+                <DataGridTextColumn Header="Accommodation name" Binding="{Binding AccommodationName }" Width="200"/>
                 <DataGridTextColumn Header="Start date"  Binding="{Binding StartDate ,StringFormat='{}{0:dd.MM.yyyy}'}"/>
                 <DataGridTextColumn Header="End date"  Binding="{Binding EndDate, StringFormat='{}{0:dd.MM.yyyy}'}"/>
                 <DataGridTextColumn Header="Length of stay"  Binding="{Binding VisitationDays}"/>

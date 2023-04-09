@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="ChangeReservation" Height="450" Width="800">
     <Grid Background="#FFF9DEDE">
-        <Grid Grid.Row="0" Grid.Column="0" Margin="19,68,27,0">
+        <Grid Grid.Row="0" Grid.Column="0" Margin="19,68,27,0" RenderTransformOrigin="0.441,0.511">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -18,9 +18,9 @@
 
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="370*"></ColumnDefinition>
-                <ColumnDefinition Width="377*"></ColumnDefinition>
-                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="183*"></ColumnDefinition>
+                <ColumnDefinition Width="475*"></ColumnDefinition>
+                <ColumnDefinition Width="6*"/>
 
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="0"
@@ -28,11 +28,11 @@
                        Margin="3,16,277,10"
                        Foreground="#FF1E1C1E" FontWeight="Bold" Grid.ColumnSpan="2"/>
             <Label Grid.Row="1" Grid.Column="0"
-                       Content="ARIVAL DATE: " 
+                       Content="NEW ARIVAL DATE: " 
                        Margin="3,16,0,16"
                        Foreground="#FF131213" FontWeight="Bold"/>
             <Label Grid.Row="2" Grid.Column="0"
-                       Content="DEPARTURE DATE:" 
+                       Content="NEW DEPARTURE DATE:" 
                        Margin="3,16,0,16"
                        Foreground="#FF171717" FontWeight="Bold"/>
             <Label Grid.Row="3" Grid.Column="0"
@@ -46,26 +46,27 @@
 
 
             <TextBox Grid.Row="0"
-                        
-                         Margin="370,16,3,16" FontSize="10" Grid.ColumnSpan="2"/>
+                         Text="{Binding Path=SelectedAccommodation.AccommodationName, UpdateSourceTrigger=PropertyChanged}"
+                         Margin="52,16,3,16" FontSize="10"
+                         IsEnabled="False" Grid.Column="1" />
 
 
             <DatePicker Grid.Row="1"
-                      
-                         Margin="370,16,3,16" FontSize="10" Grid.ColumnSpan="2"/>
+                         SelectedDate="{Binding Path=NewStartDate, UpdateSourceTrigger=PropertyChanged}"
+                         Margin="52,16,3,16" FontSize="10" Grid.Column="1"/>
 
             <DatePicker Grid.Row="2"
-                          
-                         Margin="370,16,3,16" FontSize="10" Grid.ColumnSpan="2"/>
+                          SelectedDate="{Binding Path=NewEndDate, UpdateSourceTrigger=PropertyChanged}"
+                         Margin="52,16,3,16" FontSize="10" Grid.Column="1"/>
 
             <TextBox Grid.Row="3"
-                             
-                         Margin="370,16,3,16" FontSize="10" Grid.ColumnSpan="2"/>
+                         Text="{Binding Path=GuestNumber,UpdateSourceTrigger=PropertyChanged}"
+                         Margin="52,16,3,16" FontSize="10" Grid.Column="1"/>
 
             <TextBox Grid.Row="4"
-                           
-                         Margin="370,16,3,16" FontSize="10" Grid.ColumnSpan="2"/>
-            <Button Content="SUMBIT CHANGES" HorizontalAlignment="Left" Margin="204,0,0,0" Grid.Row="5" VerticalAlignment="Center" FontWeight="Bold" FontSize="18" Width="354" Grid.ColumnSpan="2" Height="42" Background="#FFAD6969"/>
+                            Text="{Binding Path=VisitationDays, UpdateSourceTrigger=PropertyChanged}"
+                         Margin="52,16,3,16" FontSize="10" Grid.Column="1"/>
+            <Button Content="SUMBIT CHANGES"  HorizontalAlignment="Left" Margin="4,0,0,0" Grid.Row="5" VerticalAlignment="Center" FontWeight="Bold" FontSize="18" Width="354" Height="42" Background="#FFAD6969" Grid.Column="1"/>
 
 
         </Grid>

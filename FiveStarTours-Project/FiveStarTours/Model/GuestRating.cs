@@ -45,7 +45,6 @@ namespace FiveStarTours.Model
             string[] csvValues = {
                 Id.ToString(),
                 AccommodationReservation.GuestName,
-                AccommodationReservation.GuestSurname,
                 Tidiness.ToString(),
                 RulesFollowed.ToString(),
                 Quietness.ToString(),
@@ -61,14 +60,13 @@ namespace FiveStarTours.Model
         {
             Id = Convert.ToInt32(values[0]);
             AccommodationReservation = new AccommodationReservation() { GuestName = values[1] };
-            AccommodationReservation = new AccommodationReservation() { GuestSurname = values[2] };
-            Tidiness = int.Parse(values[3]);
-            RulesFollowed= int.Parse(values[4]);
-            Quietness= int.Parse(values[5]);
-            Friendliness= int.Parse(values[6]);
-            Communication= int.Parse(values[7]);
-            RespectTime= int.Parse(values[8]);
-            Comment = values[9];
+            Tidiness = int.Parse(values[2]);
+            RulesFollowed= int.Parse(values[3]);
+            Quietness= int.Parse(values[4]);
+            Friendliness= int.Parse(values[5]);
+            Communication= int.Parse(values[6]);
+            RespectTime= int.Parse(values[7]);
+            Comment = values[8];
         }
 
     }

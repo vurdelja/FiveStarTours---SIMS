@@ -39,36 +39,27 @@ namespace FiveStarTours.Repository
             _serializer.ToCSV(FilePath, _cancelations);
             return cancelation;
         }
-        public int CountChanges()
+        public CancelationNotification Save(CancelationNotification cancelationNotification)
         {
-            int canceled = 0;
-            // _cancelations =  GetCancellationLessThan24HoursAndOtherRestriction()
-
-            foreach (CancelationNotification cancelation in _cancelations)
-            {
-                if (cancelation.Delivered== false)
-                {
-                    canceled++;
-                }
-            }
-            return canceled;
-
+            cancelationNotification.Id = NextId();
+            _cancelations.Add(cancelationNotification);
+            _serializer.ToCSV(FilePath, _cancelations);
+            return cancelationNotification;
         }
+
+
+
+        public int NextId()
+        {
+            _cancelations = _serializer.FromCSV(FilePath);
+            if (_cancelations.Count < 1)
+            {
+                return 1;
+            }
+            return _cancelations.Max(t => t.Id) + 1;
+        }
+   
       
-        public void NotifyAboutChanges()
-        {
-            _cancelations = GetAll();
-            int canceled = CountChanges();
-            if (canceled > 0)
-            {
-                MessageBox.Show("You have " + canceled + "reservation that are changed. Please look them up and set their status!");
-            }
-            else
-            {
-                return;
-            }
-
-        }
 
 
     }
