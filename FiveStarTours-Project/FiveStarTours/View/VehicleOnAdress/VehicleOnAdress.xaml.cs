@@ -34,6 +34,15 @@ namespace FiveStarTours.View.VehicleOnAdress
         //public Drivings SelectedDrivings { get; set; }
         public static List<Drivings> Drivings { get; set; }
 
+        private DispatcherTimer _timer;
+        private DateTime _currentTime;
+
+        public DateTime CurrentTime
+        {
+            get { return _currentTime; }
+            set { _currentTime = value; OnPropertyChanged(nameof(CurrentTime)); }
+        }
+
         private string _name;
         public string Name
         {
@@ -62,7 +71,9 @@ namespace FiveStarTours.View.VehicleOnAdress
                 {
                     _onAdress = value;
                     OnPropertyChanged();
-                    
+                   
+
+
                 }
             }
         }
@@ -125,6 +136,7 @@ namespace FiveStarTours.View.VehicleOnAdress
                 {
                     _drivingStarts = value;
                     OnPropertyChanged();
+                    
                 }
             }
         }
@@ -160,8 +172,18 @@ namespace FiveStarTours.View.VehicleOnAdress
             _vehicleOnAddressRepository = new VehicleOnAdressRepository();
             _drivingsRepository = new DrivingsRepository();
 
-
+            
             Drivings = _drivingsRepository.GetAll();
+
+            if (DrivingStartsCheckBox.IsThreeState) 
+            {
+                _timer = new DispatcherTimer();
+                _timer.Interval = TimeSpan.FromSeconds(1);
+                _timer.Tick += Timer_Tick;
+                _timer.Start();
+            }
+
+
 
             if (OnAdressCheckBox.IsThreeState == true)
 
@@ -176,7 +198,12 @@ namespace FiveStarTours.View.VehicleOnAdress
             }
 
         }
-        
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            CurrentTime = DateTime.Now;
+        }
+
         private void FinishedComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (FinishedComboBox.SelectedItem != null)
@@ -202,6 +229,7 @@ namespace FiveStarTours.View.VehicleOnAdress
 
             OnAdress newVehicleOnAdress = new OnAdress( name, isOnAdress, isDelay, delay, finished, drivingStarts, enterStartPrice, taximeter);
             _vehicleOnAddressRepository.Save(newVehicleOnAdress);
+            _drivingsRepository.Delete(name);
             MessageBox.Show("Driving Duration:");
             
             Close();

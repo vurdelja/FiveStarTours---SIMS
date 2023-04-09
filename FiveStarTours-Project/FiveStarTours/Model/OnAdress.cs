@@ -15,13 +15,11 @@ namespace FiveStarTours.Model
         public bool IsOnAdress { get; set; }
         public bool IsDelay { get; set; }
         public int Delays { get; set; }
-        
         public string Finished { get; set; }
 
-        public bool IsDrivingStarted { get; set; }
-         
-        public int StartPrice { get; set; }
 
+        public bool IsDrivingStarted { get; set; }
+        public int StartPrice { get; set; }
         public string Taximeter { get; set; }
 
 
@@ -78,9 +76,9 @@ namespace FiveStarTours.Model
                 GetFinished();
 
             }
-            IsDrivingStarted.CompareTo(Convert.ToInt32(values[1])); 
-            StartPrice.ToString();
-            Taximeter.CompareTo(Convert.ToInt32(values[2]));        
+            IsDrivingStarted.GetType().ToString();
+            StartPrice.GetType().ToString();
+            //Taximeter.GetType().ToString();
 
         }
 
