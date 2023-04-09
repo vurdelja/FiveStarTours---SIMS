@@ -10,7 +10,7 @@ namespace FiveStarTours.Repository
 {
     public class UserRepository
     {
-        private const string FilePath = "../../../Resources/Data/users.txt";
+        private const string FilePath = "../../../Resources/Data/users.csv";
 
         private readonly Serializer<User> _serializer;
 
@@ -45,6 +45,21 @@ namespace FiveStarTours.Repository
                 }
             }
             return null;
+        }
+
+        public int FindIdByName(String name)
+        {
+            _users = GetAll();
+            int id = 0;
+            foreach(User user in _users)
+            {
+                if(user.Name == name)
+                {
+                    id = user.Id;
+                }
+            }
+
+            return id;
         }
     }
 }

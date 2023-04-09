@@ -126,6 +126,41 @@ namespace FiveStarTours.Repository
             
         }
 
+        public bool DatesIntertwine(DateTime startAcc, DateTime endAcc, DateTime start, DateTime end)
+        {
+            bool isInInterval = false;
+            if (start.Date <= endAcc.Date && end.Date >= startAcc.Date)
+            {
+                return true;
+            }
+
+            return isInInterval;
+        }
+     
+
+        public List<AccommodationReservation> GetAllReservationsForAccommodationDateInterval(string accomodationName, DateTime start, DateTime end)
+        {
+             List<AccommodationReservation> accommodationReservations = new List<AccommodationReservation>();
+            foreach (AccommodationReservation accommodationReservation in _reservations)
+            {
+                if (accomodationName == accommodationReservation.AccommodationName && DatesIntertwine(accommodationReservation.StartDate, accommodationReservation.EndDate, start, end) )
+                {
+                    accommodationReservations.Add(accommodationReservation);
+                  
+                }
+                
+            }
+             return accommodationReservations;
+        }
+
+        public List<DateInterval> GetFreeDateIntervals(string accommodationName, DateTime start, DateTime end, int numberOfDays)
+        {
+
+
+
+            return null;
+        }
+
 
 
     }
