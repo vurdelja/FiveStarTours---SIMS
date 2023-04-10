@@ -4,22 +4,45 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Driving Statistics" Height="450" Width="700">
+        Title="Driving Statistics" Height="750" Width="1300">
     <Grid>
-        <Label Content="Driving Statistics" HorizontalAlignment="Center" Margin="0,31,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <DataGrid ItemsSource="{Binding DrivingStatisticsData}"
+        <Label Content="Driving Statistics" HorizontalAlignment="Center" Margin="0,22,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+        <DataGrid x:Name="DataGridStatistics" ItemsSource="{Binding DrivingStatisticsData}"
                   
                   SelectionMode="Single" 
                   HeadersVisibility="Column"
                   FontSize="13" 
-                  Margin="0,115,0,127" AutoGenerateColumns="False">
+                  Margin="369,123,355,419" AutoGenerateColumns="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Year" IsReadOnly="True" Binding="{Binding DrivingYear, Mode=TwoWay}" Width="100"/>
                 <DataGridTextColumn Header="Driving Number" IsReadOnly="True" Binding="{Binding DrivingNumber, Mode=TwoWay}" Width="150"/>
                 <DataGridTextColumn Header="Driving Duration" IsReadOnly="True" Binding="{Binding DrivingDuration, Mode=TwoWay}" Width="150"/>
                 <DataGridTextColumn Header="Driving Price" IsReadOnly="True" Binding="{Binding DrivingPrice, Mode=TwoWay}" Width="150"/>
             </DataGrid.Columns>
+        </DataGrid>
 
+        <Label Content="Driving Statistics By Years:" HorizontalAlignment="Center" Margin="0,73,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Driving Statistics By Months:" HorizontalAlignment="Center" Margin="0,338,0,0" VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="2.394,0.634"/>
+        <DataGrid x:Name="DataGridStatistics2" ItemsSource="{Binding DrivingStatisticsData2}"
+                  SelectionMode="Single" 
+                  HeadersVisibility="Column"
+                  FontSize="13" 
+                  Margin="0,384,0,138">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="" IsReadOnly="True" Binding="{Binding DrivingNDP, Mode=TwoWay}" Width="100"/>
+                <DataGridTextColumn Header="January" IsReadOnly="True" Binding="{Binding January, Mode=TwoWay}" Width="100"/>
+                <DataGridTextColumn Header="February" IsReadOnly="True" Binding="{Binding February, Mode=TwoWay}" Width="100"/>
+                <DataGridTextColumn Header="March" IsReadOnly="True" Binding="{Binding March, Mode=TwoWay}" Width="100"/>
+                <DataGridTextColumn Header="April" IsReadOnly="True" Binding="{Binding April, Mode=TwoWay}" Width="100"/>
+                <DataGridTextColumn Header="May" IsReadOnly="True" Binding="{Binding May, Mode=TwoWay}" Width="100"/>
+                <DataGridTextColumn Header="June" IsReadOnly="True" Binding="{Binding June, Mode=TwoWay}" Width="100"/>
+                <DataGridTextColumn Header="July" IsReadOnly="True" Binding="{Binding July, Mode=TwoWay}" Width="100"/>
+                <DataGridTextColumn Header="August" IsReadOnly="True" Binding="{Binding August, Mode=TwoWay}" Width="100"/>
+                <DataGridTextColumn Header="September" IsReadOnly="True" Binding="{Binding September, Mode=TwoWay}" Width="100"/>
+                <DataGridTextColumn Header="October" IsReadOnly="True" Binding="{Binding October, Mode=TwoWay}" Width="100"/>
+                <DataGridTextColumn Header="November" IsReadOnly="True" Binding="{Binding November, Mode=TwoWay}" Width="100"/>
+                <DataGridTextColumn Header="December" IsReadOnly="True" Binding="{Binding December, Mode=TwoWay}" Width="100"/>
+            </DataGrid.Columns>
         </DataGrid>
     </Grid>
 </Window>
