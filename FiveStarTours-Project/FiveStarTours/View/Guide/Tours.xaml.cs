@@ -129,5 +129,11 @@ namespace FiveStarTours.View
             Statistics statistic = new Statistics();
             statistic.Show();
         }
+
+        private void Reviews_Click(object sender, RoutedEventArgs e)
+        {
+            Reviews reviews = new Reviews(LoggedInUser);
+            reviews.Show();
+        }
     }
 }
