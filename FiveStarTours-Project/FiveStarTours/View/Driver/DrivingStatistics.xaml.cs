@@ -26,7 +26,7 @@ namespace FiveStarTours.View.Driver
     public partial class DrivingStatistics : Window
     {
         private readonly DrivingStatisticsRepository _drivingStatisticsRepository;
-        public static List<DrivingStatisticsData> DrivingYearData { get; set; }
+        public static List<DrivingStatisticsData> DrivingStatisticsData { get; set; }
         public DrivingStatistics()
         {
             InitializeComponent();
@@ -34,7 +34,7 @@ namespace FiveStarTours.View.Driver
 
             _drivingStatisticsRepository = new DrivingStatisticsRepository();
 
-            DrivingYearData = _drivingStatisticsRepository.GetAll();
+            DrivingStatisticsData = _drivingStatisticsRepository.GetAll();
 
         }
 

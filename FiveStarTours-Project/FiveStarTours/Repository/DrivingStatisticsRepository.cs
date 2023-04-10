@@ -35,5 +35,14 @@ namespace FiveStarTours.Repository
             List<string> years = drivingYear.Select(l => l.DrivingYear).Distinct().ToList();
             return years;
         }
+        public int NextId()
+        {
+            _drivingStatisticsData = _serializer.FromCSV(FilePath);
+            if (_drivingStatisticsData.Count < 1)
+            {
+                return 1;
+            }
+            return _drivingStatisticsData.Max(l => l.Id) + 1;
+        }
     }
 }

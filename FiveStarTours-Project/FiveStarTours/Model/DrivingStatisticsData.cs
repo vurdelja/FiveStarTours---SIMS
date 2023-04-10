@@ -12,6 +12,7 @@ namespace FiveStarTours.Model
 {
     public class DrivingStatisticsData : ISerializable
     {
+        public int Id { get; set; }
         public string DrivingYear { get; set; }
         public int DrivingNumber { get; set; }
         public string DrivingDuration { get; set; }
@@ -19,8 +20,9 @@ namespace FiveStarTours.Model
 
         public DrivingStatisticsData() { }
 
-        public DrivingStatisticsData(string drivingYear, int drivingNumber, string drivingDuration, double drivingPrice)
+        public DrivingStatisticsData(int id, string drivingYear, int drivingNumber, string drivingDuration, double drivingPrice)
         {
+            Id = id;
             DrivingYear = drivingYear;  
             DrivingNumber = drivingNumber;
             DrivingDuration = drivingDuration;
@@ -29,16 +31,18 @@ namespace FiveStarTours.Model
 
         public void FromCSV(string[] values)
         {
-            DrivingYear = Convert.ToString(values[0]);  
-            DrivingNumber = Convert.ToInt32(values[1]); 
-            DrivingDuration = Convert.ToString(values[2]);
-            DrivingPrice = Convert.ToDouble(values[3]);     
+            Id = Convert.ToInt32(values[0]);
+            DrivingYear = Convert.ToString(values[1]);
+            DrivingNumber = Convert.ToInt32(values[2]); 
+            DrivingDuration = Convert.ToString(values[3]);
+            DrivingPrice = Convert.ToDouble(values[4]);     
         }
 
         public string[] ToCSV()
         {
             string[] csvValues =
             { 
+              Id.ToString(),
               DrivingYear,
               DrivingNumber.ToString(),
               DrivingDuration,
