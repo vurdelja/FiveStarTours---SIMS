@@ -14,7 +14,10 @@
                 <Label DockPanel.Dock="Top" Height="27" Width="410" Margin="0, 0, 0, 0">Most visited tour (default - all time, choose year for most visited that year):</Label>
                 <TextBox x:Name="MostVisited" Width="150" Margin="0, 3, 0, 3" IsReadOnly="True"></TextBox>
             </StackPanel>
-            <ComboBox DockPanel.Dock="Top" Margin="-500, 0, 0, 0" ItemsSource="{Binding Years}" Width="70" />
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" >
+                <ComboBox x:Name="Year" DockPanel.Dock="Top" Margin="10, 0, 0, 0" ItemsSource="{Binding Years}" Width="70" SelectionChanged="Year_SelectionChanged" />
+                <Button x:Name="SearchByYear" Width="50" Margin="20, 0, 0, 0" Content="Search" Click="SearchByYear_Click"></Button>
+            </StackPanel>
             <Border BorderThickness="1" BorderBrush="Black" Width="400" Height="286">
             <StackPanel DockPanel.Dock="Left" Width="400" Height="286">
                 <Label>Select ended tour which statistics you want to see:</Label>
@@ -22,7 +25,7 @@
                     <StackPanel Orientation="Horizontal" Margin="0, 20, 20, 0" >
                         <Label Content=" Select date of tour :"></Label>
                         <ComboBox x:Name="DateOfTour" Width="200" SelectionChanged="DateOfTour_SelectionChanged"></ComboBox>
-                        <Button x:Name="Search" Content="Search" Margin="10, 0, 0, 0" Click="Search_Click"> </Button>
+                        <Button x:Name="Search" Content="Search" Margin="10, 0, 0, 0" Click="Search_Click" Width="50"> </Button>
                     </StackPanel>
                     <Label Content="Number of visitors on tour by years:" Margin="0, 20, 20, 0"></Label>
                 <StackPanel Orientation="Horizontal" >

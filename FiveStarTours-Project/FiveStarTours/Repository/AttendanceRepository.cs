@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FiveStarTours.Model;
 using FiveStarTours.Serializer;
@@ -160,6 +161,29 @@ namespace FiveStarTours.Repository
             _attendances = GetAll();
             id = _attendances.GroupBy(a => a.IdTour).OrderByDescending(t => t.Count()).Select(mv => mv.Key).FirstOrDefault();
             return id;
+        }
+
+        public string GetMostVisitedByYear(DateTime date, ToursRepository toursRepository)
+        {
+            string result;
+            _attendances = GetAll();
+            List<Attendance> attendances = new List<Attendance>();
+            foreach (var attendance in _attendances)
+            {
+                if (attendance.Date.Year == date.Year)
+                {
+                    attendances.Add(attendance);
+                }
+            }
+            if(attendances.Count == 0)
+            {
+                return "There's no visited tours this year.";
+            } else
+            {
+                int id = attendances.GroupBy(a => a.IdTour).OrderByDescending(t => t.Count()).Select(mv => mv.Key).FirstOrDefault();
+                result = toursRepository.GetById(id).Name;
+            }
+            return result;
         }
     }
 }

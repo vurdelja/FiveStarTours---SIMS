@@ -32,6 +32,7 @@ namespace FiveStarTours.View.Guide
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public List<int> Years { get; } = Enumerable.Range(2000, DateTime.Now.Year - 2000 + 1).ToList();
+        public DateTime SelectedYear { get; set; }
         public Statistics()
         {
             InitializeComponent();
@@ -132,10 +133,29 @@ namespace FiveStarTours.View.Guide
                 return result;
             }
         }
-
+        private void Year_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(Year.SelectedItem != null)
+            {
+                int selected = int.Parse(Year.SelectedItem.ToString());
+                SelectedYear = new DateTime(selected, 1, 1);
+            }
+        }
+        private void SearchByYear_Click(object sender, RoutedEventArgs e)
+        {
+            string result = _attendanceRepository.GetMostVisitedByYear(SelectedYear, _toursRepository);
+            if(result == null)
+            {
+                MostVisited.Text = "There's no tour in this year.";
+            }
+            else
+            {
+                MostVisited.Text = result;
+            }
+        }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        } 
     }
 }
