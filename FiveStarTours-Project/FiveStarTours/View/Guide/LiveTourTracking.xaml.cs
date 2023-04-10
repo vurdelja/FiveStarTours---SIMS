@@ -11,7 +11,6 @@ using System.Windows.Data;
 using System.Windows.Media;
 using FiveStarTours.Model;
 using FiveStarTours.Repository;
-using FiveStarTours.View.Visitor;
 
 namespace FiveStarTours.View.Guide
 {
@@ -29,7 +28,7 @@ namespace FiveStarTours.View.Guide
         public ObservableCollection<string> Checkpoints { get; set; }
         public ObservableCollection<bool> IsChecked { get; set; }
 
-        public List<string> Visitor { get ; set; } 
+        public List<string> Visitor { get; set; }
         LiveTour liveTour { get; set; }
         public LiveTourTracking(Tour selectedTour)
         {
@@ -42,7 +41,7 @@ namespace FiveStarTours.View.Guide
                 InitializeComponent();
                 DataContext = liveTour;
                 Show();
-            } 
+            }
         }
         public bool CheckVisitors(TourReservationRepository visitorRepository, Tour tour)
         {
@@ -54,7 +53,7 @@ namespace FiveStarTours.View.Guide
                     visitors.Add(v);
                 }
             }
-            if( visitors.Count < 1)
+            if (visitors.Count < 1)
             {
                 return false;
             }
@@ -66,7 +65,7 @@ namespace FiveStarTours.View.Guide
         {
             tour.KeyPoints = tour.getKeyPointsById(tour.IdKeyPoints);
             tour.KeyPoints.ElementAt(0).Visited = true;
-            if(CheckVisitors(_tourReservationRepository, tour))
+            if (CheckVisitors(_tourReservationRepository, tour))
             {
                 Visitor = _tourReservationRepository.GetAllVisitors(tour);
             }
@@ -152,32 +151,33 @@ namespace FiveStarTours.View.Guide
         public void Visitor_Checked(object sender, RoutedEventArgs e)
         {
             string item = (string)((CheckBox)sender).Content;
-
-            // Poslati notifikaciju i cekati odgovor
-            //MessageBoxResult result = MessageBox.Show($"Do you want to send request for attendance for {item}?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            User User = new User();
-            foreach(User user in _userRepository.GetAll())
+            MessageBoxResult result = MessageBox.Show($"Do you want to send request for attendance for {item}?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
             {
-                if(user.Name == item)
+                User User = new User();
+                foreach (User user in _userRepository.GetAll())
                 {
-                    User = user;
+                    if (user.Name == item)
+                    {
+                        User = user;
+                    }
                 }
-            }
-            Notification.User = User;
-            Notification.SentNotification = true;
-            if (Notification.Answer)
-            {
-                MessageBox.Show($"The visitor {item} has confirmed his/hers presence.");
-                int idVisitor = _userRepository.FindIdByName(item);
-                int idKeyPoint = FindLastVisited(liveTour);
-                Attendance attendance = new Attendance(liveTour.Id,liveTour.IdTour, idVisitor, idKeyPoint);
-                _attendanceRepository.Save(attendance);
-                Notification.Answer = false;
-            }
-            else
-            {
-                MessageBox.Show($"The visitor {item} has not confirmed his/hers presence.");
-                ((CheckBox)sender).IsChecked = false;
+                Notification.User = User;
+                Notification.SentNotification = true;
+                if (Notification.Answer)
+                {
+                    MessageBox.Show($"The visitor {item} has confirmed his/hers presence.");
+                    int idVisitor = _userRepository.FindIdByName(item);
+                    int idKeyPoint = FindLastVisited(liveTour);
+                    Attendance attendance = new Attendance(liveTour.Id, liveTour.IdTour, liveTour.Date, idVisitor, idKeyPoint);
+                    _attendanceRepository.Save(attendance);
+                    Notification.Answer = false;
+                }
+                else
+                {
+                    MessageBox.Show($"The visitor {item} has not confirmed his/hers presence.");
+                    ((CheckBox)sender).IsChecked = false;
+                }
             }
         }
         public int FindLastVisited(LiveTour liveTour)

@@ -122,8 +122,15 @@ namespace FiveStarTours.View.Guide
             int id;
             string result;
             id = _attendanceRepository.GetMostVisitedTour();
-            result = _toursRepository.GetById(id).Name;
-            return result;
+            if(id == 0)
+            {
+                return "There's no visited tours.";
+            }
+            else
+            {
+                result = _toursRepository.GetById(id).Name;
+                return result;
+            }
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
