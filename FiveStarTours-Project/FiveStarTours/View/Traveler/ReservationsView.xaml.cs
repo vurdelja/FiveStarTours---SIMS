@@ -46,16 +46,7 @@ namespace FiveStarTours.View.Traveler
                 OnPropertyChanged();
             }
         }
-        private string _guestSurname;
-        public string GuestSurname
-        {
-            get => _guestSurname;
-            set
-            {
-                _guestSurname = value;
-                OnPropertyChanged();
-            }
-        }
+ 
         private string _visitationDays;
         public string VisitationDays
         {
@@ -147,7 +138,7 @@ namespace FiveStarTours.View.Traveler
             if (SelectedReservation != null)
 
             {
-                ChangeReservation change = new ChangeReservation();
+                ChangeReservation change = new ChangeReservation(SelectedReservation);
                 change.Show();
             }
             else
@@ -155,6 +146,12 @@ namespace FiveStarTours.View.Traveler
                 MessageBox.Show("You must select accommodation to change");
 
             }
+        }
+
+        private void ViewRequest(object sender, RoutedEventArgs e)
+        {
+            RequestView request = new RequestView();
+            request.Show();
         }
     }
 }

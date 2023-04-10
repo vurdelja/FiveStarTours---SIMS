@@ -7,21 +7,19 @@
         mc:Ignorable="d"
         Title="RequestView" Height="450" Width="800">
     <Grid Background="#FFE6C9C9">
-        <DataGrid x:Name="MyDisplay" AutoGenerateColumns="False" ItemsSource="{Binding Reservations }" GridLinesVisibility="All"
-                           SelectedItem="{Binding Path=SelectedReservation}"
+        <DataGrid x:Name="MyDisplay" AutoGenerateColumns="False" ItemsSource="{Binding Changes }" GridLinesVisibility="All"
+                           SelectedItem="{Binding Path=SelectedChangedRes}"
                                
                                 IsReadOnly="True" SelectionMode="Single" Margin="0,62,0,119" FontSize="18"  >
 
             <DataGrid.Columns>
 
 
-                <DataGridTextColumn Header="Accommodation name" Binding="{Binding AccommodationName }" Width="180"/>
-                <DataGridTextColumn Header="Start date"  Binding="{Binding StartDate ,StringFormat='{}{0:dd.MM.yyyy}'}"/>
-                <DataGridTextColumn Header="End date"  Binding="{Binding EndDate, StringFormat='{}{0:dd.MM.yyyy}'}"/>
-                <DataGridTextColumn Header="Length of stay"  Binding="{Binding VisitationDays}"/>
-                <DataGridTextColumn Header="Number of guests"  Binding="{Binding GuestNumber}"/>
-                <DataGridTextColumn Header="Status"/>
-                <DataGridTextColumn Header="Comment"/>
+                <DataGridTextColumn Header="Acc name" Binding="{Binding AccommodationReservation.AccommodationName}" Width="90"/>
+                <DataGridTextColumn Header="New start date"  Binding="{Binding NewStartDate ,StringFormat='{}{0:dd.MM.yyyy}'}"/>
+                <DataGridTextColumn Header="New end date"  Binding="{Binding NewEndDate, StringFormat='{}{0:dd.MM.yyyy}'}"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}"/>
 
 
             </DataGrid.Columns>

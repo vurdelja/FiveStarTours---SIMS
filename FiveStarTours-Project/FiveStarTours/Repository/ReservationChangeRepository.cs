@@ -19,11 +19,12 @@ namespace FiveStarTours.Repository
         {
             _serializer = new Serializer<ReservationChange>();
             _changes = _serializer.FromCSV(FilePath);
+            BindAccommodationReservation();
         }
 
         public List<ReservationChange> GetAll()
         {
-            return _serializer.FromCSV(FilePath);
+            return _changes;
         }
 
         public ReservationChange Save(ReservationChange changes)
@@ -35,9 +36,19 @@ namespace FiveStarTours.Repository
             return changes;
         }
 
+        public void BindAccommodationReservation()
+        {
+            AccommodationReservationsRepository accommodationReservationsRepository = AccommodationReservationsRepository.GetInstace();
+            foreach(ReservationChange change in _changes)
+            {
+                int id = change.AccommodationReservation.Id;
+                AccommodationReservation accommodationReservation = accommodationReservationsRepository.GetById(id);
+                change.AccommodationReservation = accommodationReservation;
+            }
+        }
+
         public int NextId()
         {
-            _changes = _serializer.FromCSV(FilePath);
             if (_changes.Count < 1)
             {
                 return 1;
@@ -60,7 +71,6 @@ namespace FiveStarTours.Repository
 
         public ReservationChange Update(ReservationChange changes)
         {
-            _changes = _serializer.FromCSV(FilePath);
             ReservationChange current = _changes.Find(c => c.Id == changes.Id);
             int index = _changes.IndexOf(current);
             _changes.Remove(current);

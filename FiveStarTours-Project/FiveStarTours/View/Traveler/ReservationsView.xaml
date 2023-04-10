@@ -14,7 +14,7 @@
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id }" Width="20"/>
-                <DataGridTextColumn Header="Name" Binding="{Binding GuestName}" Width="70"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding GuestName}" Width="130"/>
                 <DataGridTextColumn Header="Accommodation name" Binding="{Binding AccommodationName }" Width="200"/>
                 <DataGridTextColumn Header="Start date"  Binding="{Binding StartDate ,StringFormat='{}{0:dd.MM.yyyy}'}"/>
                 <DataGridTextColumn Header="End date"  Binding="{Binding EndDate, StringFormat='{}{0:dd.MM.yyyy}'}"/>
@@ -33,9 +33,10 @@
                 </Style>
             </DataGrid.Resources>
         </DataGrid>
-        <Button Content="CANCEL RESERVATION" HorizontalAlignment="Left" Margin="31,320,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="22" Background="#FFCF748B" Height="43" BorderThickness="3,3,3,3" BorderBrush="#FF161414" Width="260" Click="Cancel"/>
-        <Button Content="CHANGE RESERVATION" HorizontalAlignment="Left" Margin="291,320,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" Background="#FFCF748B" Height="43" BorderThickness="3,3,3,3" BorderBrush="#FF131212" Click="Change"/>
-        <Button Content="RATE" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="22" FontWeight="Bold" Background="#FFCF748B" Height="43" BorderThickness="3,3,3,3" BorderBrush="#FF131212" Margin="542,320,0,0" Width="213" Click="Rate"/>
+        <Button Content="CANCEL RESERVATION" HorizontalAlignment="Left" Margin="31,320,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" Background="#FFCF748B" Height="43" BorderThickness="3,3,3,3" BorderBrush="#FF161414" Width="185" Click="Cancel" RenderTransformOrigin="0.749,0.468"/>
+        <Button Content="CHANGE RESERVATION" HorizontalAlignment="Left" Margin="216,320,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Background="#FFCF748B" Height="43" BorderThickness="3,3,3,3" BorderBrush="#FF131212" Click="Change" Width="218"/>
+        <Button Content="RATE" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Background="#FFCF748B" Height="43" BorderThickness="3,3,3,3" BorderBrush="#FF131212" Margin="434,320,0,0" Width="158" Click="Rate"/>
+        <Button Content="VIEW REQUEST"  HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Background="#FFCF748B" Height="43" BorderThickness="3,3,3,3" BorderBrush="#FF131212" Margin="592,320,0,0" Width="168" Click="ViewRequest" />
         <Label Content="All reservations" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="22" Background="#FFDF9090" Width="578" Height="52" HorizontalContentAlignment="Center" BorderThickness="3,3,3,3" BorderBrush="#FF100E0E" Margin="0,5,0,0"/>
     </Grid>
 </Window>

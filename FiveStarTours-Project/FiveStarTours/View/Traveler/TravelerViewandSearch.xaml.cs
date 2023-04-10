@@ -31,13 +31,11 @@ namespace FiveStarTours.View.Traveler
         public Accommodation SelectAccommodation { get; set; }
    
         private readonly AccommodationsRepository accommodationsRepository;
-        //private readonly LocationsRepository locationsRepository;
         public TravelerViewandSearch()
         {
             
             InitializeComponent();
             accommodationsRepository = new AccommodationsRepository();
-            //locationsRepository = new LocationsRepository();
             Accommodations = new ObservableCollection<Accommodation>(accommodationsRepository.GetAll());
             DataContext = this;
             
@@ -45,90 +43,6 @@ namespace FiveStarTours.View.Traveler
 
         }
 
-        //public Location location;
-
-        /*
-        private string _accomodationName;
-        public string AccomodationName
-        {
-            get => _accomodationName;
-            set
-            {
-                _accomodationName = value;
-                OnPropertyChanged();
-            }
-        }
-        private string _accomodationLocation;
-        public string AccomodationLocation
-        {
-            get => _accomodationLocation;
-            set
-            {
-                _accomodationLocation = value;
-                OnPropertyChanged();
-            }
-        }
-
-
-        private string _accomodationMaxGuest;
-        public string AccomodationMaxGuest
-        {
-            get
-            {
-                return _accomodationMaxGuest;
-            }
-            set
-            {
-                _accomodationMaxGuest = value;
-                OnPropertyChanged();
-            }
-        }
-
-
-        private string _accomodationMinReservationDays;
-        public string AccomodationMinReservationDays
-        {
-            get
-            {
-                return _accomodationMinReservationDays;
-            }
-            set
-            {
-                _accomodationMinReservationDays = value;
-                OnPropertyChanged();
-            }
-        }
-
-
-
-        private string _imageURLs;
-
-        public string ImageURLs
-        {
-            get => _imageURLs;
-            set
-            {
-                if (value != _imageURLs)
-                {
-                    _imageURLs = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        public string selectedCity;
-        public string selectedState;
-
-        private Location GetSelectedLocation()
-        {
-            foreach (var location in locationsRepository.GetAll())
-            {
-                if (location.City == selectedCity)
-                {
-                    return location;
-                }
-            }
-            return null;
-        }*/
 
         private void RefreshAccommodations(List<Accommodation> accommodations)
         {

@@ -1,5 +1,8 @@
-﻿using System;
+﻿using FiveStarTours.Model;
+using FiveStarTours.Repository;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -21,12 +24,56 @@ namespace FiveStarTours.View.Traveler
     /// </summary>
     public partial class RequestView : Window, INotifyPropertyChanges
     {
+        private AccommodationReservationsRepository _accommodationReservationsRepository;
+        private ReservationChangeRepository _reservationChangeRepository;
         public event PropertyChangedEventHandler? PropertyChanged;
+        public ReservationChange SelectedChangedRes { get; set; }
+        public ObservableCollection<ReservationChange> Changes{ get; set; }
+        
 
+
+        private string _accommodationName;
+        public string AccommodationName
+        {
+            get => _accommodationName;
+            set
+            {
+                _accommodationName = value;
+                OnPropertyChanged();
+            }
+        }
+   
+        private string _startDate;
+        public string StartDate
+        {
+            get => _startDate;
+            set
+            {
+                _startDate = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _endDate;
+        public string EndDate
+        {
+            get => _endDate;
+            set
+            {
+                _endDate = value;
+                OnPropertyChanged();
+            }
+        }
+        public DateTime NewStartDate { get; set; }
+        public DateTime NewEndDate { get; set; }
         public RequestView()
         {
             InitializeComponent();
             this.DataContext = this;
+            _accommodationReservationsRepository = AccommodationReservationsRepository.GetInstace();
+            _reservationChangeRepository = new ReservationChangeRepository();
+            NewStartDate = DateTime.Now;
+            NewEndDate = DateTime.Now;
+            Changes = new ObservableCollection<ReservationChange>(_reservationChangeRepository.GetAll());
         }
 
         private void back(object sender, RoutedEventArgs e)

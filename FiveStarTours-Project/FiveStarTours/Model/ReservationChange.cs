@@ -4,35 +4,33 @@ using System.Linq;
 
 using System.Text;
 using System.Threading.Tasks;
+using FiveStarTours.Model.Enums;
 using FiveStarTours.Serializer;
-public enum StatusType
-{
-    approved,
-    rejected,
-    processing
-}
+
 namespace FiveStarTours.Model
 {
     public class ReservationChange : ISerializable
     {
-        public int Id { get; set; } 
-        public AccommodationReservation AccommodationReservation { get; set; }  
+        public int Id { get; set; }
+        public AccommodationReservation AccommodationReservation { get; set; }
         public DateTime NewStartDate { get; set; }
         public DateTime NewEndDate { get; set; }
 
-        public StatusType Status { get; set; }
+        public ReservationChangeStatusType Status { get; set; }
+        public bool Delivered { get; set; }
         public string Comment { get; set; }
 
-
-        public ReservationChange( AccommodationReservation accommodationReservation, DateTime newStartDate, DateTime newEndDate, StatusType status, string comment)
+        public ReservationChange(int id, AccommodationReservation accommodationReservation, DateTime newStartDate, DateTime newEndDate, ReservationChangeStatusType status, bool delivered, string comment)
         {
-           
+            Id = id;
             AccommodationReservation = accommodationReservation;
             NewStartDate = newStartDate;
             NewEndDate = newEndDate;
             Status = status;
+            Delivered = delivered;
             Comment = comment;
         }
+
         public ReservationChange()
         { }
         public string[] ToCSV()
@@ -44,6 +42,7 @@ namespace FiveStarTours.Model
                 string.Join(';', NewStartDate),
                 string.Join(';', NewEndDate),
                 Status.ToString(),
+                Delivered.ToString(),
                 Comment
 
         };
@@ -53,13 +52,14 @@ namespace FiveStarTours.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            AccommodationReservation=new AccommodationReservation() { Id = Convert.ToInt32(values[1]) };
+            AccommodationReservation = new AccommodationReservation() { Id = Convert.ToInt32(values[1]) };
             NewStartDate = Convert.ToDateTime(values[2]);
             NewEndDate = Convert.ToDateTime(values[3]);
-            Status = Enum.Parse<StatusType>(values[4]);
-            Comment = values[5];
+            Status = Enum.Parse<ReservationChangeStatusType>(values[4]);
+            Delivered = Convert.ToBoolean(values[5]);
+            Comment = values[6];
 
-           
+
         }
     }
 }
