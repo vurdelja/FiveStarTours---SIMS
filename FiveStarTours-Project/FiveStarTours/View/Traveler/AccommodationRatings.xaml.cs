@@ -206,9 +206,7 @@ namespace FiveStarTours.View.Traveler
                 reservation.RatedByGuest = true;
 
                 _repository.Update(reservation);
-                System.Threading.Thread.Sleep(1000);
                 Close();
-                System.Threading.Thread.Sleep(2000);
 
 
             }

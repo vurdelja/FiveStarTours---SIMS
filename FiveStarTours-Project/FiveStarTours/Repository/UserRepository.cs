@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace FiveStarTours.Repository
 {
@@ -74,5 +75,18 @@ namespace FiveStarTours.Repository
 
             return id;
         }
+
+
+        public User Update(User user)
+        {
+            _users = _serializer.FromCSV(FilePath);
+            User current = _users.Find(c => c.Id == user.Id);
+            int index = _users.IndexOf(current);
+            _users.Remove(current);
+            _users.Insert(index, user);
+            _serializer.ToCSV(FilePath, _users);
+            return user;
+        }
+
     }
 }

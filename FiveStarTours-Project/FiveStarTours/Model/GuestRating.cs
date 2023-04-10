@@ -61,11 +61,11 @@ namespace FiveStarTours.Model
             Id = Convert.ToInt32(values[0]);
             AccommodationReservation = new AccommodationReservation() { GuestName = values[1] };
             Tidiness = int.Parse(values[2]);
-            RulesFollowed= int.Parse(values[3]);
-            Quietness= int.Parse(values[4]);
-            Friendliness= int.Parse(values[5]);
-            Communication= int.Parse(values[6]);
-            RespectTime= int.Parse(values[7]);
+            RulesFollowed = int.Parse(values[3]);
+            Quietness = int.Parse(values[4]);
+            Friendliness = int.Parse(values[5]);
+            Communication = int.Parse(values[6]);
+            RespectTime = int.Parse(values[7]);
             Comment = values[8];
         }
 

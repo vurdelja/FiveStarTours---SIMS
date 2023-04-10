@@ -48,7 +48,6 @@ namespace FiveStarTours.Model
                 GuestNumber.ToString(),
                 RatedByOwner.ToString(),
                 RatedByGuest.ToString()
-
             };
 
             return csvValues;

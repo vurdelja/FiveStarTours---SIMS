@@ -23,7 +23,7 @@ namespace FiveStarTours.Repository
         private CancelationNotificationRepository _cancelationNotificationRepository;
         private UserRepository _userRepository;
 
-        private AccommodationReservationsRepository()
+        public AccommodationReservationsRepository()
         {
             _serializer = new Serializer<AccommodationReservation>();
             _reservations = _serializer.FromCSV(FilePath);
@@ -102,6 +102,8 @@ namespace FiveStarTours.Repository
             return reservation;
         }
 
+
+        //SHOW UNRATED GUESTS FOR OWNER TO RATE
         public List<AccommodationReservation> GetUnratedAndLessThanFiveDaysAgo()
         {
             List<AccommodationReservation> reservations = new List<AccommodationReservation>();
@@ -121,12 +123,28 @@ namespace FiveStarTours.Repository
 
         }
 
-        public List<AccommodationReservation> GetRatedByOwner()
+        //SHOW GUEST REVIEWS TO OWNER
+        public List<AccommodationReservation> GetRatesForOwner()
+        {
+            List<AccommodationReservation> reservations = new List<AccommodationReservation>();
+            reservations = GetRatedByGuest();
+
+            foreach (AccommodationReservation accommodationReservation in _reservations)
+            {
+                if (accommodationReservation.RatedByOwner == false)
+                {
+                    reservations.Remove(accommodationReservation);
+                }
+            }
+            return reservations;
+        }
+
+        public List<AccommodationReservation> GetRatedByGuest()
         {
             List<AccommodationReservation> reservations = new List<AccommodationReservation>();
             foreach (AccommodationReservation accommodationReservation in _reservations)
             {
-                if (accommodationReservation.RatedByOwner == true)
+                if (accommodationReservation.RatedByGuest == true)
                 {
                     reservations.Add(accommodationReservation);
                 }
@@ -147,7 +165,27 @@ namespace FiveStarTours.Repository
         }
 
 
+        //SHOW GUEST REVIEWS TO OWNER
 
+        /*
+        public List<AccommodationReservation> GetRatedByOwnerAndGuest()
+        {
+            List<AccommodationReservation> reservations = new List<AccommodationReservation>();
+            reservations = GetRatedByOwner();
+
+            foreach (AccommodationReservation accommodationReservation in _reservations)
+            {
+                if (accommodationReservation.RatedByGuest == false)
+                {
+                    reservations.Remove(accommodationReservation);
+                }
+            }
+            return reservations;
+        }
+        */
+
+
+        //NOTIFICATION FOR OWNER ABOUT UNRATED GUESTS
         public int CountUnrated()
         {
             int unrated = 0;
@@ -178,6 +216,7 @@ namespace FiveStarTours.Repository
             }
 
         }
+        //END
 
         public bool DatesIntertwine(DateTime startAcc, DateTime endAcc, DateTime start, DateTime end)
         {

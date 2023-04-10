@@ -21,6 +21,7 @@ namespace FiveStarTours.Model
         public List<string> ImageURLs { get; set; }
 
 
+
         public AccommodationRating()
         {
             AccommodationReservation = new AccommodationReservation();

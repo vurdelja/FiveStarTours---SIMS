@@ -1,7 +1,10 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Serializer;
+using FiveStarTours.View.Traveler;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -77,6 +80,39 @@ namespace FiveStarTours.Repository
             _accratings.Insert(index, rating);
             _serializer.ToCSV(FilePath, _accratings);
             return rating;
+        }
+
+        //NUMBER OF RATINGS
+        public int CountRatings()
+        {
+            int number = 0;
+            _accratings = GetAll();
+
+            foreach (AccommodationRating accommodationRating in _accratings)
+            {
+                number++;
+            }
+
+            return number;
+
+        }
+
+        //AVERAGE RATING
+        public double AverageOwnerRating()
+        {
+            double average = 0;
+            double sum = 0;
+            _accratings = GetAll();
+
+            foreach (AccommodationRating accommodationRating in _accratings)
+            {
+                sum = sum + accommodationRating.RaitingOwner;
+            }
+
+            average = sum / _accratings.Count;
+
+            return average;
+
         }
 
         public bool ExistsRateForReservation(int reservationId)

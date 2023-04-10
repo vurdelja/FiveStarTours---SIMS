@@ -31,8 +31,8 @@ namespace FiveStarTours.View.Owner
         {
             InitializeComponent();
             DataContext = this;
-            _repository = AccommodationReservationsRepository.GetInstace();
-            Reservations = new ObservableCollection<AccommodationReservation>(_repository.GetRatedByOwner());
+            _repository = new AccommodationReservationsRepository();
+            Reservations = new ObservableCollection<AccommodationReservation>(_repository.GetRatesForOwner());
 
         }
 
