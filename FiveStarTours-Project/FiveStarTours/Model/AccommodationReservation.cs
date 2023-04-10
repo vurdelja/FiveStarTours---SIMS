@@ -12,7 +12,6 @@ namespace FiveStarTours.Model
     {
         public int Id { get; set; }
         public string GuestName { get; set; }
-        public string GuestSurname { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
        
@@ -21,17 +20,18 @@ namespace FiveStarTours.Model
         public int GuestNumber { get; set; }
 
         public bool RatedByOwner { get; set; }
+        public bool RatedByGuest { get; set; }
 
-        public AccommodationReservation(string name, string surname, DateTime startDate, DateTime endDate, int visitationDays, string accommodationName, int guestNum)
+        public AccommodationReservation(string name, DateTime startDate, DateTime endDate, int visitationDays, string accommodationName, int guestNum)
         {
             this.GuestName = name;
-            this.GuestSurname = surname;
             this.StartDate = startDate;
             this.EndDate = endDate;
             this.VisitationDays = visitationDays;
             this.AccommodationName = accommodationName;
             this.GuestNumber = guestNum;
             RatedByOwner = false;
+            RatedByGuest= false;
         }
         public AccommodationReservation()
         { }
@@ -41,15 +41,13 @@ namespace FiveStarTours.Model
            {
                 Id.ToString(),
                 GuestName,
-                GuestSurname,
-
                 string.Join(';', StartDate),
                 string.Join(';', EndDate),
                 VisitationDays.ToString(),
                 AccommodationName,
                 GuestNumber.ToString(),
-                RatedByOwner.ToString()
-
+                RatedByOwner.ToString(),
+                RatedByGuest.ToString()
             };
 
             return csvValues;
@@ -60,13 +58,13 @@ namespace FiveStarTours.Model
         {
             Id = Convert.ToInt32(values[0]);
             GuestName = values[1];
-            GuestSurname = values[2];
-            StartDate = Convert.ToDateTime(values[3]);
-            EndDate = Convert.ToDateTime(values[4]);
-            VisitationDays = Convert.ToInt32(values[5]);
-            AccommodationName = values[6];
-            GuestNumber = Convert.ToInt32(values[7]);
-            RatedByOwner = Convert.ToBoolean(values[8]);
+            StartDate = Convert.ToDateTime(values[2]);
+            EndDate = Convert.ToDateTime(values[3]);
+            VisitationDays = Convert.ToInt32(values[4]);
+            AccommodationName = values[5];
+            GuestNumber = Convert.ToInt32(values[6]);
+            RatedByOwner = Convert.ToBoolean(values[7]);
+            RatedByGuest = Convert.ToBoolean(values[8]);
         }
 
     }

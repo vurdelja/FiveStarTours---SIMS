@@ -17,6 +17,17 @@ namespace FiveStarTours.Repository
 
         private List<AccommodationReservation> _reservations;
 
+        private static AccommodationReservationsRepository instance = null;
+
+        public static AccommodationReservationsRepository GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new AccommodationReservationsRepository();
+            }
+            return instance;
+        }
+
         public AccommodationReservationsRepository()
         {
             _serializer = new Serializer<AccommodationReservation>();
@@ -98,18 +109,34 @@ namespace FiveStarTours.Repository
         }
 
         //SHOW GUEST REVIEWS TO OWNER
-        public List<AccommodationReservation> GetRatedByOwner()
+        public List<AccommodationReservation> GetRatesForOwner()
+        {
+            List<AccommodationReservation> reservations = new List<AccommodationReservation>();
+            reservations = GetRatedByGuest();
+
+            foreach (AccommodationReservation accommodationReservation in _reservations)
+            {
+                if (accommodationReservation.RatedByOwner == false)
+                {
+                    reservations.Remove(accommodationReservation);
+                }
+            }
+            return reservations;
+        }
+
+        public List<AccommodationReservation> GetRatedByGuest()
         {
             List<AccommodationReservation> reservations = new List<AccommodationReservation>();
             foreach (AccommodationReservation accommodationReservation in _reservations)
             {
-                if (accommodationReservation.RatedByOwner == true)
+                if (accommodationReservation.RatedByGuest == true)
                 {
                     reservations.Add(accommodationReservation);
                 }
             }
             return reservations;
         }
+
 
         //SHOW GUEST REVIEWS TO OWNER
 
