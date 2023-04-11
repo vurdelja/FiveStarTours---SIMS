@@ -15,7 +15,7 @@ namespace FiveStarTours.Services
     {
         private IAccommodationReservationRepository _accommodationReservationRepository;
 
-        public AccommodationReservationService(IAccommodationReservationRepository reservationRepository)
+        public AccommodationReservationService()
         {
             _accommodationReservationRepository = Injector.Injector.CreateInstance<IAccommodationReservationRepository>();
         }
