@@ -18,8 +18,7 @@ using System.Reflection.PortableExecutable;
 using FiveStarTours.Serializer;
 using ControlzEx.Standard;
 using System.Security.Policy;
-
-
+using FiveStarTours.View.Driver;
 
 namespace FiveStarTours.View.VehicleOnAdress
 {
@@ -177,8 +176,9 @@ namespace FiveStarTours.View.VehicleOnAdress
             
             
             MessageBox.Show("Data Saved");
-            Taximeter taximeter = new Taximeter();
-            //taximeter.Show();
+            TaximeterWindow taximeterWindow = new TaximeterWindow();
+            taximeterWindow.Show();
+            
 
             Close();
         }

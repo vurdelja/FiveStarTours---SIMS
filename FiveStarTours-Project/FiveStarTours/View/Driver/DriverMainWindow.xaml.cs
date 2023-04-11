@@ -44,8 +44,8 @@ namespace FiveStarTours.View
 
         private void TaximeterButton_Click(object sender, RoutedEventArgs e)
         {
-            Taximeter taximeter = new Taximeter();
-            //taximeter.Show();
+            TaximeterWindow taximeterWindow = new TaximeterWindow();
+            taximeterWindow.Show();
             
         }
 

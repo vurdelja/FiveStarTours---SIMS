@@ -30,8 +30,8 @@ namespace FiveStarTours.View.Driver
         private readonly TaximeterRepository _taximeterRepository;
         private readonly VehicleOnAdressRepository _vehicleOnAddressRepository;
         public static List<Taximeter> Taximeters { get; set; }
+
         private string currentTime = "00:00:00";
-       
 
         public string CurrentTime
         {
@@ -74,10 +74,12 @@ namespace FiveStarTours.View.Driver
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         }
-
+        
         private void Timer_Tick(object sender, EventArgs e)
         {
-            CurrentTime = DateTime.Now.ToString("HH:mm:ss"); // update CurrentTime with current time
+            Time = currentTime;
+            currentTime = ToString();
+            //currentTime = DateTime.Now.ToString("HH:mm:ss"); // update CurrentTime with current time
         }
 
         public TaximeterWindow()
@@ -88,12 +90,13 @@ namespace FiveStarTours.View.Driver
             _vehicleOnAddressRepository = new VehicleOnAdressRepository();
             _taximeterRepository = new TaximeterRepository();
 
-
-
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;
             timer.Start(); // start the timer
+            
+            
+            
         }
 
         
