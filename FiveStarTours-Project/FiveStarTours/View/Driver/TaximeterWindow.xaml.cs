@@ -31,13 +31,9 @@ namespace FiveStarTours.View.Driver
         private readonly VehicleOnAdressRepository _vehicleOnAddressRepository;
         public static List<Taximeter> Taximeters { get; set; }
 
-        private string currentTime = "00:00:00";
-
-        public string CurrentTime
-        {
-            get { return currentTime; }
-            set { currentTime = value; OnPropertyChanged("CurrentTime"); }
-        }
+        private DispatcherTimer timer;
+        private int timeInSeconds = 0;
+        private double pricePerMinute = 0.25;
 
         private string _time;
         public string Time
@@ -74,45 +70,53 @@ namespace FiveStarTours.View.Driver
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         }
+
         
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            Time = currentTime;
-            currentTime = ToString();
-            //currentTime = DateTime.Now.ToString("HH:mm:ss"); // update CurrentTime with current time
-        }
+        
 
         public TaximeterWindow()
         {
             InitializeComponent();
-            DataContext = this; // set DataContext to the code-behind file
+            
+            
 
             _vehicleOnAddressRepository = new VehicleOnAdressRepository();
             _taximeterRepository = new TaximeterRepository();
 
-            DispatcherTimer timer = new DispatcherTimer();
+            timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;
-            timer.Start(); // start the timer
-            
-            
-            
+            timer.Start();
+
+
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            timeInSeconds++;
+            double price = timeInSeconds / 60.0 * pricePerMinute;
+            TimeTextBox.Text = TimeSpan.FromSeconds(timeInSeconds).ToString(@"hh\:mm\:ss");
+            PriceTextBox.Text = price.ToString("C");
+        }
+
+
+        private void FinishButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            /*
+             string time = Convert.ToString(Time);
+             string price = Convert.ToString(Price);
+            */
+
+            //Taximeter newTaximeter = new Taximeter(time, price);
+            //_taximeterRepository.Save(newTaximeter);
+
+            timer.Stop();
+            MessageBox.Show("TIME: " + TimeTextBox.Text + "\nPRICE: " + PriceTextBox.Text);
+            Close();
         }
 
         
-        private void FinishButton_Click(object sender, RoutedEventArgs e)
-        {
-            string time = Convert.ToString(Time);
-            string price = Convert.ToString(Price);
-
-
-           Taximeter newTaximeter = new Taximeter(time, price);
-            _taximeterRepository.Save(newTaximeter);
-
-
-            MessageBox.Show("TIME: " + TimeTextBox + "PRICE: " + PriceTextBox);
-            Close();
-        }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
