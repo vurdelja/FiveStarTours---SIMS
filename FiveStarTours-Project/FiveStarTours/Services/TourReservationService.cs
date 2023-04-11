@@ -10,10 +10,10 @@ namespace FiveStarTours.Services
 {
     public class TourReservationService
     {
-        private IAccomodationRatingRepository _tourReservationRepository;
+        private ITourReservationRepository _tourReservationRepository;
         public TourReservationService()
         {
-            _tourReservationRepository = Injector.Injector.CreateInstance<IAccomodationRatingRepository>();
+            _tourReservationRepository = Injector.Injector.CreateInstance<ITourReservationRepository>();
         }
 
         public List<TourReservation> GetAll()

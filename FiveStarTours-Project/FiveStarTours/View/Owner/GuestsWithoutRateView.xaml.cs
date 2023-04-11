@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,17 +29,18 @@ namespace FiveStarTours.View.Owner
         public static ObservableCollection<AccommodationReservation> Reservations { get; set; }
 
         public AccommodationReservation SelectedReservation { get; set; }   //SELEKTOVANA
-        private readonly AccommodationReservationsRepository _repository;
+        private readonly AccommodationReservationService _reservationService;
 
         public GuestsWithoutRateView(User user)
         {
             InitializeComponent();
             DataContext = this;
 
+            _reservationService = new AccommodationReservationService();
+
             LoggedInUser = user;
 
-            _repository = AccommodationReservationsRepository.GetInstace();
-            Reservations = new ObservableCollection<AccommodationReservation>(_repository.GetUnratedAndLessThanFiveDaysAgo());
+            Reservations = new ObservableCollection<AccommodationReservation>(_reservationService.GetUnratedAndLessThanFiveDaysAgo());
 
         }
 

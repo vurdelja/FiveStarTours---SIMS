@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using FiveStarTours.View.Owner;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace FiveStarTours.View
     /// </summary>
     public partial class OwnerMainWindow : Window
     {
-        private readonly AccommodationReservationsRepository _repository;
+        private readonly AccommodationReservationService _service;
         public User LoggedInUser { get; set; }
 
         public OwnerMainWindow(User user)
@@ -30,11 +31,11 @@ namespace FiveStarTours.View
             InitializeComponent();
             DataContext = this;
 
-            _repository = AccommodationReservationsRepository.GetInstace();
+            _service = new AccommodationReservationService();
 
             LoggedInUser= user;
 
-            _repository.NotifyAboutUnratedGuests();
+            _service.NotifyAboutUnratedGuests();
 
         }
 

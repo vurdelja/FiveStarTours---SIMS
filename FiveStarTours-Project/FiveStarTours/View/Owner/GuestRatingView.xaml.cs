@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using MahApps.Metro.Converters;
 using System;
 using System.Collections.Generic;
@@ -21,8 +22,8 @@ namespace FiveStarTours.View.Owner
         User LoggedInUser { get; set; }
         public AccommodationReservation _selectedReservation { get; set; }
 
-        private readonly AccommodationReservationsRepository _repository;
-        private readonly GuestRatingsRepository _rateRepository;
+        private readonly AccommodationReservationService _service;
+        private readonly GuestRaitingsService _ratingService;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string properyName = null)
@@ -40,8 +41,8 @@ namespace FiveStarTours.View.Owner
             _selectedReservation = selectedReservation;
 
 
-            _repository = AccommodationReservationsRepository.GetInstace();
-            _rateRepository = new GuestRatingsRepository();
+            _service = new AccommodationReservationService();
+            _ratingService = new GuestRaitingsService();
         }
 
 
@@ -233,10 +234,10 @@ namespace FiveStarTours.View.Owner
 
             if (IsValid(newGuestRate))
             {
-                _rateRepository.Save(newGuestRate);
+                _ratingService.Save(newGuestRate);
                 reservation.RatedByOwner = true;
 
-                _repository.Update(reservation);
+                _service.Update(reservation);
                 System.Threading.Thread.Sleep(1000);
                 Close();
                 System.Threading.Thread.Sleep(2000);

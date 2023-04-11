@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using FiveStarTours.View.Traveler;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,8 @@ namespace FiveStarTours.View.Owner
         public static ObservableCollection<ReservationChange> Requests { get; set; }
 
         public ReservationChange SelectedRequest { get; set; }   //SELEKTOVANA
-        private readonly ReservationChangeRepository _repository;
+
+        private readonly ReservationChangeService _service;
 
         
         public ManageRequestsView(User user)
@@ -37,8 +39,8 @@ namespace FiveStarTours.View.Owner
 
             LoggedInUser = user;
 
-            _repository = new ReservationChangeRepository();
-            Requests = new ObservableCollection<ReservationChange>(_repository.GetAllProcessing());
+            _service = new ReservationChangeService();
+            Requests = new ObservableCollection<ReservationChange>(_service.GetAllProcessing());
         }
 
         private void ViewRequestButton_Click(object sender, RoutedEventArgs e)

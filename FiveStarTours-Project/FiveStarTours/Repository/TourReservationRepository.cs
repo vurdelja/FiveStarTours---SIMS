@@ -10,7 +10,7 @@ using FiveStarTours.View;
 
 namespace FiveStarTours.Repository
 {
-    public class TourReservationRepository : IAccomodationRatingRepository
+    public class TourReservationRepository : ITourReservationRepository
     {
         private const string FilePath = "../../../Resources/Data/tourreservations.csv";
         private readonly Serializer<TourReservation> _serializerVisitor;

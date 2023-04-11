@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Security.AccessControl;
 using System.Xml.Linq;
+using FiveStarTours.Services;
 
 namespace FiveStarTours.View
 {
@@ -19,8 +20,8 @@ namespace FiveStarTours.View
     {
         public User LoggedInUser { get; set; }
 
-        private readonly LocationsRepository _locationsRepository;
-        private readonly AccommodationsRepository _accommodationsRepository;
+        private readonly LocationsService _locationsRepository;
+        private readonly AccommodationsService _accommodationService;
 
 
         public AddAccommodationView(User user)
@@ -28,8 +29,8 @@ namespace FiveStarTours.View
             InitializeComponent();
             DataContext = this;
 
-            _locationsRepository = new LocationsRepository();
-            _accommodationsRepository = new AccommodationsRepository();
+            _locationsRepository = new LocationsService();
+            _accommodationService = new AccommodationsService();
 
             LoggedInUser = user;
 
@@ -208,7 +209,7 @@ namespace FiveStarTours.View
 
             if(IsValid(newAccommodation))
             {
-                _accommodationsRepository.Save(newAccommodation);
+                _accommodationService.Save(newAccommodation);
                 Close();
             }
             else

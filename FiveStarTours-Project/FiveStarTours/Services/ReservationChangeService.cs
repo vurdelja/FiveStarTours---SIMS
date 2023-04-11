@@ -21,6 +21,11 @@ namespace FiveStarTours.Services
             return _reservationChangeRepository.GetAll();
         }
 
+        public List<ReservationChange> GetAllProcessing()
+        {
+            return _reservationChangeRepository.GetAllProcessing();
+        }
+
         public ReservationChange Save(ReservationChange changes)
         {
             return _reservationChangeRepository.Save(changes);

@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,7 +27,7 @@ namespace FiveStarTours.View.Owner
         public static ObservableCollection<AccommodationReservation> Reservations { get; set; }
 
         public AccommodationReservation SelectedReservation { get; set; }   //SELEKTOVANA
-        private readonly AccommodationReservationsRepository _repository;
+        private readonly AccommodationReservationService _service;
 
         public GuestReviewsView(User user)
         {
@@ -35,8 +36,8 @@ namespace FiveStarTours.View.Owner
 
             LoggedInUser = user;
 
-            _repository = new AccommodationReservationsRepository();
-            Reservations = new ObservableCollection<AccommodationReservation>(_repository.GetRatesForOwner());
+            _service = new AccommodationReservationService();
+            Reservations = new ObservableCollection<AccommodationReservation>(_service.GetRatesForOwner());
 
         }
 

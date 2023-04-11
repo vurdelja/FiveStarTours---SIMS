@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using FiveStarTours.View.Traveler;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace FiveStarTours.View.Owner
         public ReservationChange _selectedRequest { get; set; }
 
 
-        private readonly ReservationChangeRepository _requestRepository;
+        private readonly ReservationChangeService _requestService;
         public ReservationChange reservationChange { get; set; }
 
 
@@ -36,7 +37,7 @@ namespace FiveStarTours.View.Owner
             DataContext = this;
 
             _selectedRequest = selectedRequest;
-            _requestRepository = ReservationChangeRepository.GetInstance();
+            _requestService = new ReservationChangeService();
 
             reservationChange = new ReservationChange();
             reservationChange = _selectedRequest;
@@ -50,7 +51,7 @@ namespace FiveStarTours.View.Owner
         private void DeclineButton_Click(object sender, RoutedEventArgs e)
         {
             _selectedRequest.Status = Model.Enums.ReservationChangeStatusType.Rejected;
-            _requestRepository.Update(_selectedRequest);
+            _requestService.Update(_selectedRequest);
             Close();
         }
 

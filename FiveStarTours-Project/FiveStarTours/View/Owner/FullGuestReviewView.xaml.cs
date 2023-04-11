@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace FiveStarTours.View.Owner
         public AccommodationReservation _selectedReservation { get; set; }
 
 
-        private readonly AccommodationRatingRepository _rateRepository;
+        private readonly AccommodationRatingService _rateService;
 
         public AccommodationRating accommodationRating { get; set; }
 
@@ -40,10 +41,10 @@ namespace FiveStarTours.View.Owner
 
             _selectedReservation = selectedReservation;
 
-            _rateRepository = AccommodationRatingRepository.GetInstace();
+            _rateService = new AccommodationRatingService();
 
             accommodationRating = new AccommodationRating();
-            accommodationRating = _rateRepository.GetById(selectedReservation.Id);
+            accommodationRating = _rateService.GetById(selectedReservation.Id);
 
         }
 
