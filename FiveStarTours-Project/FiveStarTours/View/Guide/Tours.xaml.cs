@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using FiveStarTours.View.Guide;
 
 namespace FiveStarTours.View
@@ -17,20 +18,20 @@ namespace FiveStarTours.View
     public partial class Tours : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-        private readonly ToursRepository _toursRepository;
-        private readonly TourReservationRepository _tourReservationRepository;
-        private readonly GiftCardRepository _giftCardRepository;
-        private readonly UserRepository _userRepository;
+        private readonly ToursService _toursRepository;
+        private readonly TourReservationService _tourReservationRepository;
+        private readonly GiftCardService _giftCardRepository;
+        private readonly UserService _userRepository;
         public Tour SelectedTour { get; set; }
         public User LoggedInUser { get; set; }
         public ObservableCollection<Tour> ToursCollection { get; set; }
         public Tours(User user)
         {
             InitializeComponent();
-            _toursRepository = new ToursRepository();
-            _tourReservationRepository = new TourReservationRepository();
-            _giftCardRepository = new GiftCardRepository();
-            _userRepository = new UserRepository();
+            _toursRepository = new ToursService();
+            _tourReservationRepository = new TourReservationService();
+            _giftCardRepository = new GiftCardService();
+            _userRepository = new UserService();
             DataContext = this;
             LoggedInUser = user;
             ToursCollection = new ObservableCollection<Tour>(_toursRepository.GetByUser(user));

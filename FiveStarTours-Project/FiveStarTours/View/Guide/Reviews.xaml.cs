@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 
 namespace FiveStarTours.View.Guide
 {
@@ -17,11 +18,11 @@ namespace FiveStarTours.View.Guide
         public event PropertyChangedEventHandler? PropertyChanged;
         public ObservableCollection<TourRating> ReviewsCollection { get; set; }
 
-        private readonly TourRatingRepository _tourRatingRepository;
-        private readonly LiveTourRepository _liveTourRepository;
-        private readonly ToursRepository _toursRepository;
-        private readonly AttendanceRepository _attendanceRepository;
-        private readonly KeyPointsRepository _keyPointsRepository;
+        private readonly TourRatingService _tourRatingRepository;
+        private readonly LiveTourService _liveTourRepository;
+        private readonly ToursService _toursRepository;
+        private readonly AttendanceService _attendanceRepository;
+        private readonly KeyPointsService _keyPointsRepository;
 
         public string SelectedTour { get; set; }
         public TourRating SelectedReview { get; set; }
@@ -44,11 +45,11 @@ namespace FiveStarTours.View.Guide
             InitializeComponent();
             DataContext = this;
             LoggedInUser = user;
-            _tourRatingRepository = new TourRatingRepository();
-            _liveTourRepository = new LiveTourRepository();
-            _toursRepository = new ToursRepository();
-            _attendanceRepository = new AttendanceRepository();
-            _keyPointsRepository = new KeyPointsRepository();
+            _tourRatingRepository = new TourRatingService();
+            _liveTourRepository = new LiveTourService();
+            _toursRepository = new ToursService();
+            _attendanceRepository = new AttendanceService();
+            _keyPointsRepository = new KeyPointsService();
             ReviewsCollection = new ObservableCollection<TourRating>();
 
             List<string> endedTours = _liveTourRepository.GetEndedTours(_toursRepository.GetByUser(user));
@@ -63,7 +64,7 @@ namespace FiveStarTours.View.Guide
             {
                 SelectedTour = Tours.SelectedItem as string;
                 int tour = _toursRepository.GetByName(SelectedTour);
-                ReviewsCollection = new ObservableCollection<TourRating>(_tourRatingRepository.GetAllByTour(tour, _attendanceRepository, _keyPointsRepository));
+                ReviewsCollection = new ObservableCollection<TourRating>(_tourRatingRepository.GetAllByTour(tour, _attendanceRepository.GetAll(), _keyPointsRepository.GetAll()));
                 DataGridReviews.ItemsSource = ReviewsCollection;
             }
         }

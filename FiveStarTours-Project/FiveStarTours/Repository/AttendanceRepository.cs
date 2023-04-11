@@ -48,7 +48,7 @@ namespace FiveStarTours.Repository
             return _attendances.Max(a => a.Id) + 1;
         }
 
-        public int GetAllLower(int id, UserRepository userRepository)
+        public int GetAllLower(int id, List<User> users)
         {
             int result = 0;
             List<Attendance> Attendances = new List<Attendance>();
@@ -62,9 +62,15 @@ namespace FiveStarTours.Repository
             List<User> visitors = new List<User>();
             foreach (var attendance in Attendances)
             {
-                visitors.Add(userRepository.GetById(attendance.IdVisitor));
-            }
+                foreach (var user in users)
+                {
+                    if (attendance.IdVisitor == user.Id)
+                    {
+                        visitors.Add(user);
+                    }
+                }
 
+            }
             foreach (var visitor in visitors)
             {
                 if (visitor.Age < 18)
@@ -76,7 +82,7 @@ namespace FiveStarTours.Repository
             return result;
         }
 
-        public int GetAllBetween(int id, UserRepository userRepository)
+        public int GetAllBetween(int id, List<User> users)
         {
             int result = 0;
             List<Attendance> Attendances = new List<Attendance>();
@@ -90,7 +96,13 @@ namespace FiveStarTours.Repository
             List<User> visitors = new List<User>();
             foreach (var attendance in Attendances)
             {
-                visitors.Add(userRepository.GetById(attendance.IdVisitor));
+                foreach (var user in users)
+                {
+                    if (attendance.IdVisitor == user.Id)
+                    {
+                        visitors.Add(user);
+                    }
+                }
             }
 
             foreach (var visitor in visitors)
@@ -104,7 +116,7 @@ namespace FiveStarTours.Repository
             return result;
         }
 
-        public int GetAllAbove(int id, UserRepository userRepository)
+        public int GetAllAbove(int id, List<User> users)
         {
             int result = 0;
             List<Attendance> Attendances = new List<Attendance>();
@@ -118,7 +130,13 @@ namespace FiveStarTours.Repository
             List<User> visitors = new List<User>();
             foreach (var attendance in Attendances)
             {
-                visitors.Add(userRepository.GetById(attendance.IdVisitor));
+                foreach (var user in users)
+                {
+                    if (attendance.IdVisitor == user.Id)
+                    {
+                        visitors.Add(user);
+                    }
+                }
             }
 
             foreach (var visitor in visitors)
@@ -132,7 +150,7 @@ namespace FiveStarTours.Repository
             return result;
         }
 
-        public int GetAllById(int id, UserRepository userRepository)
+        public int GetAllById(int id, List<User> users)
         {
             int result = 0;
             List<Attendance> Attendances = new List<Attendance>();
@@ -146,7 +164,13 @@ namespace FiveStarTours.Repository
             List<User> visitors = new List<User>();
             foreach (var attendance in Attendances)
             {
-                visitors.Add(userRepository.GetById(attendance.IdVisitor));
+                foreach (var user in users)
+                {
+                    if (attendance.IdVisitor == user.Id)
+                    {
+                        visitors.Add(user);
+                    }
+                }
             }
 
             foreach (var visitor in visitors)
@@ -184,9 +208,9 @@ namespace FiveStarTours.Repository
             return attendances;
         }
 
-        public string GetMostVisitedByYear(DateTime date, ToursRepository toursRepository)
+        public string GetMostVisitedByYear(DateTime date, List<Tour> tours)
         {
-            string result;
+            string result = null;
             _attendances = GetAll();
             List<Attendance> attendances = new List<Attendance>();
             foreach (var attendance in _attendances)
@@ -198,11 +222,17 @@ namespace FiveStarTours.Repository
             }
             if(attendances.Count == 0)
             {
-                return "There's no visited tours this year.";
+                result = "There's no visited tours this year.";
             } else
             {
                 int id = attendances.GroupBy(a => a.IdTour).OrderByDescending(t => t.Count()).Select(mv => mv.Key).FirstOrDefault();
-                result = toursRepository.GetById(id).Name;
+                foreach (var tour in tours)
+                {
+                    if (tour.Id == id)
+                    {
+                        result = tour.Name;
+                    }
+                }
             }
             return result;
         }

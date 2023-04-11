@@ -15,7 +15,7 @@ namespace FiveStarTours.Interfaces
         public int NextId();
         public TourRating GetById(int id);
         public TourRating Update(TourRating rating);
-        public List<TourRating> GetAllByTour(int idTour, AttendanceRepository attendances, KeyPointsRepository keyPointsRepository);
+        public List<TourRating> GetAllByTour(int idTour, List<Attendance> attendances, List<KeyPoints> keyPointsRepository);
         public void Replace(TourRating rating);
     }
 }

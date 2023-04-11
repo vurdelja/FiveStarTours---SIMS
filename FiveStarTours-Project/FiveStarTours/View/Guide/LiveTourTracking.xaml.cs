@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 
 namespace FiveStarTours.View.Guide
 {
@@ -19,10 +20,10 @@ namespace FiveStarTours.View.Guide
     /// </summary>
     public partial class LiveTourTracking : Window, INotifyPropertyChanged
     {
-        private readonly LiveTourRepository _liveTourRepository;
-        private readonly AttendanceRepository _attendanceRepository;
-        private readonly TourReservationRepository _tourReservationRepository;
-        private readonly UserRepository _userRepository;
+        private readonly LiveTourService _liveTourRepository;
+        private readonly AttendanceService _attendanceRepository;
+        private readonly TourReservationService _tourReservationRepository;
+        private readonly UserService _userRepository;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public ObservableCollection<string> Checkpoints { get; set; }
@@ -32,10 +33,10 @@ namespace FiveStarTours.View.Guide
         LiveTour liveTour { get; set; }
         public LiveTourTracking(Tour selectedTour)
         {
-            _liveTourRepository = new LiveTourRepository();
-            _attendanceRepository = new AttendanceRepository();
-            _tourReservationRepository = new TourReservationRepository();
-            _userRepository = new UserRepository();
+            _liveTourRepository = new LiveTourService();
+            _attendanceRepository = new AttendanceService();
+            _tourReservationRepository = new TourReservationService();
+            _userRepository = new UserService();
             if (StartLiveTour(selectedTour))
             {
                 InitializeComponent();
@@ -43,10 +44,10 @@ namespace FiveStarTours.View.Guide
                 Show();
             }
         }
-        public bool CheckVisitors(TourReservationRepository visitorRepository, Tour tour)
+        public bool CheckVisitors(List<TourReservation> tourReservations, Tour tour)
         {
             List<TourReservation> visitors = new List<TourReservation>();
-            foreach (var v in _tourReservationRepository.GetAll())
+            foreach (var v in tourReservations)
             {
                 if (tour.Id == v.Id && tour.OneBeginningTime == v.DateTime)
                 {
@@ -65,7 +66,7 @@ namespace FiveStarTours.View.Guide
         {
             tour.KeyPoints = tour.getKeyPointsById(tour.IdKeyPoints);
             tour.KeyPoints.ElementAt(0).Visited = true;
-            if (CheckVisitors(_tourReservationRepository, tour))
+            if (CheckVisitors(_tourReservationRepository.GetAll(), tour))
             {
                 Visitor = _tourReservationRepository.GetAllVisitors(tour);
             }

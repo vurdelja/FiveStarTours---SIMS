@@ -42,7 +42,7 @@ namespace FiveStarTours.Services
             return _tourRatingRepository.Update(rating);
         }
 
-        public List<TourRating> GetAllByTour(int idTour, AttendanceRepository attendances, KeyPointsRepository keyPointsRepository)
+        public List<TourRating> GetAllByTour(int idTour, List<Attendance> attendances, List<KeyPoints> keyPointsRepository)
         {
             return _tourRatingRepository.GetAllByTour(idTour, attendances, keyPointsRepository);
         }

@@ -32,24 +32,24 @@ namespace FiveStarTours.Services
             return _attendanceRepository.NextId();
         }
 
-        public int GetAllLower(int id, UserRepository userRepository)
+        public int GetAllLower(int id, List<User> users)
         {
-            return _attendanceRepository.GetAllLower(id, userRepository);
+            return _attendanceRepository.GetAllLower(id, users);
         }
 
-        public int GetAllBetween(int id, UserRepository userRepository)
+        public int GetAllBetween(int id, List<User> users)
         {
-            return _attendanceRepository.GetAllBetween(id, userRepository);
+            return _attendanceRepository.GetAllBetween(id, users);
         }
 
-        public int GetAllAbove(int id, UserRepository userRepository)
+        public int GetAllAbove(int id, List<User> users)
         {
-            return _attendanceRepository.GetAllAbove(id, userRepository);
+            return _attendanceRepository.GetAllAbove(id, users);
         }
 
-        public int GetAllById(int id, UserRepository userRepository)
+        public int GetAllById(int id, List<User> users)
         {
-            return _attendanceRepository.GetAllById(id, userRepository);
+            return _attendanceRepository.GetAllById(id, users);
         }
 
         public int GetMostVisitedTour(List<Tour> tours)
@@ -62,9 +62,9 @@ namespace FiveStarTours.Services
             return _attendanceRepository.GetAllByTours(tours);
         }
 
-        public string GetMostVisitedByYear(DateTime date, ToursRepository toursRepository)
+        public string GetMostVisitedByYear(DateTime date, List<Tour> tours)
         {
-            return _attendanceRepository.GetMostVisitedByYear(date, toursRepository);
+            return _attendanceRepository.GetMostVisitedByYear(date, tours);
         }
         public List<int> GetVisitedTours(int id)
         {

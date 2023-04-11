@@ -11,10 +11,10 @@ namespace FiveStarTours.Services
 {
     public class TourReservationService
     {
-        private IAccomodationRatingRepository _tourReservationRepository;
+        private ITourReservationRepository _tourReservationRepository;
         public TourReservationService()
         {
-            _tourReservationRepository = Injector.Injector.CreateInstance<IAccomodationRatingRepository>();
+            _tourReservationRepository = Injector.Injector.CreateInstance<ITourReservationRepository>();
         }
 
         public List<TourReservation> GetAll()
@@ -52,9 +52,9 @@ namespace FiveStarTours.Services
             _tourReservationRepository.Delete(tourReservation);
         }
 
-        public int GetWithGiftCard(int id, AttendanceRepository attendanceRepository, UserRepository userRepository)
+        public int GetWithGiftCard(int id, List<Attendance> attendances, List<User> users)
         {
-            return _tourReservationRepository.GetWithGiftCard(id, attendanceRepository, userRepository);
+            return _tourReservationRepository.GetWithGiftCard(id, attendances, users);
         }
     }
 }

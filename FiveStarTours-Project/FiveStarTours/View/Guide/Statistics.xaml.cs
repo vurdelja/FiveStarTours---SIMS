@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 
 namespace FiveStarTours.View.Guide
 {
@@ -24,11 +25,11 @@ namespace FiveStarTours.View.Guide
     /// </summary>
     public partial class Statistics : Window, INotifyPropertyChanged
     {
-        private readonly LiveTourRepository _liveTourRepository;
-        private readonly AttendanceRepository _attendanceRepository;
-        private readonly UserRepository _userRepository;
-        private readonly TourReservationRepository _tourReservationRepository;
-        private readonly ToursRepository _toursRepository;
+        private readonly LiveTourService _liveTourRepository;
+        private readonly AttendanceService _attendanceRepository;
+        private readonly UserService _userRepository;
+        private readonly TourReservationService _tourReservationRepository;
+        private readonly ToursService _toursRepository;
 
         public User LoggedInUser { get; set; }
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -37,11 +38,11 @@ namespace FiveStarTours.View.Guide
         public Statistics(User user)
         {
             InitializeComponent();
-            _liveTourRepository = new LiveTourRepository();
-            _attendanceRepository = new AttendanceRepository();
-            _userRepository = new UserRepository();
-            _tourReservationRepository = new TourReservationRepository();
-            _toursRepository = new ToursRepository();
+            _liveTourRepository = new LiveTourService();
+            _attendanceRepository = new AttendanceService();
+            _userRepository = new UserService();
+            _tourReservationRepository = new TourReservationService();
+            _toursRepository = new ToursService();
             DataContext = this;
             LoggedInUser = user;
             MostVisited.Text = GetMostVisitedAllTime();
@@ -85,31 +86,31 @@ namespace FiveStarTours.View.Guide
         public string GetLower()
         {
             LiveTour tour = _liveTourRepository.GetByNameAndDate(selectedTour, Convert.ToDateTime(selectedDate));
-            int numberLower = _attendanceRepository.GetAllLower(tour.Id, _userRepository);
-            string Lower = Convert.ToString(numberLower / _attendanceRepository.GetAllById(tour.Id, _userRepository) * 100) + "%";
+            int numberLower = _attendanceRepository.GetAllLower(tour.Id, _userRepository.GetAll());
+            string Lower = Convert.ToString(numberLower / _attendanceRepository.GetAllById(tour.Id, _userRepository.GetAll()) * 100) + "%";
             return Lower;
         }
 
         public string GetBetween()
         {
             LiveTour tour = _liveTourRepository.GetByNameAndDate(selectedTour, Convert.ToDateTime(selectedDate));
-            int numberLower = _attendanceRepository.GetAllBetween(tour.Id, _userRepository);
-            string Between = Convert.ToString(numberLower / _attendanceRepository.GetAllById(tour.Id, _userRepository) * 100) + "%";
+            int numberLower = _attendanceRepository.GetAllBetween(tour.Id, _userRepository.GetAll());
+            string Between = Convert.ToString(numberLower / _attendanceRepository.GetAllById(tour.Id, _userRepository.GetAll()) * 100) + "%";
             return Between;
         }
         public string GetAbove()
         {
             LiveTour tour = _liveTourRepository.GetByNameAndDate(selectedTour, Convert.ToDateTime(selectedDate));
-            int numberLower = _attendanceRepository.GetAllAbove(tour.Id, _userRepository);
-            string Above = Convert.ToString(numberLower / _attendanceRepository.GetAllById(tour.Id, _userRepository) * 100) + "%";
+            int numberLower = _attendanceRepository.GetAllAbove(tour.Id, _userRepository.GetAll());
+            string Above = Convert.ToString(numberLower / _attendanceRepository.GetAllById(tour.Id, _userRepository.GetAll()) * 100) + "%";
             return Above;
         }
 
         public string GetWithGiftCard()
         {
             LiveTour tour = _liveTourRepository.GetByNameAndDate(selectedTour, Convert.ToDateTime(selectedDate));
-            int number = _tourReservationRepository.GetWithGiftCard(tour.Id, _attendanceRepository, _userRepository);
-            string WithGiftCard = Convert.ToString(number / _attendanceRepository.GetAllById(tour.Id, _userRepository) * 100) ;
+            int number = _tourReservationRepository.GetWithGiftCard(tour.Id, _attendanceRepository.GetAll(), _userRepository.GetAll());
+            string WithGiftCard = Convert.ToString(number / _attendanceRepository.GetAllById(tour.Id, _userRepository.GetAll()) * 100) ;
             return WithGiftCard;
         }
 
@@ -144,7 +145,7 @@ namespace FiveStarTours.View.Guide
         }
         private void SearchByYear_Click(object sender, RoutedEventArgs e)
         {
-            string result = _attendanceRepository.GetMostVisitedByYear(SelectedYear, _toursRepository);
+            string result = _attendanceRepository.GetMostVisitedByYear(SelectedYear, _toursRepository.GetAll());
             if(result == null)
             {
                 MostVisited.Text = "There's no tour in this year.";

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FiveStarTours.Interfaces
 {
-    public interface IAccomodationRatingRepository
+    public interface ITourReservationRepository
     {
         List<TourReservation> GetAll();
         TourReservation Save(TourReservation tourReservation);
@@ -17,6 +17,6 @@ namespace FiveStarTours.Interfaces
         List<string> GetAllVisitors(Tour tour);
         void DeleteById(Tour tour);
         void Delete(TourReservation tourReservation);
-        public int GetWithGiftCard(int id, AttendanceRepository attendanceRepository, UserRepository userRepository);
+        public int GetWithGiftCard(int id, List<Attendance> attendances, List<User> users);
     }
 }

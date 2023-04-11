@@ -10,7 +10,7 @@ using FiveStarTours.View;
 
 namespace FiveStarTours.Repository
 {
-    public class TourReservationRepository : IAccomodationRatingRepository
+    public class TourReservationRepository : ITourReservationRepository
     {
         private const string FilePath = "../../../Resources/Data/tourreservations.csv";
         private readonly Serializer<TourReservation> _serializerVisitor;
@@ -80,12 +80,10 @@ namespace FiveStarTours.Repository
             return visitors;
         }
 
-        public int GetWithGiftCard(int id, AttendanceRepository attendanceRepository, UserRepository userRepository)
+        public int GetWithGiftCard(int id, List<Attendance> attendances, List<User> users)
         {
             int result = 0;
             _tourReservations = GetAll();
-            List<Attendance> attendances = attendanceRepository.GetAll();
-            List<User> users = userRepository.GetAll();
             foreach (var tourReservation in _tourReservations)
             {
                 if(tourReservation.TourId == id && tourReservation.GiftCard)

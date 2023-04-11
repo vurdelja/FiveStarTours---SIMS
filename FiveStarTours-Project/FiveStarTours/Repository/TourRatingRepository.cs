@@ -68,7 +68,7 @@ namespace FiveStarTours.Repository
             return rating;
         }
 
-        public List<TourRating> GetAllByTour(int idTour, AttendanceRepository attendances, KeyPointsRepository keyPointsRepository)
+        public List<TourRating> GetAllByTour(int idTour, List<Attendance> attendances, List<KeyPoints> keyPointsRepository)
         {
             _tourRatingRepository = GetAll();
             List<TourRating> result = new List<TourRating>();
@@ -76,11 +76,11 @@ namespace FiveStarTours.Repository
             {
                 if (rating.TourId == idTour)
                 {
-                    foreach(Attendance attendance in attendances.GetAll())
+                    foreach(Attendance attendance in attendances)
                     {
                         if(rating.UserId == attendance.IdVisitor && attendance.IdTour == idTour)
                         {
-                            foreach(KeyPoints keyPoint in keyPointsRepository.GetAll())
+                            foreach(KeyPoints keyPoint in keyPointsRepository)
                             {
                                 if(attendance.IdKeyPoint == keyPoint.Id)
                                 {
