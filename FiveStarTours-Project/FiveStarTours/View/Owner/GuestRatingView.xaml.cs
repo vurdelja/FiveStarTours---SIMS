@@ -37,7 +37,7 @@ namespace FiveStarTours.View.Owner
             _selectedReservation= selectedReservation;
 
 
-            _repository = new AccommodationReservationsRepository();
+            _repository = AccommodationReservationsRepository.GetInstace();
             _rateRepository= new GuestRatingsRepository();
 
         }
@@ -232,7 +232,7 @@ namespace FiveStarTours.View.Owner
             if (IsValid(newGuestRate))
             {
                 _rateRepository.Save(newGuestRate);
-                reservation.Rated = true;
+                reservation.RatedByOwner = true;
 
                 _repository.Update(reservation);
                 System.Threading.Thread.Sleep(1000);

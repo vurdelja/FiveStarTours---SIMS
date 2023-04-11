@@ -27,8 +27,6 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header=" Name"  Width="100"
                                     Binding="{Binding GuestName}"/>
-                <DataGridTextColumn Header=" Surname" Width="100"
-                                    Binding="{Binding GuestSurname}"/>
                 <DataGridTextColumn Header=" End date" Width="130"
                                     Binding="{Binding EndDate}"/>
                 <DataGridTextColumn Header=" Accommodation name" Width="*" 

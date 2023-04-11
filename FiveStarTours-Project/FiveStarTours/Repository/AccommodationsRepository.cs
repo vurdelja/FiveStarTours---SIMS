@@ -8,10 +8,11 @@ using System.Windows.Input;
 using System.Windows;
 using FiveStarTours.Serializer;
 using System.Xml.Linq;
+using FiveStarTours.Interfaces;
 
 namespace FiveStarTours.Repository
 {
-    public class AccommodationsRepository
+    public class AccommodationsRepository : IAccommodationsRepository
     {
         private const string FilePath = "../../../Resources/Data/accommodations.csv";
 
@@ -29,7 +30,6 @@ namespace FiveStarTours.Repository
         {
             return GetAllAccomodationBindLocation();
         }
-
         public List<Accommodation> GetAllAccomodationBindLocation()
         {
             LocationsRepository locationsRepository = new LocationsRepository();
@@ -93,7 +93,6 @@ namespace FiveStarTours.Repository
             }
             return null;
         }
-
 
 
         public bool SearchConditionAccommodationName(Accommodation accommodation, string name)
@@ -161,8 +160,30 @@ namespace FiveStarTours.Repository
             return searchedAccommodations;
         }
 
-        
 
+
+        public Accommodation GetAccommodationForAccommodationName(string accommodationName)
+        {
+            foreach (Accommodation accommodation in _accommodations)
+            {
+                if (accommodationName == accommodation.AccommodationName)
+                {
+                    return accommodation;
+                }
+            }
+            return null;
+        }
+
+        public bool CheckReservationDays(Accommodation accommodation, string minDays)
+        {
+            if (minDays == null || minDays == "")
+            {
+                return true;
+            }
+            int minReserve = Convert.ToInt32(minDays);
+            return accommodation.MinReservationDays <= minReserve;
+        }
+       
 
 
     }
