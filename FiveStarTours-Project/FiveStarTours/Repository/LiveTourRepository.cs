@@ -55,9 +55,10 @@ namespace FiveStarTours.Repository
             if(livetour != null)
             {
                 livetour = liveTour;
+                liveToursList[idLiveTour-1] = livetour;
             }
 
-            _serializer.ToCSV(FilePath, _liveTours);
+            _serializer.ToCSV(FilePath, liveToursList);
         }
 
         public List<string> GetEndedTours(List<Tour> tours)

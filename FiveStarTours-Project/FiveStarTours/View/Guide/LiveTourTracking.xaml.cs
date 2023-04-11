@@ -74,7 +74,6 @@ namespace FiveStarTours.View.Guide
                 MessageBox.Show("No visitors on this tour!");
                 return false;
             }
-            liveTour = new LiveTour(tour.Id, tour.Name, tour.OneBeginningTime, tour.IdKeyPoints, tour.KeyPoints, true, false);
             foreach (var livetour in _liveTourRepository.GetAll())
             {
                 if (livetour.Ended && livetour.Date == tour.OneBeginningTime && string.Equals(tour.Name, livetour.Name, StringComparison.OrdinalIgnoreCase))
@@ -82,29 +81,72 @@ namespace FiveStarTours.View.Guide
                     MessageBox.Show("This tour is already over");
                     return false;
                 }
-                else if (livetour.Started == true && livetour.Ended == false)
+                else if (livetour.Started == true && livetour.Ended == false && !string.Equals(tour.Name, livetour.Name, StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show("One tour is already started.");
                     return false;
                 }
             }
-
             tour.KeyPoints = tour.getKeyPointsById(tour.IdKeyPoints);
             tour.KeyPoints.ElementAt(0).Visited = true;
-            liveTour = new LiveTour(tour.Id, tour.Name, tour.OneBeginningTime, tour.IdKeyPoints, tour.KeyPoints, true, false);
-            _liveTourRepository.Save(liveTour);
+            List<bool> KeyPointsVisited = new List<bool>();
+            foreach(var keypoint in tour.KeyPoints)
+            {
+                KeyPointsVisited.Add(false);
+            }
+            KeyPointsVisited[0] = true;
+            liveTour = new LiveTour(tour.Id, tour.Name, tour.OneBeginningTime, tour.IdKeyPoints, tour.KeyPoints, KeyPointsVisited, true, false);
             liveTour.Visitors = Visitor;
+            foreach (var livetour in _liveTourRepository.GetAll())
+            {
+                if(livetour.Name == liveTour.Name && livetour.Date == liveTour.Date)
+                {
+                    liveTour.Id = livetour.Id;
+                    liveTour.KeyPointsVisited = livetour.KeyPointsVisited;
+                    int i = 0;
+                    foreach(var visited in livetour.KeyPointsVisited)
+                    {
+                        if (visited)
+                        {
+                            liveTour.KeyPoints[i].Visited = true;
+                            i++;
+                        }
+                    }
+                    livetour.Visitors = Visitor;
+                    return true;
+                }
+            }
+            _liveTourRepository.Save(liveTour);
             return true;
         }
 
         public void EndTour_Click(object sender, RoutedEventArgs e)
         {
             liveTour.Ended = true;
+            foreach(var livetour in _liveTourRepository.GetAll())
+            {
+                if(liveTour.Date == livetour.Date && livetour.Name == livetour.Name)
+                {
+                    liveTour.Id = livetour.Id;
+                }
+            }
             _liveTourRepository.FindIdAndSave(liveTour, liveTour.Id);
             Close();
         }
+
+
         private void CheckPoint_Checked(object sender, RoutedEventArgs e)
         {
+            int index = 0;
+            foreach (var visited in liveTour.KeyPointsVisited)
+            {
+                if (visited)
+                {
+                    index++;
+                }
+            }
+            liveTour.KeyPointsVisited[index] = true;
+            _liveTourRepository.FindIdAndSave(liveTour, liveTour.Id);
             bool allChecked = true;
             foreach (KeyPoints item in liveTour.KeyPoints)
             {
