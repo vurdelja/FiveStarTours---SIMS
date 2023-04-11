@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using FiveStarTours.Services;
 
 namespace FiveStarTours.View.Traveler
 {
@@ -24,8 +25,8 @@ namespace FiveStarTours.View.Traveler
     public partial class AccommodationRatings : Window
     {
         public AccommodationReservation _selectedReservation { get; set; }
-        private readonly AccommodationReservationsRepository _repository;
-        private readonly AccommodationRatingRepository _raterepository;
+        private readonly AccommodationReservationService _reservationservice;
+        private readonly AccommodationRatingService _rateservice;
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string properyName = null)
         {
@@ -39,8 +40,8 @@ namespace FiveStarTours.View.Traveler
             _selectedReservation = selectedReservation;
 
 
-            _repository = AccommodationReservationsRepository.GetInstace();
-            _raterepository = AccommodationRatingRepository.GetInstace();
+            _reservationservice = new AccommodationReservationService();
+            _rateservice =new AccommodationRatingService();
         }
 
         public int ratingOwner;
@@ -202,10 +203,10 @@ namespace FiveStarTours.View.Traveler
 
             if (IsValid(newAccommodationRate))
             {
-                _raterepository.Save(newAccommodationRate);
+                _rateservice.Save(newAccommodationRate);
                 reservation.RatedByGuest = true;
 
-                _repository.Update(reservation);
+                _reservationservice.Update(reservation);
                 Close();
 
 

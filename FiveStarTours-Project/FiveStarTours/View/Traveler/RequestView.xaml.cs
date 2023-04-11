@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,8 +25,8 @@ namespace FiveStarTours.View.Traveler
     /// </summary>
     public partial class RequestView : Window, INotifyPropertyChanged
     {
-        private AccommodationReservationsRepository _accommodationReservationsRepository;
-        private ReservationChangeRepository _reservationChangeRepository;
+        private AccommodationReservationService _accommodationReservationService;
+        private ReservationChangeService _reservationChangeService;
         public event PropertyChangedEventHandler? PropertyChanged;
         public ReservationChange SelectedChangedRes { get; set; }
         public ObservableCollection<ReservationChange> Changes{ get; set; }
@@ -69,11 +70,11 @@ namespace FiveStarTours.View.Traveler
         {
             InitializeComponent();
             this.DataContext = this;
-            _accommodationReservationsRepository = AccommodationReservationsRepository.GetInstace();
-            _reservationChangeRepository = new ReservationChangeRepository();
+            _accommodationReservationService =  new AccommodationReservationService();
+            _reservationChangeService = new ReservationChangeService();
             NewStartDate = DateTime.Now;
             NewEndDate = DateTime.Now;
-            Changes = new ObservableCollection<ReservationChange>(_reservationChangeRepository.GetAll());
+            Changes = new ObservableCollection<ReservationChange>(_reservationChangeService.GetAll());
         }
 
         private void back(object sender, RoutedEventArgs e)
@@ -84,6 +85,17 @@ namespace FiveStarTours.View.Traveler
         protected virtual void OnPropertyChanged([CallerMemberName] string properyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(properyName));
+        }
+
+        private void logout(object sender, RoutedEventArgs e)
+        {
+         
+          foreach(Window window in Application.Current.Windows)
+            {
+                MainWindow mw = new MainWindow();
+                mw.Show();
+                window.Close();
+            }
         }
     }
 }

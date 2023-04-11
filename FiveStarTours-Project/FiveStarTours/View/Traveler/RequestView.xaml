@@ -35,6 +35,7 @@
         </DataGrid>
         <Label Content="Status " HorizontalAlignment="Center" Margin="0,17,0,0" VerticalAlignment="Top" Background="#FFC78C8C" FontWeight="Bold" FontSize="20" Width="780" HorizontalContentAlignment="Center"/>
         <Button Content="Go back" HorizontalAlignment="Center" Margin="0,364,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="22" BorderThickness="3,3,3,3" Width="174" Background="#FFC68484" Click="back"/>
+        <Button Content="Log Out" HorizontalAlignment="Left" Margin="686,349,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Background="#FFA56464" Height="50" Click="logout"/>
 
     </Grid>
 </Window>
