@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using FiveStarTours.Interfaces;
 using FiveStarTours.Model;
 using FiveStarTours.Serializer;
 using FiveStarTours.View;
@@ -9,7 +10,7 @@ using FiveStarTours.View;
 
 namespace FiveStarTours.Repository
 {
-    public class TourReservationRepository
+    public class TourReservationRepository : ITourReservationRepository
     {
         private const string FilePath = "../../../Resources/Data/tourreservations.csv";
         private readonly Serializer<TourReservation> _serializerVisitor;

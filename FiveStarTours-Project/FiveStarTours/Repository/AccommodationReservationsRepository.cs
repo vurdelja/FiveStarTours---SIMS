@@ -1,4 +1,5 @@
-﻿using FiveStarTours.Model;
+﻿using FiveStarTours.Interfaces;
+using FiveStarTours.Model;
 using FiveStarTours.Serializer;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Windows;
 
 namespace FiveStarTours.Repository
 {
-    public class AccommodationReservationsRepository
+    public class AccommodationReservationsRepository : IAccommodationReservationRepository
     {
         private const string FilePath = "../../../Resources/Data/accommondationReservations.csv";
 
@@ -307,5 +308,7 @@ namespace FiveStarTours.Repository
             CancelationNotification cancelationNotification = new CancelationNotification(-1, owner, guest, false);
             _cancelationNotificationRepository.Save(cancelationNotification);
         }
+
+
     }
 }

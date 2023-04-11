@@ -1,4 +1,5 @@
-﻿using FiveStarTours.Model;
+﻿using FiveStarTours.Interfaces;
+using FiveStarTours.Model;
 using FiveStarTours.Serializer;
 using FiveStarTours.View.Traveler;
 using System;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace FiveStarTours.Repository
 {
-    public class AccommodationRatingRepository
+    public class AccommodationRatingRepository : IAccommodationRatingRepository
     {
         private const string FilePath = "../../../Resources/Data/accommodationRatings.csv";
 

@@ -1,4 +1,5 @@
-﻿using FiveStarTours.Model;
+﻿using FiveStarTours.Interfaces;
+using FiveStarTours.Model;
 using FiveStarTours.Serializer;
 using FiveStarTours.View;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FiveStarTours.Repository
 {
-    public class GiftCardRepository
+    public class GiftCardRepository : IGiftCardRepository
     {
         private const string FilePath = "../../../Resources/Data/giftcard.csv";
 
@@ -40,6 +41,7 @@ namespace FiveStarTours.Repository
             }
             return null;
         }
+
         public List<GiftCard> GetAllById(int id)
         {
             _giftCards = GetAll();

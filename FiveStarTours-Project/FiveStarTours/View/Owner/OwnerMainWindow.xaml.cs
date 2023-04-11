@@ -62,6 +62,12 @@ namespace FiveStarTours.View
             superOwner.Show();
         }
 
+        private void RequestsButton_Click(object sender, RoutedEventArgs e)
+        {
+            ManageRequestsView manageRequestsView = new ManageRequestsView();
+            manageRequestsView.Show();
+        }
+
 
 
 

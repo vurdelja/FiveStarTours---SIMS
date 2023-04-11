@@ -8,10 +8,11 @@ using System.Windows.Input;
 using System.Windows;
 using FiveStarTours.Serializer;
 using System.Xml.Linq;
+using FiveStarTours.Interfaces;
 
 namespace FiveStarTours.Repository
 {
-    public class AccommodationsRepository
+    public class AccommodationsRepository : IAccommodationsRepository
     {
         private const string FilePath = "../../../Resources/Data/accommodations.csv";
 

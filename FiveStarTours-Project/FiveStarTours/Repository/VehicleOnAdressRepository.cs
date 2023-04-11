@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using FiveStarTours.Serializer;
 using FiveStarTours.Model;
 using FiveStarTours.View;
-
+using FiveStarTours.Interfaces;
 
 namespace FiveStarTours.Repository
 {
-    public class VehicleOnAdressRepository
+    public class VehicleOnAdressRepository : IVehicleOnAdressRepository
     {
         private const string FilePath = "../../../Resources/Data/vehicleOnAdress.csv";
 

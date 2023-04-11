@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FiveStarTours.Interfaces;
 using FiveStarTours.Model;
 using FiveStarTours.Serializer;
 
 namespace FiveStarTours.Repository
 {
-    public class AttendanceRepository
+    public class AttendanceRepository : IAttendanceRepository
     {
         private const string FilePath = "../../../Resources/Data/attendance.csv";
 
