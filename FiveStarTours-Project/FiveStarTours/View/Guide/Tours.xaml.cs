@@ -80,48 +80,56 @@ namespace FiveStarTours.View
 
         private void CancelTour_Click(object sender, RoutedEventArgs e)
         {
-            
             if (SelectedTour == null)
             {
                 MessageBox.Show("Choose tour first!");
                 return;
             }
 
-            DateTime fixedDateTime = SelectedTour.OneBeginningTime;
-            TimeSpan timeDifference = fixedDateTime - DateTime.Now;
-
-            if (timeDifference.TotalHours < 48)
+            MessageBoxResult result = MessageBox.Show($"Do you want to cancel tour?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            
+            if(result == MessageBoxResult.Yes)
             {
-                MessageBox.Show("It is less than 48 hours from this tour.");
-                return;
+                DateTime fixedDateTime = SelectedTour.OneBeginningTime;
+                TimeSpan timeDifference = fixedDateTime - DateTime.Now;
+
+                if (timeDifference.TotalHours < 48)
+                {
+                    MessageBox.Show("It is less than 48 hours from this tour.");
+                    return;
+                }
+                else
+                {
+                    List<int> Visitors = new List<int>();
+
+                    foreach (Tour t in _toursRepository.GetAll())
+                    {
+                        if (SelectedTour.Name == t.Name)
+                        {
+                            SelectedTour.Id = t.Id;
+                        }
+                    }
+
+                    foreach (string visitor in _tourReservationRepository.GetAllVisitors(SelectedTour))
+                    {
+                        int Visitor = _userRepository.FindIdByName(visitor);
+                        Visitors.Add(Visitor);
+                    }
+
+                    foreach (int id in Visitors)
+                    {
+                        GiftCard giftCard = new GiftCard(id, DateTime.Today.AddYears(1));
+                        _giftCardRepository.Save(giftCard);
+                    }
+
+                    _toursRepository.DeleteByDate(SelectedTour);
+                    _tourReservationRepository.DeleteById(SelectedTour);
+
+                }
             }
             else
-            { 
-                List<int> Visitors = new List<int>(); 
-                
-                foreach (Tour t in _toursRepository.GetAll())
-                {
-                    if (SelectedTour.Name == t.Name)
-                    {
-                        SelectedTour.Id = t.Id;
-                    }
-                }
-
-                foreach (string visitor in _tourReservationRepository.GetAllVisitors(SelectedTour))
-                {
-                    int Visitor = _userRepository.FindIdByName(visitor);
-                    Visitors.Add(Visitor);
-                }
-
-                foreach (int id in Visitors)
-                {
-                    GiftCard giftCard = new GiftCard(id, DateTime.Today.AddYears(1));
-                    _giftCardRepository.Save(giftCard);
-                }
-
-                _toursRepository.DeleteByDate(SelectedTour);
-                _tourReservationRepository.DeleteById(SelectedTour);
-   
+            {
+                return;
             }
         }
 

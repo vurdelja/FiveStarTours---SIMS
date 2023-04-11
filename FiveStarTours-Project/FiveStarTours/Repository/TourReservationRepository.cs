@@ -80,13 +80,13 @@ namespace FiveStarTours.Repository
             return visitors;
         }
 
-        public int GetWithGiftCard(int id, List<Attendance> attendances, List<User> users)
+        public int GetWithGiftCard(LiveTour tour, List<Attendance> attendances, List<User> users)
         {
             int result = 0;
             _tourReservations = GetAll();
             foreach (var tourReservation in _tourReservations)
             {
-                if(tourReservation.TourId == id && tourReservation.GiftCard)
+                if(tourReservation.TourId == tour.IdTour && tourReservation.DateTime == tour.Date && tourReservation.GiftCard)
                 {
                     foreach(string name in tourReservation.VisitorName)
                     {
