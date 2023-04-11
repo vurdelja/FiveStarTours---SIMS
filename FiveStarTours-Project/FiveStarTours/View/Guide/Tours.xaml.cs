@@ -148,8 +148,15 @@ namespace FiveStarTours.View
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
+            foreach (Window window in Application.Current.Windows)
+            {
+                if(window != mainWindow)
+                {
+                    window.Close();
+                }      
+            }
+            
             mainWindow.Show();
-            Close();
         }
     }
 }

@@ -82,6 +82,9 @@ namespace FiveStarTours.View.Guide
                 SelectedReview.Reported = true;
                 Reported = true;
                 _tourRatingRepository.Replace(SelectedReview);
+                int tour = _toursRepository.GetByName(SelectedTour);
+                ReviewsCollection = new ObservableCollection<TourRating>(_tourRatingRepository.GetAllByTour(tour, _attendanceRepository.GetAll(), _keyPointsRepository.GetAll()));
+
             }
             else
             {
