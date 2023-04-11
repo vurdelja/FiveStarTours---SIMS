@@ -17,18 +17,21 @@ namespace FiveStarTours.View
 {
     public partial class AddAccommodationView : Window
     {
-        
+        public User LoggedInUser { get; set; }
+
         private readonly LocationsRepository _locationsRepository;
         private readonly AccommodationsRepository _accommodationsRepository;
 
 
-        public AddAccommodationView()
+        public AddAccommodationView(User user)
         {
             InitializeComponent();
             DataContext = this;
 
             _locationsRepository = new LocationsRepository();
             _accommodationsRepository = new AccommodationsRepository();
+
+            LoggedInUser = user;
 
 
             // Adding state and city trough combobox:
@@ -216,7 +219,6 @@ namespace FiveStarTours.View
 
         }
 
-        public string Error => null;
 
         public string this[string columnName]
         {

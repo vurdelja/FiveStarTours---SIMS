@@ -22,7 +22,7 @@ namespace FiveStarTours.View.Traveler
     /// <summary>
     /// Interaction logic for RequestView.xaml
     /// </summary>
-    public partial class RequestView : Window, INotifyPropertyChanges
+    public partial class RequestView : Window, INotifyPropertyChanged
     {
         private AccommodationReservationsRepository _accommodationReservationsRepository;
         private ReservationChangeRepository _reservationChangeRepository;

@@ -26,6 +26,7 @@
         </StackPanel>
         <TextBlock HorizontalAlignment="Left" Margin="294,403,0,0" TextWrapping="Wrap" Text="{Binding Path=NumberOfReviews}" VerticalAlignment="Top" Height="43" Width="80"/>
         <TextBlock HorizontalAlignment="Left" Margin="294,489,0,0" TextWrapping="Wrap" Text="{Binding Path = AverageRate}" VerticalAlignment="Top" Height="43" Width="80"/>
+        <Button Content="Back" Click="BackButton_Click"  HorizontalAlignment="Center" Margin="0,580,0,0" VerticalAlignment="Top" Height="42" Width="118"/>
 
     </Grid>
 </Window>

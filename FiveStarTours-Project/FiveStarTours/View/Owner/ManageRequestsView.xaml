@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FiveStarTours.View.Owner"
         mc:Ignorable="d"
-        Title="ManageRequestsView" Height="400" Width="500">
+        Title="ManageRequestsView" Height="750" Width="430" Background="White" WindowStyle="None"
+        WindowStartupLocation="CenterScreen" AllowsTransparency="True">
     <Grid>
         <DataGrid ItemsSource="{Binding Requests}"
                   SelectedItem="{Binding Path=SelectedRequest}"
@@ -26,15 +27,17 @@
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header=" Guest name"  Width="100"
-                                    Binding="{Binding AccommodationReservation}"/>
-                <DataGridTextColumn Header=" End date" Width="130"
+                                    Binding="{Binding AccommodationReservation.GuestName}"/>
+                <DataGridTextColumn Header=" Start date" Width="130"
                                     Binding="{Binding NewStartDate}"/>
-                <DataGridTextColumn Header=" End date" Width="130"
+                <DataGridTextColumn Header=" Start date" Width="130"
                                     Binding="{Binding NewEndDate}"/>
+                <DataGridTextColumn Header=" Dates busy" Width="130"
+                                    Binding="{Binding DatesBusy}"/>
             </DataGrid.Columns>
 
         </DataGrid>
-        <Button Content="View review" Click="ViewReviewButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="128,336,0,0" Height="26" Width="67" Background="#FFFB0707"/>
+        <Button Content="View request" Click="ViewRequestButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="128,336,0,0" Height="26" Width="67" Background="#FFFB0707"/>
         <Button Content="Maybe later" Click="MaybeLaterButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="302,336,0,0" Height="26" Width="67" Background="#FFD4CCCC"/>
 
     </Grid>

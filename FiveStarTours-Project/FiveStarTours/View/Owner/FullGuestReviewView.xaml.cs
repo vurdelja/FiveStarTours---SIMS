@@ -30,7 +30,6 @@ namespace FiveStarTours.View.Owner
         public AccommodationRating accommodationRating { get; set; }
 
 
-
         public FullGuestReviewView(AccommodationReservation selectedReservation)
         {
             InitializeComponent();

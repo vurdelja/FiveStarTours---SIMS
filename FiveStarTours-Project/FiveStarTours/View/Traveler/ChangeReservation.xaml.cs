@@ -23,7 +23,7 @@ namespace FiveStarTours.View.Traveler
     /// <summary>
     /// Interaction logic for ChangeReservation.xaml
     /// </summary>
-    public partial class ChangeReservation : Window, INotifyPropertyChanges
+    public partial class ChangeReservation : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         private AccommodationReservationsRepository _accommodationReservationsRepository;

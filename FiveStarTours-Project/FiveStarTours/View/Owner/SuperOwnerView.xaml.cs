@@ -77,8 +77,12 @@ namespace FiveStarTours.View.Owner
 
 
         }
- 
-        
 
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            OwnerMainWindow main = new OwnerMainWindow(LoggedInUser);
+            main.Show();
+            Close();
+        }
     }
 }
