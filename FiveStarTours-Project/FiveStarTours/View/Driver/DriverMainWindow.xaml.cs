@@ -42,6 +42,13 @@ namespace FiveStarTours.View
             vehicleOnAdress.Show();
         }
 
+       
+
+        private void TaximeterButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void DrivingStatisticsButton_Click(object sender, RoutedEventArgs e)
         {
             DrivingStatistics drivingStatistics = new DrivingStatistics();

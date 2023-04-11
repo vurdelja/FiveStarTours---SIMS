@@ -14,7 +14,8 @@
                 Height="50" Width="200" 
                 Click="VehicleRegistrationButton_Click"/>
         <Button x:Name="VehicleOnAdressButton" Content="Vehicle On Adress" HorizontalAlignment="Left" Margin="60,140,0,0" VerticalAlignment="Top" Height="50" Width="200" Click="VehicleOnAdressButton_Click"/>
-        <Button x:Name="DrivingStatisticsButton" Content="Driving Statistics" HorizontalAlignment="Left" Margin="60,217,0,0" VerticalAlignment="Top" Width="200" Height="50" Click="DrivingStatisticsButton_Click"/>
+        <Button x:Name="DrivingStatisticsButton" Content="Driving Statistics" HorizontalAlignment="Left" Margin="60,293,0,0" VerticalAlignment="Top" Width="200" Height="50" Click="DrivingStatisticsButton_Click"/>
+        <Button x:Name="TaximeterButton" Content="Taximeter" HorizontalAlignment="Left" Margin="60,217,0,0" VerticalAlignment="Top" Width="200" Height="50" Click="TaximeterButton_Click"/>
 
     </Grid>
 </Window>
