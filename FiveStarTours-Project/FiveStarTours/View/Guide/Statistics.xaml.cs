@@ -30,10 +30,11 @@ namespace FiveStarTours.View.Guide
         private readonly TourReservationRepository _tourReservationRepository;
         private readonly ToursRepository _toursRepository;
 
+        public User LoggedInUser { get; set; }
         public event PropertyChangedEventHandler? PropertyChanged;
         public List<int> Years { get; } = Enumerable.Range(2000, DateTime.Now.Year - 2000 + 1).ToList();
         public DateTime SelectedYear { get; set; }
-        public Statistics()
+        public Statistics(User user)
         {
             InitializeComponent();
             _liveTourRepository = new LiveTourRepository();
@@ -42,10 +43,10 @@ namespace FiveStarTours.View.Guide
             _tourReservationRepository = new TourReservationRepository();
             _toursRepository = new ToursRepository();
             DataContext = this;
-
+            LoggedInUser = user;
             MostVisited.Text = GetMostVisitedAllTime();
 
-            List<string> endedTours = _liveTourRepository.GetEndedTours();
+            List<string> endedTours = _liveTourRepository.GetEndedTours(_toursRepository.GetByUser(user));
             EndedTours.ItemsSource = endedTours;
             EndedTours.SelectedValuePath = ".";
             EndedTours.DisplayMemberPath = ".";
@@ -122,7 +123,7 @@ namespace FiveStarTours.View.Guide
         {
             int id;
             string result;
-            id = _attendanceRepository.GetMostVisitedTour();
+            id = _attendanceRepository.GetMostVisitedTour(_toursRepository.GetByUser(LoggedInUser));
             if(id == 0)
             {
                 return "There's no visited tours.";

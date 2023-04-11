@@ -126,7 +126,7 @@ namespace FiveStarTours.View
 
         private void Statistic_Click(object sender, RoutedEventArgs e)
         {
-            Statistics statistic = new Statistics();
+            Statistics statistic = new Statistics(LoggedInUser);
             statistic.Show();
         }
 

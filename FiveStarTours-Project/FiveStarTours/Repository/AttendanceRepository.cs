@@ -156,12 +156,29 @@ namespace FiveStarTours.Repository
             return result;
         }
 
-        public int  GetMostVisitedTour()
+        public int  GetMostVisitedTour(List<Tour> tours)
         {
             int id;
-            _attendances = GetAll();
+            _attendances = GetAllByTours(tours);
             id = _attendances.GroupBy(a => a.IdTour).OrderByDescending(t => t.Count()).Select(mv => mv.Key).FirstOrDefault();
             return id;
+        }
+
+        public List<Attendance> GetAllByTours(List<Tour> tours)
+        {
+            _attendances = GetAll();
+            List<Attendance> attendances = new List<Attendance>();
+            foreach(var attendnace in _attendances)
+            {
+                foreach (var tour in tours)
+                {
+                    if(tour.Id == attendnace.IdTour)
+                    {
+                        attendances.Add(attendnace);
+                    }
+                }
+            }
+            return attendances;
         }
 
         public string GetMostVisitedByYear(DateTime date, ToursRepository toursRepository)
