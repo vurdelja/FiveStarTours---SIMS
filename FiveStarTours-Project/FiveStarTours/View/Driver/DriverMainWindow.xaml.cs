@@ -42,11 +42,11 @@ namespace FiveStarTours.View
             vehicleOnAdress.Show();
         }
 
-       
-
         private void TaximeterButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Taximeter taximeter = new Taximeter();
+            //taximeter.Show();
+            
         }
 
         private void DrivingStatisticsButton_Click(object sender, RoutedEventArgs e)

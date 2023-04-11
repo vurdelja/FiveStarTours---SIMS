@@ -157,6 +157,7 @@ namespace FiveStarTours.View.VehicleOnAdress
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
+            
             Close();
         }
 
@@ -174,7 +175,10 @@ namespace FiveStarTours.View.VehicleOnAdress
             OnAdress newVehicleOnAdress = new OnAdress(name, isOnAdress, isDelay, delay , drivingStarts, enterStartPrice);
             _vehicleOnAddressRepository.Save(newVehicleOnAdress);
             
+            
             MessageBox.Show("Data Saved");
+            Taximeter taximeter = new Taximeter();
+            //taximeter.Show();
 
             Close();
         }
