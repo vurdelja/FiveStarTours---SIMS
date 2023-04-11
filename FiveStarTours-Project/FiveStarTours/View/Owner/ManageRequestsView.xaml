@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FiveStarTours.View.Owner"
         mc:Ignorable="d"
-        Title="ManageRequestsView" Height="750" Width="430" Background="White" WindowStyle="None"
-        WindowStartupLocation="CenterScreen" AllowsTransparency="True">
+        Title="ManageRequestsView" Height="750" Width="430" 
+        Background="Pink" 
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <DataGrid ItemsSource="{Binding Requests}"
                   SelectedItem="{Binding Path=SelectedRequest}"
                   IsReadOnly="True" SelectionMode="Single" 
                   AutoGenerateColumns="false"
-                  Margin="10,10,10,67">
+                  Margin="10,10,10,179">
 
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -37,8 +38,8 @@
             </DataGrid.Columns>
 
         </DataGrid>
-        <Button Content="View request" Click="ViewRequestButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="128,336,0,0" Height="26" Width="67" Background="#FFFB0707"/>
-        <Button Content="Maybe later" Click="MaybeLaterButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="302,336,0,0" Height="26" Width="67" Background="#FFD4CCCC"/>
+        <Button Content="View request" Click="ViewRequestButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,614,0,0" Height="60" Width="129" Background="#FFFB0707"/>
+        <Button Content="Maybe later" Click="MaybeLaterButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="248,614,0,0" Height="60" Width="114" Background="#FFD4CCCC"/>
 
     </Grid>
 </Window>

@@ -73,11 +73,11 @@ namespace FiveStarTours.View
             Close();
         }
 
-
-
-
-
-
-
+        private void LogOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new MainWindow();
+            main.Show();
+            Close();
+        }
     }
 }

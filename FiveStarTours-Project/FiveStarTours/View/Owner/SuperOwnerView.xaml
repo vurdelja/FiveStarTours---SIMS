@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FiveStarTours.View.Owner"
         mc:Ignorable="d"
-        Title="SuperOwnerView" Height="750" Width="430">
+        Title="SuperOwnerView" Height="750" Width="430" 
+        Background="Pink"
+        WindowStartupLocation="CenterScreen" >
     <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

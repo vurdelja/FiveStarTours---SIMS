@@ -90,6 +90,7 @@ namespace FiveStarTours
             {
                 OwnerMainWindow ownerMainWindow = new OwnerMainWindow(user);
                 ownerMainWindow.Show();
+                Close();
             }
             else if (String.Equals(user.Role.ToLower(), "traveler"))
             {
