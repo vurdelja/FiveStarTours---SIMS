@@ -14,7 +14,8 @@
                 <Button x:Name="Cancel" Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Click="CancelTour_Click"/>
                 <Button x:Name="Statistic" Content="Statistic" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Statistic_Click"/>
                 <Button x:Name="Reviews" Content="Reviews" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Reviews_Click"/>
-                <DatePicker x:Name="ToursDate" HorizontalAlignment="Center" Height="23" Width="114" Margin="460,0,0,0" SelectedDateChanged="ToursDate_SelectedDateChanged"/>
+                <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Close_Click"/>
+                <DatePicker x:Name="ToursDate" HorizontalAlignment="Center" Height="23" Width="114" Margin="420,0,0,0" SelectedDateChanged="ToursDate_SelectedDateChanged"/>
                 
 
             </ToolBar>

@@ -135,5 +135,12 @@ namespace FiveStarTours.View
             Reviews reviews = new Reviews(LoggedInUser);
             reviews.Show();
         }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            Close();
+        }
     }
 }
