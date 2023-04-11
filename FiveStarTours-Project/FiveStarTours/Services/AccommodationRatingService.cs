@@ -16,7 +16,7 @@ namespace FiveStarTours.Services
     {
         private IAccommodationRatingRepository _accommodationRatingRepository;
 
-        public AccommodationRatingService(IAccommodationRatingRepository ratingRepository)
+        public AccommodationRatingService()
         {
             _accommodationRatingRepository = Injector.Injector.CreateInstance<IAccommodationRatingRepository>();
         }

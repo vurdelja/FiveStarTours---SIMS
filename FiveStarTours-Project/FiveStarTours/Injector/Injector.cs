@@ -13,9 +13,23 @@ namespace FiveStarTours.Injector
         private static Dictionary<Type, object> _implementations = new Dictionary<Type, object>
         {
         { typeof(IAccommodationReservationRepository), new AccommodationReservationsRepository() },
-        { typeof(IAccommodationRatingRepository), new AccommodationRatingRepository() },
+        { typeof(IAccomodationRatingRepository), new AccommodationRatingRepository() },
         { typeof(IAccommodationsRepository), new AccommodationsRepository() },
-        
+        { typeof(IAttendanceRepository), new AttendanceRepository() },
+        { typeof(ICancelationNotificationRepository), new CancelationNotificationRepository() },
+        { typeof(IDrivingRepository), new DrivingsRepository() },
+        { typeof(IGiftCardRepository), new GiftCardRepository() },
+        { typeof(IGuestRatingsRepository), new GuestRatingsRepository() },
+        { typeof(IKeyPointsRepository), new KeyPointsRepository() },
+        { typeof(ILanguagesRepository), new LanguagesRepository() },
+        { typeof(ILiveTourRepository), new LiveTourRepository() },
+        { typeof(ILocationsRepository), new LocationsRepository() },
+        { typeof(IReservationChangeRepository), new ReservationChangeRepository() },
+        { typeof(IToursRepository), new TourReservationRepository() },
+        { typeof(IToursRepository), new ToursRepository() },
+        { typeof(IUserRepository), new UserRepository() },
+        { typeof(IVehicleOnAdressRepository), new VehicleOnAdressRepository() },
+        { typeof(IVehicleRepository), new VehicleRepository() },
         // Add more implementations here
     };
 

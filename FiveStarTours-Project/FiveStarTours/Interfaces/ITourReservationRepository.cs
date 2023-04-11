@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FiveStarTours.Interfaces
 {
-    public interface ITourReservationRepository
+    public interface IAccomodationRatingRepository
     {
         List<TourReservation> GetAll();
         TourReservation Save(TourReservation tourReservation);
