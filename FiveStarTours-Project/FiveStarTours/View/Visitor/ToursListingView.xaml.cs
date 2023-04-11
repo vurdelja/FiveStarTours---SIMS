@@ -65,5 +65,11 @@ namespace FiveStarTours.View.Visitor
             TourRatingView rate = new TourRatingView(LoggedInUser);
             rate.Show();
         }
+
+        private void VehicleClick(object sender, RoutedEventArgs e)
+        {
+            VehicleSearchView vehicle = new VehicleSearchView(LoggedInUser);
+            vehicle.Show();
+        }
     }
 }

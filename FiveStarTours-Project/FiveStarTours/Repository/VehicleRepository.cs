@@ -47,5 +47,6 @@ namespace FiveStarTours.Repository
             }
             return _vehicles.Max(t => t.Id) + 1;
         }
+        
     }
 }

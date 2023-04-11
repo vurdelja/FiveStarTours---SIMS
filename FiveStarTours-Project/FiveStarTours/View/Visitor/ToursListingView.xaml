@@ -50,6 +50,9 @@
             <Button Click="RateClick" Content="RATE"
                     Width="60" Height="20" Background="Turquoise"/>
             <Separator/>
+            <Button Click="VehicleClick" Content="VEHICLE"
+                    Width="60" Height="20" Background="BlueViolet"/>
+            <Separator/>
         </ToolBar>
     </Grid>
 </Window>
