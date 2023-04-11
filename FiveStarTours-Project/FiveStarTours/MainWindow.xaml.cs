@@ -30,6 +30,7 @@ namespace FiveStarTours
     public partial class MainWindow : Window
     {
         private readonly UserRepository _repository;
+        public static User LoggedUser { get; set; }
 
         public MainWindow()
         {
@@ -84,9 +85,10 @@ namespace FiveStarTours
 
         public void FindbyRole(User user)
         {
+            LoggedUser = user;
             if (String.Equals(user.Role.ToLower(), "owner"))
             {
-                OwnerMainWindow ownerMainWindow = new OwnerMainWindow();
+                OwnerMainWindow ownerMainWindow = new OwnerMainWindow(user);
                 ownerMainWindow.Show();
             }
             else if (String.Equals(user.Role.ToLower(), "traveler"))
@@ -98,6 +100,7 @@ namespace FiveStarTours
             {
                 Tours tours = new Tours(user);
                 tours.Show();
+                Close();
             }
             else if (String.Equals(user.Role.ToLower(), "visitor"))
             {

@@ -23,13 +23,16 @@ namespace FiveStarTours.View
     public partial class OwnerMainWindow : Window
     {
         private readonly AccommodationReservationsRepository _repository;
+        public User LoggedInUser { get; set; }
 
-        public OwnerMainWindow()
+        public OwnerMainWindow(User user)
         {
             InitializeComponent();
             DataContext = this;
 
-            _repository = new AccommodationReservationsRepository();
+            _repository = AccommodationReservationsRepository.GetInstace();
+
+            LoggedInUser= user;
 
             _repository.NotifyAboutUnratedGuests();
 
@@ -41,12 +44,35 @@ namespace FiveStarTours.View
             addAccommodation.Show();
         }
 
+        private void GuestReviewsButton_Click(object sender, RoutedEventArgs e)
+        {
+            GuestReviewsView guestReviews = new GuestReviewsView();
+            guestReviews.Show();
+        }
+
         private void GuestRatingButton_Click(object sender, RoutedEventArgs e)
         {
             GuestsWithoutRateView guestRating = new GuestsWithoutRateView();
             guestRating.Show();
         }
 
-        
+        private void SuperOwnerButton_Click(object sender, RoutedEventArgs e)
+        {
+            SuperOwnerView superOwner = new SuperOwnerView(LoggedInUser);
+            superOwner.Show();
+        }
+
+        private void RequestsButton_Click(object sender, RoutedEventArgs e)
+        {
+            ManageRequestsView manageRequestsView = new ManageRequestsView();
+            manageRequestsView.Show();
+        }
+
+
+
+
+
+
+
     }
 }

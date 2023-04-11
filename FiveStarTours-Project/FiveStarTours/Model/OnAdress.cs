@@ -11,23 +11,32 @@ namespace FiveStarTours.Model
     {
 
         public int Id { get; set; }
-        //public List<Drivings> DrivingsList;
         public Drivings Drivings { get; set; }
+        public bool IsOnAdress { get; set; }
+        public bool IsDelay { get; set; }
         public int Delays { get; set; }
-        public string? SelectedFinishedComboBox { get; set; }
+        public string Finished { get; set; }
+
+
+        public bool IsDrivingStarted { get; set; }
+        public int StartPrice { get; set; }
+        public string Taximeter { get; set; }
 
 
 
         public OnAdress() { }
 
-        public OnAdress( Drivings drivings, int delays, string? selectedFinishedComboBox)
+        public OnAdress( Drivings drivings, bool isOnAdress, bool isDelay, int delays, string finished, bool isDrivingStarted, int startPrice, string taximeter)
         {
 
-            //this.DrivingsList = drivingsList;
             Drivings = drivings;
+            IsOnAdress = isOnAdress;
+            IsDelay = isDelay;
             Delays = delays;
-            SelectedFinishedComboBox = selectedFinishedComboBox;
-            
+            Finished = finished;
+            IsDrivingStarted = isDrivingStarted;
+            StartPrice = startPrice;
+            Taximeter = taximeter;
         }
 
         public string[] ToCSV()
@@ -36,29 +45,63 @@ namespace FiveStarTours.Model
             string[] csvValues =
             {
                 Id.ToString(),
-
+                IsOnAdress.ToString(),
+                IsDelay.ToString(),
                 Delays.ToString(),
-
-                Drivings.ToString(),
-
-                SelectedFinishedComboBox.ToString()
+                //Finished.ToString()
+                IsDrivingStarted.ToString(),
+                StartPrice.ToString(),
+                Taximeter.ToString(),   
             };
-
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
+            /*
+            IsOnAdress = Convert.ToBoolean(values[1]);
+            IsDelay = Convert.ToBoolean(values[2]);
+            Delays = Convert.ToInt32(values[3]);
+            Finished = Convert.ToString(values[4]);
+            */
 
-            Delays = Convert.ToInt32(values[1]);
-
-            SelectedFinishedComboBox = values[3];
-
+            IsOnAdress.GetType().ToString();
+            IsDelay.GetType().ToString();
+            Delays.GetType().ToString();
+            //Finished.GetType().ToString();
             
-            
+            if (Finished == null)
+            {
+                GetFinished();
 
-            
+            }
+            IsDrivingStarted.GetType().ToString();
+            StartPrice.GetType().ToString();
+            //Taximeter.GetType().ToString();
+
         }
+
+
+        public bool GetIsOnAdress()
+        {
+            return IsOnAdress;
+        }
+
+        public bool GetIsDelay()
+        {
+            return IsDelay;
+        }
+        public int GetDelays() 
+        {
+            return Delays;
+        }
+
+        public string GetFinished()
+        {
+            return Finished;
+        }
+
+        
     }
 }

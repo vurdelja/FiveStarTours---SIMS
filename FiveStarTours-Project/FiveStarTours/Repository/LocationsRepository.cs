@@ -2,12 +2,13 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using FiveStarTours.Interfaces;
 using FiveStarTours.Model;
 using FiveStarTours.Serializer;
 
 namespace FiveStarTours.Repository
 {
-    public class LocationsRepository
+    public class LocationsRepository : ILocationsRepository
     {
         private const string FilePath = "../../../Resources/Data/locations.csv";
 

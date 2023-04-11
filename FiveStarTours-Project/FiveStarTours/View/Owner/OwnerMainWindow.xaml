@@ -20,5 +20,24 @@
                 VerticalAlignment="Top" 
                 Height="47" Width="213" 
                 Click="GuestRatingButton_Click"/>
+
+        <Button Content="Guest reviews" 
+                HorizontalAlignment="Left" 
+                Margin="458,97,0,0" 
+                VerticalAlignment="Top" 
+                Height="47" Width="213" 
+                Click="GuestReviewsButton_Click"/>
+        <Button Content="Super owner" 
+            HorizontalAlignment="Left" 
+            Margin="92,97,0,0" 
+            VerticalAlignment="Top" 
+            Height="47" Width="213" 
+            Click="SuperOwnerButton_Click"/>
+        <Button Content="Requests" 
+            HorizontalAlignment="Left" 
+            Margin="260,0,0,0" 
+            VerticalAlignment="Center" 
+            Height="47" Width="213" 
+            Click="RequestsButton_Click"/>
     </Grid>
 </Window>

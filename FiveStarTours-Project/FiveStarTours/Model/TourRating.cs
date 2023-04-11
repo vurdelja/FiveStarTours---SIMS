@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FiveStarTours.Model
 {
-    public class TourRating: ISerializable
+    public class TourRating : ISerializable
     {
         public int Id { get; set; }
         public int TourId { get; set; }
@@ -18,6 +18,7 @@ namespace FiveStarTours.Model
         public string Review { get; set; }
         public int UserId { get; set; }
         public bool Reported { get; set; }
+        public KeyPoints KeyPoint {get; set;}
 
         public TourRating() { }
 

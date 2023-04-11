@@ -1,15 +1,13 @@
-﻿using FiveStarTours.Model;
-using FiveStarTours.Serializer;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FiveStarTours.Interfaces;
+using FiveStarTours.Model;
+using FiveStarTours.Serializer;
 
 namespace FiveStarTours.Repository
 {
-    public class TourRatingRepository
-    { 
+    public class TourRatingRepository : ITourRatingRepository
+    {
         private const string FilePath = "../../../Resources/Data/tourRating.csv";
 
         private readonly Serializer<TourRating> _serializer;
@@ -68,6 +66,46 @@ namespace FiveStarTours.Repository
             _tourRatingRepository.Insert(index, rating);
             _serializer.ToCSV(FilePath, _tourRatingRepository);
             return rating;
+        }
+
+        public List<TourRating> GetAllByTour(int idTour, List<Attendance> attendances, List<KeyPoints> keyPointsRepository)
+        {
+            _tourRatingRepository = GetAll();
+            List<TourRating> result = new List<TourRating>();
+            foreach (TourRating rating in _tourRatingRepository)
+            {
+                if (rating.TourId == idTour)
+                {
+                    foreach(Attendance attendance in attendances)
+                    {
+                        if(rating.UserId == attendance.IdVisitor && attendance.IdTour == idTour)
+                        {
+                            foreach(KeyPoints keyPoint in keyPointsRepository)
+                            {
+                                if(attendance.IdKeyPoint == keyPoint.Id)
+                                {
+                                    rating.KeyPoint = keyPoint;
+                                    result.Add(rating);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+
+        public void Replace(TourRating rating)
+        {
+            _tourRatingRepository = _serializer.FromCSV(FilePath);
+            foreach (TourRating r in _tourRatingRepository)
+            {
+                if(r.Id == rating.Id)
+                {
+                    r.Reported = true;
+                }
+            }
+            _serializer.ToCSV(FilePath, _tourRatingRepository);
         }
     }
 }

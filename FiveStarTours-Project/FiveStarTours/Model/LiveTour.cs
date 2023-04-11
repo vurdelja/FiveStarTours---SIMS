@@ -13,19 +13,21 @@ namespace FiveStarTours.Model
         public DateTime Date { get; set; }
         public List<int> IdKeyPoints { get; set; }
         public List<KeyPoints> KeyPoints { get; set; }
+        public List<bool> KeyPointsVisited { get; set; }
         public List<string> Visitors { get; set; }
         public bool Started { get; set; }
         public bool Ended { get; set; }
 
         public LiveTour() { }
 
-        public LiveTour(int idTour, string name, DateTime date, List<int> idKeyPoints, List<KeyPoints> keyPoints, bool started, bool ended)
+        public LiveTour(int idTour, string name, DateTime date, List<int> idKeyPoints, List<KeyPoints> keyPoints, List<bool> keyPointsVisited, bool started, bool ended)
         {
             IdTour = idTour;
             Name = name;
             Date = date;
             IdKeyPoints = idKeyPoints;
             KeyPoints = keyPoints;
+            KeyPointsVisited = keyPointsVisited;
             Started = started;
             Ended = ended;
         }
@@ -39,6 +41,7 @@ namespace FiveStarTours.Model
                 Name,
                 Convert.ToString(Date),
                 string.Join(';', IdKeyPoints),
+                String.Join(';', KeyPointsVisited),
                 Convert.ToString(Started),
                 Convert.ToString(Ended)
             };
@@ -51,8 +54,9 @@ namespace FiveStarTours.Model
             Name = values[2];
             Date = Convert.ToDateTime(values[3]);
             IdKeyPoints = ConvertToInt(values[4]);
-            Started = Convert.ToBoolean(values[5]);
-            Ended = Convert.ToBoolean(values[6]);
+            KeyPointsVisited = ConvertToBool(values[5]);
+            Started = Convert.ToBoolean(values[6]);
+            Ended = Convert.ToBoolean(values[7]);
         }
 
         // Conversion from string to int - for list
@@ -69,6 +73,20 @@ namespace FiveStarTours.Model
 
             return result;
 
+        }
+
+        public List<bool> ConvertToBool(string values)
+        {
+            List<string> bools = values.Split(';').ToList();
+            List<bool> result = new List<bool>();
+
+            foreach (string b in bools)
+            {
+                bool boolean = Convert.ToBoolean(b);
+                result.Add(boolean);
+            }
+
+            return result;
         }
     }
 }
