@@ -32,13 +32,16 @@ namespace FiveStarTours.View.Driver
     {
         private readonly DrivingStatisticsRepository _drivingStatisticsRepository;
         private readonly DrivingStatisticsRepository2 _drivingStatisticsRepository2;
-
+       
 
         public static List<DrivingStatisticsData> DrivingStatisticsData { get; set; }
         public static List<DrivingStatisticsData2> DrivingStatisticsData2 { get; set; }
 
-
        
+        private const string FilePath = "../../../Resources/Data/drivingstatistics2.csv";
+
+
+
         public DrivingStatistics()
         {
             InitializeComponent();
@@ -48,19 +51,37 @@ namespace FiveStarTours.View.Driver
             _drivingStatisticsRepository2 = new DrivingStatisticsRepository2();
 
             DrivingStatisticsData = _drivingStatisticsRepository.GetAll();
-            DrivingStatisticsData2 = _drivingStatisticsRepository2.GetAll();
 
+            DrivingStatisticsData dataItem = new DrivingStatisticsData();
+            DrivingStatisticsData2 dataItem2 = new DrivingStatisticsData2();
             /*
-            if (DataGridStatistics.SelectedItem == "2019") 
+            if (dataItem.DrivingYear.Equals(dataItem2.DrivingYear2) )
             {
-                drivingStatisticsData2.Add(new DrivingStatisticsData2() { DrivingNDP = "Driving Number", January = "100" });
-                drivingStatisticsData2.Add(new DrivingStatisticsData2() { DrivingNDP = "Driving Duration", January = "100" });
-                drivingStatisticsData2.Add(new DrivingStatisticsData2() { DrivingNDP = "Driving Price", January = "100" });
+                
+                  
+                    DrivingStatisticsData2.Add(dataItem2);
+               
+                
             }*/
             
+                /*
+                dataItem2.DrivingNDP = "Driving Number, Driving Duration, Driving Price";
+                dataItem2.January = "1000, 2000, 3000";
+                dataItem2.February = "4000, 5000, 6000";
+                dataItem2.March = "7000, 8000, 9000";
+                dataItem2.April = "1000, 2000, 3000";
+                dataItem2.May = "4000, 5000, 6000";
+                dataItem2.June = "7000, 8000, 9000";
+                dataItem2.July = "1000, 2000, 3000";
+                dataItem2.August = "7000, 8000, 9000";
+                dataItem2.September = "1000, 2000, 3000";
+                dataItem2.October = "1000, 2000, 3000";
+                dataItem2.November = "7000, 8000, 9000";
+                dataItem2.December = "4000, 5000, 6000";*/
+
         }
 
-        
+
     }
 }
     

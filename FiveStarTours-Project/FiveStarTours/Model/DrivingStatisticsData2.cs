@@ -14,6 +14,7 @@ namespace FiveStarTours.Model
     public class DrivingStatisticsData2 : ISerializable
     {
         public int Id { get; set; }
+        public string DrivingYear2 { get; set; }
         public string DrivingNDP { get; set; }
         public string January { get; set; }
         public string February { get; set; }
@@ -32,10 +33,11 @@ namespace FiveStarTours.Model
 
         public DrivingStatisticsData2() { }
 
-        public DrivingStatisticsData2 (int id, string drivingNDP, string january, string february, string march, string april, 
+        public DrivingStatisticsData2 (int id, string drivingYear2, string drivingNDP, string january, string february, string march, string april, 
             string may, string june, string july, string august, string september, string october, string november, string december)
         {
             Id = id;
+            DrivingYear2 = drivingYear2;
             DrivingNDP = drivingNDP;
             January = january;
             February = february;
@@ -54,19 +56,20 @@ namespace FiveStarTours.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            DrivingNDP = Convert.ToString(values[1]);   
-            January = Convert.ToString(values[2]);
-            February = Convert.ToString(values[3]);
-            March = Convert.ToString(values[4]);
-            April = Convert.ToString(values[5]);
-            May = Convert.ToString(values[6]);
-            June = Convert.ToString(values[7]);
-            July = Convert.ToString(values[8]);
-            August = Convert.ToString(values[9]);
-            September = Convert.ToString(values[10]);
-            October = Convert.ToString(values[11]);
-            November = Convert.ToString(values[12]);
-            December = Convert.ToString(values[13]);
+            DrivingYear2 = Convert.ToString(values[1]);
+            DrivingNDP = Convert.ToString(values[2]);   
+            January = Convert.ToString(values[3]);
+            February = Convert.ToString(values[4]);
+            March = Convert.ToString(values[5]);
+            April = Convert.ToString(values[6]);
+            May = Convert.ToString(values[7]);
+            June = Convert.ToString(values[8]);
+            July = Convert.ToString(values[9]);
+            August = Convert.ToString(values[10]);
+            September = Convert.ToString(values[11]);
+            October = Convert.ToString(values[12]);
+            November = Convert.ToString(values[13]);
+            December = Convert.ToString(values[14]);
         }
 
         public string[] ToCSV()
@@ -74,6 +77,8 @@ namespace FiveStarTours.Model
             string[] csvValues =
            {
               Id.ToString(),
+              DrivingYear2, 
+              DrivingNDP,
               January,
               February,
               March,
@@ -90,5 +95,7 @@ namespace FiveStarTours.Model
 
             return csvValues;
         }
+
+        
     }
 }
