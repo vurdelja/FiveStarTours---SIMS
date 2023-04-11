@@ -1,4 +1,5 @@
 ﻿using FiveStarTours.Model;
+using FiveStarTours.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,6 @@ namespace FiveStarTours.Interfaces
         List<string> GetAllVisitors(Tour tour);
         void DeleteById(Tour tour);
         void Delete(TourReservation tourReservation);
+        public int GetWithGiftCard(int id, AttendanceRepository attendanceRepository, UserRepository userRepository);
     }
 }

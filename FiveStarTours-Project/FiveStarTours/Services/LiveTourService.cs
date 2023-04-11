@@ -36,5 +36,20 @@ namespace FiveStarTours.Services
         {
             _liveTourRepository.FindIdAndSave(liveTour, idLiveTour);    
         }
+
+        public List<string> GetEndedTours(List<Tour> tours)
+        {
+            return _liveTourRepository.GetEndedTours(tours);
+        }
+
+        public List<string> GetDates(string liveTour)
+        {
+            return _liveTourRepository.GetDates(liveTour);
+        }
+
+        public LiveTour GetByNameAndDate(string name, DateTime date)
+        {
+            return _liveTourRepository.GetByNameAndDate(name, date);
+        }
     }
 }

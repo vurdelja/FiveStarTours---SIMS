@@ -50,5 +50,15 @@ namespace FiveStarTours.Services
         {
             _toursRepository.DeleteByDate(tour);
         }
+
+        public List<string> GetNamesById(List<int> ids)
+        {
+            return _toursRepository.GetNamesById(ids);
+        }
+
+        public int GetByName(string name)
+        {
+            return _toursRepository.GetByName(name);
+        }
     }
 }

@@ -30,6 +30,7 @@ namespace FiveStarTours.Injector
         { typeof(IUserRepository), new UserRepository() },
         { typeof(IVehicleOnAdressRepository), new VehicleOnAdressRepository() },
         { typeof(IVehicleRepository), new VehicleRepository() },
+        { typeof(ITourRatingRepository), new TourRatingRepository() },
         // Add more implementations here
     };
 
