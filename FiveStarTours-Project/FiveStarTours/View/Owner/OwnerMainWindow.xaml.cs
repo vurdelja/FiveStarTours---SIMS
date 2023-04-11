@@ -47,14 +47,14 @@ namespace FiveStarTours.View
 
         private void GuestReviewsButton_Click(object sender, RoutedEventArgs e)
         {
-            GuestReviewsView guestReviews = new GuestReviewsView();
+            GuestReviewsView guestReviews = new GuestReviewsView(LoggedInUser);
             guestReviews.Show();
             Close();
         }
 
         private void GuestRatingButton_Click(object sender, RoutedEventArgs e)
         {
-            GuestsWithoutRateView guestRating = new GuestsWithoutRateView();
+            GuestsWithoutRateView guestRating = new GuestsWithoutRateView(LoggedInUser);
             guestRating.Show();
             Close();
         }

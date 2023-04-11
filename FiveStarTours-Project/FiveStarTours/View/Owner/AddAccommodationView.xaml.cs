@@ -274,12 +274,6 @@ namespace FiveStarTours.View
         }
 
 
-
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
         public List<string> MakeUrlsList(string urls)
         {
             List<string> result = new List<string>();
@@ -292,6 +286,13 @@ namespace FiveStarTours.View
             }
 
             return result;
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            OwnerMainWindow main = new OwnerMainWindow(LoggedInUser);
+            main.Show();
+            Close();
         }
 
 

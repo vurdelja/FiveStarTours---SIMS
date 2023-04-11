@@ -22,15 +22,19 @@ namespace FiveStarTours.View.Owner
     /// </summary>
     public partial class GuestReviewsView : Window
     {
+        public User LoggedInUser { get; set; }
         public static ObservableCollection<AccommodationReservation> Reservations { get; set; }
 
         public AccommodationReservation SelectedReservation { get; set; }   //SELEKTOVANA
         private readonly AccommodationReservationsRepository _repository;
 
-        public GuestReviewsView()
+        public GuestReviewsView(User user)
         {
             InitializeComponent();
             DataContext = this;
+
+            LoggedInUser = user;
+
             _repository = new AccommodationReservationsRepository();
             Reservations = new ObservableCollection<AccommodationReservation>(_repository.GetRatesForOwner());
 
@@ -40,7 +44,7 @@ namespace FiveStarTours.View.Owner
         {
             if (SelectedReservation != null)
             {
-                FullGuestReviewView fullReview = new FullGuestReviewView(SelectedReservation);
+                FullGuestReviewView fullReview = new FullGuestReviewView(SelectedReservation, LoggedInUser);
                 fullReview.Show();
                 Close();
             }
@@ -54,6 +58,8 @@ namespace FiveStarTours.View.Owner
 
         private void MaybeLaterButton_Click(object sender, RoutedEventArgs e)
         {
+            OwnerMainWindow main = new OwnerMainWindow(LoggedInUser);
+            main.Show();
             Close();
         }
     }

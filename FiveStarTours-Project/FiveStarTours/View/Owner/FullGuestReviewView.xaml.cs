@@ -22,6 +22,7 @@ namespace FiveStarTours.View.Owner
     /// </summary>
     public partial class FullGuestReviewView : Window
     {
+        public User LoggedInUser { get; set; }
         public AccommodationReservation _selectedReservation { get; set; }
 
 
@@ -30,10 +31,12 @@ namespace FiveStarTours.View.Owner
         public AccommodationRating accommodationRating { get; set; }
 
 
-        public FullGuestReviewView(AccommodationReservation selectedReservation)
+        public FullGuestReviewView(AccommodationReservation selectedReservation, User user)
         {
             InitializeComponent();
             DataContext = this;
+
+            LoggedInUser = user;
 
             _selectedReservation = selectedReservation;
 
@@ -46,6 +49,8 @@ namespace FiveStarTours.View.Owner
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
+            GuestReviewsView guestReviews = new GuestReviewsView(LoggedInUser);
+            guestReviews.Show();
             Close();
         }
     }

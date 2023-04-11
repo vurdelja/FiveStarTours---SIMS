@@ -18,6 +18,7 @@ namespace FiveStarTours.View.Owner
     /// </summary>
     public partial class GuestRatingView : Window
     {
+        User LoggedInUser { get; set; }
         public AccommodationReservation _selectedReservation { get; set; }
 
         private readonly AccommodationReservationsRepository _repository;
@@ -29,17 +30,18 @@ namespace FiveStarTours.View.Owner
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(properyName));
         }
 
-        public GuestRatingView(AccommodationReservation selectedReservation)
+        public GuestRatingView(AccommodationReservation selectedReservation, User user)
         {
             InitializeComponent();
             DataContext = this;
 
-            _selectedReservation= selectedReservation;
+            LoggedInUser = user;
+
+            _selectedReservation = selectedReservation;
 
 
             _repository = AccommodationReservationsRepository.GetInstace();
-            _rateRepository= new GuestRatingsRepository();
-
+            _rateRepository = new GuestRatingsRepository();
         }
 
 
@@ -227,7 +229,7 @@ namespace FiveStarTours.View.Owner
                 );
 
 
-            GuestsWithoutRateView guestsWithoutRateView = new GuestsWithoutRateView();
+            GuestsWithoutRateView guestsWithoutRateView = new GuestsWithoutRateView(LoggedInUser);
 
             if (IsValid(newGuestRate))
             {
