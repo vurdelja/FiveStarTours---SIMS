@@ -40,7 +40,6 @@ namespace FiveStarTours.Repository
         }
 
         
-
         public int NextId()
         {
             _vehicleOnAdress = _serializer.FromCSV(FilePath);
