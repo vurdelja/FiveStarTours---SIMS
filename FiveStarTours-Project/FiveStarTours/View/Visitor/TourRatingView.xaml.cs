@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,9 +27,9 @@ namespace FiveStarTours.View.Visitor
     {
         public User LoggedInUser { get; set; }
 
-        private readonly TourRatingRepository _tourRatingRepository;
-        private readonly AttendanceRepository _attendanceRepository;
-        public readonly ToursRepository _toursRepository;
+        private readonly TourRatingService _tourRatingRepository;
+        private readonly AttendanceService _attendanceRepository;
+        public readonly ToursService _toursRepository;
         public Tour SelectedTour { get; set; }
         public List<string> tours = new List<string>();
 
@@ -44,9 +45,9 @@ namespace FiveStarTours.View.Visitor
             LoggedInUser = user;
             InitializeComponent();
             DataContext = this;
-            _tourRatingRepository = new TourRatingRepository();
-            _attendanceRepository = new AttendanceRepository();
-            _toursRepository = new ToursRepository();
+            _tourRatingRepository = new TourRatingService();
+            _attendanceRepository = new AttendanceService();
+            _toursRepository = new ToursService();
 
             tours = GetAllTours();
             TourComboBox.ItemsSource = tours;

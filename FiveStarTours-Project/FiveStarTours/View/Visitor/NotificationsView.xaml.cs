@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using FiveStarTours.View.Guide;
 using System;
 using System.Collections.Generic;
@@ -25,14 +26,14 @@ namespace FiveStarTours.View.Visitor
     public partial class NotificationsView : Window
     {
         public User LoggedInUser { get; set; }
-        public readonly GiftCardRepository _repository;
+        public readonly GiftCardService _repository;
         public string UserResponse { get; set; }
         public NotificationsView(User user)
         {
             LoggedInUser = user;
             InitializeComponent();
             DataContext = this;
-            GiftCardRepository repository = new GiftCardRepository();
+            GiftCardService repository = new GiftCardService();
             
         }
         public event PropertyChangedEventHandler PropertyChanged;

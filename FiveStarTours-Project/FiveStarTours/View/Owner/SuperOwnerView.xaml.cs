@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using FiveStarTours.View.Traveler;
 using System;
 using System.Collections.Generic;
@@ -23,8 +24,8 @@ namespace FiveStarTours.View.Owner
     public partial class SuperOwnerView : Window
     {
 
-        private readonly AccommodationRatingRepository _rateRepository;
-        private readonly UserRepository _userRepository;
+        private readonly AccommodationRatingService _rateService;
+        private readonly UserService _userService;
         public AccommodationRating accommodationRating { get; set; }
 
         public User LoggedInUser { get; set; }
@@ -41,27 +42,27 @@ namespace FiveStarTours.View.Owner
             InitializeComponent();
             DataContext = this;
 
-            _userRepository = new UserRepository();
+            _userService = new UserService();
 
-            _rateRepository = new AccommodationRatingRepository();
+            _rateService = new AccommodationRatingService();
 
             accommodationRating = new AccommodationRating();
 
             LoggedInUser = user;
 
-            NumberOfReviews = _rateRepository.CountRatings();
-            AverageRate = _rateRepository.AverageOwnerRating();
+            NumberOfReviews = _rateService.CountRatings();
+            AverageRate = _rateService.AverageOwnerRating();
 
-            if (_rateRepository.CountRatings() > 50 && _rateRepository.AverageOwnerRating() > 4.5)
+            if (_rateService.CountRatings() > 50 && _rateService.AverageOwnerRating() > 4.5)
             {
                 LoggedInUser.Super = true;
-                _userRepository.Update(LoggedInUser);
+                _userService.Update(LoggedInUser);
                 
             }
             else
             {
                 LoggedInUser.Super = false;
-                _userRepository.Update(LoggedInUser);
+                _userService.Update(LoggedInUser);
             }
 
             if(LoggedInUser.Super == true)
@@ -77,8 +78,12 @@ namespace FiveStarTours.View.Owner
 
 
         }
- 
-        
 
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            OwnerMainWindow main = new OwnerMainWindow(LoggedInUser);
+            main.Show();
+            Close();
+        }
     }
 }

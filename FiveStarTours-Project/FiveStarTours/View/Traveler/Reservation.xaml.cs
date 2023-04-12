@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 
 namespace FiveStarTours.View.Traveler
 {
@@ -24,8 +25,8 @@ namespace FiveStarTours.View.Traveler
     /// </summary>
     public partial class Reservation : Window, INotifyPropertyChanged
     {
-        private readonly AccommodationReservationsRepository accommodationReservationsRepository;
-        private readonly AccommodationsRepository accommodationsRepository;
+        private readonly AccommodationReservationService accommodationReservationService;
+        private readonly AccommodationsService accommodationService;
         public static ObservableCollection<AccommodationReservation> AccommodationReservations { get; set; }
         public event PropertyChangedEventHandler? PropertyChanged;
         public Accommodation SelectedAccommodation { get; set; }
@@ -46,7 +47,7 @@ namespace FiveStarTours.View.Traveler
         {
             InitializeComponent();
             DataContext = this;
-            accommodationReservationsRepository = AccommodationReservationsRepository.GetInstace();
+            accommodationReservationService = new AccommodationReservationService();
             SelectedAccommodation = selectedAccommoodation;
             StartDate = DateTime.Now;
             EndDate = DateTime.Now;
@@ -65,8 +66,9 @@ namespace FiveStarTours.View.Traveler
                 MessageBox.Show("Min number of days for this accommodation is " + SelectedAccommodation.MinReservationDays + ".", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            AvailableDates availableDates = new AvailableDates(accommodationReservationsRepository.GetFreeDateIntervals(SelectedAccommodation.AccommodationName, StartDate, EndDate, VisitationDays), SelectedAccommodation.AccommodationName);
+            AvailableDates availableDates = new AvailableDates(accommodationReservationService.GetFreeDateIntervals(SelectedAccommodation.AccommodationName, StartDate, EndDate, VisitationDays), SelectedAccommodation.AccommodationName);
             availableDates.Show();
+            Close();
         }
     }
 }

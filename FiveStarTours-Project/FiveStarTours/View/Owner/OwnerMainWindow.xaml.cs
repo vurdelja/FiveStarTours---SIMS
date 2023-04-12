@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using FiveStarTours.View.Owner;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace FiveStarTours.View
     /// </summary>
     public partial class OwnerMainWindow : Window
     {
-        private readonly AccommodationReservationsRepository _repository;
+        private readonly AccommodationReservationService _service;
         public User LoggedInUser { get; set; }
 
         public OwnerMainWindow(User user)
@@ -30,49 +31,54 @@ namespace FiveStarTours.View
             InitializeComponent();
             DataContext = this;
 
-            _repository = AccommodationReservationsRepository.GetInstace();
+            _service = new AccommodationReservationService();
 
             LoggedInUser= user;
 
-            _repository.NotifyAboutUnratedGuests();
+            _service.NotifyAboutUnratedGuests();
 
         }
 
         private void AddAccommodationButton_Click(object sender, RoutedEventArgs e)
         {
-            AddAccommodationView addAccommodation = new AddAccommodationView();
+            AddAccommodationView addAccommodation = new AddAccommodationView(LoggedInUser);
             addAccommodation.Show();
+            Close();
         }
 
         private void GuestReviewsButton_Click(object sender, RoutedEventArgs e)
         {
-            GuestReviewsView guestReviews = new GuestReviewsView();
+            GuestReviewsView guestReviews = new GuestReviewsView(LoggedInUser);
             guestReviews.Show();
+            Close();
         }
 
         private void GuestRatingButton_Click(object sender, RoutedEventArgs e)
         {
-            GuestsWithoutRateView guestRating = new GuestsWithoutRateView();
+            GuestsWithoutRateView guestRating = new GuestsWithoutRateView(LoggedInUser);
             guestRating.Show();
+            Close();
         }
 
         private void SuperOwnerButton_Click(object sender, RoutedEventArgs e)
         {
             SuperOwnerView superOwner = new SuperOwnerView(LoggedInUser);
             superOwner.Show();
+            Close();
         }
 
         private void RequestsButton_Click(object sender, RoutedEventArgs e)
         {
-            ManageRequestsView manageRequestsView = new ManageRequestsView();
+            ManageRequestsView manageRequestsView = new ManageRequestsView(LoggedInUser);
             manageRequestsView.Show();
+            Close();
         }
 
-
-
-
-
-
-
+        private void LogOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new MainWindow();
+            main.Show();
+            Close();
+        }
     }
 }

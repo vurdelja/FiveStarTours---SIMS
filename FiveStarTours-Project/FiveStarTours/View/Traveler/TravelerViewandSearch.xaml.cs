@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,13 +31,13 @@ namespace FiveStarTours.View.Traveler
         public ObservableCollection<Accommodation> Accommodations { get; set; }
         public Accommodation SelectAccommodation { get; set; }
    
-        private readonly AccommodationsRepository accommodationsRepository;
+        private readonly AccommodationsService accommodationService;
         public TravelerViewandSearch()
         {
             
             InitializeComponent();
-            accommodationsRepository = new AccommodationsRepository();
-            Accommodations = new ObservableCollection<Accommodation>(accommodationsRepository.GetAll());
+            accommodationService = new AccommodationsService();
+            Accommodations = new ObservableCollection<Accommodation>(accommodationService.GetAll());
             DataContext = this;
             
 
@@ -65,7 +66,7 @@ namespace FiveStarTours.View.Traveler
                 string type = TypeBox.Text;
                 string length= LengthSearch.Text;
 
-                List<Accommodation> seachedAccommodations = accommodationsRepository.SearchAccomodations(name, state, city, guestNum,type, length);
+                List<Accommodation> seachedAccommodations = accommodationService.SearchAccomodations(name, state, city, guestNum,type, length);
                 RefreshAccommodations(seachedAccommodations);
 
             }catch(Exception ex)
@@ -125,6 +126,7 @@ namespace FiveStarTours.View.Traveler
         {
             ReservationsView reservationsView = new ReservationsView();
             reservationsView.Show();
+            Close();
         }
     }
 }
