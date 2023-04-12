@@ -113,7 +113,7 @@
                          Margin="0,16,10,16" FontSize="10">
                 </TextBox>
 
-                <TextBlock Grid.Row="4" Grid.Column="1"
+                <TextBlock Grid.Row="6" Grid.Column="1"
                            Text="{Binding Path=IsBusy}"
                          Height="30"  
                          Margin="0,16,10,16" FontSize="10">
