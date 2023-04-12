@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using MahApps.Metro.Converters;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,11 @@ namespace FiveStarTours.View.Owner
     /// </summary>
     public partial class GuestRatingView : Window
     {
+        User LoggedInUser { get; set; }
         public AccommodationReservation _selectedReservation { get; set; }
 
-        private readonly AccommodationReservationsRepository _repository;
-        private readonly GuestRatingsRepository _rateRepository;
+        private readonly AccommodationReservationService _service;
+        private readonly GuestRaitingsService _ratingService;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string properyName = null)
@@ -29,17 +31,18 @@ namespace FiveStarTours.View.Owner
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(properyName));
         }
 
-        public GuestRatingView(AccommodationReservation selectedReservation)
+        public GuestRatingView(AccommodationReservation selectedReservation, User user)
         {
             InitializeComponent();
             DataContext = this;
 
-            _selectedReservation= selectedReservation;
+            LoggedInUser = user;
+
+            _selectedReservation = selectedReservation;
 
 
-            _repository = new AccommodationReservationsRepository();
-            _rateRepository= new GuestRatingsRepository();
-
+            _service = new AccommodationReservationService();
+            _ratingService = new GuestRaitingsService();
         }
 
 
@@ -227,14 +230,14 @@ namespace FiveStarTours.View.Owner
                 );
 
 
-            GuestsWithoutRateView guestsWithoutRateView = new GuestsWithoutRateView();
+            GuestsWithoutRateView guestsWithoutRateView = new GuestsWithoutRateView(LoggedInUser);
 
             if (IsValid(newGuestRate))
             {
-                _rateRepository.Save(newGuestRate);
-                reservation.Rated = true;
+                _ratingService.Save(newGuestRate);
+                reservation.RatedByOwner = true;
 
-                _repository.Update(reservation);
+                _service.Update(reservation);
                 System.Threading.Thread.Sleep(1000);
                 Close();
                 System.Threading.Thread.Sleep(2000);

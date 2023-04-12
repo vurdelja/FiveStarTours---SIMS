@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using FiveStarTours.Interfaces;
 using FiveStarTours.Model;
 using FiveStarTours.Serializer;
 using FiveStarTours.View;
@@ -9,7 +10,7 @@ using FiveStarTours.View;
 
 namespace FiveStarTours.Repository
 {
-    public class TourReservationRepository
+    public class TourReservationRepository : ITourReservationRepository
     {
         private const string FilePath = "../../../Resources/Data/tourreservations.csv";
         private readonly Serializer<TourReservation> _serializerVisitor;
@@ -77,6 +78,36 @@ namespace FiveStarTours.Repository
                 }
             }
             return visitors;
+        }
+
+        public int GetWithGiftCard(LiveTour tour, List<Attendance> attendances, List<User> users)
+        {
+            int result = 0;
+            _tourReservations = GetAll();
+            foreach (var tourReservation in _tourReservations)
+            {
+                if(tourReservation.TourId == tour.IdTour && tourReservation.DateTime == tour.Date && tourReservation.GiftCard)
+                {
+                    foreach(string name in tourReservation.VisitorName)
+                    {
+                        foreach(var user in users)
+                        {
+                            if(user.Name == name)
+                            {
+                                foreach(Attendance attendance in attendances)
+                                {
+                                    if(user.Id == attendance.IdVisitor)
+                                    {
+                                        result++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return result;
         }
 
         public void DeleteById(Tour tour)

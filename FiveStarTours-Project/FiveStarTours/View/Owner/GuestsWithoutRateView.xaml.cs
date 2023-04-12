@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,17 +25,22 @@ namespace FiveStarTours.View.Owner
     /// </summary>
     public partial class GuestsWithoutRateView : Window
     {
+        public User LoggedInUser { get; set; }
         public static ObservableCollection<AccommodationReservation> Reservations { get; set; }
 
         public AccommodationReservation SelectedReservation { get; set; }   //SELEKTOVANA
-        private readonly AccommodationReservationsRepository _repository;
+        private readonly AccommodationReservationService _reservationService;
 
-        public GuestsWithoutRateView()
+        public GuestsWithoutRateView(User user)
         {
             InitializeComponent();
             DataContext = this;
-            _repository = new AccommodationReservationsRepository();
-            Reservations = new ObservableCollection<AccommodationReservation>(_repository.GetUnratedAndLessThanFiveDaysAgo());
+
+            _reservationService = new AccommodationReservationService();
+
+            LoggedInUser = user;
+
+            Reservations = new ObservableCollection<AccommodationReservation>(_reservationService.GetUnratedAndLessThanFiveDaysAgo());
 
         }
 
@@ -42,7 +48,7 @@ namespace FiveStarTours.View.Owner
         {
             if (SelectedReservation != null)
             {
-                GuestRatingView guestRatingView = new GuestRatingView(SelectedReservation);
+                GuestRatingView guestRatingView = new GuestRatingView(SelectedReservation, LoggedInUser);
                 guestRatingView.Show();
                 Close();
                 
@@ -55,6 +61,8 @@ namespace FiveStarTours.View.Owner
 
         private void MaybeLaterButton_Click(object sender, RoutedEventArgs e)
         {
+            OwnerMainWindow main = new OwnerMainWindow(LoggedInUser);
+            main.Show();
             Close();
         }
     }

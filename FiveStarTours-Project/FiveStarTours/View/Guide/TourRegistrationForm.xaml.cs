@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 
 namespace FiveStarTours.View
 {
@@ -18,10 +19,10 @@ namespace FiveStarTours.View
     {
         public User LoggedInUser { get; set; }
 
-        private readonly ToursRepository _toursRepository;
-        private readonly LanguagesRepository _languagesRepository;
-        private readonly LocationsRepository _locationsRepository;
-        private readonly KeyPointsRepository _keyPointsRepository;
+        private readonly ToursService _toursRepository;
+        private readonly LanguagesService _languagesRepository;
+        private readonly LocationsService _locationsRepository;
+        private readonly KeyPointsService _keyPointsRepository;
 
         private string _tourName;
         public string TourName
@@ -137,10 +138,10 @@ namespace FiveStarTours.View
             InitializeComponent();
             DataContext = this;
 
-            _toursRepository = new ToursRepository();
-            _languagesRepository = new LanguagesRepository();
-            _locationsRepository = new LocationsRepository();
-            _keyPointsRepository = new KeyPointsRepository();
+            _toursRepository = new ToursService();
+            _languagesRepository = new LanguagesService();
+            _locationsRepository = new LocationsService();
+            _keyPointsRepository = new KeyPointsService();
 
             LoggedInUser = user;
 
