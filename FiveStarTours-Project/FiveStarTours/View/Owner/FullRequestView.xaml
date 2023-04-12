@@ -69,6 +69,11 @@
                        Margin="3 0 0 0" 
                        Height="30"
                        Foreground="Purple"/>
+                <Label Grid.Row="6" Grid.Column="0"
+                       Content="IsBusy?" 
+                       Margin="3 0 0 0" 
+                       Height="30"
+                       Foreground="Purple"/>
 
 
                 <TextBlock Grid.Row="0" Grid.Column="1"
@@ -108,6 +113,12 @@
                          Margin="0,16,10,16" FontSize="10">
                 </TextBox>
 
+                <TextBlock Grid.Row="4" Grid.Column="1"
+                           Text="{Binding Path=IsBusy}"
+                         Height="30"  
+                         Margin="0,16,10,16" FontSize="10">
+                </TextBlock>
+
             </Grid>
             <Grid Grid.Row="1" Grid.Column="0" >
 
@@ -120,9 +131,9 @@
                 <Button Content="Back" 
                         Padding="10 5"
                         IsDefault="True"
-                        HorizontalAlignment="Left" 
+                        HorizontalAlignment="Center" 
                         VerticalAlignment="Top"
-                        Click="GoBackButton_Click" Margin="311,196,0,0" Width="80"
+                        Click="GoBackButton_Click" Margin="0,153,0,0" Width="80"
                         />
                 <Button Content="Accept" 
                     Padding="10 5"

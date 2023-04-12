@@ -19,6 +19,7 @@ namespace FiveStarTours.Model
         public ReservationChangeStatusType Status { get; set; }
         public bool Delivered { get; set; }
         public string Comment { get; set; }
+        public bool IsBusy { get; internal set; }
 
         public ReservationChange(int id, AccommodationReservation accommodationReservation, DateTime newStartDate, DateTime newEndDate, ReservationChangeStatusType status, bool delivered, string comment)
         {
@@ -29,6 +30,7 @@ namespace FiveStarTours.Model
             Status = status;
             Delivered = delivered;
             Comment = comment;
+            IsBusy = false;
         }
 
         public ReservationChange()

@@ -33,8 +33,6 @@
                                     Binding="{Binding NewStartDate}"/>
                 <DataGridTextColumn Header=" Start date" Width="130"
                                     Binding="{Binding NewEndDate}"/>
-                <DataGridTextColumn Header=" Dates busy" Width="130"
-                                    Binding="{Binding DatesBusy}"/>
             </DataGrid.Columns>
 
         </DataGrid>

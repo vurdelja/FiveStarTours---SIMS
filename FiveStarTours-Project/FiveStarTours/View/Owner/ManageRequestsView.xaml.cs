@@ -47,7 +47,7 @@ namespace FiveStarTours.View.Owner
         {
             if (SelectedRequest != null)
             {
-                FullRequestView fullRequest = new FullRequestView(SelectedRequest);
+                FullRequestView fullRequest = new FullRequestView(SelectedRequest, LoggedInUser);
                 fullRequest.Show();
                 Close();
             }

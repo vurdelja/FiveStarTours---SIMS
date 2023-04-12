@@ -17,6 +17,8 @@ namespace FiveStarTours.Interfaces
         ReservationChange GetById(int id);
         ReservationChange Update(ReservationChange changes);
 
+        bool IsBusy(ReservationChange changes);
+
 
     }
 }
