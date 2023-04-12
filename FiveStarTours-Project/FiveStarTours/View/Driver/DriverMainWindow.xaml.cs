@@ -15,6 +15,7 @@ using FiveStarTours.View;
 using FiveStarTours.Model;
 using FiveStarTours.Repository;
 using FiveStarTours.Serializer;
+using FiveStarTours.View.Driver;
 
 namespace FiveStarTours.View
 {
@@ -39,6 +40,19 @@ namespace FiveStarTours.View
 
             VehicleOnAdress.VehicleOnAdress vehicleOnAdress = new VehicleOnAdress.VehicleOnAdress();
             vehicleOnAdress.Show();
+        }
+
+        private void TaximeterButton_Click(object sender, RoutedEventArgs e)
+        {
+            TaximeterWindow taximeterWindow = new TaximeterWindow();
+            taximeterWindow.Show();
+            
+        }
+
+        private void DrivingStatisticsButton_Click(object sender, RoutedEventArgs e)
+        {
+            DrivingStatistics drivingStatistics = new DrivingStatistics();
+            drivingStatistics.Show();
         }
     }
 }
