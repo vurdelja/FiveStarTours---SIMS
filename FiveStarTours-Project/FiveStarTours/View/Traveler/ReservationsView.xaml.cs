@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,14 +28,14 @@ namespace FiveStarTours.View.Traveler
         public static ObservableCollection<AccommodationReservation> Reservations { get; set; }
         public AccommodationReservation SelectedReservation { get; set; }
         public Accommodation SelectedAccommodation  { get; set; }
-        private readonly AccommodationReservationsRepository accommodationReservationsRepository;
+        private readonly AccommodationReservationService accommodationReservationService;
         
         public ReservationsView()
         {
             InitializeComponent();
             DataContext = this;
-            accommodationReservationsRepository=AccommodationReservationsRepository.GetInstace();
-            Reservations = new ObservableCollection<AccommodationReservation>(accommodationReservationsRepository.GetAll());
+            accommodationReservationService = new AccommodationReservationService();
+            Reservations = new ObservableCollection<AccommodationReservation>(accommodationReservationService.GetAll());
         }
         private string _guestName;
         public string GuestName
@@ -88,10 +89,11 @@ namespace FiveStarTours.View.Traveler
         {
             if (SelectedReservation != null)
             {
-                if (accommodationReservationsRepository.IsAbleToRate(SelectedReservation.Id))
+                if (accommodationReservationService.IsAbleToRate(SelectedReservation.Id))
                 {
                     AccommodationRatings rating = new AccommodationRatings(SelectedReservation);
                     rating.Show();
+                   
                    
                 }
                 else
@@ -113,10 +115,10 @@ namespace FiveStarTours.View.Traveler
                 MessageBoxResult result = MessageBox.Show("Are you sure you want to cancel?", "Cancel reservation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                    if(accommodationReservationsRepository.IsAbleToCancel(SelectedReservation.Id))
+                    if(accommodationReservationService.IsAbleToCancel(SelectedReservation.Id))
                     {
-                        accommodationReservationsRepository.UserCancelsReservation(SelectedReservation);
-                        accommodationReservationsRepository.Delete(SelectedReservation);
+                        accommodationReservationService.UserCancelsReservation(SelectedReservation);
+                        accommodationReservationService.Delete(SelectedReservation);
                         Reservations.Remove(SelectedReservation);
                     }
                     else
@@ -140,6 +142,7 @@ namespace FiveStarTours.View.Traveler
             {
                 ChangeReservation change = new ChangeReservation(SelectedReservation);
                 change.Show();
+               
             }
             else
             {
@@ -152,6 +155,7 @@ namespace FiveStarTours.View.Traveler
         {
             RequestView request = new RequestView();
             request.Show();
+            
         }
     }
 }

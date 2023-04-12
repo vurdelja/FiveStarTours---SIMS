@@ -1,6 +1,7 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Model.Enums;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,11 +24,11 @@ namespace FiveStarTours.View.Traveler
     /// <summary>
     /// Interaction logic for ChangeReservation.xaml
     /// </summary>
-    public partial class ChangeReservation : Window, INotifyPropertyChanges
+    public partial class ChangeReservation : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-        private AccommodationReservationsRepository _accommodationReservationsRepository;
-        private ReservationChangeRepository _reservationChangeRepository;
+        private AccommodationReservationService _accommodationReservationService;
+        private ReservationChangeService _reservationChangeService;
         public DateTime NewStartDate { get; set; }
         public DateTime NewEndDate { get; set; }
         public static ObservableCollection<AccommodationReservation> AccommodationReservations { get; set; }
@@ -67,8 +68,8 @@ namespace FiveStarTours.View.Traveler
             InitializeComponent();
             this.DataContext = this;
             SelectedAccommodationReservation = selectedReservation;
-            _accommodationReservationsRepository = AccommodationReservationsRepository.GetInstace();
-            _reservationChangeRepository = new ReservationChangeRepository();
+            _accommodationReservationService= new AccommodationReservationService();
+            _reservationChangeService = new ReservationChangeService();
             NewStartDate = DateTime.Now;
             NewEndDate = DateTime.Now;
 
@@ -81,7 +82,7 @@ namespace FiveStarTours.View.Traveler
         private void SubmitChanges(object sender, RoutedEventArgs e)
         {
             ReservationChange reservationChange = new ReservationChange(-1, SelectedAccommodationReservation, NewStartDate, NewEndDate, ReservationChangeStatusType.Processing, false, "");
-            _reservationChangeRepository.Save(reservationChange);
+            _reservationChangeService.Save(reservationChange);
             
         }
     }

@@ -10,6 +10,7 @@ namespace FiveStarTours.Interfaces
     public interface IReservationChangeRepository
     {
         List<ReservationChange> GetAll();
+        List<ReservationChange> GetAllProcessing();
         ReservationChange Save(ReservationChange changes);
         void BindAccommodationReservation();
         int NextId();
