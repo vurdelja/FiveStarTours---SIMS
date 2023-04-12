@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FiveStarTours.Interfaces;
 using FiveStarTours.Model;
+using FiveStarTours.Repository;
 
 namespace FiveStarTours.Services
 {
@@ -49,6 +50,11 @@ namespace FiveStarTours.Services
         public void Delete(TourReservation tourReservation)
         {
             _tourReservationRepository.Delete(tourReservation);
+        }
+
+        public int GetWithGiftCard(int id, List<Attendance> attendances, List<User> users)
+        {
+            return _tourReservationRepository.GetWithGiftCard(id, attendances, users);
         }
     }
 }

@@ -101,6 +101,7 @@ namespace FiveStarTours
             {
                 Tours tours = new Tours(user);
                 tours.Show();
+                Close();
             }
             else if (String.Equals(user.Role.ToLower(), "visitor"))
             {

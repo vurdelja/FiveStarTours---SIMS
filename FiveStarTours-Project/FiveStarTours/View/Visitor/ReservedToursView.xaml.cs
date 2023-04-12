@@ -19,19 +19,17 @@ using System.Windows.Shapes;
 namespace FiveStarTours.View.Visitor
 {
     /// <summary>
-    /// Interaction logic for TourView.xaml
+    /// Interaction logic for ReservedToursView.xaml
     /// </summary>
-    /// 
-    public partial class TourView : Window
+    public partial class ReservedToursView : Window
     {
-        //public static ObservableCollection<Tour> Tours { get; set; }
         public User LoggedInUser { get; set; }
-
+        public static ObservableCollection<Tour> Tours { get; set; }
         public Tour SelectedTour { get; set; }
+
         private readonly ToursService _repository;
         public Tour tour { get; set; }
-
-        public TourView(Tour selectedTour, User user)
+        public ReservedToursView(Tour selectedTour, User user)
         {
             LoggedInUser = user;
             InitializeComponent();
@@ -43,17 +41,13 @@ namespace FiveStarTours.View.Visitor
             //Tours = new ObservableCollection<Tour>(_repository.GetById(selectedTour.Id));
         }
 
-        private void ReservationButton_Click(object sender, RoutedEventArgs e)
+        private void RateButton_Click(object sender, RoutedEventArgs e)
         {
-            ReservationView reservationView = new ReservationView(SelectedTour, LoggedInUser);
-            reservationView.Show();
-        }
+            
+                TourRatingView tourRatingView = new TourRatingView(LoggedInUser);
+                tourRatingView.Show();
 
-        private void GoBackButton_Click(object sender, RoutedEventArgs e)
-        {
-            ToursListingView toursListingView = new ToursListingView(LoggedInUser);
-            //this.Visibility = Visibility.Hidden;
-            toursListingView.Show();
+            
         }
     }
 }

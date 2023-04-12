@@ -35,7 +35,6 @@ namespace FiveStarTours.Services
         {
             return _giftCardRepository.GetAllDatesById(id);
         }
-
         public int NextId()
         {
             return _giftCardRepository.NextId();

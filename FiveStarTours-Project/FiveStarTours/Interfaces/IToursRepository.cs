@@ -16,6 +16,8 @@ namespace FiveStarTours.Interfaces
         List<Tour> GetAllByDate(DateTime date, User user);
         List<Tour> GetByUser(User user);
         void DeleteByDate(Tour tour);
+        public List<string> GetNamesById(List<int> ids);
+        public int GetByName(string name);
 
     }
 }
