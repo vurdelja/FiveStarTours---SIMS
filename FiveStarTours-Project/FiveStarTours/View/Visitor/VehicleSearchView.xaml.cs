@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using FiveStarTours.View.Traveler;
 using System;
 using System.Collections.Generic;
@@ -31,20 +32,20 @@ namespace FiveStarTours.View.Visitor
         public static ObservableCollection<Vehicle> Vehicles { get; set; }
         public Vehicle SelectedVehicle { get; set; }
 
-        private readonly VehicleRepository _vehicleRepository;
-        private readonly LocationsRepository _locationsRepository;
-        private readonly DrivingsRepository _drivingsRepository;
-        private readonly ReservedDrivingsRepository _reservedDrivingsRepository;
+        private readonly VehicleService _vehicleRepository;
+        private readonly LocationsService _locationsRepository;
+        private readonly DrivingsService _drivingsRepository;
+        private readonly ReservedDrivingsService _reservedDrivingsRepository;
         public VehicleSearchView(User user)
         {
             LoggedInUser = user;
 
             InitializeComponent();
             DataContext = this;
-            _vehicleRepository = new VehicleRepository();
-            _locationsRepository = new LocationsRepository();
-            _drivingsRepository = new DrivingsRepository();
-            _reservedDrivingsRepository = new ReservedDrivingsRepository();
+            _vehicleRepository = new VehicleService();
+            _locationsRepository = new LocationsService();
+            _drivingsRepository = new DrivingsService();
+            _reservedDrivingsRepository = new ReservedDrivingsService();
             Vehicles = new ObservableCollection<Vehicle>(_vehicleRepository.GetAll());
 
             List<string> starting = _locationsRepository.GetAllStates();

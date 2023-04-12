@@ -15,8 +15,10 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using FiveStarTours.View;
 using static System.Net.Mime.MediaTypeNames;
+using Application = System.Windows.Application;
 
 namespace FiveStarTours.View.Visitor
 {
@@ -30,7 +32,7 @@ namespace FiveStarTours.View.Visitor
         public User LoggedInUser { get; set; }
         public static ObservableCollection<Tour> Tours { get; set; }
         public Tour SelectedTour{ get; set; }
-        private readonly ToursRepository _repository;
+        private readonly ToursService _repository;
 
 
 
@@ -39,7 +41,7 @@ namespace FiveStarTours.View.Visitor
             LoggedInUser = user;
             InitializeComponent();
             DataContext = this;
-            _repository = new ToursRepository();
+            _repository = new ToursService();
             Tours = new ObservableCollection<Tour>(_repository.GetAll());
 
         }
@@ -70,6 +72,19 @@ namespace FiveStarTours.View.Visitor
         {
             VehicleSearchView vehicle = new VehicleSearchView(LoggedInUser);
             vehicle.Show();
+        }
+
+        private void LogOutClick(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            foreach(Window window in Application.Current.Windows)
+            {
+                if(window != mainWindow)
+                {
+                    window.Close();
+                }
+            }
+            mainWindow.Show();
         }
     }
 }

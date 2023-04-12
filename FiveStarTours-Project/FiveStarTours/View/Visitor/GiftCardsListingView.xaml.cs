@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,14 +26,14 @@ namespace FiveStarTours.View.Visitor
         public User LoggedInUser { get; set; }
         public static ObservableCollection<GiftCard> GiftCards { get; set; }
         public GiftCard SelectedGiftCard { get; set; }
-        private readonly GiftCardRepository _repository;
+        private readonly GiftCardService _repository;
 
         public GiftCardsListingView(User user)
         {
             LoggedInUser = user;
             InitializeComponent();
             DataContext = this;
-            _repository = new GiftCardRepository();
+            _repository = new GiftCardService();
             //GiftCards = new ObservableCollection<GiftCard>(_repository.GetAllById(user));
         }
 
