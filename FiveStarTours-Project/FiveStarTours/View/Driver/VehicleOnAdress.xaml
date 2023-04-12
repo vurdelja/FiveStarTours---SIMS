@@ -18,9 +18,9 @@
                   Margin="0,62,0,134" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" IsReadOnly="True" Binding="{Binding Name, Mode=TwoWay}" Width="150"/>
-                <DataGridCheckBoxColumn x:Name="OnAdressCheckBox" Header="On Adress" Binding="{Binding OnAdress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="100" />
-                <DataGridCheckBoxColumn x:Name="IsDelayCheckBox" Header="Delay" Binding="{Binding IsDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100" Visibility="Visible"/>
-                <DataGridTextColumn  x:Name="EnterDelayTextBox" Header="Enter Delay" Binding="{Binding EnterDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                <DataGridCheckBoxColumn x:Name="OnAdressCheckBox" Header="On Adress" Binding="{Binding OnAdress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="100" IsThreeState="True" />
+                <DataGridCheckBoxColumn x:Name="IsDelayCheckBox" Header="Delay" Binding="{Binding IsDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100"  IsThreeState="True"/>
+                <DataGridTextColumn  x:Name="EnterDelayTextBox" Header="Enter Delay" Binding="{Binding EnterDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100" />
                 
                 <DataGridCheckBoxColumn x:Name="DrivingStartsCheckBox" Header="Driving Starts" Binding="{Binding DrivingStarts, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100" />
                 <DataGridTextColumn  x:Name="EnterStartPriceTextBox" Header="Enter Start Price" Binding="{Binding EnterStartPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100"/>

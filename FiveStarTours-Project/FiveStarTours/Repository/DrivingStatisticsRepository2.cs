@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Serializer;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,28 @@ namespace FiveStarTours.Repository
                 return 1;
             }
             return _drivingStatisticsData2.Max(l => l.Id) + 1;
+        }
+
+        public int FindIdByYear(String year)
+        {
+            _drivingStatisticsData2 = GetAll();
+            int id = 0;
+            foreach (DrivingStatisticsData2 drivingstatisticsdata2 in _drivingStatisticsData2)
+            {
+                if (drivingstatisticsdata2.DrivingYear2 == year)
+                {
+                    id = drivingstatisticsdata2.Id;
+                }
+            }
+
+            return id;
+        }
+
+        public List<string> GetAllYears()
+        {
+            List<DrivingStatisticsData2> drivingStatisticsData2 = GetAll();
+            List<string> years = drivingStatisticsData2.Select(l => l.DrivingYear2).Distinct().ToList();
+            return years;
         }
     }
 

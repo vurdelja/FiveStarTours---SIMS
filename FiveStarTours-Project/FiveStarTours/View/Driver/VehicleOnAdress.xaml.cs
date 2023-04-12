@@ -61,9 +61,6 @@ namespace FiveStarTours.View.VehicleOnAdress
                 {
                     _onAdress = value;
                     OnPropertyChanged();
-                   
-
-
                 }
             }
         }
@@ -75,6 +72,10 @@ namespace FiveStarTours.View.VehicleOnAdress
             get => _isDelay;
             set
             {
+                if (_onAdress == value) 
+                { 
+                    OnPropertyChanged();
+                }
                 if (value != _isDelay)
                 {
                     _isDelay = value;
@@ -146,7 +147,18 @@ namespace FiveStarTours.View.VehicleOnAdress
 
             
             Drivings = _drivingsRepository.GetAll();
-   
+
+            if (OnAdressCheckBox != null)
+            {
+                IsDelayCheckBox.IsReadOnly = true;
+                EnterDelayTextBox.IsReadOnly = true;
+            }
+            else
+            {
+                IsDelayCheckBox.IsReadOnly = false;   
+                EnterDelayTextBox.IsReadOnly = false;
+            }
+
         }
 
         private Drivings GetSelectedDriving()
@@ -161,7 +173,7 @@ namespace FiveStarTours.View.VehicleOnAdress
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
-        {
+        { 
             Drivings name = GetSelectedDriving();
             bool isOnAdress = Convert.ToBoolean(OnAdress);
             bool isDelay = Convert.ToBoolean(IsDelay);
@@ -182,5 +194,7 @@ namespace FiveStarTours.View.VehicleOnAdress
 
             Close();
         }
+
+        
     }
 }
