@@ -5,13 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FiveStarTours.View.Owner"
         mc:Ignorable="d"
-        Title="Guests without rate" Background ="Pink" Height="400" Width="500">
+        Title="Guests without rate" Height="750" Width="430" 
+        Background="Pink" 
+        WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="245*"/>
+            <RowDefinition Height="122*"/>
+        </Grid.RowDefinitions>
         <DataGrid ItemsSource="{Binding Reservations}"
                   SelectedItem="{Binding Path=SelectedReservation}"
                   IsReadOnly="True" SelectionMode="Single" x:Name="NoRateGuests" 
                   AutoGenerateColumns="false"
-                  Margin="10,10,10,67">
+                  Margin="10,10,10,146" Grid.RowSpan="2">
 
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -27,8 +33,6 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header=" Name"  Width="100"
                                     Binding="{Binding GuestName}"/>
-                <DataGridTextColumn Header=" Surname" Width="100"
-                                    Binding="{Binding GuestSurname}"/>
                 <DataGridTextColumn Header=" End date" Width="130"
                                     Binding="{Binding EndDate}"/>
                 <DataGridTextColumn Header=" Accommodation name" Width="*" 
@@ -36,8 +40,8 @@
             </DataGrid.Columns>
 
         </DataGrid>
-        <Button Content="Rate" Click="RateGuestsButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="128,336,0,0" Height="26" Width="67" Background="#FFFB0707"/>
-        <Button Content="Maybe later" Click="MaybeLaterButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="302,336,0,0" Height="26" Width="67" Background="#FFD4CCCC"/>
+        <Button Content="Rate" Click="RateGuestsButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="58,139,0,0" Height="51" Width="135" Background="#FFFB0707" Grid.Row="1"/>
+        <Button Content="Maybe later" Click="MaybeLaterButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,139,0,0" Height="51" Width="120" Background="#FFD4CCCC" Grid.Row="1"/>
 
     </Grid>
 </Window>

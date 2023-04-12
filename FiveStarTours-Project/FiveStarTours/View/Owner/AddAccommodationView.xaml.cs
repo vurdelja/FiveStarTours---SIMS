@@ -12,23 +12,27 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Security.AccessControl;
 using System.Xml.Linq;
+using FiveStarTours.Services;
 
 namespace FiveStarTours.View
 {
     public partial class AddAccommodationView : Window
     {
-        
-        private readonly LocationsRepository _locationsRepository;
-        private readonly AccommodationsRepository _accommodationsRepository;
+        public User LoggedInUser { get; set; }
+
+        private readonly LocationsService _locationsRepository;
+        private readonly AccommodationsService _accommodationService;
 
 
-        public AddAccommodationView()
+        public AddAccommodationView(User user)
         {
             InitializeComponent();
             DataContext = this;
 
-            _locationsRepository = new LocationsRepository();
-            _accommodationsRepository = new AccommodationsRepository();
+            _locationsRepository = new LocationsService();
+            _accommodationService = new AccommodationsService();
+
+            LoggedInUser = user;
 
 
             // Adding state and city trough combobox:
@@ -205,7 +209,7 @@ namespace FiveStarTours.View
 
             if(IsValid(newAccommodation))
             {
-                _accommodationsRepository.Save(newAccommodation);
+                _accommodationService.Save(newAccommodation);
                 Close();
             }
             else
@@ -216,7 +220,6 @@ namespace FiveStarTours.View
 
         }
 
-        public string Error => null;
 
         public string this[string columnName]
         {
@@ -272,12 +275,6 @@ namespace FiveStarTours.View
         }
 
 
-
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
         public List<string> MakeUrlsList(string urls)
         {
             List<string> result = new List<string>();
@@ -290,6 +287,13 @@ namespace FiveStarTours.View
             }
 
             return result;
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            OwnerMainWindow main = new OwnerMainWindow(LoggedInUser);
+            main.Show();
+            Close();
         }
 
 

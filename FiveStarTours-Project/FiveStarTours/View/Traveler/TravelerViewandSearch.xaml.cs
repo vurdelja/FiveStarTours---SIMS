@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,105 +31,19 @@ namespace FiveStarTours.View.Traveler
         public ObservableCollection<Accommodation> Accommodations { get; set; }
         public Accommodation SelectAccommodation { get; set; }
    
-        private readonly AccommodationsRepository accommodationsRepository;
-        //private readonly LocationsRepository locationsRepository;
+        private readonly AccommodationsService accommodationService;
         public TravelerViewandSearch()
         {
             
             InitializeComponent();
-            accommodationsRepository = new AccommodationsRepository();
-            //locationsRepository = new LocationsRepository();
-            Accommodations = new ObservableCollection<Accommodation>(accommodationsRepository.GetAll());
+            accommodationService = new AccommodationsService();
+            Accommodations = new ObservableCollection<Accommodation>(accommodationService.GetAll());
             DataContext = this;
             
 
 
         }
 
-        //public Location location;
-
-        /*
-        private string _accomodationName;
-        public string AccomodationName
-        {
-            get => _accomodationName;
-            set
-            {
-                _accomodationName = value;
-                OnPropertyChanged();
-            }
-        }
-        private string _accomodationLocation;
-        public string AccomodationLocation
-        {
-            get => _accomodationLocation;
-            set
-            {
-                _accomodationLocation = value;
-                OnPropertyChanged();
-            }
-        }
-
-
-        private string _accomodationMaxGuest;
-        public string AccomodationMaxGuest
-        {
-            get
-            {
-                return _accomodationMaxGuest;
-            }
-            set
-            {
-                _accomodationMaxGuest = value;
-                OnPropertyChanged();
-            }
-        }
-
-
-        private string _accomodationMinReservationDays;
-        public string AccomodationMinReservationDays
-        {
-            get
-            {
-                return _accomodationMinReservationDays;
-            }
-            set
-            {
-                _accomodationMinReservationDays = value;
-                OnPropertyChanged();
-            }
-        }
-
-
-
-        private string _imageURLs;
-
-        public string ImageURLs
-        {
-            get => _imageURLs;
-            set
-            {
-                if (value != _imageURLs)
-                {
-                    _imageURLs = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        public string selectedCity;
-        public string selectedState;
-
-        private Location GetSelectedLocation()
-        {
-            foreach (var location in locationsRepository.GetAll())
-            {
-                if (location.City == selectedCity)
-                {
-                    return location;
-                }
-            }
-            return null;
-        }*/
 
         private void RefreshAccommodations(List<Accommodation> accommodations)
         {
@@ -151,7 +66,7 @@ namespace FiveStarTours.View.Traveler
                 string type = TypeBox.Text;
                 string length= LengthSearch.Text;
 
-                List<Accommodation> seachedAccommodations = accommodationsRepository.SearchAccomodations(name, state, city, guestNum,type, length);
+                List<Accommodation> seachedAccommodations = accommodationService.SearchAccomodations(name, state, city, guestNum,type, length);
                 RefreshAccommodations(seachedAccommodations);
 
             }catch(Exception ex)
@@ -194,7 +109,7 @@ namespace FiveStarTours.View.Traveler
                 if (result == MessageBoxResult.Yes)
                 {
                    
-                    Reservation rs = new Reservation();
+                    Reservation rs = new Reservation(SelectAccommodation);
                     rs.Show();
 
                 }
@@ -207,6 +122,11 @@ namespace FiveStarTours.View.Traveler
 
         }
 
-
+        private void ViewReservations(object sender, RoutedEventArgs e)
+        {
+            ReservationsView reservationsView = new ReservationsView();
+            reservationsView.Show();
+            Close();
+        }
     }
 }
