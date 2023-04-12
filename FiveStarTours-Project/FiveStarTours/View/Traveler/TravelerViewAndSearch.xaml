@@ -11,10 +11,11 @@
         <DockPanel>
             <StackPanel  Background="#FFD9E5E9" DockPanel.Dock="Top" Height="34" Width="821">
                 <TextBlock Text="FiveStarTours" FontSize="29" Height="33" FontWeight="Bold" TextDecorations="Underline" Foreground="#FF84219B"/>
+
             </StackPanel>
             <StackPanel DockPanel.Dock="Bottom" Margin="4" Background="#FFDDE3E8">
                 <TextBlock Text="GuestViewAndSearch" FontSize="22" Foreground="#FF1A43C3" FontWeight="Bold"/>
-                <Button Content="Reserve" Width="684" FontSize="20" FontWeight="Bold" Background="#FFB59797" FontStyle="Normal" FontFamily="Sitka Text" Click="Reserve" />
+                <Button Content="VIEW ALL RESERVATIONS" FontSize="20" FontWeight="Bold" Background="#FFA79090" Click="ViewReservations"/>
             </StackPanel>
             <StackPanel DockPanel.Dock="Left" Margin="4" Background="AliceBlue" Width="221" Height="339">
                 <TextBlock Text="Search for accommodation" FontSize="20" Background="#FFD2D0E0"/>
@@ -69,6 +70,7 @@
                         </Style>
                     </DataGrid.Resources>
                 </DataGrid>
+                <Button Content="Reserve" Width="575" FontSize="20" FontWeight="Bold" Background="#FFB59797" FontStyle="Normal" FontFamily="Sitka Text" Click="Reserve" />
 
 
 

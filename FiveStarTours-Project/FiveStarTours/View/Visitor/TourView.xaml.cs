@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,7 +28,7 @@ namespace FiveStarTours.View.Visitor
         public User LoggedInUser { get; set; }
 
         public Tour SelectedTour { get; set; }
-        private readonly ToursRepository _repository;
+        private readonly ToursService _repository;
         public Tour tour { get; set; }
 
         public TourView(Tour selectedTour, User user)
@@ -35,7 +36,7 @@ namespace FiveStarTours.View.Visitor
             LoggedInUser = user;
             InitializeComponent();
             DataContext = this;
-            _repository = new ToursRepository();
+            _repository = new ToursService();
             tour = new Tour();
             tour = _repository.GetById(selectedTour.Id);
             SelectedTour = selectedTour;

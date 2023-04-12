@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using FiveStarTours.View.Guide;
 
 namespace FiveStarTours.View
@@ -17,20 +18,20 @@ namespace FiveStarTours.View
     public partial class Tours : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-        private readonly ToursRepository _toursRepository;
-        private readonly TourReservationRepository _tourReservationRepository;
-        private readonly GiftCardRepository _giftCardRepository;
-        private readonly UserRepository _userRepository;
+        private readonly ToursService _toursRepository;
+        private readonly TourReservationService _tourReservationRepository;
+        private readonly GiftCardService _giftCardRepository;
+        private readonly UserService _userRepository;
         public Tour SelectedTour { get; set; }
         public User LoggedInUser { get; set; }
         public ObservableCollection<Tour> ToursCollection { get; set; }
         public Tours(User user)
         {
             InitializeComponent();
-            _toursRepository = new ToursRepository();
-            _tourReservationRepository = new TourReservationRepository();
-            _giftCardRepository = new GiftCardRepository();
-            _userRepository = new UserRepository();
+            _toursRepository = new ToursService();
+            _tourReservationRepository = new TourReservationService();
+            _giftCardRepository = new GiftCardService();
+            _userRepository = new UserService();
             DataContext = this;
             LoggedInUser = user;
             ToursCollection = new ObservableCollection<Tour>(_toursRepository.GetByUser(user));
@@ -79,55 +80,83 @@ namespace FiveStarTours.View
 
         private void CancelTour_Click(object sender, RoutedEventArgs e)
         {
-            
             if (SelectedTour == null)
             {
                 MessageBox.Show("Choose tour first!");
                 return;
             }
 
-            DateTime fixedDateTime = SelectedTour.OneBeginningTime;
-            TimeSpan timeDifference = fixedDateTime - DateTime.Now;
-
-            if (timeDifference.TotalHours < 48)
+            MessageBoxResult result = MessageBox.Show($"Do you want to cancel tour?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            
+            if(result == MessageBoxResult.Yes)
             {
-                MessageBox.Show("It is less than 48 hours from this tour.");
-                return;
+                DateTime fixedDateTime = SelectedTour.OneBeginningTime;
+                TimeSpan timeDifference = fixedDateTime - DateTime.Now;
+
+                if (timeDifference.TotalHours < 48)
+                {
+                    MessageBox.Show("It is less than 48 hours from this tour.");
+                    return;
+                }
+                else
+                {
+                    List<int> Visitors = new List<int>();
+
+                    foreach (Tour t in _toursRepository.GetAll())
+                    {
+                        if (SelectedTour.Name == t.Name)
+                        {
+                            SelectedTour.Id = t.Id;
+                        }
+                    }
+
+                    foreach (string visitor in _tourReservationRepository.GetAllVisitors(SelectedTour))
+                    {
+                        int Visitor = _userRepository.FindIdByName(visitor);
+                        Visitors.Add(Visitor);
+                    }
+
+                    foreach (int id in Visitors)
+                    {
+                        GiftCard giftCard = new GiftCard(id, DateTime.Today.AddYears(1));
+                        _giftCardRepository.Save(giftCard);
+                    }
+
+                    _toursRepository.DeleteByDate(SelectedTour);
+                    _tourReservationRepository.DeleteById(SelectedTour);
+
+                }
             }
             else
-            { 
-                List<int> Visitors = new List<int>(); 
-                
-                foreach (Tour t in _toursRepository.GetAll())
-                {
-                    if (SelectedTour.Name == t.Name)
-                    {
-                        SelectedTour.Id = t.Id;
-                    }
-                }
-
-                foreach (string visitor in _tourReservationRepository.GetAllVisitors(SelectedTour))
-                {
-                    int Visitor = _userRepository.FindIdByName(visitor);
-                    Visitors.Add(Visitor);
-                }
-
-                foreach (int id in Visitors)
-                {
-                    GiftCard giftCard = new GiftCard(id, DateTime.Today.AddYears(1));
-                    _giftCardRepository.Save(giftCard);
-                }
-
-                _toursRepository.DeleteByDate(SelectedTour);
-                _tourReservationRepository.DeleteById(SelectedTour);
-   
+            {
+                return;
             }
         }
 
         private void Statistic_Click(object sender, RoutedEventArgs e)
         {
-            Statistics statistic = new Statistics();
+            Statistics statistic = new Statistics(LoggedInUser);
             statistic.Show();
+        }
+
+        private void Reviews_Click(object sender, RoutedEventArgs e)
+        {
+            Reviews reviews = new Reviews(LoggedInUser);
+            reviews.Show();
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            foreach (Window window in Application.Current.Windows)
+            {
+                if(window != mainWindow)
+                {
+                    window.Close();
+                }      
+            }
+            
+            mainWindow.Show();
         }
     }
 }

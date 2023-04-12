@@ -17,6 +17,8 @@ using System.Windows.Shapes;
 using FiveStarTours.Model;
 using FiveStarTours.View.Traveler;
 using System.Collections.ObjectModel;
+using FiveStarTours.View.Owner;
+using FiveStarTours.Services;
 
 namespace FiveStarTours.View.Visitor
 {
@@ -27,10 +29,10 @@ namespace FiveStarTours.View.Visitor
     {
         public User LoggedInUser { get; set; }
 
-        private readonly TourReservationRepository _visitorRepository;
-        private readonly KeyPointsRepository _keyPointsRepository;
-        private readonly UserRepository _userRepository;
-        private readonly GiftCardRepository _giftCardRepository;
+        private readonly TourReservationService _visitorRepository;
+        private readonly KeyPointsService _keyPointsRepository;
+        private readonly UserService _userRepository;
+        private readonly GiftCardService _giftCardRepository;
 
         public ObservableCollection<User> Visitors { get; set; }
 
@@ -96,10 +98,10 @@ namespace FiveStarTours.View.Visitor
             freeSeats = selectedTour.MaxGuests;
             SelectedTour = selectedTour;
 
-            _visitorRepository = new TourReservationRepository();
-            _keyPointsRepository = new KeyPointsRepository();
-            _userRepository = new UserRepository();
-            _giftCardRepository = new GiftCardRepository();
+            _visitorRepository = new TourReservationService();
+            _keyPointsRepository = new KeyPointsService();
+            _userRepository = new UserService();
+            _giftCardRepository = new GiftCardService();
 
             Visitors = new ObservableCollection<User>(_userRepository.GetAll());
 
@@ -154,6 +156,9 @@ namespace FiveStarTours.View.Visitor
             
             TourReservation visitor = new TourReservation(Names, PhoneNumber, SelectedTour.Id, startingKeyPoint.Id, startingKeyPoint, dateTime, Convert.ToInt32(MembersNumber), Email, giftCard);
             _visitorRepository.Save(visitor);
+            MessageBox.Show("Reservation has just made.");
+            ReservedToursView reserved = new ReservedToursView(SelectedTour, LoggedInUser);
+            reserved.Show();
             Close();
 
         }

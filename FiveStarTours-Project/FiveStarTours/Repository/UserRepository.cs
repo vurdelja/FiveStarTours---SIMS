@@ -1,20 +1,30 @@
-﻿using FiveStarTours.Model;
+﻿using FiveStarTours.Interfaces;
+using FiveStarTours.Model;
 using FiveStarTours.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace FiveStarTours.Repository
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         private const string FilePath = "../../../Resources/Data/users.csv";
 
         private readonly Serializer<User> _serializer;
-
+        private static UserRepository instance = null;
         private List<User> _users;
+        public static UserRepository GetInstace()
+        {
+            if (instance == null)
+            {
+                instance = new UserRepository();
+            }
+            return instance;
+        }
 
         public UserRepository()
         {
@@ -26,6 +36,11 @@ namespace FiveStarTours.Repository
         {
             _users = _serializer.FromCSV(FilePath);
             return _users.FirstOrDefault(u => u.Username == username);
+        }
+
+        public User GetByNameSurname(string name)
+        {
+            return _users.FirstOrDefault(u => u.Name == name);
         }
 
 
@@ -61,5 +76,18 @@ namespace FiveStarTours.Repository
 
             return id;
         }
+
+
+        public User Update(User user)
+        {
+            _users = _serializer.FromCSV(FilePath);
+            User current = _users.Find(c => c.Id == user.Id);
+            int index = _users.IndexOf(current);
+            _users.Remove(current);
+            _users.Insert(index, user);
+            _serializer.ToCSV(FilePath, _users);
+            return user;
+        }
+
     }
 }

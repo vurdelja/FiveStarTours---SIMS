@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using FiveStarTours.Serializer;
 using FiveStarTours.Model;
 using FiveStarTours.View;
+using FiveStarTours.Interfaces;
 
 namespace FiveStarTours.Repository
 {
-    public class VehicleRepository
+    public class VehicleRepository : IVehicleRepository
     {
         private const string FilePath = "../../../Resources/Data/vehicles.csv";
 
@@ -47,5 +48,6 @@ namespace FiveStarTours.Repository
             }
             return _vehicles.Max(t => t.Id) + 1;
         }
+        
     }
 }
