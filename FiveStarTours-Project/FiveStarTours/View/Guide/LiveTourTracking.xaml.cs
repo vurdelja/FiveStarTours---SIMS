@@ -49,7 +49,7 @@ namespace FiveStarTours.View.Guide
             List<TourReservation> visitors = new List<TourReservation>();
             foreach (var v in tourReservations)
             {
-                if (tour.Id == v.Id && tour.OneBeginningTime == v.DateTime)
+                if (tour.Id == v.TourId && tour.OneBeginningTime == v.DateTime)
                 {
                     visitors.Add(v);
                 }

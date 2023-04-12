@@ -52,9 +52,9 @@ namespace FiveStarTours.Services
             _tourReservationRepository.Delete(tourReservation);
         }
 
-        public int GetWithGiftCard(int id, List<Attendance> attendances, List<User> users)
+        public int GetWithGiftCard(LiveTour tour, List<Attendance> attendances, List<User> users)
         {
-            return _tourReservationRepository.GetWithGiftCard(id, attendances, users);
+            return _tourReservationRepository.GetWithGiftCard(tour, attendances, users);
         }
     }
 }

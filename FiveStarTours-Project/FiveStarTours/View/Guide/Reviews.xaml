@@ -27,7 +27,7 @@
                         </Style>
                     </DataGrid.RowStyle>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Visitor ID" Binding="{Binding GuidesKnowledge}"  Width="*">
+                        <DataGridTextColumn Header="Visitor ID" Binding="{Binding UserId}"  Width="*">
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="Knowlegde" Binding="{Binding GuidesKnowledge}"  Width="1.3*">
                         </DataGridTextColumn>

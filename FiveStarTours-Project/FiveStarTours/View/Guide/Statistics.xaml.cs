@@ -94,22 +94,22 @@ namespace FiveStarTours.View.Guide
         public string GetBetween()
         {
             LiveTour tour = _liveTourRepository.GetByNameAndDate(selectedTour, Convert.ToDateTime(selectedDate));
-            int numberLower = _attendanceRepository.GetAllBetween(tour.Id, _userRepository.GetAll());
-            string Between = Convert.ToString(numberLower / _attendanceRepository.GetAllById(tour.Id, _userRepository.GetAll()) * 100) + "%";
+            int numberBetween = _attendanceRepository.GetAllBetween(tour.Id, _userRepository.GetAll());
+            string Between = Convert.ToString(numberBetween / _attendanceRepository.GetAllById(tour.Id, _userRepository.GetAll()) * 100) + "%";
             return Between;
         }
         public string GetAbove()
         {
             LiveTour tour = _liveTourRepository.GetByNameAndDate(selectedTour, Convert.ToDateTime(selectedDate));
-            int numberLower = _attendanceRepository.GetAllAbove(tour.Id, _userRepository.GetAll());
-            string Above = Convert.ToString(numberLower / _attendanceRepository.GetAllById(tour.Id, _userRepository.GetAll()) * 100) + "%";
+            int numberAbove = _attendanceRepository.GetAllAbove(tour.Id, _userRepository.GetAll());
+            string Above = Convert.ToString(numberAbove / _attendanceRepository.GetAllById(tour.Id, _userRepository.GetAll()) * 100) + "%";
             return Above;
         }
 
         public string GetWithGiftCard()
         {
             LiveTour tour = _liveTourRepository.GetByNameAndDate(selectedTour, Convert.ToDateTime(selectedDate));
-            int number = _tourReservationRepository.GetWithGiftCard(tour.Id, _attendanceRepository.GetAll(), _userRepository.GetAll());
+            int number = _tourReservationRepository.GetWithGiftCard(tour, _attendanceRepository.GetAll(), _userRepository.GetAll());
             string WithGiftCard = Convert.ToString(number / _attendanceRepository.GetAllById(tour.Id, _userRepository.GetAll()) * 100) ;
             return WithGiftCard;
         }
