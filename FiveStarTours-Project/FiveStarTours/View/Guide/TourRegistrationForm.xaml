@@ -49,19 +49,19 @@
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30">State*</Label>
                 <Label Grid.Row="0" Grid.Column="1" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30">City*</Label>
-                <ComboBox x:Name="stateComboBox" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Width="140" SelectionChanged="stateComboBox_SelectionChanged"/>
-                <ComboBox x:Name="cityComboBox" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Width="140"  SelectionChanged="cityComboBox_SelectionChanged"  Grid.Column="1"/>
+                <ComboBox ItemsSource="{Binding States}" SelectedItem="{Binding SelectedState, Mode=TwoWay}" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Width="140"/>
+                <ComboBox ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity, Mode=TwoWay}" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Width="140"  Grid.Column="1"/>
             </Grid>
             <TextBox Grid.Row="2" Grid.Column="1" Margin="0,1,0,2" Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBox Grid.Row="3" Grid.Column="1" Margin="0,2,0,1" Text="{Binding Path=Languages, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBox Grid.Row="4" Grid.Column="1" Margin="0,2,0,2" Text="{Binding Path=MaxGuests, UpdateSourceTrigger=PropertyChanged}" />
             <TextBox Grid.Row="5" Grid.Column="1" Margin="0,1,0,2" Text="{Binding Path=KeyPoints, UpdateSourceTrigger=PropertyChanged}"/>
             <Grid Grid.Row="5" Grid.Column="1" Margin="0,43,0,0" Grid.RowSpan="2">
-                <Calendar x:Name="datePicker" SelectionMode="SingleDate" SelectedDatesChanged="Calendar_SelectedDatesChanged" HorizontalAlignment="Left" Width="171" Margin="149,0,0,10" ></Calendar>
+                <Calendar x:Name="datePicker" SelectionMode="SingleDate" SelectedDate="{Binding SelectedDate, Mode=TwoWay}" HorizontalAlignment="Left" Width="171" Margin="149,0,0,10" ></Calendar>
                 <Grid HorizontalAlignment="Left" Width="161">
-                    <TextBox x:Name="datesTextBox" Margin="2,35,15,10"></TextBox>
-                    <TextBox x:Name="textBoxTime" HorizontalAlignment="Right" Margin="0,10,15,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" Height="21" Text="12:00:00"/>
-                    <Button x:Name="AddDateTime" Content="Add" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="34" Click="AddDateTime_Click" />
+                    <ListBox x:Name="datesTextBox" Margin="2,35,15,10" ItemsSource="{Binding DateTimeCollection, Mode=OneWay}"></ListBox>
+                    <TextBox x:Name="textBoxTime" HorizontalAlignment="Right" Margin="0,10,15,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="85" Height="21" Text="{Binding Path=SelectedTime, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button x:Name="AddDateTime" Content="Add" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="34" Command="{Binding AddDateCommand}"/>
                 </Grid>
             </Grid>
             <TextBox Grid.Row="7" Grid.Column="1" Margin="0,2,0,2" Text="{Binding Path=Duration, UpdateSourceTrigger=PropertyChanged}"/>
@@ -69,9 +69,10 @@
         </Grid>
         <WrapPanel Grid.Row="1" FlowDirection="RightToLeft">
             <Button Content="Cancel" IsCancel="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5"
-                Click="CancelButton_Click"/>
-            <Button Content="Save" IsDefault="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5"
-                Click="SaveButton_Click"/>
+                Click="CloseWindow"/>
+            <Button Content="Save" IsDefault="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 5, 20, 5" 
+                Command="{Binding SaveCommand}"
+                />
         </WrapPanel>
     </Grid>
 </Window>
