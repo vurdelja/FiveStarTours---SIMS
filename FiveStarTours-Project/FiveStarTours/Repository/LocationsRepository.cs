@@ -47,12 +47,16 @@ namespace FiveStarTours.Repository
         }
         public List<string> GetCitiesInState(string state)
         {
+            List<string> result = new List<string>();
             var locations = GetAll();
-            return locations
-                .Where(l => l.State == state)
-                .Select(l => l.City)
-                .Distinct()
-                .ToList();
+            foreach(Location location in locations)
+            {
+                if(location.State == state)
+                {
+                    result.Add(location.City);
+                }
+            }
+            return result;
         }
     }
 }
