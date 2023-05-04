@@ -5,21 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace FiveStarTours.ViewModel.ICommandImplementation
+namespace FiveStarTours.ViewModel.Command
 {
-    public class Command : ICommand
+    public class RelayCommand : ICommand
     {
         private readonly Action execute;
         private readonly Func<bool> canExecute;
 
         public event EventHandler CanExecuteChanged;
 
-        public Command(Action execute)
+        public RelayCommand(Action execute)
             : this(execute, null)
         {
         }
 
-        public Command(Action execute, Func<bool> canExecute)
+        public RelayCommand(Action execute, Func<bool> canExecute)
         {
             this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
             this.canExecute = canExecute;

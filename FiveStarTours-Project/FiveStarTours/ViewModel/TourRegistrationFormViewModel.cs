@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using FiveStarTours.Model;
 using FiveStarTours.Services;
-using FiveStarTours.ViewModel.ICommandImplementation;
+using FiveStarTours.ViewModel.Command;
 
 namespace FiveStarTours.ViewModel
 {
@@ -233,9 +233,9 @@ namespace FiveStarTours.ViewModel
             LoggedInUser = user;
             SelectedTime = "12:00:00";
 
-            AddDateCommand = new Command(AddDateTime);
-            CloseWindowCommand = new Command(CloseWindow);
-            SaveCommand = new Command(Save);
+            AddDateCommand = new RelayCommand(AddDateTime);
+            CloseWindowCommand = new RelayCommand(CloseWindow);
+            SaveCommand = new RelayCommand(Save);
 
             // Adding state and city trough combobox:
 
