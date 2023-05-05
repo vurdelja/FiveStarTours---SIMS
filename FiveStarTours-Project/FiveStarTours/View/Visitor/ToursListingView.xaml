@@ -7,55 +7,66 @@
         mc:Ignorable="d"
         Title="ToursListingView" Height="450" Width="800" ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
          WindowStartupLocation="CenterScreen">
-    <Grid Background="Beige">
-        <!-- podesavam horizontalne ivice -->
+    <Grid Background="WhiteSmoke">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="760"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <!-- podesavam vertikalne ivice  -->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="0"/>
-        </Grid.RowDefinitions>
-        <!-- podesavam dimenzije centralnog polja-->
-        <StackPanel Grid.Row="2" Grid.Column="1">
-            <DataGrid ItemsSource="{Binding Tours}"
-                      SelectedItem="{Binding Path=SelectedTour}"
-                      IsReadOnly="True" SelectionMode="Single"
-                      AutoGenerateColumns="False" Height="360" HeadersVisibility="Column"
-                      FontSize="13">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Tour Id" Binding="{Binding Id}" Width="100"/>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="100"/>
-                    <DataGridTextColumn Header="Location" Binding="{Binding Location}" Width="100"/>
-                    <DataGridTextColumn Header="Beginning" Binding="{Binding Beginning}" Width="100"/>
-                    <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="100"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </StackPanel>
+        <Border Grid.Column="0" Background="LightSlateGray" CornerRadius="15 15 15 15" >
+            <Grid DataContext="{Binding LoggedInUser}">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
 
-        <ToolBar Grid.Row="0" Grid.ColumnSpan="3">
-            <TextBox Width=" 200" Height="20" Background="LightPink" Foreground="Black" MaxLength="30"/>
-            <Separator/>
-            <Button Click="TourSearchClick" Content="CLICK"
-                    Width="50" Height="20" Background="LightBlue"/>
-            <Separator/>
-            <Button Click="ShowTourView" Content="VIEW"
-                    Width="50" Height="20" Background="LemonChiffon"/>
-            <Separator/>
-            <Button Click="RateClick" Content="RATE"
-                    Width="60" Height="20" Background="Turquoise"/>
-            <Separator/>
-            <Button Click="VehicleClick" Content="VEHICLE"
-                    Width="60" Height="20" Background="BlueViolet"/>
-            <Separator/>
-            <Button Click="LogOutClick" Content="LogOut"
-                    Width="60" Height="20" Background="PaleVioletRed"/>
-            <Separator/>
-        </ToolBar>
+                <TextBlock Grid.Row="1" Width="170" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                           TextAlignment="Center" Text="{Binding Path=Username}" FontSize="15" FontWeight="Medium"/>
+                <Button Grid.Row="2" Width="170" Height="32" Content="ALL TOURS" Background="WhiteSmoke" FontSize="20" FontWeight="Medium"
+                         HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="DarkGray" />
+                <Button Grid.Row="3" Click="LogOutClick" Width="170" Height="32" Content="MY TOURS" Background="WhiteSmoke" FontSize="20"
+                         FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="DarkGray" />
+                <Button Grid.Row="4" Click="LogOutClick" Width="170" Height="32" Content="GIFT CARDS" Background="WhiteSmoke" FontSize="20"
+                         FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="DarkGray" />
+                <Button Grid.Row="5" Click="LogOutClick" Width="170" Height="32" Content="MAKE TOUR" Background="WhiteSmoke" FontSize="20"
+                         FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="DarkGray" />
+                <Button Grid.Row="6" Click="LogOutClick" Width="170" Height="32" Content="MAKE COMPLEX TOUR" Background="WhiteSmoke" FontSize="15"
+                        FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="DarkGray" />
+                <Button Grid.Row="7" Click="NotificationsButtonClick" Width="170" Height="32" Content="NOTIFICATIONS" Background="WhiteSmoke" FontSize="20"
+                         FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="DarkGray" />
+                <Grid Grid.Row="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Width="170" Height="16" HorizontalAlignment="Center" VerticalAlignment="Bottom" TextAlignment="Center" 
+                             Text="LANGUAGE" FontSize="12" FontWeight="Medium" Background="WhiteSmoke"/>
+                    <ComboBox Grid.Row="1" Width="170" Height="16" x:Name="LanguageComboBox" VerticalAlignment="Top" Visibility="Visible"
+                              SelectionChanged="LanguageComboBox_SelectionChanged" />
+                </Grid>
+                <Grid Grid.Row="9">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Width="170" Height="16" HorizontalAlignment="Center" VerticalAlignment="Bottom" TextAlignment="Center" 
+                             Text="BACKGROUND" FontSize="12" FontWeight="Medium" Background="WhiteSmoke"/>
+                    <ComboBox Grid.Row="1" Width="170" Height="16" x:Name="BackgroundComboBox" VerticalAlignment="Top" Visibility="Visible"
+                              SelectionChanged="BackgroundComboBox_SelectionChanged" />
+                </Grid>
+                <Button Grid.Row="10" Click="LogOutClick" Width="170" Height="32" Content="LOG OUT" Background="Red" FontSize="20"
+                         FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="Red"/>
+                
+            </Grid>
+        </Border>
+        
     </Grid>
 </Window>

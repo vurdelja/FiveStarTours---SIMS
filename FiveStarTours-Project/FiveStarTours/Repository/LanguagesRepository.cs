@@ -45,5 +45,7 @@ namespace FiveStarTours.Repository
             }
             return _languages.Max(l => l.Id) + 1;
         }
+
+        
     }
 }
