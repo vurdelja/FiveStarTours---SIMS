@@ -17,6 +17,6 @@ namespace FiveStarTours.Interfaces
         List<string> GetAllVisitors(Tour tour);
         void DeleteById(Tour tour);
         void Delete(TourReservation tourReservation);
-        public int GetWithGiftCard(int id, List<Attendance> attendances, List<User> users);
+        public int GetWithGiftCard(LiveTour tour, List<Attendance> attendances, List<User> users);
     }
 }

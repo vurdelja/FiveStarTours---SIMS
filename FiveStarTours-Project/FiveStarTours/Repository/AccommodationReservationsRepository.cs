@@ -143,25 +143,7 @@ namespace FiveStarTours.Repository
         public List<AccommodationReservation> GetRatedByGuest()
         {
             List<AccommodationReservation> reservations = new List<AccommodationReservation>();
-            foreach (AccommodationReservation accommodationReservation in _reservations)
-            {
-                if (accommodationReservation.RatedByGuest == true)
-                {
-                    reservations.Add(accommodationReservation);
-                }
-            }
-            return reservations;
-        }
-
-
-
-        //SHOW GUEST REVIEWS TO OWNER
-
-        /*
-        public List<AccommodationReservation> GetRatedByOwnerAndGuest()
-        {
-            List<AccommodationReservation> reservations = new List<AccommodationReservation>();
-            reservations = GetRatedByOwner();
+            reservations = GetAll();
 
             foreach (AccommodationReservation accommodationReservation in _reservations)
             {
@@ -172,7 +154,7 @@ namespace FiveStarTours.Repository
             }
             return reservations;
         }
-        */
+
 
 
         //NOTIFICATION FOR OWNER ABOUT UNRATED GUESTS

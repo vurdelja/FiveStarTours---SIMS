@@ -1,6 +1,7 @@
 ﻿using FiveStarTours.Interfaces;
 using FiveStarTours.Model;
 using FiveStarTours.Serializer;
+using FiveStarTours.View.Traveler;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,17 @@ namespace FiveStarTours.Repository
         private readonly Serializer<ReservationChange> _serializer;
 
         private List<ReservationChange> _changes;
+
+        private static ReservationChangeRepository instance = null;
+
+        public static ReservationChangeRepository GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new ReservationChangeRepository();
+            }
+            return instance;
+        }
         public ReservationChangeRepository()
         {
             _serializer = new Serializer<ReservationChange>();
@@ -26,6 +38,20 @@ namespace FiveStarTours.Repository
         public List<ReservationChange> GetAll()
         {
             return _changes;
+        }
+        
+        public List<ReservationChange> GetAllProcessing()
+        {
+            List<ReservationChange> changes = new List<ReservationChange>();
+
+            foreach (ReservationChange change in _changes)
+            {
+                if (change.Status == Model.Enums.ReservationChangeStatusType.Processing)
+                {
+                    changes.Add(change);
+                }
+            }
+            return changes;
         }
 
         public ReservationChange Save(ReservationChange changes)
@@ -78,6 +104,15 @@ namespace FiveStarTours.Repository
             _changes.Insert(index, changes);
             _serializer.ToCSV(FilePath, _changes);
             return changes;
+        }
+
+        public bool IsBusy(ReservationChange changes)
+        {
+            bool newStartBeforeEnd = changes.NewStartDate <= changes.AccommodationReservation.EndDate;
+            bool newEndAfterStart = changes.NewEndDate >= changes.AccommodationReservation.StartDate;
+            bool anyDurationOverlap = newStartBeforeEnd && newEndAfterStart;
+
+            return anyDurationOverlap;
         }
     }
 }

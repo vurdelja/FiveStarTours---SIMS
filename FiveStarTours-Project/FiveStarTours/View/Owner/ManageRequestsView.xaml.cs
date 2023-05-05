@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
+using FiveStarTours.Services;
 using FiveStarTours.View.Traveler;
 using System;
 using System.Collections.Generic;
@@ -23,27 +24,31 @@ namespace FiveStarTours.View.Owner
     /// </summary>
     public partial class ManageRequestsView : Window
     {
+        public User LoggedInUser { get; set; }
         public static ObservableCollection<ReservationChange> Requests { get; set; }
 
         public ReservationChange SelectedRequest { get; set; }   //SELEKTOVANA
-        private readonly ReservationChangeRepository _repository;
+
+        private readonly ReservationChangeService _service;
 
         
-        public ManageRequestsView()
+        public ManageRequestsView(User user)
         {
             InitializeComponent();
             DataContext = this;
 
-            _repository = new ReservationChangeRepository();
-            Requests = new ObservableCollection<ReservationChange>(_repository.GetAll());
+            LoggedInUser = user;
+
+            _service = new ReservationChangeService();
+            Requests = new ObservableCollection<ReservationChange>(_service.GetAllProcessing());
         }
 
-        private void ViewReviewButton_Click(object sender, RoutedEventArgs e)
+        private void ViewRequestButton_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedRequest != null)
             {
-                RejectedRequestView rejected = new RejectedRequestView(SelectedRequest);
-                rejected.Show();
+                FullRequestView fullRequest = new FullRequestView(SelectedRequest, LoggedInUser);
+                fullRequest.Show();
                 Close();
             }
             else
@@ -56,6 +61,8 @@ namespace FiveStarTours.View.Owner
 
         private void MaybeLaterButton_Click(object sender, RoutedEventArgs e)
         {
+            OwnerMainWindow main = new OwnerMainWindow(LoggedInUser);
+            main.Show();
             Close();
         }
         

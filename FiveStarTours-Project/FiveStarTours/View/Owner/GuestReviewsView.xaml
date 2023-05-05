@@ -5,13 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FiveStarTours.View.Owner"
         mc:Ignorable="d"
-        Title="Guests reviews" Background ="Pink" Height="400" Width="500">
+        Title="Guests reviews" Height="750" Width="430" 
+        Background="Pink" 
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <DataGrid ItemsSource="{Binding Reservations}"
                   SelectedItem="{Binding Path=SelectedReservation}"
                   IsReadOnly="True" SelectionMode="Single" 
                   AutoGenerateColumns="false"
-                  Margin="10,10,10,67">
+                  Margin="10,10,10,168">
 
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -34,8 +36,8 @@
             </DataGrid.Columns>
 
         </DataGrid>
-        <Button Content="View review" Click="ViewReviewButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="128,336,0,0" Height="26" Width="67" Background="#FFFB0707"/>
-        <Button Content="Maybe later" Click="MaybeLaterButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="302,336,0,0" Height="26" Width="67" Background="#FFD4CCCC"/>
+        <Button Content="View review" Click="ViewReviewButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,614,0,0" Height="54" Width="125" Background="#FFFB0707"/>
+        <Button Content="Maybe later" Click="MaybeLaterButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="267,614,0,0" Height="54" Width="103" Background="#FFD4CCCC"/>
 
     </Grid>
 </Window>

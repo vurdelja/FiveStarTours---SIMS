@@ -16,7 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using FiveStarTours.Repository;
-
+using FiveStarTours.Services;
 
 namespace FiveStarTours.View.Traveler
 {
@@ -29,8 +29,8 @@ namespace FiveStarTours.View.Traveler
         public static ObservableCollection<AccommodationReservation> AccommodationReservations { get; set; }
         public ObservableCollection<DateInterval> FreeDates { get; set; }
         public DateInterval SelectedDate { get; set; }
-        private readonly AccommodationReservationsRepository accommodationReservationsRepository;
-        private readonly AccommodationsRepository accommodationsRepository;
+        private readonly AccommodationReservationService _accommodationReservationService;
+        private readonly AccommodationsService _accommodationService;
         public string AccommodationName { get; set; }
 
         public int GuestNumber { get; set; }
@@ -64,8 +64,8 @@ namespace FiveStarTours.View.Traveler
 
             FreeDates = new ObservableCollection<DateInterval>(freeIntervals);
             AccommodationName = accommodationName;
-            accommodationReservationsRepository =AccommodationReservationsRepository.GetInstace();
-            accommodationsRepository = new AccommodationsRepository();
+            _accommodationReservationService = new AccommodationReservationService();
+            _accommodationService = new AccommodationsService();
 
 
         }
@@ -81,7 +81,7 @@ namespace FiveStarTours.View.Traveler
         {
             if (SelectedDate != null)
             {
-                Accommodation accommodation = accommodationsRepository.GetAccommodationForAccommodationName(AccommodationName);
+                Accommodation accommodation = _accommodationService.GetAccommodationForAccommodationName(AccommodationName);
                 if (accommodation.MaxGuestNum < GuestNumber)
                 {
                     MessageBox.Show("Max guests for this accommodation is " + accommodation.MaxGuestNum + ".", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -101,10 +101,11 @@ namespace FiveStarTours.View.Traveler
 
                     GuestName = MainWindow.LoggedUser.Name;
                     AccommodationReservation accommodationReservation = new AccommodationReservation(GuestName, SelectedDate.Start, SelectedDate.End, days, AccommodationName, GuestNumber);
-                    accommodationReservationsRepository.Save(accommodationReservation);
+                    _accommodationReservationService.Save(accommodationReservation);
 
                     ReservationsView rs = new ReservationsView();
                     rs.Show();
+                    Close();
 
                 }
                 else

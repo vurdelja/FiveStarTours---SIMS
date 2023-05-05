@@ -18,8 +18,7 @@ using System.Reflection.PortableExecutable;
 using FiveStarTours.Serializer;
 using ControlzEx.Standard;
 using System.Security.Policy;
-
-
+using FiveStarTours.View.Driver;
 
 namespace FiveStarTours.View.VehicleOnAdress
 {
@@ -31,17 +30,8 @@ namespace FiveStarTours.View.VehicleOnAdress
 
         private readonly VehicleOnAdressRepository _vehicleOnAddressRepository;
         private readonly DrivingsRepository _drivingsRepository;
-        //public Drivings SelectedDrivings { get; set; }
         public static List<Drivings> Drivings { get; set; }
 
-        private DispatcherTimer _timer;
-        private DateTime _currentTime;
-
-        public DateTime CurrentTime
-        {
-            get { return _currentTime; }
-            set { _currentTime = value; OnPropertyChanged(nameof(CurrentTime)); }
-        }
 
         private string _name;
         public string Name
@@ -71,9 +61,6 @@ namespace FiveStarTours.View.VehicleOnAdress
                 {
                     _onAdress = value;
                     OnPropertyChanged();
-                   
-
-
                 }
             }
         }
@@ -85,6 +72,10 @@ namespace FiveStarTours.View.VehicleOnAdress
             get => _isDelay;
             set
             {
+                if (_onAdress == value) 
+                { 
+                    OnPropertyChanged();
+                }
                 if (value != _isDelay)
                 {
                     _isDelay = value;
@@ -103,23 +94,6 @@ namespace FiveStarTours.View.VehicleOnAdress
                 if (value != _enterDelay)
                 {
                     _enterDelay = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        
-
-        private string _finished;
-        public string Finished
-        {
-
-            get => _finished;
-            set
-            {
-                if (value != _finished)
-                {
-                    _finished = value;
                     OnPropertyChanged();
                 }
             }
@@ -160,12 +134,11 @@ namespace FiveStarTours.View.VehicleOnAdress
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-           
-            
         }
 
         public VehicleOnAdress()
         {
+
             InitializeComponent();
             DataContext = this;
 
@@ -175,69 +148,17 @@ namespace FiveStarTours.View.VehicleOnAdress
             
             Drivings = _drivingsRepository.GetAll();
 
-            if (DrivingStartsCheckBox.IsThreeState) 
-            {
-                _timer = new DispatcherTimer();
-                _timer.Interval = TimeSpan.FromSeconds(1);
-                _timer.Tick += Timer_Tick;
-                _timer.Start();
-            }
-
-
-
-            if (OnAdressCheckBox.IsThreeState == true)
-
+            if (OnAdressCheckBox != null)
             {
                 IsDelayCheckBox.IsReadOnly = true;
                 EnterDelayTextBox.IsReadOnly = true;
             }
             else
             {
-                IsDelayCheckBox.IsReadOnly = false;
+                IsDelayCheckBox.IsReadOnly = false;   
                 EnterDelayTextBox.IsReadOnly = false;
             }
 
-        }
-
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            CurrentTime = DateTime.Now;
-        }
-
-        private void FinishedComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (FinishedComboBox.SelectedItem != null)
-            {
-
-                string selectedFinishedComboBox = FinishedComboBox.SelectedItem.ToString();
-                selectedFinishedComboBox = FinishedComboBox.SelectedItem as string;
-            }
-        }
-
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-            Drivings name = GetSelectedDriving();
-            bool isOnAdress = Convert.ToBoolean(OnAdress);
-            bool isDelay = Convert.ToBoolean(IsDelay);
-            int delay = Convert.ToInt32(EnterDelay);
-            string finished = FinishedComboBox.SelectedItem.ToString();
-            bool drivingStarts = Convert.ToBoolean(DrivingStarts);
-            int enterStartPrice = Convert.ToInt32(EnterStartPrice);
-            string taximeter = GetTaximeter();
-
-
-            OnAdress newVehicleOnAdress = new OnAdress( name, isOnAdress, isDelay, delay, finished, drivingStarts, enterStartPrice, taximeter);
-            _vehicleOnAddressRepository.Save(newVehicleOnAdress);
-            _drivingsRepository.Delete(name);
-            MessageBox.Show("Driving Duration:");
-            
-            Close();
-        }
-
-        private string GetTaximeter()
-        {
-            throw new NotImplementedException();
         }
 
         private Drivings GetSelectedDriving()
@@ -247,7 +168,33 @@ namespace FiveStarTours.View.VehicleOnAdress
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
+            
             Close();
         }
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        { 
+            Drivings name = GetSelectedDriving();
+            bool isOnAdress = Convert.ToBoolean(OnAdress);
+            bool isDelay = Convert.ToBoolean(IsDelay);
+            int delay = Convert.ToInt32(EnterDelay);
+            
+            bool drivingStarts = Convert.ToBoolean(DrivingStarts);
+            int enterStartPrice = Convert.ToInt32(EnterStartPrice);
+            
+
+            OnAdress newVehicleOnAdress = new OnAdress(name, isOnAdress, isDelay, delay , drivingStarts, enterStartPrice);
+            _vehicleOnAddressRepository.Save(newVehicleOnAdress);
+            
+            
+            MessageBox.Show("Data Saved");
+            TaximeterWindow taximeterWindow = new TaximeterWindow();
+            taximeterWindow.Show();
+            
+
+            Close();
+        }
+
+        
     }
 }

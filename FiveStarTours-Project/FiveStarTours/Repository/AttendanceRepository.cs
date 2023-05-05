@@ -54,7 +54,7 @@ namespace FiveStarTours.Repository
             List<Attendance> Attendances = new List<Attendance>();
             foreach (var attendance in GetAll())
             {
-                if (attendance.IdTour == id)
+                if (attendance.IdLiveTour == id)
                 {
                     Attendances.Add(attendance);
                 }
@@ -86,9 +86,10 @@ namespace FiveStarTours.Repository
         {
             int result = 0;
             List<Attendance> Attendances = new List<Attendance>();
-            foreach (var attendance in GetAll())
+            _attendances = GetAll();
+            foreach (var attendance in _attendances)
             {
-                if (attendance.IdTour == id)
+                if (attendance.IdLiveTour == id)
                 {
                     Attendances.Add(attendance);
                 }
@@ -122,7 +123,7 @@ namespace FiveStarTours.Repository
             List<Attendance> Attendances = new List<Attendance>();
             foreach (var attendance in GetAll())
             {
-                if (attendance.IdTour == id)
+                if (attendance.IdLiveTour == id)
                 {
                     Attendances.Add(attendance);
                 }
@@ -154,9 +155,10 @@ namespace FiveStarTours.Repository
         {
             int result = 0;
             List<Attendance> Attendances = new List<Attendance>();
-            foreach (var attendance in GetAll())
+            _attendances = GetAll();
+            foreach (var attendance in _attendances)
             {
-                if (attendance.IdTour == id)
+                if (attendance.IdLiveTour == id)
                 {
                     Attendances.Add(attendance);
                 }

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FiveStarTours.View.Owner"
         mc:Ignorable="d"
-        Title="FullGuestReviewView" WindowStartupLocation="CenterScreen" Height="750" Width="430">
+        Title="FullGuestReviewView" Height="750" Width="430"
+        Background="Pink" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>

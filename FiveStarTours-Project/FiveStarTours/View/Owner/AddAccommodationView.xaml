@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FiveStarTours.View"
         mc:Ignorable="d"
-        Title="AddAccommodationView" Height="750" Width="430" Background="White" WindowStyle="None"
-        WindowStartupLocation="CenterScreen" AllowsTransparency="True">
+        Title="Accommodation form" Height="750" Width="430" Background="Pink"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ControlTemplate x:Key="ValidationTemplate">
             <StackPanel>

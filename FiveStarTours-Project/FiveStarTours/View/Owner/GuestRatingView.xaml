@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FiveStarTours.View.Owner"
         mc:Ignorable="d"
-        Title="OwnerRatingGuests" WindowStartupLocation="CenterScreen" Height="750" Width="430">
+        Title="OwnerRatingGuests" Height="750" Width="430"
+        Background="Pink" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -161,14 +162,14 @@
                         IsDefault="True"
                         HorizontalAlignment="Center" Grid.Column="0" 
                         VerticalAlignment="Center"
-                        Click="SubmitRateButton_Click"/>
+                        Click="SubmitRateButton_Click" Width="110"/>
 
                 <Button Content="Cancel" 
                         Padding="10 5"
                         IsDefault="True"
                         HorizontalAlignment="Center" Grid.Column="1" 
                         VerticalAlignment="Center"
-                        Click="CancelButton_Click"/>
+                        Click="CancelButton_Click" Width="121"/>
 
             </Grid>
         </Grid>

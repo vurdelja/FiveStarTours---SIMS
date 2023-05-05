@@ -183,6 +183,20 @@ namespace FiveStarTours.Repository
             int minReserve = Convert.ToInt32(minDays);
             return accommodation.MinReservationDays <= minReserve;
         }
+
+        public List<string> MakeUrlsList(string urls)
+        {
+            List<string> result = new List<string>();
+
+            Array _urls = urls.Split(", ");
+
+            foreach (string url in _urls)
+            {
+                result.Add(url);
+            }
+
+            return result;
+        }
        
 
 

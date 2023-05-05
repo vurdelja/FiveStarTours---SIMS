@@ -62,6 +62,7 @@ namespace FiveStarTours.Services
 
         }
 
+
         //SHOW GUEST REVIEWS TO OWNER
         public List<AccommodationReservation> GetRatesForOwner()
         {
