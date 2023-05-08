@@ -12,7 +12,7 @@
             <ColumnDefinition Width="200" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Border Grid.Column="0" Background="LightSlateGray" CornerRadius="15 15 15 15" >
+        <Border Grid.Column="0" Background="Lavender" CornerRadius="15 15 15 15" >
             <Grid DataContext="{Binding LoggedInUser}">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -32,15 +32,15 @@
                            TextAlignment="Center" Text="{Binding Path=Username}" FontSize="15" FontWeight="Medium"/>
                 <Button Grid.Row="2" Width="170" Height="32" Content="ALL TOURS" Background="WhiteSmoke" FontSize="20" FontWeight="Medium"
                          HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="DarkGray" />
-                <Button Grid.Row="3" Click="LogOutClick" Width="170" Height="32" Content="MY TOURS" Background="WhiteSmoke" FontSize="20"
+                <Button Grid.Row="3" Command="{Binding NotificationsCommand}" Width="170" Height="32" Content="MY TOURS" Background="WhiteSmoke" FontSize="20"
                          FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="DarkGray" />
-                <Button Grid.Row="4" Click="LogOutClick" Width="170" Height="32" Content="GIFT CARDS" Background="WhiteSmoke" FontSize="20"
+                <Button Grid.Row="4" Command="{Binding NotificationsCommand}" Width="170" Height="32" Content="GIFT CARDS" Background="WhiteSmoke" FontSize="20"
                          FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="DarkGray" />
-                <Button Grid.Row="5" Click="LogOutClick" Width="170" Height="32" Content="MAKE TOUR" Background="WhiteSmoke" FontSize="20"
+                <Button Grid.Row="5" Command="{Binding NotificationsCommand}" Width="170" Height="32" Content="MAKE TOUR" Background="WhiteSmoke" FontSize="20"
                          FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="DarkGray" />
-                <Button Grid.Row="6" Click="LogOutClick" Width="170" Height="32" Content="MAKE COMPLEX TOUR" Background="WhiteSmoke" FontSize="15"
+                <Button Grid.Row="6" Command="{Binding NotificationsCommand}" Width="170" Height="32" Content="MAKE COMPLEX TOUR" Background="WhiteSmoke" FontSize="15"
                         FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="DarkGray" />
-                <Button Grid.Row="7" Click="NotificationsButtonClick" Width="170" Height="32" Content="NOTIFICATIONS" Background="WhiteSmoke" FontSize="20"
+                <Button Grid.Row="7" Command="{Binding NotificationsCommand}" Width="170" Height="32" Content="NOTIFICATIONS" Background="WhiteSmoke" FontSize="20"
                          FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="DarkGray" />
                 <Grid Grid.Row="8">
                     <Grid.RowDefinitions>
@@ -49,8 +49,8 @@
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Width="170" Height="16" HorizontalAlignment="Center" VerticalAlignment="Bottom" TextAlignment="Center" 
                              Text="LANGUAGE" FontSize="12" FontWeight="Medium" Background="WhiteSmoke"/>
-                    <ComboBox Grid.Row="1" Width="170" Height="16" x:Name="LanguageComboBox" VerticalAlignment="Top" Visibility="Visible"
-                              SelectionChanged="LanguageComboBox_SelectionChanged" />
+                    <ComboBox Grid.Row="1" Width="170" Height="16" VerticalAlignment="Top" Visibility="Visible"
+                              ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}"/>
                 </Grid>
                 <Grid Grid.Row="9">
                     <Grid.RowDefinitions>
@@ -59,11 +59,11 @@
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Width="170" Height="16" HorizontalAlignment="Center" VerticalAlignment="Bottom" TextAlignment="Center" 
                              Text="BACKGROUND" FontSize="12" FontWeight="Medium" Background="WhiteSmoke"/>
-                    <ComboBox Grid.Row="1" Width="170" Height="16" x:Name="BackgroundComboBox" VerticalAlignment="Top" Visibility="Visible"
-                              SelectionChanged="BackgroundComboBox_SelectionChanged" />
+                    <ComboBox Grid.Row="1" Width="170" Height="16" x:Name="BackgroundComboBox" VerticalAlignment="Top" Visibility="Visible"/>
                 </Grid>
-                <Button Grid.Row="10" Click="LogOutClick" Width="170" Height="32" Content="LOG OUT" Background="Red" FontSize="20"
-                         FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="Red"/>
+                <Button Grid.Row="10" Width="170" Height="32" Content="LOG OUT" Background="Red" FontSize="20"
+                         FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="Red"
+                        Command="{Binding LogOutCommand}"/>
                 
             </Grid>
         </Border>
