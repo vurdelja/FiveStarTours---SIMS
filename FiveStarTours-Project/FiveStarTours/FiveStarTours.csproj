@@ -13,6 +13,10 @@
 	  <EmbeddedResource Remove="Resources\Images\**" />
 	  <None Remove="Resources\Images\**" />
 	  <Page Remove="Resources\Images\**" />
+	  <None Remove="View\Owner\ImagesOwner\logoFST.png" />
+	  <Content Include="View\Owner\ImagesOwner\logoFST.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
     <Folder Include="Resources\Images\" />
 
   </ItemGroup>

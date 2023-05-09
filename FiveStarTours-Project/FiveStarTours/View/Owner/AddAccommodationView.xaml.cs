@@ -291,7 +291,7 @@ namespace FiveStarTours.View
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            OwnerMainWindow main = new OwnerMainWindow(LoggedInUser);
+            ActionBarView main = new ActionBarView(LoggedInUser);
             main.Show();
             Close();
         }

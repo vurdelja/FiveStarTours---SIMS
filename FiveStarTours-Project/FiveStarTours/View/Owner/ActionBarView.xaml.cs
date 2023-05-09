@@ -19,14 +19,14 @@ using System.Windows.Shapes;
 namespace FiveStarTours.View
 {
     /// <summary>
-    /// Interaction logic for OwnerMainWindow.xaml
+    /// Interaction logic for ActionBarView.xaml
     /// </summary>
-    public partial class OwnerMainWindow : Window
+    public partial class ActionBarView : Window
     {
         private readonly AccommodationReservationService _service;
         public User LoggedInUser { get; set; }
 
-        public OwnerMainWindow(User user)
+        public ActionBarView(User user)
         {
             InitializeComponent();
             DataContext = this;
@@ -80,5 +80,34 @@ namespace FiveStarTours.View
             main.Show();
             Close();
         }
+
+        private void StatisticsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void RenovationsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void ForumButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void SuggestionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            ActionBarView action = new ActionBarView(LoggedInUser);
+            action.Show();
+            Close();
+        }
+
+
     }
 }

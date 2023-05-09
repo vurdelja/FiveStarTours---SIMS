@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FiveStarTours.View.Owner"
         mc:Ignorable="d"
         Title="Guests reviews" Height="750" Width="430" 
-        Background="Pink" 
+        Background="Pink" WindowStyle="None"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <DataGrid ItemsSource="{Binding Reservations}"

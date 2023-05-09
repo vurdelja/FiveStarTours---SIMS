@@ -88,8 +88,8 @@ namespace FiveStarTours
             LoggedUser = user;
             if (String.Equals(user.Role.ToLower(), "owner"))
             {
-                OwnerMainWindow ownerMainWindow = new OwnerMainWindow(user);
-                ownerMainWindow.Show();
+                ActionBarView action = new ActionBarView(user);
+                action.Show();
                 Close();
             }
             else if (String.Equals(user.Role.ToLower(), "traveler"))

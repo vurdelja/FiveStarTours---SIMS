@@ -6,29 +6,76 @@
         xmlns:local="clr-namespace:FiveStarTours.View.Owner"
         mc:Ignorable="d"
         Title="SuperOwnerView" Height="750" Width="430" 
-        Background="Pink"
-        WindowStartupLocation="CenterScreen" >
-    <Grid ShowGridLines="True">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Margin="0,0,0,648">
-            <Label Content="Are you the super-owner?" FontSize="24" FontWeight="Bold" Height="52" Width="310"/>
+        Background="White"
+        WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <!-- Add your content here, using the Grid.Row attribute to specify which row each element should occupy -->
+        <Border Background="White" 
+                    Grid.Row="0"
+                    CornerRadius="10 10 0 0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Click="BackButton_Click" Background="White" Padding="10 10" IsDefault="True" HorizontalAlignment="Left"
+                        VerticalAlignment="Center">
+                    <Button.Content>
+                        <Path Data="M20,0 L0,10 L20,20" Stroke="Black" StrokeThickness="2" />
+                    </Button.Content>
+                </Button>
+                <Label Content="Are you a super-owner?" Grid.Column="1" HorizontalAlignment="Center" FontSize="20" VerticalContentAlignment="Center" />
+            </Grid>
+        </Border>
+
+        <TextBlock TextWrapping="Wrap" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16">
+            This is the first sentence of the paragraph.<LineBreak />
+            This is the second sentence of the paragraph.<LineBreak />
+            This is the third sentence of the paragraph.
+        </TextBlock>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <CheckBox IsChecked="{Binding IsSuperOwner}" IsEnabled="False" FontSize="36" BorderThickness="3,3,3,3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,0,0,0"/>
+            <Label VerticalContentAlignment="Center" Margin="20,0,0,0" FontSize="16">Super-owner</Label>
         </StackPanel>
-        <StackPanel Margin="0,91,0,557">
-            <CheckBox IsChecked="{Binding IsSuperOwner}" IsEnabled="False" Content="Super-owner" HorizontalAlignment="Center" FontSize="36" BorderThickness="10,10,10,10"/>
-        </StackPanel>
-        <StackPanel Margin="0,177,0,471"/>
-        <StackPanel Margin="0,312,0,336"/>
-        <StackPanel Margin="0,403,215,245">
-            <Label Content="Number of reviews:" FontSize="20"/>
-        </StackPanel>
-        <StackPanel Margin="0,489,215,159">
-            <Label Content="Average rate:" FontSize="20"/>
-        </StackPanel>
-        <TextBlock HorizontalAlignment="Left" Margin="294,403,0,0" TextWrapping="Wrap" Text="{Binding Path=NumberOfReviews}" VerticalAlignment="Top" Height="43" Width="80"/>
-        <TextBlock HorizontalAlignment="Left" Margin="294,489,0,0" TextWrapping="Wrap" Text="{Binding Path = AverageRate}" VerticalAlignment="Top" Height="43" Width="80"/>
-        <Button Content="Back" Click="BackButton_Click"  HorizontalAlignment="Center" Margin="0,580,0,0" VerticalAlignment="Top" Height="42" Width="118"/>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Number of reviews:" FontSize="20" Grid.Column="0" VerticalContentAlignment="Center"/>
+            <Border BorderBrush="Black"  Grid.Column="1" BorderThickness="2" Width="50" Height="30">
+                <TextBlock Text="{Binding Path=NumberOfReviews}" Grid.Column="1" Height="20" Width="20"/>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Average rate:" FontSize="20" Grid.Column="0" VerticalContentAlignment="Center"/>
+            <Border BorderBrush="Black"  Grid.Column="1" BorderThickness="2" Width="50" Height="30">
+                <TextBlock Text="{Binding Path=AverageRate}" Grid.Column="1" Height="20" Width="20"/>
+            </Border>
+        </Grid>
+
+        <Image Source="/View/Owner/ImagesOwner/logoFST.png" Grid.Row="6"/>
+
 
     </Grid>
+
 </Window>

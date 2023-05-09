@@ -61,7 +61,7 @@ namespace FiveStarTours.View.Owner
 
         private void MaybeLaterButton_Click(object sender, RoutedEventArgs e)
         {
-            OwnerMainWindow main = new OwnerMainWindow(LoggedInUser);
+            ActionBarView main = new ActionBarView(LoggedInUser);
             main.Show();
             Close();
         }
