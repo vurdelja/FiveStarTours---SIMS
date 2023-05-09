@@ -215,6 +215,17 @@ namespace FiveStarTours.View.Visitor
 
         }
 
-       
+        private void InformationsButton_Click(object sender, RoutedEventArgs e)
+        {
+            ToursListingView toursListing = new ToursListingView(LoggedInUser);
+            toursListing.Show();
+        }
+
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            ReservedToursView reservedTours = new ReservedToursView(LoggedInUser);
+            reservedTours.Show();
+        }
     }
 }

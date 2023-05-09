@@ -105,8 +105,8 @@ namespace FiveStarTours
             }
             else if (String.Equals(user.Role.ToLower(), "visitor"))
             {
-                VisitorMainWindow visitorMainWindow = new VisitorMainWindow(user);
-                visitorMainWindow.Show();
+                ToursListingView tourListing = new ToursListingView(user);
+                tourListing.Show();
             }
             else 
             {

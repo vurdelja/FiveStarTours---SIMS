@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Media;
 using FiveStarTours.Repository;
 using FiveStarTours.Serializer;
 
@@ -24,6 +25,8 @@ namespace FiveStarTours.Model
         public int Duration { get; set; }
         public List<string> ImageUrls { get; set; }
 
+        public ImageSource FrontImage { get; set; }
+
         public Tour() { }
 
         public Tour(string name, User user, int idLocation, Location location, string description, List<int> idLanguage, List<Language> language, int maxGuests, List<int> idKeyPoints, List<KeyPoints> keyPoints, List<DateTime> beginning, int duration, List<string> imageUrls)
@@ -41,6 +44,7 @@ namespace FiveStarTours.Model
             Beginning = beginning;
             Duration = duration;
             ImageUrls = imageUrls;
+            FrontImage = null;
         }
 
         public Tour(string name, User user, int idLocation, Location location, string description, List<int> idLanguage, List<Language> language, int maxGuests, List<int> idKeyPoints, List<KeyPoints> keyPoints, DateTime oneBeginningTime, int duration, List<string> imageUrls)
@@ -58,6 +62,7 @@ namespace FiveStarTours.Model
             OneBeginningTime = oneBeginningTime;
             Duration = duration;
             ImageUrls = imageUrls;
+            FrontImage = null;
         }
 
         public string[] ToCSV()

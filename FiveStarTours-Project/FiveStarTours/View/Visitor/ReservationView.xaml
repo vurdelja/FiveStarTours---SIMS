@@ -5,50 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FiveStarTours.View.Visitor"
         mc:Ignorable="d"
-        Title="ReservationView" Height="850" Width="800" ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
+        Title="ReservationView" Height="600" Width="1200" ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
          WindowStartupLocation="CenterScreen">
     <Grid Background="Lavender">
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="1" Grid.Column="0" Background="LemonChiffon" Margin="76,46,75,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="200"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Height="40" Width="160" Content="People: " FontSize="15"/>
-            <Label Grid.Row="1" Grid.Column="0" Height="40" Width="160" Content="Number of people: " FontSize="15"/>
-            <Label Grid.Row="2" Grid.Column="0" Height="40" Width="160" Content="Starting Key Point:" FontSize="15"/>
-            <Label Grid.Row="3" Grid.Column="0" Height="40" Width="160" Content="Date and time:" FontSize="15"/>
-            <Label Grid.Row="4" Grid.Column="0" Height="40" Width="160" Content="Your contact(phone):" FontSize="15"/>
-            <Label Grid.Row="5" Grid.Column="0" Height="40" Width="160" Content="Your email:" FontSize="15"/>
-            <Label Grid.Row="6" Grid.Column="0" Height="40" Width="160" Content="Gift Card:" FontSize="15"/>
-            <ItemsControl Grid.Row="0" Grid.Column="1" x:Name="Users" ItemsSource="{Binding Visitors}" Width="400" Height="160">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <CheckBox x:Name="User" Content="{Binding Name}" Checked="User_Checked"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <TextBox Grid.Row="1" Grid.Column="1" Height="40" Width="400" Text="{Binding Path=MembersNumber, UpdateSourceTrigger=PropertyChanged}"/>
-            <ComboBox Grid.Row="2" Grid.Column="1" Height="40" Width="400" x:Name="StartingKeyPoint" SelectionChanged="StartingKeyPoint_SelectionChanged" />
-            <ComboBox Grid.Row="3" Grid.Column="1" Height="40" Width="400" x:Name="DateTimeComboBox" SelectionChanged="DateTime_SelectionChanged" />
-            <TextBox Grid.Row="4" Grid.Column="1" Height="40" Width="400" Text="{Binding Path=PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Height="40" Width="400" Text="{Binding Path=Email, UpdateSourceTrigger=PropertyChanged}"/>
-            <ComboBox Grid.Row="6" Grid.Column="1" Height="40" Width="400" x:Name="GiftCardComboBox" SelectionChanged="GiftCardComboBox_SelectionChanged" />
-            
-        </Grid>
+        <ScrollViewer Grid.Column="0" Grid.Row="1">
+            <Grid Grid.Row="1" Grid.Column="0" Background="LemonChiffon" Margin="76,46,75,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="160"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Height="40" Width="160" Content="People: " FontSize="20" FontWeight="Medium" HorizontalAlignment="Left"/>
+                <Label Grid.Row="1" Grid.Column="0" Height="40" Width="160" Content="Number of people: " FontSize="20" FontWeight="Medium" HorizontalAlignment="Left"/>
+                <Label Grid.Row="2" Grid.Column="0" Height="40" Width="160" Content="Starting Key Point:" FontSize="20" FontWeight="Medium" HorizontalAlignment="Left"/>
+                <Label Grid.Row="3" Grid.Column="0" Height="40" Width="160" Content="Date and time:" FontSize="20" FontWeight="Medium" HorizontalAlignment="Left"/>
+                <Label Grid.Row="4" Grid.Column="0" Height="40" Width="160" Content="Your contact(phone):" FontSize="20" FontWeight="Medium" HorizontalAlignment="Left"/>
+                <Label Grid.Row="5" Grid.Column="0" Height="40" Width="160" Content="Your email:" FontSize="20" FontWeight="Medium" HorizontalAlignment="Left"/>
+                <Label Grid.Row="6" Grid.Column="0" Height="40" Width="160" Content="Gift Card:" FontSize="20" FontWeight="Medium" HorizontalAlignment="Left"/>
+                <ItemsControl Grid.Row="0" Grid.Column="1" x:Name="Users" ItemsSource="{Binding Visitors}" Width="650" Height="130">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox x:Name="User" Content="{Binding Name}" Checked="User_Checked"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBox Grid.Row="1" Grid.Column="1" Height="40" Width="650" Text="{Binding Path=MembersNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                <ComboBox Grid.Row="2" Grid.Column="1" Height="40" Width="650" x:Name="StartingKeyPoint" SelectionChanged="StartingKeyPoint_SelectionChanged" />
+                <ComboBox Grid.Row="3" Grid.Column="1" Height="40" Width="650" x:Name="DateTimeComboBox" SelectionChanged="DateTime_SelectionChanged" />
+                <TextBox Grid.Row="4" Grid.Column="1" Height="40" Width="650" Text="{Binding Path=PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Row="5" Grid.Column="1" Height="40" Width="650" Text="{Binding Path=Email, UpdateSourceTrigger=PropertyChanged}"/>
+                <ComboBox Grid.Row="6" Grid.Column="1" Height="40" Width="650" x:Name="GiftCardComboBox" SelectionChanged="GiftCardComboBox_SelectionChanged" />
+
+            </Grid>
+        </ScrollViewer>
         <Grid Grid.Row="3" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -56,8 +58,10 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Row="3" Grid.Column="2" Height="40" Width="100" Content="RESERVATION" Background="LightGreen" FontSize="15" Click="ReservationButton_Click"/>
-            <Button Grid.Row="3" Grid.Column="3" Height="40" Width="100" Content="CANCEL" Background="LightGray" FontSize="15" Click="CancelButton_Click"/>
+            <Button Grid.Column="3" Height="40" Width="128" Content="RESERVATION" Background="Green" FontSize="20" Click="ReservationButton_Click"
+                    HorizontalAlignment="Center" Margin="0,20,0,20" FontWeight="Medium"/>
+            <Button Grid.Column="0" Height="40" Width="124" Content="BACK" Background="Red" FontSize="20" Click="CancelButton_Click"
+                    HorizontalAlignment="Left" Margin="76,20,0,20" FontWeight="Medium"/>
 
         </Grid>
     </Grid>
