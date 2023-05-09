@@ -1,6 +1,7 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
 using FiveStarTours.View;
+using FiveStarTours.View.Owner;
 using FiveStarTours.View.Traveler;
 using FiveStarTours.View.Visitor;
 using System;
@@ -88,8 +89,8 @@ namespace FiveStarTours
             LoggedUser = user;
             if (String.Equals(user.Role.ToLower(), "owner"))
             {
-                ActionBarView action = new ActionBarView(user);
-                action.Show();
+                OwnerMainPageView main = new OwnerMainPageView(user);
+                main.Show();
                 Close();
             }
             else if (String.Equals(user.Role.ToLower(), "traveler"))

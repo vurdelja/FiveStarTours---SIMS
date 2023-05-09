@@ -5,9 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FiveStarTours.View.Owner"
         mc:Ignorable="d"
-        Title="Guests reviews" Height="750" Width="430" 
-        Background="Pink" WindowStyle="None"
-        WindowStartupLocation="CenterScreen">
+        Title="Guests reviews" Height="736" Width="414" Background="Pink" 
+        WindowStyle="None" WindowStartupLocation="CenterScreen">
     <Grid>
         <DataGrid ItemsSource="{Binding Reservations}"
                   SelectedItem="{Binding Path=SelectedReservation}"
@@ -37,7 +36,7 @@
 
         </DataGrid>
         <Button Content="View review" Click="ViewReviewButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,614,0,0" Height="54" Width="125" Background="#FFFB0707"/>
-        <Button Content="Maybe later" Click="MaybeLaterButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="267,614,0,0" Height="54" Width="103" Background="#FFD4CCCC"/>
+        <Button Content="Maybe later" Click="GoBackButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="267,614,0,0" Height="54" Width="103" Background="#FFD4CCCC"/>
 
     </Grid>
 </Window>

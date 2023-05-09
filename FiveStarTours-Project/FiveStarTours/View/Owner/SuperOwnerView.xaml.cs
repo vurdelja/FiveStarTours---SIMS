@@ -85,9 +85,9 @@ namespace FiveStarTours.View.Owner
 
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-            ActionBarView main = new ActionBarView(LoggedInUser);
+            OwnerMainPageView main = new OwnerMainPageView(LoggedInUser);
             main.Show();
             Close();
         }

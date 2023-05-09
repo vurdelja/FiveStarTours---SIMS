@@ -5,9 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FiveStarTours.View.Owner"
         mc:Ignorable="d"
-        Title="ManageRequestsView" Height="750" Width="430" 
-        Background="Pink" 
-        WindowStartupLocation="CenterScreen">
+        Title="ManageRequestsView" Height="736" Width="414" Background="Pink" 
+        WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Grid>
         <DataGrid ItemsSource="{Binding Requests}"
                   SelectedItem="{Binding Path=SelectedRequest}"

@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using System.Security.AccessControl;
 using System.Xml.Linq;
 using FiveStarTours.Services;
+using FiveStarTours.View.Owner;
 
 namespace FiveStarTours.View
 {
@@ -289,9 +290,9 @@ namespace FiveStarTours.View
             return result;
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-            ActionBarView main = new ActionBarView(LoggedInUser);
+            OwnerMainPageView main = new OwnerMainPageView(LoggedInUser);
             main.Show();
             Close();
         }

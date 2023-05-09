@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FiveStarTours.View.Owner"
         mc:Ignorable="d"
-        Title="SuperOwnerView" Height="750" Width="430" 
+        Title="SuperOwnerView" Height="736" Width="414"
         Background="White"
         WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Grid>
@@ -28,7 +28,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Click="BackButton_Click" Background="White" Padding="10 10" IsDefault="True" HorizontalAlignment="Left"
+                <Button Click="GoBackButton_Click" Background="White" Padding="10 10" IsDefault="True" HorizontalAlignment="Left"
                         VerticalAlignment="Center">
                     <Button.Content>
                         <Path Data="M20,0 L0,10 L20,20" Stroke="Black" StrokeThickness="2" />
