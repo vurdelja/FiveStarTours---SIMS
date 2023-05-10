@@ -20,7 +20,6 @@
 	  <None Remove="View\Owner\ImagesOwner\download.png" />
 	  <None Remove="View\Owner\ImagesOwner\help.png" />
 	  <None Remove="View\Owner\ImagesOwner\logo.png" />
-	  <None Remove="View\Owner\ImagesOwner\logoFST.png" />
 	  <None Remove="View\Owner\ImagesOwner\notification.png" />
 	  <None Remove="View\Owner\ImagesOwner\pdf.png" />
 	  <None Remove="View\Owner\ImagesOwner\rightArrow.png" />
@@ -40,9 +39,6 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="View\Owner\ImagesOwner\logo.png">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
-	  <Content Include="View\Owner\ImagesOwner\logoFST.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="View\Owner\ImagesOwner\notification.png">

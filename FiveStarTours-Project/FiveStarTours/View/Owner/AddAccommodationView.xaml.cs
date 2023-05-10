@@ -170,7 +170,7 @@ namespace FiveStarTours.View
         }
 
 
-        private void SubmitRegistrationButton_Click(object sender, RoutedEventArgs e)
+        private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
             Location location = GetSelectedLocation();
 

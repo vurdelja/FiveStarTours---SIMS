@@ -7,51 +7,28 @@
         mc:Ignorable="d"
         Title="Accommodation form" Height="736" Width="414" Background="Transparent"
         WindowStartupLocation="CenterScreen" WindowStyle="None">
-    <Window.Resources>
-        <ControlTemplate x:Key="ValidationTemplate">
-            <StackPanel>
-                <!-- Placeholder for the TextBox itself -->
-                <AdornedElementPlaceholder x:Name="textBox" />
-                <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red" />
-            </StackPanel>
 
-        </ControlTemplate>
-    </Window.Resources>
-
-
-
-    <Border Background="White" 
-                    Grid.Row="0"
-                    CornerRadius="20 20 20 20">
+    <Border Background="Pink" CornerRadius="20 20 20 20">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"></RowDefinition>
-                <RowDefinition Height="500"></RowDefinition>
-                <RowDefinition Height="150"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <!-- TOP -->
+            <!-- TITLE -->
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Button Click="GoBackButton_Click" Background="White" Padding="10 10" IsDefault="True" HorizontalAlignment="Left"
-                        VerticalAlignment="Center">
-                        <Button.Content>
-                            <Path Data="M20,0 L0,10 L20,20" Stroke="Black" StrokeThickness="2" />
-
-                        </Button.Content>
-                    </Button>
-
-                    <Label Content="Fill in the form" Grid.Column="1" HorizontalAlignment="Center" FontSize="20" VerticalContentAlignment="Center" />
-                </Grid>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Button Click="GoBackButton_Click" Background="Transparent" BorderThickness="0" HorizontalAlignment="Left" Width="50" Height="50">
+                    <Image Source="/View/Owner/ImagesOwner/arrow.png" Height="40" Width="40" Margin="10,0,0,0"/>
+                </Button>
+                <Label Content="Fill in the form"  FontSize="20" Height="40" Width="200" Margin="60,0,0,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" />
+            </StackPanel>
 
 
 
-            <!-- MIDDLE -->
-            <Grid Grid.Row="1" Grid.Column="0" Width="430" Height="500" Background="White">
+            <!-- FORM -->
+            <Grid Grid.Row="1" Grid.Column="0" Width="430" Height="500">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
@@ -111,8 +88,7 @@
 
 
                 <TextBox Grid.Row="0" Grid.Column="1" 
-                         Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                         Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                         Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged}"
                          Height="30"  
                          Margin="0 0 1 0" 
                          FontSize="16" Width="200">
@@ -142,21 +118,18 @@
                 </ComboBox>
                 <TextBox Grid.Row="4" Grid.Column="1"
                          Text="{Binding Path=MaxGuestNum, UpdateSourceTrigger=PropertyChanged}"
-                        Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
                          Height="30"  
                          Margin="0 0 1 0" 
                          FontSize="16" Width="50">
                 </TextBox>
                 <TextBox Grid.Row="5" Grid.Column="1"
                          Text="{Binding Path=MinReservationDays, UpdateSourceTrigger=PropertyChanged}"
-                        Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
                          Height="30"  
                          Margin="0 0 1 0" 
                          FontSize="16" Width="50">
                 </TextBox>
                 <TextBox Grid.Row="6" Grid.Column="1"
                          Text="{Binding Path=DaysPossibleToCancel, UpdateSourceTrigger=PropertyChanged}"
-                         Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
                          Height="30"  
                          Margin="0 0 1 0" 
                          FontSize="16" Width="50">
@@ -172,15 +145,11 @@
 
 
             <!-- BOTTOM -->
-            <Grid Grid.Row="2" Grid.Column="0" >
-                <Button Content="Submit" 
+            <Button Grid.Row="2" Content="Submit" 
                         Padding="10 5"
-                        IsDefault="True"
-                        HorizontalAlignment="Center" Grid.Column="0" 
+                        HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Click="SubmitRegistrationButton_Click" Width="100" Height="60" FontSize="18"/>
-            </Grid>
-
+                        Click="SubmitButton_Click" Width="110" FontSize="18"/>
         </Grid>
     </Border>
 </Window>

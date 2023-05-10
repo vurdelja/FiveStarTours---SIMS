@@ -23,7 +23,7 @@
             <!-- TITLE -->
 
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <Button Click="ActionBar_ButtonClick" Background="Transparent" BorderThickness="0" IsDefault="True" HorizontalAlignment="Left" Width="50" Height="50">
+                <Button Click="ActionBar_ButtonClick" Background="Transparent" BorderThickness="0" HorizontalAlignment="Left" Width="50" Height="50">
                     <Image Source="/View/Owner/ImagesOwner/actionBar.png" Height="40" Width="40" Margin="10,0,0,0"/>
                 </Button>
                 <Image Source="/View/Owner/ImagesOwner/logo.png" Margin="40,0,0,0" Width="200" Height="80"/>

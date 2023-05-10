@@ -23,7 +23,7 @@ namespace FiveStarTours.View
     /// </summary>
     public partial class ActionBarView : Window
     {
-        private readonly AccommodationReservationService _service;
+        
         public User LoggedInUser { get; set; }
 
         public ActionBarView(User user)
@@ -31,11 +31,7 @@ namespace FiveStarTours.View
             InitializeComponent();
             DataContext = this;
 
-            _service = new AccommodationReservationService();
-
             LoggedInUser= user;
-
-            _service.NotifyAboutUnratedGuests();
 
         }
 

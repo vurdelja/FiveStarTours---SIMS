@@ -24,6 +24,8 @@ namespace FiveStarTours.View.Owner
     public partial class OwnerMainPageView : Window
     {
         public User LoggedInUser { get; set; }
+
+        private readonly AccommodationReservationService _service;
         public OwnerMainPageView(User user)
         {
             InitializeComponent();
@@ -31,6 +33,8 @@ namespace FiveStarTours.View.Owner
 
             LoggedInUser = user;
 
+            _service = new AccommodationReservationService();
+            _service.NotifyAboutUnratedGuests();
         }
 
         private void ActionBar_ButtonClick(object sender, RoutedEventArgs e)
