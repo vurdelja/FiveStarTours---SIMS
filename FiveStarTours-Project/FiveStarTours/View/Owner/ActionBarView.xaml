@@ -9,23 +9,26 @@
         Background="Transparent" 
         WindowStartupLocation="CenterScreen" WindowStyle="None">
 
-    <Border Background="White" CornerRadius="20 20 20 20">
-        
-        <StackPanel>
+    <Border Background="Pink" CornerRadius="20 20 20 20">
 
-            <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
+        <StackPanel>
+            <StackPanel Height="100" Orientation="Horizontal">
                 <Button Click="GoBackButton_Click" Background="Transparent" BorderThickness="0" IsDefault="True" HorizontalAlignment="Left" Width="40" Height="40">
-                    <Image Source="/View/Owner/ImagesOwner/arrow.png" Height="40" Width="40"/>
+                    <Image Source="/View/Owner/ImagesOwner/arrow.png" Height="40" Width="40" Margin="10,0,0,0"/>
                 </Button>
 
-                <Image Source="/View/Owner/ImagesOwner/logoFST.png" VerticalAlignment="Top" Margin="90,0,0,0" Width="116" Height="63"/>
+                <Image Source="/View/Owner/ImagesOwner/logo.png"  Margin="60,0,0,0" Width="200" Height="80"/>
             </StackPanel>
 
-            <Button Content="Add new accommodation" Padding="10"
+            <Button Padding="10"
                     Click="AddAccommodationButton_Click"
                     Background="Transparent" 
                     HorizontalAlignment="Left" VerticalAlignment="Top" 
-                    Margin="92,25,0,0" Height="47" Width="213" >
+                    Margin="92,10,0,0" Height="47" Width="213" >
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Add new accommodation"/>
+                    <Image Source="/View/Owner/ImagesOwner/rightArrow.png"  Width="15" Height="15" Margin="10,0,0,0"/>
+                </StackPanel>
                 <Button.BorderThickness>
                     <Thickness Bottom="2"/>
                 </Button.BorderThickness>
@@ -34,11 +37,15 @@
                 </Button.BorderBrush>
             </Button>
 
-            <Button Content="Accommodation statistics" Padding="10"
+            <Button Padding="10"
                     Click="StatisticsButton_Click"
                     Background="Transparent"
                     HorizontalAlignment="Left" VerticalAlignment="Top" 
                     Margin="92,25,0,0" Height="47" Width="213" >
+                <StackPanel Orientation="Horizontal">
+                    <Label  Content="Accommodation statistics"/>
+                    <Image Source="/View/Owner/ImagesOwner/rightArrow.png"  Width="15" Height="15" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
                 <Button.BorderThickness>
                     <Thickness Bottom="2"/>
                 </Button.BorderThickness>
@@ -47,11 +54,15 @@
                 </Button.BorderBrush>
             </Button>
 
-            <Button Content="Renovations"  Padding="10"
+            <Button Padding="10"
                     Click="RenovationsButton_Click"
                     Background="Transparent"
                     HorizontalAlignment="Left" VerticalAlignment="Top" 
                     Margin="92,25,0,0" Height="47" Width="213" >
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Renovations" />
+                    <Image Source="/View/Owner/ImagesOwner/rightArrow.png"  Width="15" Height="15" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
                 <Button.BorderThickness>
                     <Thickness Bottom="2"/>
                 </Button.BorderThickness>
@@ -60,11 +71,15 @@
                 </Button.BorderBrush>
             </Button>
 
-            <Button Content="Rating guests"  Padding="10"
+            <Button Padding="10"
                     Click="GuestRatingButton_Click"
                     Background="Transparent"
                     HorizontalAlignment="Left" VerticalAlignment="Top" 
                     Margin="92,25,0,0" Height="47" Width="213" >
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Rating guests"  />
+                    <Image Source="/View/Owner/ImagesOwner/rightArrow.png"  Width="15" Height="15" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
                 <Button.BorderThickness>
                     <Thickness Bottom="2"/>
                 </Button.BorderThickness>
@@ -73,11 +88,15 @@
                 </Button.BorderBrush>
             </Button>
 
-            <Button Content="Reviews from guests"  Padding="10"
+            <Button Padding="10"
                     Click="GuestReviewsButton_Click"
                     Background="Transparent"
                     HorizontalAlignment="Left" VerticalAlignment="Top" 
                     Margin="92,25,0,0" Height="47" Width="213" >
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Reviews from guests" />
+                    <Image Source="/View/Owner/ImagesOwner/rightArrow.png"  Width="15" Height="15" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
                 <Button.BorderThickness>
                     <Thickness Bottom="2"/>
                 </Button.BorderThickness>
@@ -86,11 +105,15 @@
                 </Button.BorderBrush>
             </Button>
 
-            <Button Content="Super-owner"  Padding="10"
+            <Button  Padding="10"
                     Click="SuperOwnerButton_Click"
                     Background="Transparent"
                     HorizontalAlignment="Left" VerticalAlignment="Top" 
                     Margin="92,25,0,0" Height="47" Width="213" >
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Super-owner"/>
+                    <Image Source="/View/Owner/ImagesOwner/rightArrow.png"  Width="15" Height="15" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
                 <Button.BorderThickness>
                     <Thickness Bottom="2"/>
                 </Button.BorderThickness>
@@ -99,11 +122,15 @@
                 </Button.BorderBrush>
             </Button>
 
-            <Button Content="Forum"  Padding="10"
+            <Button Padding="10"
                     Click="ForumButton_Click"
                     Background="Transparent"
                     HorizontalAlignment="Left" VerticalAlignment="Top" 
                     Margin="92,25,0,0" Height="47" Width="213" >
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Forum"  />
+                    <Image Source="/View/Owner/ImagesOwner/rightArrow.png"  Width="15" Height="15" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
                 <Button.BorderThickness>
                     <Thickness Bottom="2"/>
                 </Button.BorderThickness>
@@ -112,11 +139,15 @@
                 </Button.BorderBrush>
             </Button>
 
-            <Button Content="App suggestions for you"  Padding="10"
+            <Button Padding="10"
                     Click="SuggestionsButton_Click"
                     Background="Transparent"
                     HorizontalAlignment="Left" VerticalAlignment="Top" 
                     Margin="92,25,0,0" Height="47" Width="213" >
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="App suggestions for you"  />
+                    <Image Source="/View/Owner/ImagesOwner/rightArrow.png"  Width="15" Height="15" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
                 <Button.BorderThickness>
                     <Thickness Bottom="2"/>
                 </Button.BorderThickness>

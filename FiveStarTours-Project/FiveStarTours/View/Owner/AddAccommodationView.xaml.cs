@@ -292,8 +292,8 @@ namespace FiveStarTours.View
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-            OwnerMainPageView main = new OwnerMainPageView(LoggedInUser);
-            main.Show();
+            ActionBarView action = new ActionBarView(LoggedInUser);
+            action.Show();
             Close();
         }
 
