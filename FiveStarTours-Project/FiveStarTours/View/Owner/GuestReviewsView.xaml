@@ -52,11 +52,11 @@
 
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header=" Guest name"  Width="100"
+                    <DataGridTextColumn Header=" Name"  Width="120"
                                     Binding="{Binding GuestName}"/>
-                    <DataGridTextColumn Header=" End date" Width="130"
+                    <DataGridTextColumn Header=" End date" Width="150"
                                     Binding="{Binding EndDate}"/>
-                    <DataGridTextColumn Header=" Accommodation name" Width="*" 
+                    <DataGridTextColumn Header="Acc name" Width="*" 
                                     Binding="{Binding AccommodationName}"/>
                 </DataGrid.Columns>
 
