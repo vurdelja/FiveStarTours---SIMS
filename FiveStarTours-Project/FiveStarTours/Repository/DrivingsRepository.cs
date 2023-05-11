@@ -10,7 +10,7 @@ using FiveStarTours.View.VehicleOnAdress;
 
 namespace FiveStarTours.Repository
 {
-    public class DrivingsRepository : IDrivingRepository
+    public class DrivingsRepository : IDrivingsRepository
     {
         private const string FilePath = "../../../Resources/Data/drivings.csv";
 

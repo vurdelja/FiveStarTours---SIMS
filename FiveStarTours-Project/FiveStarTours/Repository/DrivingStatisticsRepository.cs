@@ -9,7 +9,7 @@ using FiveStarTours.View.Driver;
 
 namespace FiveStarTours.Repository
 {
-    public class DrivingStatisticsRepository
+    public class DrivingStatisticsRepository : IDrivingSatatisticsRepository
     {
         private const string FilePath = "../../../Resources/Data/drivingstatistics.csv";
 
