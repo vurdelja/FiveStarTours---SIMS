@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Documents;
+using System.Windows.Media;
 using FiveStarTours.Repository;
 using FiveStarTours.Serializer;
 
@@ -28,6 +29,8 @@ namespace FiveStarTours.Model
         public int MinReservationDays { get; set; }
         public int DaysPossibleToCancel { get; set; } = 1; 
 
+        public ImageSource FrontImage { get; set; }
+
         public List<string> ImageURLs { get; set; }  
 
         public Accommodation() { }
@@ -41,6 +44,7 @@ namespace FiveStarTours.Model
             MinReservationDays = minReservationDays;
             DaysPossibleToCancel = daysPossibleToCancel;
             ImageURLs = imageURLs;
+            FrontImage = null;
         }
 
         public string[] ToCSV()
