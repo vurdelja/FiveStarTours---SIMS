@@ -74,6 +74,8 @@ namespace FiveStarTours.View
 
         private void StatisticsButton_Click(object sender, RoutedEventArgs e)
         {
+            StatisticsView statisticsView = new StatisticsView(LoggedInUser);
+            statisticsView.Show();
             Close();
         }
 
