@@ -19,23 +19,19 @@ using System.Windows.Shapes;
 namespace FiveStarTours.View
 {
     /// <summary>
-    /// Interaction logic for OwnerMainWindow.xaml
+    /// Interaction logic for ActionBarView.xaml
     /// </summary>
-    public partial class OwnerMainWindow : Window
+    public partial class ActionBarView : Window
     {
-        private readonly AccommodationReservationService _service;
+        
         public User LoggedInUser { get; set; }
 
-        public OwnerMainWindow(User user)
+        public ActionBarView(User user)
         {
             InitializeComponent();
             DataContext = this;
 
-            _service = new AccommodationReservationService();
-
             LoggedInUser= user;
-
-            _service.NotifyAboutUnratedGuests();
 
         }
 
@@ -74,11 +70,35 @@ namespace FiveStarTours.View
             Close();
         }
 
-        private void LogOutButton_Click(object sender, RoutedEventArgs e)
+        
+
+        private void StatisticsButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow main = new MainWindow();
+            Close();
+        }
+
+        private void RenovationsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void ForumButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void SuggestionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            OwnerMainPageView main = new OwnerMainPageView(LoggedInUser);
             main.Show();
             Close();
         }
+
+
     }
 }
