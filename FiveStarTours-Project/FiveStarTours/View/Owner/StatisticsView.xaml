@@ -26,9 +26,9 @@
             </StackPanel>
 
             <!-- DATAGRID -->
-            <DataGrid RowHeight="40" ItemsSource="{Binding Reservations}"
-                  SelectedItem="{Binding Path=SelectedReservation}"
-                  IsReadOnly="True" SelectionMode="Single" x:Name="NoRateGuests" 
+            <DataGrid RowHeight="40" ItemsSource="{Binding Accommodations}"
+                  SelectedItem="{Binding Path=SelectedAccommodation}"
+                  IsReadOnly="True" SelectionMode="Single" x:Name="AccommodationsStatistics" 
                   AutoGenerateColumns="false" FontSize="14"
                   Margin="10,10,10,10" Grid.Row="1">
 
@@ -44,11 +44,7 @@
 
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header=" Name"  Width="120"
-                                    Binding="{Binding GuestName}"/>
-                    <DataGridTextColumn Header=" End date" Width="150"
-                                    Binding="{Binding EndDate}"/>
-                    <DataGridTextColumn Header="Acc name" Width="*" 
+                    <DataGridTextColumn Header="Accommodation name" Width="*" 
                                     Binding="{Binding AccommodationName}"/>
                 </DataGrid.Columns>
             </DataGrid>

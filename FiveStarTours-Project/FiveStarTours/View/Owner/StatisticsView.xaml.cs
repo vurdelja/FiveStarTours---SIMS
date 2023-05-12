@@ -17,6 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using FiveStarTours.View.Traveler;
 
 namespace FiveStarTours.View.Owner
 {
@@ -26,18 +27,24 @@ namespace FiveStarTours.View.Owner
     public partial class StatisticsView : Window
     {
         public User LoggedInUser { get; set; }
+        public static ObservableCollection<Accommodation> Accommodations { get; set; }
+
+        public Accommodation SelectedAccommodation { get; set; } 
+        private readonly AccommodationsService _accommodationService;
 
         public StatisticsView(User user)
         {
             InitializeComponent();
             DataContext = this;
 
+            _accommodationService = new AccommodationsService();
             LoggedInUser = user;
+
+            Accommodations = new ObservableCollection<Accommodation>(_accommodationService.GetAll());
         }
 
         private void ShowButton_Click(object sender, RoutedEventArgs e)
         {
-            
             StatisticsYearView yearView = new StatisticsYearView(LoggedInUser);
             yearView.Show();
             Close();
