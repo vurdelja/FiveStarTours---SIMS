@@ -17,7 +17,7 @@ namespace FiveStarTours.Injector
         { typeof(IAccommodationsRepository), new AccommodationsRepository() },
         { typeof(IAttendanceRepository), new AttendanceRepository() },
         { typeof(ICancelationNotificationRepository), new CancelationNotificationRepository() },
-        { typeof(IDrivingRepository), new DrivingsRepository() },
+        { typeof(IDrivingsRepository), new DrivingsRepository() },
         { typeof(IGiftCardRepository), new GiftCardRepository() },
         { typeof(IGuestRatingsRepository), new GuestRatingsRepository() },
         { typeof(IKeyPointsRepository), new KeyPointsRepository() },

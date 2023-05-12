@@ -54,5 +54,12 @@ namespace FiveStarTours.View
             DrivingStatistics drivingStatistics = new DrivingStatistics();
             drivingStatistics.Show();
         }
+
+        private void FastReservationDrivingButton_Click(object sender, RoutedEventArgs e)
+        {
+            FastReservationDriving fastReservationDriving = new FastReservationDriving();
+            fastReservationDriving.Show();
+
+        }
     }
 }

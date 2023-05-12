@@ -11,7 +11,7 @@ namespace FiveStarTours.Model
     public class Vehicle : ISerializable
     {
         public int Id { get; set; }
-        public int IdLocation { get; set; }
+        //public int IdLocation { get; set; }
         public Location Location { get; set; }
         public int MaxPersonNum { get; set; }
         public List<int> IdLanguages { get; set; }
@@ -23,12 +23,13 @@ namespace FiveStarTours.Model
 
         
 
-        public Vehicle(Location location, List<Language> languageList, List<int>idLanguages, int maximumPersonNumber, List<string> imageUrlsList)
+        public Vehicle( Location location, int maximumPersonNumber,  List<Language> languageList, List<int> idLanguages, List<string> imageUrlsList)
         {
+            //IdLocation = idlocation;
             Location = location;
             MaxPersonNum = maximumPersonNumber;
-            Languages = languageList;
             IdLanguages = idLanguages;
+            Languages = languageList;
             ImageUrls = imageUrlsList;
         }
 
@@ -37,10 +38,11 @@ namespace FiveStarTours.Model
             string[] csvValues =
             {
                 Id.ToString(),
-                IdLocation.ToString(),
+                //IdLocation.ToString(),
+                //Location.ToString(),
                 MaxPersonNum.ToString(),
-                
-                string.Join(';', IdLanguages),
+                string.Join(';', IdLanguages ),
+                //Languages.ToString(),
                 string.Join(';', ImageUrls) };
              return csvValues;
         }
@@ -50,10 +52,11 @@ namespace FiveStarTours.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            IdLocation = Convert.ToInt32(values[1]);
+           // IdLocation = Convert.ToInt32(values[1]);
+
             MaxPersonNum = Convert.ToInt32(values[2]);
             
-            
+
             if (IdLanguages == null)
             {
                 IdLanguages = new List<int>();

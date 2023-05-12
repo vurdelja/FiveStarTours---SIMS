@@ -30,8 +30,10 @@ namespace FiveStarTours.View.VehicleOnAdress
 
         private readonly VehicleOnAdressRepository _vehicleOnAddressRepository;
         private readonly DrivingsRepository _drivingsRepository;
-        public static List<Drivings> Drivings { get; set; }
+        
 
+        public static List<Drivings> Drivings { get; set; }
+        
 
         private string _name;
         public string Name
@@ -144,8 +146,9 @@ namespace FiveStarTours.View.VehicleOnAdress
 
             _vehicleOnAddressRepository = new VehicleOnAdressRepository();
             _drivingsRepository = new DrivingsRepository();
-
             
+
+
             Drivings = _drivingsRepository.GetAll();
 
             if (OnAdressCheckBox != null)
@@ -166,6 +169,8 @@ namespace FiveStarTours.View.VehicleOnAdress
             return new Drivings();
         }
 
+        
+
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             
@@ -175,6 +180,7 @@ namespace FiveStarTours.View.VehicleOnAdress
         private void StartButton_Click(object sender, RoutedEventArgs e)
         { 
             Drivings name = GetSelectedDriving();
+            
             bool isOnAdress = Convert.ToBoolean(OnAdress);
             bool isDelay = Convert.ToBoolean(IsDelay);
             int delay = Convert.ToInt32(EnterDelay);
@@ -183,7 +189,7 @@ namespace FiveStarTours.View.VehicleOnAdress
             int enterStartPrice = Convert.ToInt32(EnterStartPrice);
             
 
-            OnAdress newVehicleOnAdress = new OnAdress(name, isOnAdress, isDelay, delay , drivingStarts, enterStartPrice);
+            OnAdress newVehicleOnAdress = new OnAdress( name, isOnAdress, isDelay, delay , drivingStarts, enterStartPrice);
             _vehicleOnAddressRepository.Save(newVehicleOnAdress);
             
             

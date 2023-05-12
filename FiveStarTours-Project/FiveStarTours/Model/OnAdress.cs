@@ -11,7 +11,7 @@ namespace FiveStarTours.Model
     {
 
         public int Id { get; set; }
-        public Drivings Drivings { get; set; }
+        public Drivings Name { get; set; }
         public bool IsOnAdress { get; set; }
         public bool IsDelay { get; set; }
         public int Delays { get; set; }
@@ -25,14 +25,13 @@ namespace FiveStarTours.Model
 
         public OnAdress() { }
 
-        public OnAdress( Drivings drivings, bool isOnAdress, bool isDelay, int delays, bool isDrivingStarted, int startPrice)
+        public OnAdress( Drivings name, bool isOnAdress, bool isDelay, int delays, bool isDrivingStarted, int startPrice)
         {
-            
-            Drivings = drivings;
+
+            Name = name;
             IsOnAdress = isOnAdress;
             IsDelay = isDelay;
             Delays = delays;
-            
             IsDrivingStarted = isDrivingStarted;
             StartPrice = startPrice;
             
@@ -44,10 +43,10 @@ namespace FiveStarTours.Model
             string[] csvValues =
             {
                 Id.ToString(),
+                //Name.ToString(),
                 IsOnAdress.ToString(),
                 IsDelay.ToString(),
                 Delays.ToString(),
-                
                 IsDrivingStarted.ToString(),
                 StartPrice.ToString(),
                   
@@ -58,15 +57,12 @@ namespace FiveStarTours.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
+            
             IsOnAdress = Convert.ToBoolean(values[1]);
             IsDelay = Convert.ToBoolean(values[2]);
             Delays = Convert.ToInt32(values[3]);
-
-
             IsDrivingStarted.GetType().ToString();
             StartPrice.GetType().ToString();
-
-            //TimerInterval.GetType().ToString(); 
 
         }
 

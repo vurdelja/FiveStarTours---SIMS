@@ -132,19 +132,21 @@ namespace FiveStarTours.View.VehicleRegistration
         
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            
             Location location = GetSelectedLocation();
+            int MaximumPersonNumber = int.Parse(MaxPersonNum);
             List<Language> LanguageList = MakeLanguagesList(Languages);
             List<int> LanguageIds = GetLanguagesIds(LanguageList);
-            int MaximumPersonNumber = int.Parse(MaxPersonNum);
+            
             List<string> ImageUrlsList = MakeUrlsList(ImageUrls);
 
             
-            Vehicle newVehicle = new Vehicle( location, LanguageList, LanguageIds, MaximumPersonNumber, ImageUrlsList );
+            Vehicle newVehicle = new Vehicle(location, MaximumPersonNumber, LanguageList , LanguageIds, ImageUrlsList);
             _vehicleRegistrationRepository.Save(newVehicle);
             MessageBox.Show("Data saved successfully.");
             Close();
         }
-        
+
         
 
         private List<string> MakeUrlsList(string urls)
