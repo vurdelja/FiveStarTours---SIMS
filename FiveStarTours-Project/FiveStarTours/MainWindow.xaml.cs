@@ -108,7 +108,7 @@ namespace FiveStarTours
                 VisitorMainWindow visitorMainWindow = new VisitorMainWindow(user);
                 visitorMainWindow.Show();
             }
-            else 
+            else if (String.Equals(user.Role.ToLower(), "driver"))
             {
                 DriverMainWindow driverMainWindow = new DriverMainWindow();
                 driverMainWindow.Show();

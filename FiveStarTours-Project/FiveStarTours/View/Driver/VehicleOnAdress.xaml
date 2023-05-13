@@ -18,6 +18,7 @@
                   Margin="0,190,0,137" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" IsReadOnly="True" Binding="{Binding Name, Mode=TwoWay}" Width="150"/>
+                <DataGridCheckBoxColumn x:Name="AcceptDrive" Header="Accept Drive" Binding="{Binding AcceptingDrive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="100" IsThreeState="True" />
                 <DataGridCheckBoxColumn x:Name="OnAdressCheckBox" Header="On Adress" Binding="{Binding OnAdress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="100" IsThreeState="True" />
                 <DataGridCheckBoxColumn x:Name="IsDelayCheckBox" Header="Delay" Binding="{Binding IsDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100"  IsThreeState="True"/>
                 <DataGridTextColumn  x:Name="EnterDelayTextBox" Header="Enter Delay" Binding="{Binding EnterDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100" />

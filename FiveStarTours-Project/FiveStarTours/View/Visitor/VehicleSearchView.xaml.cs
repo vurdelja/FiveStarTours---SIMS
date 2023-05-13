@@ -2,6 +2,8 @@
 using FiveStarTours.Repository;
 using FiveStarTours.Services;
 using FiveStarTours.View.Traveler;
+using FiveStarTours.View.Driver;
+using FiveStarTours.View.VehicleOnAdress;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -57,6 +59,14 @@ namespace FiveStarTours.View.Visitor
             DestinationState.ItemsSource = destination;
             DestinationState.SelectedValuePath = ".";
             DestinationState.DisplayMemberPath = ".";
+
+            
+        }
+
+        private void OnNotificationReceived(string message)
+        {
+            // Handle the notification message
+            MessageBox.Show(message);
 
         }
         public string selectedStartingCity;
