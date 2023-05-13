@@ -19,6 +19,7 @@ using FiveStarTours.Serializer;
 using ControlzEx.Standard;
 using System.Security.Policy;
 using FiveStarTours.View.Driver;
+using Microsoft.VisualBasic.FileIO;
 
 namespace FiveStarTours.View.VehicleOnAdress
 {
@@ -146,8 +147,34 @@ namespace FiveStarTours.View.VehicleOnAdress
 
             _vehicleOnAddressRepository = new VehicleOnAdressRepository();
             _drivingsRepository = new DrivingsRepository();
-            
 
+            string csvFilePath = "../../../Resources/Data/vehicles.csv";
+
+            try
+            {
+                using (TextFieldParser parser = new TextFieldParser(csvFilePath))
+                {
+                    parser.TextFieldType = FieldType.Delimited;
+                    parser.SetDelimiters(",");
+
+                    while (!parser.EndOfData)
+                    {
+                        string[] fields = parser.ReadFields();
+
+                        // Assuming the values are in the first column of each line
+                        if (fields.Length > 0)
+                        {
+                            string value = fields[0];
+                            SelectDriverComboBox.Items.Add(value);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions that may occur during the process
+                MessageBox.Show("Error: " + ex.Message);
+            }
 
             Drivings = _drivingsRepository.GetAll();
 
@@ -201,6 +228,9 @@ namespace FiveStarTours.View.VehicleOnAdress
             Close();
         }
 
-        
+        private void SelectDriverComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

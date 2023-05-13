@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using FiveStarTours.Repository;
 using FiveStarTours.Serializer;
 
 
@@ -11,10 +13,9 @@ namespace FiveStarTours.Model
     public class Vehicle : ISerializable
     {
         public int Id { get; set; }
-        //public int IdLocation { get; set; }
-        public string Name { get; set; }    
+        public string Name { get; set; }
+        public int IdLocation { get; set; }
         public Location Location { get; set; }
-       
         public int MaxPersonNum { get; set; }
         public List<int> IdLanguages { get; set; }
         public List<Language> Languages { get; set; }
@@ -22,9 +23,11 @@ namespace FiveStarTours.Model
 
         public Vehicle() { }
 
-        public Vehicle( Location location, int maximumPersonNumber,  List<Language> languageList, List<int> idLanguages, List<string> imageUrlsList)
+        public Vehicle( string name, int idlocation, Location location, int maximumPersonNumber,  List<Language> languageList, List<int> idLanguages, List<string> imageUrlsList)
         {
-            //IdLocation = idlocation;
+           
+            Name = name;
+            IdLocation = idlocation;
             Location = location;
             MaxPersonNum = maximumPersonNumber;
             IdLanguages = idLanguages;
@@ -34,16 +37,16 @@ namespace FiveStarTours.Model
 
         public string[] ToCSV()
         {
+            
             string[] csvValues =
-            {
-                Id.ToString(),
-                //IdLocation.ToString(),
-                //Location.ToString(),
-                MaxPersonNum.ToString(),
-                string.Join(';', IdLanguages ),
-                //Languages.ToString(),
-                string.Join(';', ImageUrls) };
-             return csvValues;
+            { 
+              Id.ToString(),
+              Name,
+              IdLocation.ToString(),
+              string.Join(';', IdLanguages),
+              MaxPersonNum.ToString(),
+              string.Join(';', ImageUrls) };
+            return csvValues;
         }
             
         
@@ -51,20 +54,43 @@ namespace FiveStarTours.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-           // IdLocation = Convert.ToInt32(values[1]);
-
-            MaxPersonNum = Convert.ToInt32(values[2]);
-            
-
-            if (IdLanguages == null)
-            {
-                IdLanguages = new List<int>();
-                
-            }
-            
-            ImageUrls = values[4].Split(';').ToList();
+            Name = values[1];
+            IdLocation = Convert.ToInt32(values[2]);
+            IdLanguages = ConvertToInt(values[3]);
+            MaxPersonNum = Convert.ToInt32(values[4]);
+            ImageUrls = values[5].Split(';').ToList();
         }
 
-        
+        // Conversion from string to int - for list
+        public List<int> ConvertToInt(string values)
+        {
+            List<string> numbers = values.Split(';').ToList();
+            List<int> result = new List<int>();
+
+            foreach (string num in numbers)
+            {
+                int number = Convert.ToInt32(num);
+                result.Add(number);
+            }
+
+            return result;
+
+        }
+
+        public Location getLocationById(int locationId)
+        {
+            LocationsRepository locationsRepository = new LocationsRepository();
+            foreach (Location location in locationsRepository.GetAll())
+            {
+                if (locationId == location.Id)
+                {
+                    Location = location;
+                    return location;
+                }
+            }
+
+            return null;
+
+        }
     }
 }

@@ -1,15 +1,12 @@
-﻿using FiveStarTours.Model;
-using FiveStarTours.Repository;
-using FiveStarTours.View;
-using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using FiveStarTours.Model;
+using FiveStarTours.Repository;
+using FiveStarTours.Services;
 
 
 namespace FiveStarTours.View.VehicleRegistration
@@ -20,10 +17,24 @@ namespace FiveStarTours.View.VehicleRegistration
     public partial class VehicleRegistration : Window, INotifyPropertyChanged
     {
 
-        private readonly VehicleRepository _vehicleRegistrationRepository;
+        private readonly VehicleRepository _vehicleRepository;
         private readonly LanguagesRepository _languagesRepository;
         private readonly LocationsRepository _locationsRepository;
 
+
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                if (value != _name)
+                {
+                    _name = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private string _languages;
         public string Languages
         {
@@ -96,7 +107,7 @@ namespace FiveStarTours.View.VehicleRegistration
             InitializeComponent();
             DataContext = this;
 
-            _vehicleRegistrationRepository = new VehicleRepository();
+            _vehicleRepository = new VehicleRepository();
             _languagesRepository = new LanguagesRepository();
             _locationsRepository = new LocationsRepository();
 
@@ -132,22 +143,89 @@ namespace FiveStarTours.View.VehicleRegistration
         
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            //Name
             
-            Location location = GetSelectedLocation();
-            int MaximumPersonNumber = int.Parse(MaxPersonNum);
-            List<Language> LanguageList = MakeLanguagesList(Languages);
-            List<int> LanguageIds = GetLanguagesIds(LanguageList);
-            
-            List<string> ImageUrlsList = MakeUrlsList(ImageUrls);
 
-            
-            Vehicle newVehicle = new Vehicle(location, MaximumPersonNumber, LanguageList , LanguageIds, ImageUrlsList);
-            _vehicleRegistrationRepository.Save(newVehicle);
+            //Location
+            Location location = new Location();
+            if (CheckLocation())
+            {
+                location = GetSelectedLocation();
+            }
+            else return;
+
+            //Maximum Person Number
+            int MaximumPersonNumber;
+            if (MaxPersonNum == null)
+            {
+                MessageBox.Show("You must enter maximum guests number.");
+                return;
+            }
+            else
+            {
+                MaximumPersonNumber = int.Parse(MaxPersonNum);
+                if (MaximumPersonNumber < 1)
+                {
+                    MessageBox.Show("Maximum number of guests must be greater then 0.");
+                    return;
+                }
+            }
+
+            //Language
+            List<Language> LanguageList = new List<Language>();
+            if (CheckLanguages(Languages))
+            {
+                LanguageList = MakeLanguagesList(Languages);
+            }
+            else return;
+
+            List<int> LanguageIds = GetLanguagesIds(LanguageList);
+
+            //Img URLs
+            List<string> ImageUrlsList = new List<string>();
+            if (CheckUrls(ImageUrls))
+            {
+                ImageUrlsList = MakeUrlsList(ImageUrls);
+            }
+            else return;
+
+
+            Vehicle newVehicle = new Vehicle( Name, location.Id, location, MaximumPersonNumber, LanguageList , LanguageIds, ImageUrlsList);
+            _vehicleRepository.Save(newVehicle);
             MessageBox.Show("Data saved successfully.");
             Close();
         }
 
-        
+        public bool CheckUrls(string urls)
+        {
+            if (urls == null)
+            {
+                MessageBox.Show("At least 1 URL is required.");
+                return false;
+            }
+
+            return true;
+        }
+        public bool CheckLanguages(string languages)
+        {
+            if (languages == null)
+            {
+                MessageBox.Show("At least 1 language is required.");
+                return false;
+            }
+
+            return true;
+        }
+        public bool CheckLocation()
+        {
+            if (selectedCity == null)
+            {
+                MessageBox.Show("You must select state and city.");
+                return false;
+            }
+
+            return true;
+        }
 
         private List<string> MakeUrlsList(string urls)
         {
