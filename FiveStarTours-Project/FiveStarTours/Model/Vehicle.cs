@@ -12,16 +12,15 @@ namespace FiveStarTours.Model
     {
         public int Id { get; set; }
         //public int IdLocation { get; set; }
+        public string Name { get; set; }    
         public Location Location { get; set; }
+       
         public int MaxPersonNum { get; set; }
         public List<int> IdLanguages { get; set; }
         public List<Language> Languages { get; set; }
         public List<string> ImageUrls { get; set; }
 
-
         public Vehicle() { }
-
-        
 
         public Vehicle( Location location, int maximumPersonNumber,  List<Language> languageList, List<int> idLanguages, List<string> imageUrlsList)
         {
