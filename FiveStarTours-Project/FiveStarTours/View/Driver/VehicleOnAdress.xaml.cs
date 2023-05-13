@@ -6,12 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using FiveStarTours.Repository;
 using FiveStarTours.View;
 using Microsoft.Win32;
@@ -41,7 +35,7 @@ namespace FiveStarTours.View.VehicleOnAdress
 
         public static List<Drivings> Drivings { get; set; }
         public User LoggedInUser { get; set; }
-        public bool notificationReceived = false;
+        //public bool notificationReceived = false;
 
        
 
@@ -197,7 +191,6 @@ namespace FiveStarTours.View.VehicleOnAdress
             }
             catch (Exception ex)
             {
-                // Handle any exceptions that may occur during the process
                 MessageBox.Show("Error: " + ex.Message);
             }
             //Reserved driving in Grid (Name)
@@ -213,9 +206,16 @@ namespace FiveStarTours.View.VehicleOnAdress
                 IsDelayCheckBox.IsReadOnly = false;   
                 EnterDelayTextBox.IsReadOnly = false;
             }
-
             
 
+
+        }
+
+        //Send notification
+        public void SendNotification()
+        {
+            // Update the shared object with the notification message
+            NotificationManager.Instance.Notification = "Driver accepted your reservation";
         }
 
         private Drivings GetSelectedDriving()
@@ -238,7 +238,7 @@ namespace FiveStarTours.View.VehicleOnAdress
             //Accept drive and send notification
             if (AcceptDrive != null)
             {
-                
+                SendNotification();
                 /*
                 //Send notification
                 notificationReceived = Notification.SentNotification;

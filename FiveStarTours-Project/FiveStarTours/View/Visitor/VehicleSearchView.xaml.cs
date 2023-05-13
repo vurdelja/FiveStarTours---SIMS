@@ -21,6 +21,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace FiveStarTours.View.Visitor
 {
@@ -60,9 +61,25 @@ namespace FiveStarTours.View.Visitor
             DestinationState.SelectedValuePath = ".";
             DestinationState.DisplayMemberPath = ".";
 
-            
+            // Poll the shared object to detect changes
+            var timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += Timer_Tick;
+            timer.Start();
         }
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            // Check if the shared object's notification message has changed
+            string notification = NotificationManager.Instance.Notification;
+            if (!string.IsNullOrEmpty(notification))
+            {
+                // Handle the notification message
+                MessageBox.Show(notification);
 
+                // Reset the notification after handling
+                NotificationManager.Instance.Notification = null;
+            }
+        }
         private void OnNotificationReceived(string message)
         {
             // Handle the notification message
