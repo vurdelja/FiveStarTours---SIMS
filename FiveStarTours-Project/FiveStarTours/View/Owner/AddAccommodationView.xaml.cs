@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using System.Security.AccessControl;
 using System.Xml.Linq;
 using FiveStarTours.Services;
+using FiveStarTours.View.Owner;
 
 namespace FiveStarTours.View
 {
@@ -169,7 +170,7 @@ namespace FiveStarTours.View
         }
 
 
-        private void SubmitRegistrationButton_Click(object sender, RoutedEventArgs e)
+        private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
             Location location = GetSelectedLocation();
 
@@ -289,10 +290,10 @@ namespace FiveStarTours.View
             return result;
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-            OwnerMainWindow main = new OwnerMainWindow(LoggedInUser);
-            main.Show();
+            ActionBarView action = new ActionBarView(LoggedInUser);
+            action.Show();
             Close();
         }
 
