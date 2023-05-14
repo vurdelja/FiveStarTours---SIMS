@@ -19,9 +19,6 @@ namespace FiveStarTours.Repository
 
         private List<Vehicle> _vehicles;
        
-
-        private List<Vehicle> _countfastdrive;
-
         public VehicleRepository()
         {
             _serializer = new Serializer<Vehicle>();
@@ -51,35 +48,5 @@ namespace FiveStarTours.Repository
             }
             return _vehicles.Max(t => t.Id) + 1;
         }
-
-        public Vehicle GetByFastDrive(string fastdrivenum)
-        {
-            _vehicles = GetAll();
-            foreach (Vehicle vehicle in _vehicles)
-            {
-                if (vehicle.FastDriveNum == fastdrivenum)
-                {
-                    return vehicle;
-                }
-            }
-            return null;
-        }
-
-        
-        /*
-public string CountFastDrive()
-{
-   int number = 0;
-   _countfastdrive = GetbyFastDrive();
-
-   foreach (Vehicle vehiclefastdrive in _countfastdrive)
-   {
-       number++;
-   }
-
-   return number;
-
-}
-*/
     }
 }

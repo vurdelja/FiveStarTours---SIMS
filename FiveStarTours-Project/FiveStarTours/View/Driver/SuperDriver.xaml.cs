@@ -59,7 +59,6 @@ namespace FiveStarTours.View.Driver
                 MessageBox.Show("Error: " + ex.Message);
             }
             
-            
         }
 
         private void CheckHereButton_Click(object sender, RoutedEventArgs e)
