@@ -7,12 +7,12 @@
         mc:Ignorable="d"
         Title="NotificationsWindow" Height="600" Width="1200" ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
          WindowStartupLocation="CenterScreen">
-    <Grid Background="WhiteSmoke">
+    <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Border Grid.Column="0" Background="Lavender" CornerRadius="15 15 15 15" >
+        <Border Grid.Column="0" Background="LightGray" CornerRadius="15 15 15 15" >
             <Grid DataContext="{Binding LoggedInUser}">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -79,7 +79,7 @@
                 <RowDefinition Height="85"/>
             </Grid.RowDefinitions>
             <Border Grid.Row="1" Grid.Column="1" BorderThickness="6" BorderBrush="LightGray">
-                <Grid Grid.Row="1" Grid.Column="1" Background="LemonChiffon">
+                <Grid Grid.Row="1" Grid.Column="1" Background="WhiteSmoke">
                     <Label Content="HELLO!" 
                    VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="23" FontWeight="Medium" Margin="0,94,0,0" />
                     <Label Content="DID YOU JOIN THE TOUR?" 

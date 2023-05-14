@@ -7,12 +7,12 @@
         mc:Ignorable="d"
         Title="ToursListingView" Height="600" Width="1200" ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
          WindowStartupLocation="CenterScreen">
-    <Grid Background="WhiteSmoke">
+    <Grid Background="white">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Border Grid.Column="0" Background="Lavender" CornerRadius="15 15 15 15" >
+        <Border Grid.Column="0" Background="LightGray" CornerRadius="15 15 15 15" >
             <Grid DataContext="{Binding LoggedInUser}">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -30,8 +30,8 @@
 
                 <TextBlock Grid.Row="1" Width="200" Height="45" HorizontalAlignment="Center" VerticalAlignment="Center" 
                            TextAlignment="Center" Text="{Binding Path=Username}" FontSize="15" FontWeight="Medium"/>
-                <Button Grid.Row="2" Width="200" Height="45" Content="ALL TOURS" Background="WhiteSmoke" FontSize="20" FontWeight="Medium"
-                         HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="DarkGray" />
+                <Button Grid.Row="2" Width="200" Height="45" Content="ALL TOURS" Background="DarkGray" FontSize="20" FontWeight="Medium"
+                         HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="Black" />
                 <Button Grid.Row="3" Click="ReservedToursButton_Click" Width="200" Height="45" Content="MY TOURS" Background="WhiteSmoke" FontSize="20"
                          FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="DarkGray" />
                 <Button Grid.Row="4" Click="GiftCardsButton_Click" Width="200" Height="45" Content="GIFT CARDS" Background="WhiteSmoke" FontSize="20"
@@ -73,7 +73,7 @@
             </Grid.RowDefinitions>
             <Border Grid.Row="1" BorderBrush="LightGray" BorderThickness="3">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <ListBox ItemsSource="{Binding Tours}" Name="tourListBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                    <ListBox ItemsSource="{Binding Tours}" Name="tourListBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="WhiteSmoke">
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="{x:Type ListBoxItem}">
                                 <Setter Property="Width" Value="Auto" />

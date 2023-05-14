@@ -112,13 +112,9 @@ namespace FiveStarTours.View.Visitor
 
         private void ShowTourButton_Click(object sender, RoutedEventArgs e)
         {
-
-            if (SelectedTour != null)
-            {
-                TourView tourView = new TourView(SelectedTour, LoggedInUser);
-                tourView.Show();
-
-            }
+            TourRequestView tourRequest = new TourRequestView(LoggedInUser);
+            tourRequest.Show();
+            
         }
 
         private void RateClick(object sender, RoutedEventArgs e)

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="TourView" Height="600" Width="1200" ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
          WindowStartupLocation="CenterScreen">
-    <Grid Background="WhiteSmoke">
+    <Grid Background="white">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="*"/>
@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
         <Border Grid.Column="1" Grid.Row="1" BorderThickness="3" BorderBrush="LightGray">
             <ScrollViewer Grid.Row="1" Grid.Column="1">
-            <Grid Grid.Row="1" Grid.Column="1" Background="Lavender" DataContext="{Binding tour}" ShowGridLines="True">
+            <Grid Grid.Row="1" Grid.Column="1" Background="WhiteSmoke" DataContext="{Binding tour}" ShowGridLines="True">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="160"/>
                     <ColumnDefinition Width="*"/>

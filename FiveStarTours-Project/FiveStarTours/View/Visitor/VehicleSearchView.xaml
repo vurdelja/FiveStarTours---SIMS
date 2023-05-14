@@ -12,7 +12,7 @@
             <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Border Grid.Column="0" Background="Lavender" CornerRadius="15 15 15 15">
+        <Border Grid.Column="0" Background="LightGray" CornerRadius="15 15 15 15">
             <Grid Grid.Column="0" >
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -51,10 +51,10 @@
                 <ColumnDefinition Width="130"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="1" Content="SEARCH VEHICLE"  FontWeight="Medium" BorderThickness="3" BorderBrush="LightGray"
-                   VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Background="LemonChiffon"/>
-            <Grid Grid.Row="1" Grid.Column="1" Background="LemonChiffon">
+                   VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Background="WhiteSmoke"/>
+            <Grid Grid.Row="1" Grid.Column="1" Background="WhiteSmoke">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="180"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
