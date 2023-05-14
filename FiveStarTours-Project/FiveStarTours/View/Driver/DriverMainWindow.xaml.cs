@@ -64,5 +64,11 @@ namespace FiveStarTours.View
             fastReservationDriving.Show();
 
         }
+
+        private void SuperDriverButton_Click(object sender, RoutedEventArgs e)
+        {
+            SuperDriver superDriver = new SuperDriver();
+            superDriver.Show();
+        }
     }
 }

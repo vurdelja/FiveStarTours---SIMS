@@ -94,6 +94,21 @@ namespace FiveStarTours.View.VehicleRegistration
             }
         }
 
+        private string _fastDriveNum;
+        public string FastDriveNum
+        {
+
+            get => _fastDriveNum;
+            set
+            {
+                if (value != _fastDriveNum)
+                {
+                    _fastDriveNum = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -189,8 +204,25 @@ namespace FiveStarTours.View.VehicleRegistration
             }
             else return;
 
+            //Fast Drive Number
+            string FastDriveNumber;
+            if (FastDriveNum == null)
+            {
+                MessageBox.Show("You must enter number of fast drivings.");
+                return;
+            }
+            else
+            {
+                FastDriveNumber = Convert.ToString(FastDriveNum);
+                if (FastDriveNumber.Length < 1)
+                {
+                    MessageBox.Show("Maximum number of guests must be greater then 0.");
+                    return;
+                }
+            }
 
-            Vehicle newVehicle = new Vehicle( Name, location.Id, location, MaximumPersonNumber, LanguageList , LanguageIds, ImageUrlsList);
+
+            Vehicle newVehicle = new Vehicle( Name, location.Id, location, MaximumPersonNumber, LanguageList , LanguageIds, ImageUrlsList , FastDriveNumber);
             _vehicleRepository.Save(newVehicle);
             MessageBox.Show("Data saved successfully.");
             Close();

@@ -11,8 +11,8 @@
         <Label Content="Max Person Number*" HorizontalAlignment="Left" Margin="78,209,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Label Content="Language*" HorizontalAlignment="Left" Margin="154,264,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="-0.017,0.533"/>
         <Label Content="Images*" HorizontalAlignment="Left" Margin="172,313,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.18,-1.697"/>
-        <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="180,406,0,0" VerticalAlignment="Top" Height="22" Width="120" RenderTransformOrigin="0.96,-0.324" Click="SaveButton_Click"/>
-        <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="340,406,0,0" VerticalAlignment="Top" Width="129" Height="22" RenderTransformOrigin="0.64,3.309" Click="CancelButton_Click"/>
+        <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="176,427,0,0" VerticalAlignment="Top" Height="22" Width="120" RenderTransformOrigin="0.96,-0.324" Click="SaveButton_Click"/>
+        <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="335,427,0,0" VerticalAlignment="Top" Width="129" Height="22" RenderTransformOrigin="0.64,3.309" Click="CancelButton_Click"/>
         <ComboBox x:Name="stateComboBox" HorizontalAlignment="Left" Margin="258,167,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="StateCombobox_SelectionChanged" Height="22"/>
         <ComboBox x:Name="cityComboBox" HorizontalAlignment="Left" Margin="404,167,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="CityCombobox_SelectionChanged" Height="22"/>
         <Label Content="State*" HorizontalAlignment="Left" Margin="254,140,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.222,-0.363"/>
@@ -23,6 +23,8 @@
         <TextBox HorizontalAlignment="Left" Margin="254,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Height="22" Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" />
         <Label Content="Name*" HorizontalAlignment="Left" Margin="184,95,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Label Content="Driver Registration" HorizontalAlignment="Left" Margin="224,25,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
+        <TextBox HorizontalAlignment="Left" Margin="258,371,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" Height="22" Text="{Binding Path=FastDriveNum, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Content="Fast Drive Number*" HorizontalAlignment="Left" Margin="91,366,0,0" VerticalAlignment="Top" FontSize="16"/>
 
     </Grid>
 </Window>

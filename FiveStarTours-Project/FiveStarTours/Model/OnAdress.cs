@@ -18,7 +18,7 @@ namespace FiveStarTours.Model
         public int Id { get; set; }
         public User User { get; set; }
         public Drivings Name { get; set; }
-        public bool AcceptDrive { get; set; }
+        public bool FastDrive { get; set; }
         public bool IsOnAdress { get; set; }
         public bool IsDelay { get; set; }
         public int Delays { get; set; }
@@ -30,12 +30,12 @@ namespace FiveStarTours.Model
 
         public OnAdress() { }
 
-        public OnAdress( Drivings name, User user, bool acceptDrive, bool isOnAdress, bool isDelay, int delays, bool isDrivingStarted, int startPrice)
+        public OnAdress( Drivings name, User user, bool fastDrive, bool isOnAdress, bool isDelay, int delays, bool isDrivingStarted, int startPrice)
         {
 
             Name = name;
             User = user;
-            AcceptDrive = acceptDrive;
+            FastDrive = fastDrive;
             IsOnAdress = isOnAdress;
             IsDelay = isDelay;
             Delays = delays;
@@ -52,7 +52,7 @@ namespace FiveStarTours.Model
                 Id.ToString(),
                 //Name.ToString(),
                 User.Id.ToString(),
-                AcceptDrive.ToString(),
+                FastDrive.ToString(),
                 IsOnAdress.ToString(),
                 IsDelay.ToString(),
                 Delays.ToString(),
@@ -67,7 +67,7 @@ namespace FiveStarTours.Model
         {
             Id = Convert.ToInt32(values[0]);
             User = new User() { Id = Convert.ToInt32(values[1]) };
-            AcceptDrive = Convert.ToBoolean(values[1]);
+            FastDrive = Convert.ToBoolean(values[1]);
             IsOnAdress = Convert.ToBoolean(values[2]);
             IsDelay = Convert.ToBoolean(values[3]);
             Delays = Convert.ToInt32(values[4]);

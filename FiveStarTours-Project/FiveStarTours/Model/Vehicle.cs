@@ -21,9 +21,11 @@ namespace FiveStarTours.Model
         public List<Language> Languages { get; set; }
         public List<string> ImageUrls { get; set; }
 
+        public string FastDriveNum { get; set; }
+
         public Vehicle() { }
 
-        public Vehicle( string name, int idlocation, Location location, int maximumPersonNumber,  List<Language> languageList, List<int> idLanguages, List<string> imageUrlsList)
+        public Vehicle( string name, int idlocation, Location location, int maximumPersonNumber,  List<Language> languageList, List<int> idLanguages, List<string> imageUrlsList, string fastdrivenum)
         {
            
             Name = name;
@@ -33,6 +35,7 @@ namespace FiveStarTours.Model
             IdLanguages = idLanguages;
             Languages = languageList;
             ImageUrls = imageUrlsList;
+            FastDriveNum = fastdrivenum;
         }
 
         public string[] ToCSV()
@@ -45,7 +48,9 @@ namespace FiveStarTours.Model
               IdLocation.ToString(),
               string.Join(';', IdLanguages),
               MaxPersonNum.ToString(),
-              string.Join(';', ImageUrls) };
+              string.Join(';', ImageUrls),
+              FastDriveNum
+            };
             return csvValues;
         }
             
@@ -59,6 +64,7 @@ namespace FiveStarTours.Model
             IdLanguages = ConvertToInt(values[3]);
             MaxPersonNum = Convert.ToInt32(values[4]);
             ImageUrls = values[5].Split(';').ToList();
+            FastDriveNum = values[6];
         }
 
         // Conversion from string to int - for list
