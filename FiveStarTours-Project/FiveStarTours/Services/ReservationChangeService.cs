@@ -50,5 +50,10 @@ namespace FiveStarTours.Services
         {
             return _reservationChangeRepository.Update(changes);
         }
+
+        public bool IsBusy(ReservationChange changes)
+        {
+            return _reservationChangeRepository.IsBusy(changes);
+        }
     }
 }

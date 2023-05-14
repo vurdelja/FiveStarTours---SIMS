@@ -143,11 +143,13 @@ namespace FiveStarTours.Repository
         public List<AccommodationReservation> GetRatedByGuest()
         {
             List<AccommodationReservation> reservations = new List<AccommodationReservation>();
+            reservations = GetAll();
+
             foreach (AccommodationReservation accommodationReservation in _reservations)
             {
-                if (accommodationReservation.RatedByGuest == true)
+                if (accommodationReservation.RatedByGuest == false)
                 {
-                    reservations.Add(accommodationReservation);
+                    reservations.Remove(accommodationReservation);
                 }
             }
             return reservations;

@@ -34,9 +34,11 @@ namespace FiveStarTours.View.Owner
             InitializeComponent();
             DataContext = this;
 
+            _service = new AccommodationReservationService();
+
             LoggedInUser = user;
 
-            _service = new AccommodationReservationService();
+            
             Reservations = new ObservableCollection<AccommodationReservation>(_service.GetRatesForOwner());
 
         }

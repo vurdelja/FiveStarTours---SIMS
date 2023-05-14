@@ -1,15 +1,16 @@
-﻿using FiveStarTours.Model;
-using FiveStarTours.Serializer;
-using Microsoft.VisualBasic.ApplicationServices;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FiveStarTours.Interfaces;
+using FiveStarTours.Model;
+using FiveStarTours.Serializer;
+using FiveStarTours.View.VehicleOnAdress;
 
 namespace FiveStarTours.Repository
 {
-    public class DrivingStatisticsRepository2
+    public class DrivingStatisticsRepository2 : IDrivingStatisticsRepository2
     {
         private const string FilePath = "../../../Resources/Data/drivingstatistics2.csv";
 

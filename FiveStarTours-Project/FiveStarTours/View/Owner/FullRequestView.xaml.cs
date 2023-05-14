@@ -23,35 +23,60 @@ namespace FiveStarTours.View.Owner
     /// </summary>
     public partial class FullRequestView : Window
     {
-        public ReservationChange _selectedRequest { get; set; }
-
+        User LoggedInUser { get; set; }
 
         private readonly ReservationChangeService _requestService;
+        private readonly AccommodationReservationService _reservationService;
         public ReservationChange reservationChange { get; set; }
+        public AccommodationReservation reservation { get; set; }
 
 
 
-        public FullRequestView(ReservationChange selectedRequest)
+        public FullRequestView(ReservationChange selectedRequest, User user)
         {
             InitializeComponent();
             DataContext = this;
 
-            _selectedRequest = selectedRequest;
-            _requestService = new ReservationChangeService();
+            LoggedInUser = user;
 
-            reservationChange = new ReservationChange();
-            reservationChange = _selectedRequest;
+            _requestService = new ReservationChangeService();
+            _reservationService = new AccommodationReservationService();
+
+
+            reservationChange = selectedRequest;
+
+
+            if (_requestService.IsBusy(reservationChange) == true)
+            {
+                reservationChange.IsBusy = true;
+            }
+            else
+            {
+                reservationChange.IsBusy = false;
+            }
         }
 
         private void AcceptButton_Click(object sender, RoutedEventArgs e)
         {
+            reservationChange.AccommodationReservation.StartDate = reservationChange.NewStartDate;
+            reservationChange.AccommodationReservation.EndDate = reservationChange.NewEndDate;
+            _reservationService.Update(reservationChange.AccommodationReservation);
+
+            reservationChange.Status = Model.Enums.ReservationChangeStatusType.Approved;
+            _requestService.Update(reservationChange);
+
+            ManageRequestsView manageRequestsView = new ManageRequestsView(LoggedInUser);
+            manageRequestsView.Show();
             Close();
         }
 
         private void DeclineButton_Click(object sender, RoutedEventArgs e)
         {
-            _selectedRequest.Status = Model.Enums.ReservationChangeStatusType.Rejected;
-            _requestService.Update(_selectedRequest);
+            reservationChange.Status = Model.Enums.ReservationChangeStatusType.Rejected;
+            _requestService.Update(reservationChange);
+
+            ManageRequestsView manageRequestsView = new ManageRequestsView(LoggedInUser);
+            manageRequestsView.Show();
             Close();
         }
 

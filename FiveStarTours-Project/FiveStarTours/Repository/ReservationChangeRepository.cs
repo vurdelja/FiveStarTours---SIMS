@@ -105,5 +105,14 @@ namespace FiveStarTours.Repository
             _serializer.ToCSV(FilePath, _changes);
             return changes;
         }
+
+        public bool IsBusy(ReservationChange changes)
+        {
+            bool newStartBeforeEnd = changes.NewStartDate <= changes.AccommodationReservation.EndDate;
+            bool newEndAfterStart = changes.NewEndDate >= changes.AccommodationReservation.StartDate;
+            bool anyDurationOverlap = newStartBeforeEnd && newEndAfterStart;
+
+            return anyDurationOverlap;
+        }
     }
 }
