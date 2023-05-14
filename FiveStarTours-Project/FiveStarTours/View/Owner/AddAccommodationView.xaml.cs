@@ -1,17 +1,10 @@
 ﻿using FiveStarTours.Model;
-using FiveStarTours.Repository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using Microsoft.Win32;
-using System.Windows.Media.Imaging;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Security.AccessControl;
-using System.Xml.Linq;
 using FiveStarTours.Services;
 using FiveStarTours.View.Owner;
 
