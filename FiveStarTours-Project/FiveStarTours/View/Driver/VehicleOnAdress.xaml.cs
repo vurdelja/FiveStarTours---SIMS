@@ -240,7 +240,7 @@ namespace FiveStarTours.View.VehicleOnAdress
             //Name
             Drivings name = GetSelectedDriving();
             //Accept drive and send notification
-            if (FastDriving != null)
+            if (FastDriving == true)
             {
                 SendNotification();
                 /*
