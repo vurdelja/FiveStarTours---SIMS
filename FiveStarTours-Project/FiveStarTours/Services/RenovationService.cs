@@ -20,12 +20,12 @@ namespace FiveStarTours.Services
             _renovationRepository = Injector.Injector.CreateInstance<IRenovationRepository>();
         }
 
-        public List<Renovation> GetAll()
+        public List<Renovations> GetAll()
         {
             return _renovationRepository.GetAll();
         }
 
-        public Renovation Save(Renovation renovation)
+        public Renovations Save(Renovations renovation)
         {
             return _renovationRepository.Save(renovation);
         }
@@ -36,16 +36,16 @@ namespace FiveStarTours.Services
             return NextId();
         }
 
-        public Renovation GetById(int id)
+        public Renovations GetById(int id)
         {
             return _renovationRepository.GetById(id);
         }
-        public void Delete(Renovation renovation)
+        public void Delete(Renovations renovation)
         {
             _renovationRepository.Delete(renovation);
         }
 
-        public Renovation Update(Renovation renovations)
+        public Renovations Update(Renovations renovations)
         {
             return _renovationRepository.Update(renovations);
         }
@@ -55,13 +55,18 @@ namespace FiveStarTours.Services
             return _renovationRepository.DatesIntertwine(startAcc, endAcc, start, end);
         }
 
+        public void SetToFalse(Renovations renovation)
+        {
+            _renovationRepository.SetToFalse(renovation);
+        }
 
-        public List<Renovation> GetAllReservationsForAccommodationDateInterval(string accomodationName, DateTime start, DateTime end)
+
+        public List<Renovations> GetAllReservationsForAccommodationDateInterval(string accomodationName, DateTime start, DateTime end)
         {
             return _renovationRepository.GetAllReservationsForAccommodationDateInterval(accomodationName, start, end);
         }
 
-        public bool DoesInterwalIntertwineWithReservations(List<Renovation> renovations, DateTime start, DateTime end)
+        public bool DoesInterwalIntertwineWithReservations(List<Renovations> renovations, DateTime start, DateTime end)
         {
             return _renovationRepository.DoesInterwalIntertwineWithReservations(renovations, start, end);
         }
@@ -78,7 +83,7 @@ namespace FiveStarTours.Services
             return _renovationRepository.IsAbleToCancel(renovationId);
         }
 
-        public void CancelRenovation(Renovation renovation)
+        public void CancelRenovation(Renovations renovation)
         {
             _renovationRepository.CancelRenovation(renovation);
         }

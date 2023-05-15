@@ -204,12 +204,15 @@ namespace FiveStarTours.View
             if(IsValid(newAccommodation))
             {
                 _accommodationService.Save(newAccommodation);
+                ActionBarView action = new ActionBarView(LoggedInUser);
+                action.Show();
                 Close();
             }
             else
             {
                 MessageBox.Show("You must provide all info on your accommodation.");
             }
+
             
 
         }

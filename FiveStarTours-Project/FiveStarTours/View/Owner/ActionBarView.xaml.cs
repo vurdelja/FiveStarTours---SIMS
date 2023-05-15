@@ -1,5 +1,6 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.View.Owner;
+using FiveStarTours.View.Owner.Renovation;
 using System.Windows;
 
 
@@ -68,8 +69,8 @@ namespace FiveStarTours.View
 
         private void RenovationsButton_Click(object sender, RoutedEventArgs e)
         {
-            RenovationAccommodationsView accommodations = new RenovationAccommodationsView(LoggedInUser);
-            accommodations.Show();
+            RenovationsView renovations = new RenovationsView(LoggedInUser);
+            renovations.Show();
             Close();
         }
 

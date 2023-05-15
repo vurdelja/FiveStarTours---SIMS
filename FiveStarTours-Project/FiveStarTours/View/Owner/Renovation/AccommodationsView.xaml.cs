@@ -10,19 +10,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace FiveStarTours.View.Owner
+namespace FiveStarTours.View.Owner.Renovation
 {
     /// <summary>
     /// Interaction logic for RenovationAccommodations.xaml
     /// </summary>
-    public partial class RenovationAccommodationsView : Window
+    public partial class AccommodationsView : Window
     {
         public User LoggedInUser;
         public ObservableCollection<Accommodation> Accommodations { get; set; }
         public Accommodation SelectedAccommodation { get; set; }
 
         private readonly AccommodationsService accommodationService;
-        public RenovationAccommodationsView(User user)
+        public AccommodationsView(User user)
         {
             InitializeComponent();
             DataContext = this;
@@ -35,7 +35,7 @@ namespace FiveStarTours.View.Owner
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
-            SchedulingRenovationsView scheduling = new SchedulingRenovationsView(LoggedInUser, SelectedAccommodation);
+            SchedulingView scheduling = new SchedulingView(LoggedInUser, SelectedAccommodation);
             scheduling.Show();
             Close();
         }

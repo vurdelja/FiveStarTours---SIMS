@@ -9,7 +9,7 @@ using FiveStarTours.Serializer;
 
 namespace FiveStarTours.Model
 {
-    public class Renovation : ISerializable
+    public class Renovations : ISerializable
     {
         public int Id { get; set; }
         public User User { get; set; }
@@ -19,21 +19,18 @@ namespace FiveStarTours.Model
         public DateTime EndDate { get; set; }
         public int ExpectedDuration { get; set; }
         public string Description { get; set; }
-        public bool RecentlyRenovated { get; set; }  //godinu dana nakon renoviranja
 
 
-        public Renovation() { }
+        public Renovations() { }
 
-        public Renovation(User user, Accommodation accommodation, int idAccommodation, DateTime start, DateTime end, int expected, string description)
+        public Renovations(User user, Accommodation accommodation, DateTime start, DateTime end, int expected, string description)
         {
             User = user;
             Accommodation = accommodation;
-            IdAccommodation = idAccommodation;
             StartDate= start;
             EndDate= end;
             ExpectedDuration = expected;
             Description = description;
-            RecentlyRenovated = false;
         }
 
         public string[] ToCSV()
@@ -41,12 +38,12 @@ namespace FiveStarTours.Model
             string[] csvValues = {
               Id.ToString(),
               User.Id.ToString(),
-              IdAccommodation.ToString(),
+              Accommodation.Id.ToString(),
+              Accommodation.AccommodationName,
               string.Join(';', StartDate),
               string.Join(';', EndDate),
               ExpectedDuration.ToString(),
-              Description,
-              RecentlyRenovated.ToString()
+              Description
 
         };
             return csvValues;
@@ -56,12 +53,12 @@ namespace FiveStarTours.Model
         {
             Id = Convert.ToInt32(values[0]);
             User = new User() { Id = Convert.ToInt32(values[1]) };
-            IdAccommodation = Convert.ToInt32(values[2]);
-            StartDate = Convert.ToDateTime(values[3]);
-            EndDate = Convert.ToDateTime(values[4]);
-            ExpectedDuration = Convert.ToInt32(values[5]);
-            Description = values[6];
-            RecentlyRenovated = Convert.ToBoolean(values[7]);
+            Accommodation = new Accommodation() { Id = Convert.ToInt32(values[2]) };
+            Accommodation = new Accommodation() { AccommodationName = values[3] };
+            StartDate = Convert.ToDateTime(values[4]);
+            EndDate = Convert.ToDateTime(values[5]);
+            ExpectedDuration = Convert.ToInt32(values[6]);
+            Description = values[7];
         }
 
 

@@ -9,19 +9,20 @@ namespace FiveStarTours.Interfaces
 {
     public interface IRenovationRepository
     {
-        List<Renovation> GetAll();
-        Renovation Save(Renovation renovation);
+        List<Renovations> GetAll();
+        Renovations Save(Renovations renovation);
 
         int NextId();
-        Renovation GetById(int id);
-        void Delete(Renovation renovation);
-        Renovation Update(Renovation renovation);
+        Renovations GetById(int id);
+        void Delete(Renovations renovation);
+        Renovations Update(Renovations renovation);
         bool DatesIntertwine(DateTime startAcc, DateTime endAcc, DateTime start, DateTime end);
-        List<Renovation> GetAllReservationsForAccommodationDateInterval(string accomodationName, DateTime start, DateTime end);
-        bool DoesInterwalIntertwineWithReservations(List<Renovation> reservations, DateTime start, DateTime end);
+        List<Renovations> GetAllReservationsForAccommodationDateInterval(string accomodationName, DateTime start, DateTime end);
+        bool DoesInterwalIntertwineWithReservations(List<Renovations> reservations, DateTime start, DateTime end);
         List<DateInterval> GetFreeDateIntervals(string accommodationName, DateTime start, DateTime end, int numberOfDays);
         bool IsAbleToCancel(int renovationId);
-        void CancelRenovation(Renovation renovation);
+        void CancelRenovation(Renovations renovation);
+        public void SetToFalse(Renovations renovation);
 
 
     }

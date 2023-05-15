@@ -15,9 +15,9 @@ namespace FiveStarTours.Repository
     {
         private const string FilePath = "../../../Resources/Data/renovations.csv";
 
-        private readonly Serializer<Renovation> _serializer;
+        private readonly Serializer<Renovations> _serializer;
 
-        private List<Renovation> renovations;
+        private List<Renovations> renovations;
 
         private AccommodationReservationsRepository _reservationsRepository;
 
@@ -29,7 +29,7 @@ namespace FiveStarTours.Repository
 
         public RenovationRepository()
         {
-            _serializer = new Serializer<Renovation>();
+            _serializer = new Serializer<Renovations>();
 
             renovations = _serializer.FromCSV(FilePath);
 
@@ -42,12 +42,12 @@ namespace FiveStarTours.Repository
             _userRepository = new UserRepository();
         }
 
-        public List<Renovation> GetAll()
+        public List<Renovations> GetAll()
         {
             return _serializer.FromCSV(FilePath);
         }
 
-        public Renovation Save(Renovation renovation)
+        public Renovations Save(Renovations renovation)
         {
             renovation.Id = NextId();
             renovations = _serializer.FromCSV(FilePath);
@@ -67,10 +67,10 @@ namespace FiveStarTours.Repository
         }
 
 
-        public Renovation GetById(int id)
+        public Renovations GetById(int id)
         {
             renovations = GetAll();
-            foreach (Renovation renovation in renovations)
+            foreach (Renovations renovation in renovations)
             {
                 if (renovation.Id == id)
                 {
@@ -79,18 +79,18 @@ namespace FiveStarTours.Repository
             }
             return null;
         }
-        public void Delete(Renovation renovation)
+        public void Delete(Renovations renovation)
         {
             renovations = _serializer.FromCSV(FilePath);
-            Renovation found = renovations.Find(c => c.Id == renovation.Id);
+            Renovations found = renovations.Find(c => c.Id == renovation.Id);
             renovations.Remove(found);
             _serializer.ToCSV(FilePath, renovations);
         }
 
-        public Renovation Update(Renovation renovation)
+        public Renovations Update(Renovations renovation)
         {
             renovations = _serializer.FromCSV(FilePath);
-            Renovation current = renovations.Find(c => c.Id == renovation.Id);
+            Renovations current = renovations.Find(c => c.Id == renovation.Id);
             int index = renovations.IndexOf(current);
             renovations.Remove(current);
             renovations.Insert(index, renovation);
@@ -111,10 +111,10 @@ namespace FiveStarTours.Repository
         }
 
 
-        public List<Renovation> GetAllReservationsForAccommodationDateInterval(string accomodationName, DateTime start, DateTime end)
+        public List<Renovations> GetAllReservationsForAccommodationDateInterval(string accomodationName, DateTime start, DateTime end)
         {
-            List<Renovation> renovations = new List<Renovation>();
-            foreach (Renovation renovation in renovations)
+            List<Renovations> renovations = new List<Renovations>();
+            foreach (Renovations renovation in renovations)
             {
                 if (accomodationName == renovation.Accommodation.AccommodationName && DatesIntertwine(renovation.StartDate, renovation.EndDate, start, end))
                 {
@@ -126,9 +126,9 @@ namespace FiveStarTours.Repository
             return renovations;
         }
 
-        public bool DoesInterwalIntertwineWithReservations(List<Renovation> renovations, DateTime start, DateTime end)
+        public bool DoesInterwalIntertwineWithReservations(List<Renovations> renovations, DateTime start, DateTime end)
         {
-            foreach (Renovation renovation in renovations)
+            foreach (Renovations renovation in renovations)
             {
                 if (DatesIntertwine(renovation.StartDate, renovation.EndDate, start, end))
                 {
@@ -144,7 +144,7 @@ namespace FiveStarTours.Repository
         public List<DateInterval> GetFreeDateIntervals(string accommodationName, DateTime start, DateTime end, int numberOfDays)
         {
             DateTime iterDate = start;
-            List<Renovation> reservations = GetAllReservationsForAccommodationDateInterval(accommodationName, start, end);
+            List<Renovations> reservations = GetAllReservationsForAccommodationDateInterval(accommodationName, start, end);
             List<DateInterval> freeIntervals = new List<DateInterval>();
 
             while (iterDate.AddDays(numberOfDays).Date <= end.Date)
@@ -164,7 +164,7 @@ namespace FiveStarTours.Repository
 
         public bool IsAbleToCancel(int renovationId)
         {
-            Renovation renovation = GetById(renovationId);
+            Renovations renovation = GetById(renovationId);
             DateTime now = DateTime.Now;
             Accommodation accommodation = _accommodationsRepository.GetAccommodationForAccommodationName(renovation.Accommodation.AccommodationName);
             if (renovation.StartDate > now.AddDays(5))
@@ -175,7 +175,13 @@ namespace FiveStarTours.Repository
             return false;
         }
 
-        public void CancelRenovation(Renovation renovation)
+        public void SetToFalse(Renovations renovation)
+        {
+            Accommodation accommodation = _accommodationsRepository.GetAccommodationForAccommodationName(renovation.Accommodation.AccommodationName);
+            accommodation.RecentlyRenovated = false;
+        }
+
+        public void CancelRenovation(Renovations renovation)
         {
             int ownerId = 2;
             User guest = _userRepository.GetByNameSurname(renovation.User.Name);
