@@ -19,12 +19,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using FiveStarTours.View.Traveler;
 
-namespace FiveStarTours.View.Owner
+namespace FiveStarTours.View.Owner.Statistics
 {
     /// <summary>
     /// Interaction logic for Statistics.xaml
     /// </summary>
-    public partial class StatisticsView : Window
+    public partial class AccommodationsStatistics : Window
     {
         public User LoggedInUser { get; set; }
         public static ObservableCollection<Accommodation> Accommodations { get; set; }
@@ -32,7 +32,7 @@ namespace FiveStarTours.View.Owner
         public Accommodation SelectedAccommodation { get; set; } 
         private readonly AccommodationsService _accommodationService;
 
-        public StatisticsView(User user)
+        public AccommodationsStatistics(User user)
         {
             InitializeComponent();
             DataContext = this;
@@ -45,7 +45,7 @@ namespace FiveStarTours.View.Owner
 
         private void ShowButton_Click(object sender, RoutedEventArgs e)
         {
-            StatisticsYearView yearView = new StatisticsYearView(LoggedInUser);
+            YearView yearView = new YearView(LoggedInUser);
             yearView.Show();
             Close();
         }

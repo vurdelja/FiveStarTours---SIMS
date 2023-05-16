@@ -18,15 +18,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace FiveStarTours.View.Owner
+namespace FiveStarTours.View.Owner.Statistics
 {
     /// <summary>
     /// Interaction logic for StatisticsYearView.xaml
     /// </summary>
-    public partial class StatisticsYearView : Window
+    public partial class YearView : Window
     {
         public User LoggedInUser { get; set; }
-        public StatisticsYearView(User user)
+        public YearView(User user)
         {
             InitializeComponent();
             DataContext = this;

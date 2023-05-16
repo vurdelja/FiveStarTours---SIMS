@@ -2,6 +2,7 @@
 using FiveStarTours.Repository;
 using FiveStarTours.Services;
 using FiveStarTours.View.Owner;
+using FiveStarTours.View.Owner.Statistics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,7 +75,7 @@ namespace FiveStarTours.View
 
         private void StatisticsButton_Click(object sender, RoutedEventArgs e)
         {
-            StatisticsView statisticsView = new StatisticsView(LoggedInUser);
+            AccommodationsStatistics statisticsView = new AccommodationsStatistics(LoggedInUser);
             statisticsView.Show();
             Close();
         }
