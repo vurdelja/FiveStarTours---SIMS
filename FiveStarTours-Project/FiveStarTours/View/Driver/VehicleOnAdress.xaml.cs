@@ -20,6 +20,9 @@ using FiveStarTours.View.Driver;
 using Microsoft.VisualBasic.FileIO;
 using FiveStarTours.View.Visitor;
 using System.Diagnostics.Metrics;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace FiveStarTours.View.VehicleOnAdress
 {
@@ -31,10 +34,9 @@ namespace FiveStarTours.View.VehicleOnAdress
 
         private readonly VehicleOnAdressRepository _vehicleOnAddressRepository;
         private readonly DrivingsRepository _drivingsRepository;
-        
-
         public static List<Drivings> Drivings { get; set; }
-        
+        public Model.User LoggedInUser { get; set; }
+        public VehicleSearchView secondWindow;
 
         private string _name;
         public string Name
@@ -153,12 +155,16 @@ namespace FiveStarTours.View.VehicleOnAdress
 
         }
 
-        public VehicleOnAdress()
+        public VehicleOnAdress(Model.User user)
         {
 
             InitializeComponent();
-            
             DataContext = this;
+
+            LoggedInUser = user;
+            secondWindow = new VehicleSearchView(user);
+
+
 
             _vehicleOnAddressRepository = new VehicleOnAdressRepository();
             _drivingsRepository = new DrivingsRepository();
@@ -188,7 +194,7 @@ namespace FiveStarTours.View.VehicleOnAdress
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                System.Windows.MessageBox.Show("Error: " + ex.Message);
             }
             //Reserved driving in Grid (Name)
             Drivings = _drivingsRepository.GetAll();
@@ -204,32 +210,31 @@ namespace FiveStarTours.View.VehicleOnAdress
                 IsDelayCheckBox.IsReadOnly = false;   
                 EnterDelayTextBox.IsReadOnly = false;
             }
-            //if FastDrive checked poen+ 1
+            //if FastDrive checked send notification
+            
             
 
-        }
-
-        //Send notification
-        public void SendNotification()
-        {
-            // Update the shared object with the notification message
-            NotificationManager.Instance.Notification = "Driver accepted your reservation";
         }
 
         private Drivings GetSelectedDriving()
         {
             return new Drivings();
         }
-
-
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            
             Close();
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
-        { 
+        {
+            // Pritiskom na dugme čekirajte checkbox, postavite poruku i pokažite drugi prozor
+            if (FastDriveCheckBox != null)
+            {
+                string message = "Driver accepted your reservation!";
+                secondWindow.ReceiveMessage(message);
+                secondWindow.Show();
+            }
+           
             //Name
             Drivings name = GetSelectedDriving();
             //Accept fast drive
@@ -249,7 +254,7 @@ namespace FiveStarTours.View.VehicleOnAdress
             _vehicleOnAddressRepository.Save(newVehicleOnAdress);
             
             
-            MessageBox.Show("Data Saved");
+            System.Windows.MessageBox.Show("Data Saved");
             TaximeterWindow taximeterWindow = new TaximeterWindow();
             taximeterWindow.Show();
             
