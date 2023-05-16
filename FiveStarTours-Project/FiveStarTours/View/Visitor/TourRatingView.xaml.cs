@@ -177,6 +177,22 @@ namespace FiveStarTours.View.Visitor
             Close();
         }
 
-       
+        private void InformationsButton_Click(object sender, RoutedEventArgs e)
+        {
+            ToursListingView toursListing = new ToursListingView(LoggedInUser);
+            toursListing.Show();
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            VehicleSearchView vehicleSearch = new VehicleSearchView(LoggedInUser);
+            vehicleSearch.Show();
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            ReservedToursView reservedTours = new ReservedToursView(LoggedInUser);
+            reservedTours.Show();
+        }
     }
 }

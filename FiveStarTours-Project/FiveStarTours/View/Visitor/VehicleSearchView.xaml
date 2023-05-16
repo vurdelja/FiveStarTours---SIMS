@@ -5,31 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FiveStarTours.View.Visitor"
         mc:Ignorable="d"
-        Title="VehicleSearchView" Height="650" Width="800" ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
+        Title="VehicleSearchView" Height="600" Width="1200" ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
          WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" Background="Lavender">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Button Grid.Row="0" Content="INFORMATIONS" Height="35" Width="170" FontSize="20"/>
-            <Button Grid.Row="1" Content="FOLLOW TOUR" Height="35" Width="170" FontSize="20"/>
-            <Button Grid.Row="2" Content="RATE TOUR" Height="35" Width="170" FontSize="20"/>
-            <Button Grid.Row="3" Content="SEARCH RIDE" Height="35" Width="170" FontSize="20"/>
-            <Button Grid.Row="4" Content="GROUP RIDE" Height="35" Width="170" FontSize="20"/>
-            <Button Grid.Row="5" Content="MY RIDES" Height="35" Width="170" FontSize="20"/>
-            <Button Grid.Row="6" Content="BACK" Height="35" Width="170" FontSize="20"/>
-        </Grid>
+        <Border Grid.Column="0" Background="LightGray" CornerRadius="15 15 15 15">
+            <Grid Grid.Column="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" Click="InformationsButton_Click" Content="INFORMATIONS" Height="55" Width="200" FontSize="20" FontWeight="Medium" Background="WhiteSmoke"
+                    BorderThickness="3" BorderBrush="DarkGray" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button Grid.Row="1" Content="FOLLOW TOUR" Height="55" Width="200" FontSize="20" FontWeight="Medium" Background="WhiteSmoke"
+                    BorderThickness="3" BorderBrush="DarkGray" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button Grid.Row="2" Content="RATE TOUR" Height="55" Width="200" FontSize="20" FontWeight="Medium" Background="WhiteSmoke"  
+                    BorderBrush="LightGray" BorderThickness="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button Grid.Row="3" Click="SearchButton_Click" Content="SEARCH RIDE" Height="55" Width="200" FontSize="20" FontWeight="Medium" Background="DarkGray"
+                    BorderBrush="black" BorderThickness="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button Grid.Row="4" Content="GROUP RIDE" Height="55" Width="200" FontSize="20" FontWeight="Medium" Background="WhiteSmoke"
+                    BorderThickness="3" BorderBrush="DarkGray" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button Grid.Row="5" Content="MY RIDES" Height="55" Width="200" FontSize="20" FontWeight="Medium" Background="WhiteSmoke"
+                    BorderThickness="3" BorderBrush="DarkGray" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button Grid.Row="6" Click="BackButton_Click" Content="BACK" Height="55" Width="200" FontSize="20" FontWeight="Medium" Background="Red"
+                    BorderThickness="3" BorderBrush="DarkGray" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
@@ -37,15 +46,15 @@
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="130"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="130"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="1" Content="SEARCH VEHICLE" 
-                   VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Background="LemonChiffon"/>
-            <Grid Grid.Row="1" Grid.Column="1" Background="LemonChiffon">
+            <Label Grid.Row="0" Grid.Column="1" Content="SEARCH VEHICLE"  FontWeight="Medium" BorderThickness="3" BorderBrush="LightGray"
+                   VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Background="WhiteSmoke"/>
+            <Grid Grid.Row="1" Grid.Column="1" Background="WhiteSmoke">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="180"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -58,24 +67,24 @@
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Content="Starting State" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <Label Grid.Row="1" Grid.Column="0" Content="Starting City" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <Label Grid.Row="2" Grid.Column="0" Content="Starting Street" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <Label Grid.Row="3" Grid.Column="0" Content="Destination State" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <Label Grid.Row="4" Grid.Column="0" Content="Destination City" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <Label Grid.Row="5" Grid.Column="0" Content="Destination Street" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <Label Grid.Row="6" Grid.Column="0" Content="Time" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <ComboBox Grid.Row="0" Grid.Column="1" Height="25" Width="400" x:Name="StartingState" SelectionChanged="StartingState_SelectionChanged" />
-                <ComboBox Grid.Row="1" Grid.Column="1" Height="25" Width="400" x:Name="StartingCity" SelectionChanged="StartingCity_SelectionChanged" />
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=StartingStreet, UpdateSourceTrigger=PropertyChanged}" Height="25" FontSize="20"/>
-                <ComboBox Grid.Row="3" Grid.Column="1" Height="25" Width="400" x:Name="DestinationState" SelectionChanged="DestinationState_SelectionChanged" />
-                <ComboBox Grid.Row="4" Grid.Column="1" Height="25" Width="400" x:Name="DestinationCity" SelectionChanged="DestinationCity_SelectionChanged" />
-                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Path=DestinationStreet, UpdateSourceTrigger=PropertyChanged}" Height="25" FontSize="20"/>
-                <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Path=StartingTime, UpdateSourceTrigger=PropertyChanged}" Height="25" FontSize="20"/>
-                <DataGrid Grid.Row="7" Grid.Column="1" Margin="0,24,0,-274" ItemsSource="{Binding Vehicles}"
+                <Label Grid.Row="0" Grid.Column="0" Content="Starting State" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium" FontSize="17"/>
+                <Label Grid.Row="1" Grid.Column="0" Content="Starting City" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium" FontSize="17"/>
+                <Label Grid.Row="2" Grid.Column="0" Content="Starting Street" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium" FontSize="17"/>
+                <Label Grid.Row="3" Grid.Column="0" Content="Destination State" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium" FontSize="17"/>
+                <Label Grid.Row="4" Grid.Column="0" Content="Destination City" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium" FontSize="17"/>
+                <Label Grid.Row="5" Grid.Column="0" Content="Destination Street" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium" FontSize="17"/>
+                <Label Grid.Row="6" Grid.Column="0" Content="Time" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Medium" FontSize="17"/>
+                <ComboBox Grid.Row="0" Grid.Column="1" Height="25" Width="500" x:Name="StartingState" SelectionChanged="StartingState_SelectionChanged" />
+                <ComboBox Grid.Row="1" Grid.Column="1" Height="25" Width="500" x:Name="StartingCity" SelectionChanged="StartingCity_SelectionChanged" />
+                <TextBox Grid.Row="2" Grid.Column="1" Width="500" Text="{Binding Path=StartingStreet, UpdateSourceTrigger=PropertyChanged}" Height="25" FontSize="20"/>
+                <ComboBox Grid.Row="3" Grid.Column="1" Height="25" Width="500" x:Name="DestinationState" SelectionChanged="DestinationState_SelectionChanged" />
+                <ComboBox Grid.Row="4" Grid.Column="1" Height="25" Width="500" x:Name="DestinationCity" SelectionChanged="DestinationCity_SelectionChanged" />
+                <TextBox Grid.Row="5" Grid.Column="1" Width="500" Text="{Binding Path=DestinationStreet, UpdateSourceTrigger=PropertyChanged}" Height="25" FontSize="20"/>
+                <TextBox Grid.Row="6" Grid.Column="1" Width="500" Text="{Binding Path=StartingTime, UpdateSourceTrigger=PropertyChanged}" Height="25" FontSize="20"/>
+                <DataGrid Grid.Row="7" Grid.Column="1" Margin="15,24,15,-175" ItemsSource="{Binding Vehicles}"
                       SelectedItem="{Binding Path=SelectedVehicle}"
                       IsReadOnly="True" SelectionMode="Single"
-                      AutoGenerateColumns="False" Height="360" HeadersVisibility="Column"
+                      AutoGenerateColumns="False" HeadersVisibility="Column"
                       FontSize="13">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="State" Binding="{Binding Location.State}" Width="*"/>
@@ -85,10 +94,10 @@
                 </DataGrid>
 
             </Grid>
-            <Button Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left"
-                    Height="35" Width="170" Content="SEARCH" Click="SearchButton_Click" FontSize="20"/>
-            <Button Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right"
-                    Height="35" Width="170" Content="RESERVE" Click="ReserveButton_Click" FontSize="20"/>
+            <Button Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left" Background="Thistle" BorderBrush="LightGray"
+                    Height="35" Width="170" Content="SEARCH" Click="SearchButton_Click" FontSize="20" BorderThickness="3"/>
+            <Button Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right" Background="Green"
+                    Height="35" Width="170" Content="RESERVE" Click="ReserveButton_Click" FontSize="20" BorderThickness="3" BorderBrush="LightGray"/>
         </Grid>
     </Grid>
 </Window>

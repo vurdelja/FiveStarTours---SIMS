@@ -24,21 +24,20 @@ namespace FiveStarTours.View.Visitor
     public partial class ReservedToursView : Window
     {
         public User LoggedInUser { get; set; }
-        public static ObservableCollection<Tour> Tours { get; set; }
-        public Tour SelectedTour { get; set; }
+        public static ObservableCollection<TourReservation> ReservedTours { get; set; }
+        public Tour SelectedReservedTour { get; set; }
 
-        private readonly ToursService _repository;
+
+        private readonly TourReservationService _repository;
         public Tour tour { get; set; }
-        public ReservedToursView(Tour selectedTour, User user)
+        public ReservedToursView(User user)
         {
             LoggedInUser = user;
             InitializeComponent();
             DataContext = this;
-            _repository = new ToursService();
-            tour = new Tour();
-            tour = _repository.GetById(selectedTour.Id);
-            SelectedTour = selectedTour;
-            //Tours = new ObservableCollection<Tour>(_repository.GetById(selectedTour.Id));
+            _repository = new TourReservationService();
+            ReservedTours = new ObservableCollection<TourReservation>(_repository.GetAll());
+
         }
 
         private void RateButton_Click(object sender, RoutedEventArgs e)
@@ -48,6 +47,12 @@ namespace FiveStarTours.View.Visitor
                 tourRatingView.Show();
 
             
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            ToursListingView tourListing = new ToursListingView(LoggedInUser);
+            tourListing.Show();
         }
     }
 }

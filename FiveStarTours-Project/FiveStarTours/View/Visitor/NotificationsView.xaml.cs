@@ -27,6 +27,7 @@ namespace FiveStarTours.View.Visitor
     {
         public User LoggedInUser { get; set; }
         public readonly GiftCardService _repository;
+        public Tour SelectedTour { get; set; }
         public string UserResponse { get; set; }
         public NotificationsView(User user)
         {
@@ -70,6 +71,36 @@ namespace FiveStarTours.View.Visitor
         {
             VisitorMainWindow visitorMainView = new VisitorMainWindow(LoggedInUser);
             visitorMainView.Show();
+        }
+
+        private void GiftCardsButton_Click(object sender, RoutedEventArgs e)
+        {
+            GiftCardsListingView giftCards = new GiftCardsListingView(LoggedInUser);
+            giftCards.Show();
+        }
+
+        private void AllToursButton_Click(object sender, RoutedEventArgs e)
+        {
+            ToursListingView toursListing = new ToursListingView(LoggedInUser);
+            toursListing.Show();
+        }
+        private void LogOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window != mainWindow)
+                {
+                    window.Close();
+                }
+            }
+            mainWindow.Show();
+        }
+
+        private void ReservedToursButton_Click(object sender, RoutedEventArgs e)
+        {
+            ReservedToursView reservedTours = new ReservedToursView(LoggedInUser);
+            reservedTours.Show();
         }
     }
 }

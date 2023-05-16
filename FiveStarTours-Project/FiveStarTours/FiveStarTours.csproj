@@ -48,6 +48,9 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
     <Folder Include="Resources\Images\" />
+	  <Resource Include="Resources\Images\unavailable-image.jpg">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
 
   </ItemGroup>
 

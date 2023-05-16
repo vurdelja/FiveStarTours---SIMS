@@ -37,6 +37,8 @@ namespace FiveStarTours.Injector
         { typeof(IVehicleRepository), new VehicleRepository() },
         { typeof(ITourRatingRepository), new TourRatingRepository() },
         { typeof(IReservedDrivingsRepository), new ReservedDrivingsRepository() },
+        { typeof(ITourRequestRepository), new TourRequestRepository() },
+
 
         // Add more implementations here
     };

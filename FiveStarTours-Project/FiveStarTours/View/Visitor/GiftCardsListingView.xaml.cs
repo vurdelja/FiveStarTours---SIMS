@@ -26,6 +26,7 @@ namespace FiveStarTours.View.Visitor
         public User LoggedInUser { get; set; }
         public static ObservableCollection<GiftCard> GiftCards { get; set; }
         public GiftCard SelectedGiftCard { get; set; }
+
         private readonly GiftCardService _repository;
 
         public GiftCardsListingView(User user)
@@ -34,17 +35,15 @@ namespace FiveStarTours.View.Visitor
             InitializeComponent();
             DataContext = this;
             _repository = new GiftCardService();
-            //GiftCards = new ObservableCollection<GiftCard>(_repository.GetAllById(user));
+            GiftCards = new ObservableCollection<GiftCard>(_repository.GetAll());
         }
 
-        private void ChoseGiftCard(object sender, RoutedEventArgs e)
-        {
-            /*if (SelectedGiftCard != null)
-            {
-                ReservationView reservationView = new ReservationView(SelectedGiftCard, LoggedInUser);
-                reservationView.Show();
+        
 
-            }*/
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            ToursListingView tourListing= new ToursListingView(LoggedInUser);
+            tourListing.Show();
         }
     }
 }
