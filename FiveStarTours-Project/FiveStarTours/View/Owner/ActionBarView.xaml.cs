@@ -1,7 +1,6 @@
 ﻿using FiveStarTours.Model;
-using FiveStarTours.Repository;
-using FiveStarTours.Services;
 using FiveStarTours.View.Owner;
+using FiveStarTours.View.Owner.Renovation;
 using FiveStarTours.View.Owner.Statistics;
 using System;
 using System.Collections.Generic;
@@ -9,13 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace FiveStarTours.View
 {
@@ -82,6 +75,8 @@ namespace FiveStarTours.View
 
         private void RenovationsButton_Click(object sender, RoutedEventArgs e)
         {
+            RenovationsView renovations = new RenovationsView();
+            renovations.Show();
             Close();
         }
 

@@ -26,7 +26,6 @@ namespace FiveStarTours.View.Traveler
     public partial class Reservation : Window, INotifyPropertyChanged
     {
         private readonly AccommodationReservationService accommodationReservationService;
-        private readonly AccommodationsService accommodationService;
         public static ObservableCollection<AccommodationReservation> AccommodationReservations { get; set; }
         public event PropertyChangedEventHandler? PropertyChanged;
         public Accommodation SelectedAccommodation { get; set; }

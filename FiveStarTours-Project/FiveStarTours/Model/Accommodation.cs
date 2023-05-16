@@ -28,6 +28,7 @@ namespace FiveStarTours.Model
         public int MaxGuestNum { get; set; }
         public int MinReservationDays { get; set; }
         public int DaysPossibleToCancel { get; set; } = 1; 
+        public bool RecentlyRenovated { get; set; }
 
         public ImageSource FrontImage { get; set; }
 
@@ -45,6 +46,7 @@ namespace FiveStarTours.Model
             DaysPossibleToCancel = daysPossibleToCancel;
             ImageURLs = imageURLs;
             FrontImage = null;
+            RecentlyRenovated = false;
         }
 
         public string[] ToCSV()
@@ -67,7 +69,8 @@ namespace FiveStarTours.Model
                 MaxGuestNum.ToString(),
                 MinReservationDays.ToString(),
                 DaysPossibleToCancel.ToString(),
-                string.Join(';', ImageURLs)
+                string.Join(';', ImageURLs),
+                RecentlyRenovated.ToString(),
 
         };
             return csvValues;
@@ -84,6 +87,7 @@ namespace FiveStarTours.Model
             DaysPossibleToCancel = int.Parse(values[6]);
 
             ImageURLs = values[7].Split(';').ToList();
+            RecentlyRenovated = Convert.ToBoolean(values[8]);
         }
 
 
