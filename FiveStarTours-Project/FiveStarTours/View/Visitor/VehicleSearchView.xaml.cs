@@ -67,6 +67,8 @@ namespace FiveStarTours.View.Visitor
             timer.Tick += Timer_Tick;
             timer.Start();
         }
+
+        
         private void Timer_Tick(object sender, EventArgs e)
         {
             // Check if the shared object's notification message has changed

@@ -22,12 +22,16 @@ namespace FiveStarTours.View.Visitor
     {
         public User LoggedInUser { get; set; }
         public bool notificationReceived = false;
+        private string message;
+
         public VisitorMainWindow(User user)
         {
             LoggedInUser = user;
             InitializeComponent();
-           
+            
         }
+
+        
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {

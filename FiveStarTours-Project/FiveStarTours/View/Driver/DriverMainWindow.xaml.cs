@@ -24,7 +24,7 @@ namespace FiveStarTours.View
     /// </summary>
     public partial class DriverMainWindow : Window
     {
-        User user = new User();
+       
         public DriverMainWindow()
         {
             InitializeComponent();
@@ -41,7 +41,7 @@ namespace FiveStarTours.View
         private void VehicleOnAdressButton_Click(object sender, RoutedEventArgs e)
         {
            
-            VehicleOnAdress.VehicleOnAdress vehicleOnAdress = new VehicleOnAdress.VehicleOnAdress(user);
+            VehicleOnAdress.VehicleOnAdress vehicleOnAdress = new VehicleOnAdress.VehicleOnAdress();
             vehicleOnAdress.Show();
         }
 
