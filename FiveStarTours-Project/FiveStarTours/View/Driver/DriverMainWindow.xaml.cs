@@ -24,7 +24,7 @@ namespace FiveStarTours.View
     /// </summary>
     public partial class DriverMainWindow : Window
     {
-        
+       
         public DriverMainWindow()
         {
             InitializeComponent();

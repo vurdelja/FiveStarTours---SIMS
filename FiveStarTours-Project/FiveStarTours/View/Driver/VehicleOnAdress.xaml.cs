@@ -23,6 +23,7 @@ using System.Diagnostics.Metrics;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 using Microsoft.VisualBasic.ApplicationServices;
+using System.Windows.Controls;
 
 namespace FiveStarTours.View.VehicleOnAdress
 {
@@ -35,8 +36,9 @@ namespace FiveStarTours.View.VehicleOnAdress
         private readonly VehicleOnAdressRepository _vehicleOnAddressRepository;
         private readonly DrivingsRepository _drivingsRepository;
         public static List<Drivings> Drivings { get; set; }
-        public Model.User LoggedInUser { get; set; }
-        public VehicleSearchView secondWindow;
+        public VisitorMainWindow secondWindow;
+        
+       
 
         private string _name;
         public string Name
@@ -67,7 +69,6 @@ namespace FiveStarTours.View.VehicleOnAdress
                 }
             }
         }
-
 
         private bool _onAdress;
         public bool OnAdress
@@ -155,15 +156,14 @@ namespace FiveStarTours.View.VehicleOnAdress
 
         }
 
-        public VehicleOnAdress(Model.User user)
+        public VehicleOnAdress()
         {
 
             InitializeComponent();
             DataContext = this;
 
-            LoggedInUser = user;
-            secondWindow = new VehicleSearchView(user);
 
+            secondWindow = new VisitorMainWindow();
 
 
             _vehicleOnAddressRepository = new VehicleOnAdressRepository();
@@ -211,11 +211,18 @@ namespace FiveStarTours.View.VehicleOnAdress
                 EnterDelayTextBox.IsReadOnly = false;
             }
             //if FastDrive checked send notification
-            
-            
+            if (FastDriving == true)
+            {
+                // Slanje poruke drugom prozoru
+                string message = "Poruka koju želite poslati";
+                //VisitorMainWindow secondWindow = new VisitorMainWindow(message);
+                secondWindow.Show();
+            }
+
+
 
         }
-
+       
         private Drivings GetSelectedDriving()
         {
             return new Drivings();
@@ -227,14 +234,10 @@ namespace FiveStarTours.View.VehicleOnAdress
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            // Pritiskom na dugme čekirajte checkbox, postavite poruku i pokažite drugi prozor
-            if (FastDriveCheckBox != null)
-            {
-                string message = "Driver accepted your reservation!";
-                secondWindow.ReceiveMessage(message);
-                secondWindow.Show();
-            }
-           
+            
+                
+               
+            
             //Name
             Drivings name = GetSelectedDriving();
             //Accept fast drive

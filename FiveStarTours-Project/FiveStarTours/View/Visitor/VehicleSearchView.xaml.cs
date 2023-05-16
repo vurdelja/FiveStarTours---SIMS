@@ -68,11 +68,7 @@ namespace FiveStarTours.View.Visitor
             timer.Start();
         }
 
-        public void ReceiveMessage(string message)
-        {
-            // Ovde radite nešto sa primljenom porukom
-            MessageBox.Show(message);
-        }
+        
         private void Timer_Tick(object sender, EventArgs e)
         {
             // Check if the shared object's notification message has changed
