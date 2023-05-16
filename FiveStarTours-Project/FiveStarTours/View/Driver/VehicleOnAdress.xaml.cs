@@ -34,10 +34,7 @@ namespace FiveStarTours.View.VehicleOnAdress
         
 
         public static List<Drivings> Drivings { get; set; }
-        public User LoggedInUser { get; set; }
-        //public bool notificationReceived = false;
-
-       
+        
 
         private string _name;
         public string Name
@@ -156,11 +153,11 @@ namespace FiveStarTours.View.VehicleOnAdress
 
         }
 
-        public VehicleOnAdress(User user)
+        public VehicleOnAdress()
         {
 
             InitializeComponent();
-            LoggedInUser = user;
+            
             DataContext = this;
 
             _vehicleOnAddressRepository = new VehicleOnAdressRepository();
@@ -208,10 +205,7 @@ namespace FiveStarTours.View.VehicleOnAdress
                 EnterDelayTextBox.IsReadOnly = false;
             }
             //if FastDrive checked poen+ 1
-            if (FastDriveCheckBox != null)  
-            {
-                
-            }
+            
 
         }
 
@@ -227,7 +221,6 @@ namespace FiveStarTours.View.VehicleOnAdress
             return new Drivings();
         }
 
-        
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
@@ -239,42 +232,8 @@ namespace FiveStarTours.View.VehicleOnAdress
         { 
             //Name
             Drivings name = GetSelectedDriving();
-            //Accept drive and send notification
-            if (FastDriving == true)
-            {
-                SendNotification();
-                /*
-                //Send notification
-                notificationReceived = Notification.SentNotification;
-
-                 Check if there are any notifications
-                if (!notificationReceived || Notification.User.Id != LoggedInUser.Id)
-                {
-                    MessageBox.Show("There are no notifications.", "No Notifications", MessageBoxButton.OK, MessageBoxImage.Information);
-                    return;
-                }
-                else
-                {
-                    NotificationsView notificationWindow = new NotificationsView(LoggedInUser);
-                    notificationWindow.ShowDialog();
-
-                    if (notificationWindow.UserResponse == "yes")
-                    {
-                        Notification.Answer = true;
-
-                    }
-                    else if (notificationWindow.UserResponse == "no")
-                    {
-                        Notification.Answer = false;
-                    }
-
-                    Notification.SentNotification = false;
-                }*/
-            }
+            //Accept fast drive
             bool fastDriving = Convert.ToBoolean(FastDriving);
-            
-            
-            
             //On Adress
             bool isOnAdress = Convert.ToBoolean(OnAdress);
             //Delay
@@ -286,7 +245,7 @@ namespace FiveStarTours.View.VehicleOnAdress
             int enterStartPrice = Convert.ToInt32(EnterStartPrice);
             
 
-            OnAdress newVehicleOnAdress = new OnAdress( name, LoggedInUser, fastDriving, isOnAdress, isDelay, delay , drivingStarts, enterStartPrice);
+            OnAdress newVehicleOnAdress = new OnAdress( name, fastDriving, isOnAdress, isDelay, delay , drivingStarts, enterStartPrice);
             _vehicleOnAddressRepository.Save(newVehicleOnAdress);
             
             
