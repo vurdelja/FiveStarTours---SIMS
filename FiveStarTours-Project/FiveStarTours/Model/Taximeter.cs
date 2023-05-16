@@ -14,12 +14,12 @@ namespace FiveStarTours.Model
     {
         public int Id { get; set; }
         public string Timer { get; set; }
-        public string Price { get; set; }
+        public double Price { get; set; }
         public Taximeter()
         {
         }
 
-        public Taximeter(string timer, string price)
+        public Taximeter(string timer, double price)
         {
             Timer = timer;
             Price = price;
@@ -29,7 +29,7 @@ namespace FiveStarTours.Model
         {
             Id = Convert.ToInt32(values[0]);    
             Timer = Convert.ToString(values[1]);    
-            Price = Convert.ToString(values[2]);
+            Price = Convert.ToDouble(values[2]);
         }
 
         public string[] ToCSV()

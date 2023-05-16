@@ -7,13 +7,10 @@ using System.Threading.Tasks;
 
 namespace FiveStarTours.Interfaces
 {
-    public interface IDrivingRepository
+    public interface IDrivingStatisticsRepository
     {
-        List<Drivings> GetAll();
-        List<string> GetAllNames();
-        Drivings Save(Drivings drivings);
-        Drivings Delete(Drivings drivings);
+        List<DrivingStatisticsData> GetAll();
+        List<string> GetAllDrivingYears();
         int NextId();
-
     }
 }

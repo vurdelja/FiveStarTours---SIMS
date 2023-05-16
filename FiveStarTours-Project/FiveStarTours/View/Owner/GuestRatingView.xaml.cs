@@ -264,12 +264,14 @@ namespace FiveStarTours.View.Owner
 
 
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
+            GuestsWithoutRateView guests = new GuestsWithoutRateView(LoggedInUser);
+            guests.Show();
             Close();
         }
 
-     
+
 
     }
 }

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FiveStarTours.Interfaces;
 using FiveStarTours.Model;
 using FiveStarTours.Serializer;
 using FiveStarTours.View.Driver;
 
 namespace FiveStarTours.Repository
 {
-    public class DrivingStatisticsRepository
+    public class DrivingStatisticsRepository : IDrivingStatisticsRepository
     {
         private const string FilePath = "../../../Resources/Data/drivingstatistics.csv";
 

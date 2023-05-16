@@ -59,10 +59,10 @@ namespace FiveStarTours.View.Owner
             }
         }
 
-        private void MaybeLaterButton_Click(object sender, RoutedEventArgs e)
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-            OwnerMainWindow main = new OwnerMainWindow(LoggedInUser);
-            main.Show();
+            ActionBarView action = new ActionBarView(LoggedInUser);
+            action.Show();
             Close();
         }
     }

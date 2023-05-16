@@ -1,24 +1,25 @@
 ﻿using FiveStarTours.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using FiveStarTours.Repository;
 using FiveStarTours.View;
 using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Controls;
 using FiveStarTours.View.VehicleOnAdress;
 using System.IO;
 using System.Windows.Threading;
-using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
-using System.Reflection.PortableExecutable;
 using FiveStarTours.Serializer;
-using ControlzEx.Standard;
-using System.Security.Policy;
 using FiveStarTours.View.Driver;
+using Microsoft.VisualBasic.FileIO;
+using FiveStarTours.View.Visitor;
+using System.Diagnostics.Metrics;
 
 namespace FiveStarTours.View.VehicleOnAdress
 {
@@ -30,8 +31,13 @@ namespace FiveStarTours.View.VehicleOnAdress
 
         private readonly VehicleOnAdressRepository _vehicleOnAddressRepository;
         private readonly DrivingsRepository _drivingsRepository;
-        public static List<Drivings> Drivings { get; set; }
+        
 
+        public static List<Drivings> Drivings { get; set; }
+        public User LoggedInUser { get; set; }
+        //public bool notificationReceived = false;
+
+       
 
         private string _name;
         public string Name
@@ -48,7 +54,21 @@ namespace FiveStarTours.View.VehicleOnAdress
             }
         }
 
-        
+        private bool _fastDriving;
+        public bool FastDriving
+        {
+
+            get => _fastDriving;
+            set
+            {
+                if (value != _fastDriving)
+                {
+                    _fastDriving = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
 
         private bool _onAdress;
         public bool OnAdress
@@ -136,18 +156,47 @@ namespace FiveStarTours.View.VehicleOnAdress
 
         }
 
-        public VehicleOnAdress()
+        public VehicleOnAdress(User user)
         {
 
             InitializeComponent();
+            LoggedInUser = user;
             DataContext = this;
 
             _vehicleOnAddressRepository = new VehicleOnAdressRepository();
             _drivingsRepository = new DrivingsRepository();
 
-            
+            //from CSV file to SelectDriverComboBox
+            string csvFilePath = "../../../Resources/Data/vehicles.csv";
+
+            try
+            {
+                using (TextFieldParser parser = new TextFieldParser(csvFilePath))
+                {
+                    parser.TextFieldType = FieldType.Delimited;
+                    parser.SetDelimiters(",");
+
+                    while (!parser.EndOfData)
+                    {
+                        string[] fields = parser.ReadFields();
+
+                        // Assuming the values are in the first column of each line
+                        if (fields.Length > 0)
+                        {
+                            string value = fields[0];
+                            SelectDriverComboBox.Items.Add(value);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            //Reserved driving in Grid (Name)
             Drivings = _drivingsRepository.GetAll();
 
+            //if OnAdress checked you can't check delay
             if (OnAdressCheckBox != null)
             {
                 IsDelayCheckBox.IsReadOnly = true;
@@ -158,13 +207,27 @@ namespace FiveStarTours.View.VehicleOnAdress
                 IsDelayCheckBox.IsReadOnly = false;   
                 EnterDelayTextBox.IsReadOnly = false;
             }
+            //if FastDrive checked poen+ 1
+            if (FastDriveCheckBox != null)  
+            {
+                
+            }
 
+        }
+
+        //Send notification
+        public void SendNotification()
+        {
+            // Update the shared object with the notification message
+            NotificationManager.Instance.Notification = "Driver accepted your reservation";
         }
 
         private Drivings GetSelectedDriving()
         {
             return new Drivings();
         }
+
+        
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
@@ -174,16 +237,56 @@ namespace FiveStarTours.View.VehicleOnAdress
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         { 
+            //Name
             Drivings name = GetSelectedDriving();
+            //Accept drive and send notification
+            if (FastDriving != null)
+            {
+                SendNotification();
+                /*
+                //Send notification
+                notificationReceived = Notification.SentNotification;
+
+                 Check if there are any notifications
+                if (!notificationReceived || Notification.User.Id != LoggedInUser.Id)
+                {
+                    MessageBox.Show("There are no notifications.", "No Notifications", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+                else
+                {
+                    NotificationsView notificationWindow = new NotificationsView(LoggedInUser);
+                    notificationWindow.ShowDialog();
+
+                    if (notificationWindow.UserResponse == "yes")
+                    {
+                        Notification.Answer = true;
+
+                    }
+                    else if (notificationWindow.UserResponse == "no")
+                    {
+                        Notification.Answer = false;
+                    }
+
+                    Notification.SentNotification = false;
+                }*/
+            }
+            bool fastDriving = Convert.ToBoolean(FastDriving);
+            
+            
+            
+            //On Adress
             bool isOnAdress = Convert.ToBoolean(OnAdress);
+            //Delay
             bool isDelay = Convert.ToBoolean(IsDelay);
             int delay = Convert.ToInt32(EnterDelay);
-            
+            //Drivig Starts
             bool drivingStarts = Convert.ToBoolean(DrivingStarts);
+            //Enter Start Price
             int enterStartPrice = Convert.ToInt32(EnterStartPrice);
             
 
-            OnAdress newVehicleOnAdress = new OnAdress(name, isOnAdress, isDelay, delay , drivingStarts, enterStartPrice);
+            OnAdress newVehicleOnAdress = new OnAdress( name, LoggedInUser, fastDriving, isOnAdress, isDelay, delay , drivingStarts, enterStartPrice);
             _vehicleOnAddressRepository.Save(newVehicleOnAdress);
             
             
@@ -195,6 +298,9 @@ namespace FiveStarTours.View.VehicleOnAdress
             Close();
         }
 
-        
+        private void SelectDriverComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

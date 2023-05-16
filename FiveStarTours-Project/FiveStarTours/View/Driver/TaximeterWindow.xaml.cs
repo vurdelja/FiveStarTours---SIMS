@@ -71,13 +71,9 @@ namespace FiveStarTours.View.Driver
 
         }
 
-        
-        
-
         public TaximeterWindow()
         {
             InitializeComponent();
-            
             
 
             _vehicleOnAddressRepository = new VehicleOnAdressRepository();
@@ -102,16 +98,15 @@ namespace FiveStarTours.View.Driver
 
         private void FinishButton_Click(object sender, RoutedEventArgs e)
         {
-
+            timer.Stop();
             /*
-             string time = Convert.ToString(Time);
-             string price = Convert.ToString(Price);
+            string time = Convert.ToString(timer);
+            double price = Convert.ToDouble(PriceTextBox.Text);
+
+            Taximeter newTaximeter = new Taximeter(time , price);
+            _taximeterRepository.Save(newTaximeter);
             */
 
-            //Taximeter newTaximeter = new Taximeter(time, price);
-            //_taximeterRepository.Save(newTaximeter);
-
-            timer.Stop();
             MessageBox.Show("TIME: " + TimeTextBox.Text + "\nPRICE: " + PriceTextBox.Text);
             Close();
         }

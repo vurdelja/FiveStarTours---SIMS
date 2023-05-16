@@ -2,6 +2,8 @@
 using FiveStarTours.Repository;
 using FiveStarTours.Services;
 using FiveStarTours.View.Traveler;
+using FiveStarTours.View.Driver;
+using FiveStarTours.View.VehicleOnAdress;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,6 +21,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace FiveStarTours.View.Visitor
 {
@@ -57,6 +60,30 @@ namespace FiveStarTours.View.Visitor
             DestinationState.ItemsSource = destination;
             DestinationState.SelectedValuePath = ".";
             DestinationState.DisplayMemberPath = ".";
+
+            // Poll the shared object to detect changes
+            var timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            // Check if the shared object's notification message has changed
+            string notification = NotificationManager.Instance.Notification;
+            if (!string.IsNullOrEmpty(notification))
+            {
+                // Handle the notification message
+                MessageBox.Show(notification);
+
+                // Reset the notification after handling
+                NotificationManager.Instance.Notification = null;
+            }
+        }
+        private void OnNotificationReceived(string message)
+        {
+            // Handle the notification message
+            MessageBox.Show(message);
 
         }
         public string selectedStartingCity;
