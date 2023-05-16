@@ -12,5 +12,6 @@ namespace FiveStarTours.Interfaces
         List<Language> GetAll();
         Language Save(Language language);
         int NextId();
+        Language GetById(int id);
     }
 }

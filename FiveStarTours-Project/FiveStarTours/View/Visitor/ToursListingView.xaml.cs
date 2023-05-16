@@ -214,5 +214,16 @@ namespace FiveStarTours.View.Visitor
             }
         }
 
+        private void GroupRideButton_Click(object sender, RoutedEventArgs e)
+        {
+            RideRequestView rideRequest = new RideRequestView(LoggedInUser);
+            rideRequest.Show();
+        }
+
+        private void GroupButton_Click(object sender, RoutedEventArgs e)
+        {
+            GroupRides groupRides = new GroupRides(LoggedInUser);
+            groupRides.Show();
+        }
     }
 }

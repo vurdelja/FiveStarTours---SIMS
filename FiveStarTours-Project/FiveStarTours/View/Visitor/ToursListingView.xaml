@@ -30,7 +30,7 @@
 
                 <TextBlock Grid.Row="1" Width="200" Height="45" HorizontalAlignment="Center" VerticalAlignment="Center" 
                            TextAlignment="Center" Text="{Binding Path=Username}" FontSize="15" FontWeight="Medium"/>
-                <Button Grid.Row="2" Width="200" Height="45" Content="ALL TOURS" Background="DarkGray" FontSize="20" FontWeight="Medium"
+                <Button Grid.Row="2" Click="GroupButton_Click" Width="200" Height="45" Content="ALL TOURS" Background="DarkGray" FontSize="20" FontWeight="Medium"
                          HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="Black" />
                 <Button Grid.Row="3" Click="ReservedToursButton_Click" Width="200" Height="45" Content="MY TOURS" Background="WhiteSmoke" FontSize="20"
                          FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="DarkGray" />
@@ -38,8 +38,8 @@
                          FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="DarkGray" />
                 <Button Grid.Row="5" Click="ShowTourButton_Click" Width="200" Height="45" Content="MAKE TOUR" Background="WhiteSmoke" FontSize="20"
                          FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="DarkGray" />
-                <Button Grid.Row="6"  Width="200" Height="45" Content="MAKE COMPLEX TOUR" Background="WhiteSmoke" FontSize="15"
-                        FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="DarkGray" />
+                <Button Grid.Row="6" Click="GroupRideButton_Click" Width="200" Height="45" Content="RIDE REQUEST" Background="WhiteSmoke" FontSize="20"
+                        FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="DarkGray" />
                 <Button Grid.Row="7" Click="NotificationsButton_Click" Width="200" Height="45" Content="NOTIFICATIONS" Background="WhiteSmoke" FontSize="20"
                          FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="3" BorderBrush="DarkGray" />
                 <Grid Grid.Row="8">

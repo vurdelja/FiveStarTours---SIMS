@@ -13,23 +13,35 @@ namespace FiveStarTours.Model
     {
         public int Id { get; set; }
         public int PassengerNumber { get; set; }
+        public int IdStartingLocation { get; set; }
         public Location StartingLocation { get; set; }
         public string StartingStreet { get; set; }
+        public int IdDestinationLocation { get; set; }
         public Location DestinationLocation { get; set; }
         public string DestinationStreet { get; set; }
+        public int IdLanguage { get; set; }
         public Language Language { get; set; }
+        public DateTime DateTime { get; set; }
+        public bool DriverIsLate { get; set; }
+        public bool VisitorIsLate { get; set; }
+
 
         public GroupRide() { }
 
-        public GroupRide(int id, int passengerNumber, Location startingLocation, string startingStreet, Location destinationLocation, string destinationStreet, Language language)
+        public GroupRide(int passengerNumber, int idStartingLocation, Location startingLocation, string startingStreet, int idDestinationLocation, Location destinationLocation, string destinationStreet, int idLanguage, Language language, DateTime dateTime, bool driverIsLate, bool visitorIsLate)
         {
-            Id = id;
             PassengerNumber = passengerNumber;
+            IdStartingLocation = idStartingLocation;
             StartingLocation = startingLocation;
             StartingStreet = startingStreet;
+            IdDestinationLocation = idDestinationLocation;
             DestinationLocation = destinationLocation;
             DestinationStreet = destinationStreet;
+            IdLanguage = idLanguage;
             Language = language;
+            DateTime = dateTime;
+            DriverIsLate = driverIsLate;
+            VisitorIsLate = visitorIsLate;
         }
         public string[] ToCSV()
         {
@@ -37,8 +49,15 @@ namespace FiveStarTours.Model
             {
               Id.ToString(),
               PassengerNumber.ToString(),
+              IdStartingLocation.ToString(),
               StartingStreet,
+              IdDestinationLocation.ToString(),
               DestinationStreet,
+              IdLanguage.ToString(),
+              DateTime.ToString(),
+              DriverIsLate.ToString(),
+              VisitorIsLate.ToString(),
+
               
              };
             return csvValues;
@@ -47,8 +66,14 @@ namespace FiveStarTours.Model
         {
             Id = Convert.ToInt32(values[0]);
             PassengerNumber = Convert.ToInt32(values[1]);
-            StartingStreet = values[2];
-            DestinationStreet = values[3];
+            IdStartingLocation = Convert.ToInt32(values[2]);
+            StartingStreet = values[3];
+            IdDestinationLocation = Convert.ToInt32(values[4]);
+            DestinationStreet = values[5];
+            IdLanguage = Convert.ToInt32(values[6]);
+            DateTime = Convert.ToDateTime(values[7]);
+            DriverIsLate = Convert.ToBoolean(values[8]);
+            VisitorIsLate= Convert.ToBoolean(values[9]);
             
         }
         
