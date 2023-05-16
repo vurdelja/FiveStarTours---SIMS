@@ -39,7 +39,7 @@
             </Grid>
 
             <!-- FREE DATES DATAGRID -->
-            <DataGrid Grid.Row="2" x:Name="DatesFree" AutoGenerateColumns="False" ItemsSource="{Binding FreeDates }" SelectedItem="{Binding SelectedDate}" GridLinesVisibility="All"
+            <DataGrid Grid.Row="2" x:Name="MyDisplay1" AutoGenerateColumns="False" ItemsSource="{Binding FreeDates }" SelectedItem="{Binding SelectedDate}" GridLinesVisibility="All"
                                
                                 IsReadOnly="True" SelectionMode="Single" FontSize="18"  >
 

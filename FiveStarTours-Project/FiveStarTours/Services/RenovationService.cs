@@ -50,33 +50,12 @@ namespace FiveStarTours.Services
             return _renovationRepository.Update(renovations);
         }
 
-        public bool DatesIntertwine(DateTime startAcc, DateTime endAcc, DateTime start, DateTime end)
-        {
-            return _renovationRepository.DatesIntertwine(startAcc, endAcc, start, end);
-        }
-
+       
         public void SetToFalse(Renovations renovation)
         {
             _renovationRepository.SetToFalse(renovation);
         }
 
-
-        public List<Renovations> GetAllReservationsForAccommodationDateInterval(string accomodationName, DateTime start, DateTime end)
-        {
-            return _renovationRepository.GetAllReservationsForAccommodationDateInterval(accomodationName, start, end);
-        }
-
-        public bool DoesInterwalIntertwineWithReservations(List<Renovations> renovations, DateTime start, DateTime end)
-        {
-            return _renovationRepository.DoesInterwalIntertwineWithReservations(renovations, start, end);
-        }
-
-
-
-        public List<DateInterval> GetFreeDateIntervals(string accommodationName, DateTime start, DateTime end, int numberOfDays)
-        {
-            return _renovationRepository.GetFreeDateIntervals(accommodationName, start, end, numberOfDays);
-        }
 
         public bool IsAbleToCancel(int renovationId)
         {

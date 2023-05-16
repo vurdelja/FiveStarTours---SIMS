@@ -20,6 +20,7 @@ namespace FiveStarTours.Repository
 
         private static AccommodationReservationsRepository instance = null;
         private AccommodationRatingRepository _ratingRepository;
+        //private RecommodationRepository _recommodationRepository;
         private AccommodationsRepository _accommodationsRepository;
         private CancelationNotificationRepository _cancelationNotificationRepository;
         private UserRepository _userRepository;
@@ -30,6 +31,7 @@ namespace FiveStarTours.Repository
             _reservations = _serializer.FromCSV(FilePath);
             _ratingRepository = AccommodationRatingRepository.GetInstace();
             _accommodationsRepository = new AccommodationsRepository();
+            //_recommodationRepository = RecommodationRepository.GetInstace();
             _cancelationNotificationRepository = new CancelationNotificationRepository();
             _userRepository = new UserRepository();
         }
@@ -261,7 +263,7 @@ namespace FiveStarTours.Repository
                 return false;
             }
             AccommodationReservation reservation = GetById(reservationId);
-            if (reservation.EndDate < now && reservation.EndDate > now.AddDays(-5) )
+            if (reservation.EndDate < now && reservation.EndDate > now.AddDays(-5))
             {
                 return true;
             }
@@ -274,7 +276,7 @@ namespace FiveStarTours.Repository
             AccommodationReservation reservation = GetById(reservationId);
             DateTime now = DateTime.Now;
             Accommodation accommodation = _accommodationsRepository.GetAccommodationForAccommodationName(reservation.AccommodationName);
-            if (reservation.StartDate>now.AddDays(1) && reservation.StartDate>now.AddDays(accommodation.DaysPossibleToCancel))
+            if (reservation.StartDate > now.AddDays(1) && reservation.StartDate > now.AddDays(accommodation.DaysPossibleToCancel))
             {
                 return true;
             }
@@ -289,6 +291,30 @@ namespace FiveStarTours.Repository
             User owner = _userRepository.GetById(ownerId);
             CancelationNotification cancelationNotification = new CancelationNotification(-1, owner, guest, false);
             _cancelationNotificationRepository.Save(cancelationNotification);
+        }
+        public int CountReservations()
+        {
+
+            return GetAll().Count();
+
+        }
+        public int CountReservationsInLastYear()
+        {
+            DateTime lastYear = DateTime.Now.AddYears(-1);
+            DateTime now = DateTime.Now;
+            return GetAll().Where(r => r.StartDate > lastYear && r.StartDate < now).Count();
+
+        }
+        public int UpdateBonusPoints(int reservationCount, int currentPoints)
+        {
+            if (reservationCount >= 10)
+            {
+                return currentPoints + 5;
+            }
+            else
+            {
+                return currentPoints;
+            }
         }
 
 

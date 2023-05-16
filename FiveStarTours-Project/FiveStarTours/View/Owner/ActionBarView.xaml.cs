@@ -69,7 +69,7 @@ namespace FiveStarTours.View
 
         private void RenovationsButton_Click(object sender, RoutedEventArgs e)
         {
-            RenovationsView renovations = new RenovationsView(LoggedInUser);
+            RenovationsView renovations = new RenovationsView();
             renovations.Show();
             Close();
         }

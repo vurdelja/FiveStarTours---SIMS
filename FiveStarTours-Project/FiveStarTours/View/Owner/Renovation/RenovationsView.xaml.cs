@@ -28,13 +28,12 @@ namespace FiveStarTours.View.Owner.Renovation
 
         public Renovations SelectedRenovation { get; set; }   //SELEKTOVANA
         private readonly RenovationService _renovationsService;
-        public RenovationsView(User user)
+        public RenovationsView()
         {
             InitializeComponent();
             DataContext = this;
 
             _renovationsService = new RenovationService();
-            LoggedInUser = user;
 
             RenovationsAcc = new ObservableCollection<Renovations>(_renovationsService.GetAll());
 
@@ -49,14 +48,13 @@ namespace FiveStarTours.View.Owner.Renovation
                 {
                     _renovationsService.Delete(SelectedRenovation);
                     RenovationsAcc.Remove(SelectedRenovation);
-                    _renovationsService.SetToFalse(SelectedRenovation);
                 }
                 else
                 {
                     MessageBox.Show("You are not able to cancel this renovation");
                 }
 
-                RenovationsView renovation = new RenovationsView(LoggedInUser);
+                RenovationsView renovation = new RenovationsView();
                 renovation.Show();
                 Close();
 
@@ -69,7 +67,7 @@ namespace FiveStarTours.View.Owner.Renovation
 
         private void ScheduleButton_Click(object sender, RoutedEventArgs e)
         {
-            AccommodationsView accommodations = new AccommodationsView(LoggedInUser);
+            AccommodationsView accommodations = new AccommodationsView();
             accommodations.Show();
             Close();
         }

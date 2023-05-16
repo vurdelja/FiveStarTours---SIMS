@@ -13,8 +13,7 @@ namespace FiveStarTours.Model
     {
         public int Id { get; set; }
         public User User { get; set; }
-        public int IdAccommodation { get; set; }
-        public Accommodation Accommodation { get; set; }
+        public string AccommodationName { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int ExpectedDuration { get; set; }
@@ -23,10 +22,9 @@ namespace FiveStarTours.Model
 
         public Renovations() { }
 
-        public Renovations(User user, Accommodation accommodation, DateTime start, DateTime end, int expected, string description)
+        public Renovations(string accommodationName, DateTime start, DateTime end, int expected, string description)
         {
-            User = user;
-            Accommodation = accommodation;
+            AccommodationName = accommodationName;
             StartDate= start;
             EndDate= end;
             ExpectedDuration = expected;
@@ -37,9 +35,7 @@ namespace FiveStarTours.Model
         {
             string[] csvValues = {
               Id.ToString(),
-              User.Id.ToString(),
-              Accommodation.Id.ToString(),
-              Accommodation.AccommodationName,
+              AccommodationName,
               string.Join(';', StartDate),
               string.Join(';', EndDate),
               ExpectedDuration.ToString(),
@@ -52,13 +48,11 @@ namespace FiveStarTours.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            User = new User() { Id = Convert.ToInt32(values[1]) };
-            Accommodation = new Accommodation() { Id = Convert.ToInt32(values[2]) };
-            Accommodation = new Accommodation() { AccommodationName = values[3] };
-            StartDate = Convert.ToDateTime(values[4]);
-            EndDate = Convert.ToDateTime(values[5]);
-            ExpectedDuration = Convert.ToInt32(values[6]);
-            Description = values[7];
+            AccommodationName = values[1];
+            StartDate = Convert.ToDateTime(values[2]);
+            EndDate = Convert.ToDateTime(values[3]);
+            ExpectedDuration = Convert.ToInt32(values[4]);
+            Description = values[5];
         }
 
 

@@ -34,7 +34,7 @@
                 <DataGrid Grid.Column="1" Width="260" SelectionMode="Single" AutoGenerateColumns="False" ItemsSource="{Binding Accommodations}" 
                           IsReadOnly="True" SelectedItem="{Binding SelectedAccommodation}" GridLinesVisibility="All">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Accommodation name" Binding="{Binding Path=AccommodationName, StringFormat='{}{0:dd.MM.yyyy}'}" Width="200"/>
+                        <DataGridTextColumn Header="Accommodation name" Binding="{Binding AccommodationName}" Width="200"/>
 
                     </DataGrid.Columns>
                 </DataGrid>
@@ -44,7 +44,7 @@
        
 
             <!-- SUBMIT -->
-            <Button Grid.Row="7" Content="Submit" Click="SubmitButton_Click"  Margin="20,20,0,0" Height="35" Width="100"
+            <Button Grid.Row="7" Content="Choose" Click="ChooseButton_Click"  Margin="20,20,0,0" Height="35" Width="100"
                     Background="#FFFB0707" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18"/>
 
 

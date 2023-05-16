@@ -17,7 +17,6 @@
                 <RowDefinition Height="70"/>
                 <RowDefinition Height="70"/>
                 <RowDefinition Height="70"/>
-                <RowDefinition Height="200"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
@@ -41,7 +40,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Content="Start date:" FontSize="16" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="40,0,0,0"/>
-                <DatePicker x:Name="start" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                <DatePicker x:Name="first" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
                             SelectedDate="{Binding Path=StartDate, UpdateSourceTrigger=PropertyChanged}" FontSize="18"/>
             </Grid>
             
@@ -53,12 +52,12 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Content="End date:" FontSize="16" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="40,0,0,0"/>
-                <DatePicker x:Name="Start" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                <DatePicker x:Name="last" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
                             SelectedDate="{Binding Path=EndDate, UpdateSourceTrigger=PropertyChanged}" FontSize="18"/>
             </Grid>
 
             <!-- EXPECTED DURATION -->
-            
+
             <Grid Grid.Row="4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -69,20 +68,8 @@
                 <TextBox Grid.Column="1" Width="70" Height="40" Text="{Binding Path=ExpectedDuration, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
 
-
-            <!-- FREE DATES DATAGRID -->
-            <Grid Grid.Row="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="130" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <Label Content="Free dates:" FontSize="16" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="40,0,0,0"/>
-
-            </Grid>
-
             <!-- DESCRIPTION -->
-            <Grid Grid.Row="6">
+            <Grid Grid.Row="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
@@ -97,7 +84,7 @@
 
 
             <!-- SUBMIT -->
-            <Button Grid.Row="7" Content="Submit" Click="SubmitButton_Click"  Margin="20,20,0,0" Height="35" Width="100"
+            <Button Grid.Row="6" Content="Check" Click="SubmitButton_Click"  Margin="20,20,0,0" Height="35" Width="100"
                     Background="#FFFB0707" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18"/>
 
 

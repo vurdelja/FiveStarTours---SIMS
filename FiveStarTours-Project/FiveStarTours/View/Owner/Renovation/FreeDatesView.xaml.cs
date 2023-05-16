@@ -28,13 +28,10 @@ namespace FiveStarTours.View.Owner.Renovation
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         public static ObservableCollection<AccommodationReservation> AccommodationReservations { get; set; }
-        public static ObservableCollection<Renovations> Renovations { get; set; }
+        public ObservableCollection<Renovations> Renovations { get; set; }
 
-        public User LoggedInUser;
         public ObservableCollection<DateInterval> FreeDates { get; set; }
         public DateInterval SelectedDate { get; set; }
-
-        public Accommodation SelectedAccommodation { get; set; }
 
         private readonly AccommodationReservationService _accommodationReservationService;
         private readonly AccommodationsService _accommodationService;
@@ -44,24 +41,20 @@ namespace FiveStarTours.View.Owner.Renovation
         public string Description { get; set; }
         public int ExpectedDuration { get; set; }
 
-        public FreeDatesView(User user, List<DateInterval> freeIntervals, string accommodationName, string description, int duration)
+        public FreeDatesView(List<DateInterval> freeIntervals, string accommodationName, string description, int duration)
         {
             InitializeComponent();
             this.DataContext = this;
 
             FreeDates = new ObservableCollection<DateInterval>(freeIntervals);
+
             AccommodationName = accommodationName;
             Description = description;
             ExpectedDuration = duration;
 
-            _accommodationReservationService = new AccommodationReservationService();
             _accommodationService = new AccommodationsService();
-
+            _accommodationReservationService = new AccommodationReservationService();
             _renovationService = new RenovationService();
-
-
-            LoggedInUser = user;
-
 
         }
 
@@ -90,14 +83,14 @@ namespace FiveStarTours.View.Owner.Renovation
                     int days = (int)(SelectedDate.End.Date - SelectedDate.Start.Date).TotalDays;
 
 
-                    Renovations renovation = new Renovations(LoggedInUser, accommodation, SelectedDate.Start, SelectedDate.End, days, Description);
+                    Renovations renovation = new Renovations(AccommodationName, SelectedDate.Start, SelectedDate.End, days, Description);
                     accommodation.RecentlyRenovated = true;
                     _accommodationService.Update(accommodation);
 
                     _renovationService.Save(renovation);
                     
 
-                    RenovationsView renovations = new RenovationsView(LoggedInUser);
+                    RenovationsView renovations = new RenovationsView();
                     renovations.Show();
                     Close();
 
@@ -114,7 +107,7 @@ namespace FiveStarTours.View.Owner.Renovation
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-            AccommodationsView accommodations = new AccommodationsView(LoggedInUser);
+            AccommodationsView accommodations = new AccommodationsView();
             accommodations.Show();
             Close();
         }

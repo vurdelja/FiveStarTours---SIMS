@@ -98,75 +98,11 @@ namespace FiveStarTours.Repository
             return renovation;
         }
 
-
-        public bool DatesIntertwine(DateTime startAcc, DateTime endAcc, DateTime start, DateTime end)
-        {
-            bool isInInterval = false;
-            if (start.Date <= endAcc.Date && end.Date >= startAcc.Date)
-            {
-                return true;
-            }
-
-            return isInInterval;
-        }
-
-
-        public List<Renovations> GetAllReservationsForAccommodationDateInterval(string accomodationName, DateTime start, DateTime end)
-        {
-            List<Renovations> renovations = new List<Renovations>();
-            foreach (Renovations renovation in renovations)
-            {
-                if (accomodationName == renovation.Accommodation.AccommodationName && DatesIntertwine(renovation.StartDate, renovation.EndDate, start, end))
-                {
-                    renovations.Add(renovation);
-
-                }
-
-            }
-            return renovations;
-        }
-
-        public bool DoesInterwalIntertwineWithReservations(List<Renovations> renovations, DateTime start, DateTime end)
-        {
-            foreach (Renovations renovation in renovations)
-            {
-                if (DatesIntertwine(renovation.StartDate, renovation.EndDate, start, end))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-
-
-        public List<DateInterval> GetFreeDateIntervals(string accommodationName, DateTime start, DateTime end, int numberOfDays)
-        {
-            DateTime iterDate = start;
-            List<Renovations> reservations = GetAllReservationsForAccommodationDateInterval(accommodationName, start, end);
-            List<DateInterval> freeIntervals = new List<DateInterval>();
-
-            while (iterDate.AddDays(numberOfDays).Date <= end.Date)
-            {
-                if (!DoesInterwalIntertwineWithReservations(reservations, iterDate, iterDate.AddDays(numberOfDays)))
-                {
-                    freeIntervals.Add(new DateInterval(iterDate, iterDate.AddDays(numberOfDays)));
-                }
-
-                iterDate = iterDate.AddDays(1);
-            }
-
-
-            return freeIntervals;
-        }
-
-
         public bool IsAbleToCancel(int renovationId)
         {
             Renovations renovation = GetById(renovationId);
             DateTime now = DateTime.Now;
-            Accommodation accommodation = _accommodationsRepository.GetAccommodationForAccommodationName(renovation.Accommodation.AccommodationName);
+            Accommodation accommodation = _accommodationsRepository.GetAccommodationForAccommodationName(renovation.AccommodationName);
             if (renovation.StartDate > now.AddDays(5))
             {
                 return true;
@@ -177,7 +113,7 @@ namespace FiveStarTours.Repository
 
         public void SetToFalse(Renovations renovation)
         {
-            Accommodation accommodation = _accommodationsRepository.GetAccommodationForAccommodationName(renovation.Accommodation.AccommodationName);
+            Accommodation accommodation = _accommodationsRepository.GetAccommodationForAccommodationName(renovation.AccommodationName);
             accommodation.RecentlyRenovated = false;
         }
 

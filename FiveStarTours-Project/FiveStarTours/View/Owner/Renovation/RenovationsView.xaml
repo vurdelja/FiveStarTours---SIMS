@@ -45,7 +45,7 @@
 
                 <DataGrid.Columns>
                     <DataGridTextColumn Header=" Name"  Width="100"
-                                    Binding="{Binding Accommodation.AccommodationName}"/>
+                                    Binding="{Binding AccommodationName}"/>
                     <DataGridTextColumn Header=" End date" Width="70"
                                     Binding="{Binding StartDate}"/>
                     <DataGridTextColumn Header="Start date" Width="70" 

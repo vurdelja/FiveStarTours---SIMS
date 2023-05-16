@@ -1,26 +1,26 @@
 ﻿using FiveStarTours.Services;
-using System;
 using FiveStarTours.Model;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using FiveStarTours.View.Traveler;
 using FiveStarTours.View.Owner.Renovation;
+using System.Collections.Generic;
 
 namespace FiveStarTours.View.Owner
 {
     /// <summary>
     /// Interaction logic for SchedulingRenovationsView.xaml
     /// </summary>
-    public partial class SchedulingView : Window
+    public partial class SchedulingView : Window, INotifyPropertyChanged
     {
         public User LoggedInUser { get; set; }
 
-        private readonly RenovationService renovationService;
-        private readonly AccommodationsService accommodationService;
         private readonly AccommodationReservationService accommodationReservationService;
-        public static ObservableCollection<Renovations> Renovations { get; set; }
+        public ObservableCollection<AccommodationReservation> AccommodationReservations { get; set; }
+
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public Accommodation SelectedAccommodation { get; set; }
@@ -31,19 +31,18 @@ namespace FiveStarTours.View.Owner
         public int ExpectedDuration { get; set; }
         public string Description { get; set; }
 
-        public SchedulingView(User user, Accommodation selected)
+ 
+        public SchedulingView(Accommodation selected)
         {
             InitializeComponent();
             DataContext = this;
 
-            accommodationService = new AccommodationsService();
             accommodationReservationService = new AccommodationReservationService();
-            SelectedAccommodation = selected;
 
+            SelectedAccommodation = selected;
             StartDate = DateTime.Now;
             EndDate = DateTime.Now;
 
-            LoggedInUser = user;
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string properyName = null)
@@ -54,7 +53,8 @@ namespace FiveStarTours.View.Owner
     
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
-            FreeDatesView freeDates = new FreeDatesView(LoggedInUser, accommodationReservationService.GetFreeDateIntervals(SelectedAccommodation.AccommodationName, StartDate, EndDate, ExpectedDuration), SelectedAccommodation.AccommodationName, Description, ExpectedDuration);
+            List<DateInterval> dates = accommodationReservationService.GetFreeDateIntervals(SelectedAccommodation.AccommodationName, StartDate, EndDate, ExpectedDuration);
+            FreeDatesView freeDates = new FreeDatesView(dates, SelectedAccommodation.AccommodationName, Description, ExpectedDuration);
             freeDates.Show();
             Close();
 
@@ -62,7 +62,7 @@ namespace FiveStarTours.View.Owner
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-            AccommodationsView accommodations = new AccommodationsView(LoggedInUser);
+            AccommodationsView accommodations = new AccommodationsView();
             accommodations.Show();
             Close();
         }
