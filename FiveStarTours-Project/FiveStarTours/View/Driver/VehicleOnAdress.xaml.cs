@@ -24,6 +24,7 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 using Microsoft.VisualBasic.ApplicationServices;
 using System.Windows.Controls;
+using User = FiveStarTours.Model.User;
 
 namespace FiveStarTours.View.VehicleOnAdress
 {
@@ -32,6 +33,7 @@ namespace FiveStarTours.View.VehicleOnAdress
     /// </summary>
     public partial class VehicleOnAdress : Window, INotifyPropertyChanged
     {
+        public User LoggedInUser { get; set; }
 
         private readonly VehicleOnAdressRepository _vehicleOnAddressRepository;
         private readonly DrivingsRepository _drivingsRepository;
@@ -163,7 +165,7 @@ namespace FiveStarTours.View.VehicleOnAdress
             DataContext = this;
 
 
-            secondWindow = new VisitorMainWindow();
+            secondWindow = new VisitorMainWindow(LoggedInUser);
 
 
             _vehicleOnAddressRepository = new VehicleOnAdressRepository();

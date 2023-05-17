@@ -172,7 +172,8 @@ namespace FiveStarTours.View.Visitor
 
         private void AllToursButton_Click(object sender, RoutedEventArgs e)
         {
-
+            TourRequestsListingView requests = new TourRequestsListingView(LoggedInUser);
+            requests.Show();
         }
 
         private void ReservedToursButton_Click(object sender, RoutedEventArgs e)
