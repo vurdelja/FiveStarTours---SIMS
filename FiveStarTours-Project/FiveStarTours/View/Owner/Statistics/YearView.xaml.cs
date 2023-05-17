@@ -18,28 +18,43 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace FiveStarTours.View.Owner
+namespace FiveStarTours.View.Owner.Statistics
 {
     /// <summary>
-    /// Interaction logic for Statistics.xaml
+    /// Interaction logic for StatisticsYearView.xaml
     /// </summary>
-    public partial class StatisticsView : Window
+    public partial class YearView : Window
     {
         public User LoggedInUser { get; set; }
 
-        public StatisticsView(User user)
+        public static ObservableCollection<AccommodationReservation> Reservations { get; set; }
+
+        public Accommodation SelectedAccommodation { get; set; }   //SELEKTOVANA
+
+        private readonly AccommodationReservationService _service;
+
+        public int NumberReservations { get; set; }
+        public int NumberCancellations { get; set; }
+        public int NumberSuggestions { get; set; }
+        public string AccommodationName { get; set; }
+        public bool Busiest { get; set; }
+
+        //years
+
+        public YearView(User user, Accommodation selected)
         {
             InitializeComponent();
             DataContext = this;
+
+            SelectedAccommodation = selected;
 
             LoggedInUser = user;
         }
 
         private void ShowButton_Click(object sender, RoutedEventArgs e)
         {
-            
-            StatisticsYearView yearView = new StatisticsYearView(LoggedInUser);
-            yearView.Show();
+            ActionBarView action = new ActionBarView(LoggedInUser);
+            action.Show();
             Close();
         }
 

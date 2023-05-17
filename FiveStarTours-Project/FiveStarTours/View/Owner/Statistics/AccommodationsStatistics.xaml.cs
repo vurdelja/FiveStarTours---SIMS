@@ -17,27 +17,36 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using FiveStarTours.View.Traveler;
 
-namespace FiveStarTours.View.Owner
+namespace FiveStarTours.View.Owner.Statistics
 {
     /// <summary>
-    /// Interaction logic for StatisticsYearView.xaml
+    /// Interaction logic for Statistics.xaml
     /// </summary>
-    public partial class StatisticsYearView : Window
+    public partial class AccommodationsStatistics : Window
     {
         public User LoggedInUser { get; set; }
-        public StatisticsYearView(User user)
+        public static ObservableCollection<Accommodation> Accommodations { get; set; }
+
+        public Accommodation SelectedAccommodation { get; set; } 
+        private readonly AccommodationsService _accommodationService;
+
+        public AccommodationsStatistics(User user)
         {
             InitializeComponent();
             DataContext = this;
 
+            _accommodationService = new AccommodationsService();
             LoggedInUser = user;
+
+            Accommodations = new ObservableCollection<Accommodation>(_accommodationService.GetAll());
         }
 
         private void ShowButton_Click(object sender, RoutedEventArgs e)
         {
-            ActionBarView action = new ActionBarView(LoggedInUser);
-            action.Show();
+            YearView yearView = new YearView(LoggedInUser, SelectedAccommodation);
+            yearView.Show();
             Close();
         }
 
