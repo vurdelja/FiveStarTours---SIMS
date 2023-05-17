@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
+    <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +14,43 @@
 	  <EmbeddedResource Remove="Resources\Images\**" />
 	  <None Remove="Resources\Images\**" />
 	  <Page Remove="Resources\Images\**" />
+	  <None Remove="View\Owner\ImagesOwner\actionBar.png" />
+	  <None Remove="View\Owner\ImagesOwner\arrow.png" />
+	  <None Remove="View\Owner\ImagesOwner\avatar.png" />
+	  <None Remove="View\Owner\ImagesOwner\download.png" />
+	  <None Remove="View\Owner\ImagesOwner\help.png" />
+	  <None Remove="View\Owner\ImagesOwner\logo.png" />
+	  <None Remove="View\Owner\ImagesOwner\notification.png" />
+	  <None Remove="View\Owner\ImagesOwner\pdf.png" />
+	  <None Remove="View\Owner\ImagesOwner\rightArrow.png" />
+	  <Content Include="View\Owner\ImagesOwner\actionBar.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="View\Owner\ImagesOwner\arrow.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="View\Owner\ImagesOwner\avatar.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="View\Owner\ImagesOwner\download.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="View\Owner\ImagesOwner\help.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="View\Owner\ImagesOwner\logo.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="View\Owner\ImagesOwner\notification.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="View\Owner\ImagesOwner\rightArrow.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
     <Folder Include="Resources\Images\" />
+	  <Resource Include="Resources\Images\unavailable-image.jpg">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
 
   </ItemGroup>
 

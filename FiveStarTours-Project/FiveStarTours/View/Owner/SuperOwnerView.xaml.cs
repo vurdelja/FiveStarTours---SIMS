@@ -1,4 +1,10 @@
 ﻿using FiveStarTours.Model;
+using FiveStarTours.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using FiveStarTours.Model;
 using FiveStarTours.Repository;
 using FiveStarTours.Services;
 using FiveStarTours.View.Traveler;
@@ -57,7 +63,7 @@ namespace FiveStarTours.View.Owner
             {
                 LoggedInUser.Super = true;
                 _userService.Update(LoggedInUser);
-                
+
             }
             else
             {
@@ -65,7 +71,7 @@ namespace FiveStarTours.View.Owner
                 _userService.Update(LoggedInUser);
             }
 
-            if(LoggedInUser.Super == true)
+            if (LoggedInUser.Super == true)
             {
                 IsSuperOwner = true;
             }
@@ -79,10 +85,10 @@ namespace FiveStarTours.View.Owner
 
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-            OwnerMainWindow main = new OwnerMainWindow(LoggedInUser);
-            main.Show();
+            ActionBarView action = new ActionBarView(LoggedInUser);
+            action.Show();
             Close();
         }
     }

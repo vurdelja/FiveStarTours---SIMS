@@ -24,9 +24,12 @@ namespace FiveStarTours.View
     /// </summary>
     public partial class DriverMainWindow : Window
     {
+       
         public DriverMainWindow()
         {
             InitializeComponent();
+            DataContext = this;
+            
         }
 
         private void VehicleRegistrationButton_Click(object sender, RoutedEventArgs e)
@@ -37,7 +40,7 @@ namespace FiveStarTours.View
 
         private void VehicleOnAdressButton_Click(object sender, RoutedEventArgs e)
         {
-
+           
             VehicleOnAdress.VehicleOnAdress vehicleOnAdress = new VehicleOnAdress.VehicleOnAdress();
             vehicleOnAdress.Show();
         }
@@ -53,6 +56,19 @@ namespace FiveStarTours.View
         {
             DrivingStatistics drivingStatistics = new DrivingStatistics();
             drivingStatistics.Show();
+        }
+
+        private void FastReservationDrivingButton_Click(object sender, RoutedEventArgs e)
+        {
+            FastReservationDriving fastReservationDriving = new FastReservationDriving();
+            fastReservationDriving.Show();
+
+        }
+
+        private void SuperDriverButton_Click(object sender, RoutedEventArgs e)
+        {
+            SuperDriver superDriver = new SuperDriver();
+            superDriver.Show();
         }
     }
 }

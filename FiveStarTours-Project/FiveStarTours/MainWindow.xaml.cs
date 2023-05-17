@@ -1,6 +1,7 @@
 ﻿using FiveStarTours.Model;
 using FiveStarTours.Repository;
 using FiveStarTours.View;
+using FiveStarTours.View.Owner;
 using FiveStarTours.View.Traveler;
 using FiveStarTours.View.Visitor;
 using System;
@@ -88,8 +89,8 @@ namespace FiveStarTours
             LoggedUser = user;
             if (String.Equals(user.Role.ToLower(), "owner"))
             {
-                OwnerMainWindow ownerMainWindow = new OwnerMainWindow(user);
-                ownerMainWindow.Show();
+                OwnerMainPageView main = new OwnerMainPageView(user);
+                main.Show();
                 Close();
             }
             else if (String.Equals(user.Role.ToLower(), "traveler"))
@@ -105,10 +106,10 @@ namespace FiveStarTours
             }
             else if (String.Equals(user.Role.ToLower(), "visitor"))
             {
-                VisitorMainWindow visitorMainWindow = new VisitorMainWindow(user);
-                visitorMainWindow.Show();
+                ToursListingView tourListing = new ToursListingView(user);
+                tourListing.Show();
             }
-            else 
+            else if (String.Equals(user.Role.ToLower(), "driver"))
             {
                 DriverMainWindow driverMainWindow = new DriverMainWindow();
                 driverMainWindow.Show();

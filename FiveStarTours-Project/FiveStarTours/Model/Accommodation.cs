@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Documents;
+using System.Windows.Media;
 using FiveStarTours.Repository;
 using FiveStarTours.Serializer;
 
@@ -27,6 +28,9 @@ namespace FiveStarTours.Model
         public int MaxGuestNum { get; set; }
         public int MinReservationDays { get; set; }
         public int DaysPossibleToCancel { get; set; } = 1; 
+        public bool RecentlyRenovated { get; set; }
+
+        public ImageSource FrontImage { get; set; }
 
         public List<string> ImageURLs { get; set; }  
 
@@ -41,6 +45,8 @@ namespace FiveStarTours.Model
             MinReservationDays = minReservationDays;
             DaysPossibleToCancel = daysPossibleToCancel;
             ImageURLs = imageURLs;
+            FrontImage = null;
+            RecentlyRenovated = false;
         }
 
         public string[] ToCSV()
@@ -63,7 +69,8 @@ namespace FiveStarTours.Model
                 MaxGuestNum.ToString(),
                 MinReservationDays.ToString(),
                 DaysPossibleToCancel.ToString(),
-                string.Join(';', ImageURLs)
+                string.Join(';', ImageURLs),
+                RecentlyRenovated.ToString(),
 
         };
             return csvValues;
@@ -80,6 +87,7 @@ namespace FiveStarTours.Model
             DaysPossibleToCancel = int.Parse(values[6]);
 
             ImageURLs = values[7].Split(';').ToList();
+            RecentlyRenovated = Convert.ToBoolean(values[8]);
         }
 
 

@@ -5,25 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FiveStarTours.View.Owner"
         mc:Ignorable="d"
-        Title="OwnerRatingGuests" Height="750" Width="430"
-        Background="Pink" WindowStartupLocation="CenterScreen">
-    <Grid>
+        Title="OwnerRatingGuests"  Height="736" Width="414" Background="Transparent"
+        WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Window.Resources>
+        <ControlTemplate x:Key="ValidationTemplate">
+            <StackPanel>
+                <AdornedElementPlaceholder x:Name="textBox">
+                    <Border BorderBrush="Red" BorderThickness="1"/>
+                </AdornedElementPlaceholder>
+                <TextBlock Text="{Binding [0].ErrorContent}" Foreground="red"/>
+            </StackPanel>
+            
+        </ControlTemplate>
+    </Window.Resources>
+
+    <Border Background="Pink" CornerRadius="20 20 20 20">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="500"></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Border Background="DeepPink" 
-                    Grid.Row="1"
-                    Padding="10" CornerRadius="10 0 0 10">
-                <StackPanel VerticalAlignment="Center">
-                    <Image Source="/Resources/ImagesOwner/logo.png" Width="30" Height="30" Margin="0 0 0 0"/>
-                </StackPanel>
-            </Border>
+            <!-- TITLE -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Button Click="GoBackButton_Click" Background="Transparent" BorderThickness="0" HorizontalAlignment="Left" Width="50" Height="50">
+                    <Image Source="/View/Owner/ImagesOwner/arrow.png" Height="40" Width="40" Margin="10,0,0,0"/>
+                </Button>
+                <Label Content="Give your rates"  FontSize="20" Height="40" Width="200" Margin="60,0,0,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" />
+            </StackPanel>
 
 
-            <Grid Grid.Row="0" Grid.Column="0" Height="500" Margin="0,0,10,0">
+            <Grid Grid.Row="1" Grid.Column="0" Height="500" Margin="0,0,10,0">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
@@ -31,8 +44,7 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
@@ -43,37 +55,37 @@
                        Content="Tidiness: " 
                        Margin="3 0 0 0" 
                        Height="30"
-                       Foreground="Purple"/>
+                       Foreground="Purple" FontSize="14"/>
                 <Label Grid.Row="1" Grid.Column="0"
                        Content="Good at following the rules: " 
                        Margin="3 0 0 0" 
                        Height="30"
-                       Foreground="Purple"/>
+                       Foreground="Purple" FontSize="14"/>
                 <Label Grid.Row="2" Grid.Column="0"
                        Content="Quietness: " 
                        Margin="3 0 0 0" 
                        Height="30"
-                       Foreground="Purple"/>
+                       Foreground="Purple" FontSize="14"/>
                 <Label Grid.Row="3" Grid.Column="0"
                        Content="Friendliness: " 
                        Margin="3 0 0 0" 
                        Height="30"
-                       Foreground="Purple"/>
+                       Foreground="Purple" FontSize="14"/>
                 <Label Grid.Row="4" Grid.Column="0"
                        Content="Communication: " 
                        Margin="3 0 0 0" 
                        Height="30"
-                       Foreground="Purple"/>
+                       Foreground="Purple" FontSize="14"/>
                 <Label Grid.Row="5" Grid.Column="0"
-                       Content="Respected check-in/out time: " 
+                       Content="Respected check-in/out times: " 
                        Margin="3 0 0 0" 
                        Height="30"
-                       Foreground="Purple"/>
+                       Foreground="Purple" FontSize="14"/>
                 <Label Grid.Row="6" Grid.Column="0"
                        Content="Comment:" 
                        Margin="3 0 0 0" 
                        Height="30"
-                       Foreground="Purple"/>
+                       Foreground="Purple" VerticalAlignment="Top" FontSize="16"/>
 
 
                 <ComboBox Grid.Row="0" Grid.Column="1"
@@ -87,7 +99,7 @@
                     <ComboBoxItem Content="5 - very good"/>
                 </ComboBox>
 
-                
+
                 <ComboBox Grid.Row="1" Grid.Column="1"
                            x:Name="RulesFollowedComboBox"
                          Height="30"  
@@ -143,35 +155,21 @@
                     <ComboBoxItem Content="5 - very good"/>
                 </ComboBox>
 
-                <TextBox Grid.Row="6" Grid.Column="1"
+                <TextBox Grid.Row="6" Grid.Column="1" Height="70"
                          Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}"  
-                         Margin="0,0,1,62" 
-                         FontSize="10" Grid.RowSpan="2"/>
+                         FontSize="16">
+                </TextBox>
 
 
             </Grid>
-            <Grid Grid.Row="1" Grid.Column="0" >
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
 
-                <Button Content="Submit rate" 
+
+            <Button Grid.Row="2" Content="Submit" 
                         Padding="10 5"
-                        IsDefault="True"
-                        HorizontalAlignment="Center" Grid.Column="0" 
+                        HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Click="SubmitRateButton_Click" Width="110"/>
-
-                <Button Content="Cancel" 
-                        Padding="10 5"
-                        IsDefault="True"
-                        HorizontalAlignment="Center" Grid.Column="1" 
-                        VerticalAlignment="Center"
-                        Click="CancelButton_Click" Width="121"/>
-
-            </Grid>
+                        Click="SubmitRateButton_Click" Width="110" FontSize="18"/>
         </Grid>
-    </Grid>
+    </Border>
 </Window>

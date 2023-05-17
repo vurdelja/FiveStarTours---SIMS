@@ -18,7 +18,7 @@ namespace FiveStarTours.Repository
         private readonly Serializer<Vehicle> _serializer;
 
         private List<Vehicle> _vehicles;
-
+       
         public VehicleRepository()
         {
             _serializer = new Serializer<Vehicle>();
@@ -48,6 +48,5 @@ namespace FiveStarTours.Repository
             }
             return _vehicles.Max(t => t.Id) + 1;
         }
-        
     }
 }
