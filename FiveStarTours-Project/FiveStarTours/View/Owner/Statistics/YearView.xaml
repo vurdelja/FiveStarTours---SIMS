@@ -27,7 +27,7 @@
 
             <!-- DATAGRID -->
             <DataGrid RowHeight="40" ItemsSource="{Binding Reservations}"
-                  SelectedItem="{Binding Path=SelectedReservation}"
+                  SelectedItem="{Binding Path=SelectedAccommodation}"
                   IsReadOnly="True" SelectionMode="Single" x:Name="NoRateGuests" 
                   AutoGenerateColumns="false" FontSize="14"
                   Margin="10,10,10,10" Grid.Row="1">
@@ -45,17 +45,17 @@
 
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Year"  Width="40"
-                                    Binding="{Binding GuestName}"/>
+                                    Binding="{Binding Year}"/>
                     <DataGridTextColumn Header="Name" Width="230"
                                     Binding="{Binding AccommodationName}"/>
                     <DataGridTextColumn Header="R"  Width="30"
-                                    Binding="{Binding GuestName}"/>
+                                    Binding="{Binding NumberReservations}"/>
                     <DataGridTextColumn Header="C" Width="30"
-                                    Binding="{Binding EndDate}"/>
+                                    Binding="{Binding NumberCancellations}"/>
                     <DataGridTextColumn Header="SR"  Width="30"
-                                    Binding="{Binding GuestName}"/>
+                                    Binding="{Binding NumberSuggestions}"/>
                     <DataGridTextColumn Header="B" Width="30"
-                                    Binding="{Binding EndDate}"/>
+                                    Binding="{Binding Busiest}"/>
                 </DataGrid.Columns>
             </DataGrid>
 

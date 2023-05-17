@@ -45,7 +45,7 @@ namespace FiveStarTours.View.Owner.Statistics
 
         private void ShowButton_Click(object sender, RoutedEventArgs e)
         {
-            YearView yearView = new YearView(LoggedInUser);
+            YearView yearView = new YearView(LoggedInUser, SelectedAccommodation);
             yearView.Show();
             Close();
         }
