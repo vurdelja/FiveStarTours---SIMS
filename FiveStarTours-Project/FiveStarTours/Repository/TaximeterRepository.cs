@@ -1,4 +1,5 @@
-﻿using FiveStarTours.Model;
+﻿using FiveStarTours.Interfaces;
+using FiveStarTours.Model;
 using FiveStarTours.Serializer;
 using FiveStarTours.View.VehicleOnAdress;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FiveStarTours.Repository
 {
-    class TaximeterRepository
+    class TaximeterRepository : ITaximeterRepository
     {
         private const string FilePath = "../../../Resources/Data/taximeter.csv";
         private readonly Serializer<Taximeter> _serializer;

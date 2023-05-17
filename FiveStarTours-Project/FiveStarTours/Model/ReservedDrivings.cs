@@ -25,7 +25,7 @@ namespace FiveStarTours.Model
         public ReservedDrivings() { }
         public ReservedDrivings(int idStartingLocation,int idDestinationLocation, Location startingLocation, string startingStreet, Location destinationLocation, string destinationStreet, DateTime startingTime, int userId)
         {
-            IdStartingLocation = idStartingLocation;
+           IdStartingLocation = idStartingLocation;
             IdDestinationLocation = idDestinationLocation;
             StartingLocation = startingLocation;
             StartingStreet = startingStreet;

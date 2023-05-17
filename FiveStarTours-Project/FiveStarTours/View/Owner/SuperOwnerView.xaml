@@ -69,7 +69,7 @@
                 </Border>
             </Grid>
 
-            <TextBox Grid.Row="5" Background="LightGray" Height="60" Width="300"/>
+            <TextBox Grid.Row="5" Background="LightGray" Height="60" Width="300" />
 
 
 
